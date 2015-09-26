@@ -1,0 +1,9 @@
+C:\VSWorkspace\MudClient\MudClient\bin\Debug\MudClient.exe.config
+C:\VSWorkspace\MudClient\MudClient\bin\Debug\MudClient.exe
+C:\VSWorkspace\MudClient\MudClient\bin\Debug\MudClient.pdb
+C:\VSWorkspace\MudClient\MudClient\obj\Debug\MudClient.csprojResolveAssemblyReference.cache
+C:\VSWorkspace\MudClient\MudClient\obj\Debug\MudClient.Client.resources
+C:\VSWorkspace\MudClient\MudClient\obj\Debug\MudClient.Properties.Resources.resources
+C:\VSWorkspace\MudClient\MudClient\obj\Debug\MudClient.csproj.GenerateResource.Cache
+C:\VSWorkspace\MudClient\MudClient\obj\Debug\MudClient.exe
+C:\VSWorkspace\MudClient\MudClient\obj\Debug\MudClient.pdb
