@@ -5,6 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
+
     public class Heart {
+
+        public Heart() {
+        }
+
     }
 }

@@ -18,6 +18,7 @@ namespace Mountain.classes {
 
         public Room() {
         }
+
         protected bool Save() {
             return false;
         }

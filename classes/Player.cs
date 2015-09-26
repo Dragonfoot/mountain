@@ -37,7 +37,6 @@ namespace Mountain.classes {
 
     }
 
-
     class Equipment {       // possible player gear locations
         protected Item head;
         protected Item eyes;
@@ -66,12 +65,13 @@ namespace Mountain.classes {
 
     }
 
-    class Stats {   // list of possible player attributes set at debatable level 1 defaults
+    class Stats {   // list of possible player attributes set at arbitrary level 1 defaults
         protected int health = 18;
         protected int maxHealth = 18;
-        protected int strength = 9;
-        protected int constitution = 6;
+        protected int strength = 4;
+        protected int constitution = 4;
         protected int dexterity = 3;
+        protected int intellegence = 3;
         protected int mana = 0;
         protected int maxMana = 0;
         protected int wisdom = 3;
@@ -79,14 +79,13 @@ namespace Mountain.classes {
         protected double luck = 0.01;
         protected double intuition = 0.01;
         protected int experience = 0;
-        protected int intellegence = 3;
         protected int maxItemWeight = 18;
         protected int coins = 5;
         protected List<string> skills;
         protected List<string> spells;
         protected List<string> powers;
         protected List<string> languages;
-        protected string charClass = "Fighter";
+        protected string charClass = "generic";
 
         public Stats() {
             this.skills = new List<string>();
@@ -95,7 +94,7 @@ namespace Mountain.classes {
             this.languages = new List<string>();
         }
         protected XmlWriter GetProperties(XmlWriter xml) {
-
+            // store properties into writer and return it to calling object
             return xml;
         }
     }

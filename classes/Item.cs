@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes {
 
-    enum ItemType { unknown = 1, weapon, armour, money, consumable, clothing, valuables, text, container };
+    enum ItemType { unknown = 1, weapon, armour, money, consumable, clothing, valuables, text, container, ingredients };
 
     class Item : BaseObject {
         protected ItemType type = ItemType.unknown;
