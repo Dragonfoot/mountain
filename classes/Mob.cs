@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Mountain.classes {
-    class Mob {
+
+    class Mob : Character {
+
+        public Mob() {
+        }
     }
 }

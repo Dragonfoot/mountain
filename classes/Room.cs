@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Xml;
 using System.Collections.Concurrent;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Mountain.classes.helpers;
-using Mountain.classes.Interfaces;
 
 namespace Mountain.classes {
 
-    public class Room : BaseObject, IStorable {
+    public class Room : BaseObject {
 
         private BlockingCollection<Exit> exits;
         private BlockingCollection<Player> players;
@@ -20,9 +18,11 @@ namespace Mountain.classes {
 
         public Room() {
         }
-        void IStorable.Save() {
+        protected bool Save() {
+            return false;
         }
-        void IStorable.Load() {
+        protected bool Load() {
+            return false;
         }
 
     }

@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Mountain.classes.helpers;
-using Mountain.classes.Interfaces;
 
 namespace Mountain.classes {
 
-    public class World : IStorable {
+    public class World {
 
         protected BlockingCollection<Area> Areas;
         protected Heart heart;
 
         public World() {
         }
-        void IStorable.Load() {
-        }
-        void IStorable.Save() {
+        public void Load() {
         }
 
     }

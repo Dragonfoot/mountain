@@ -2,9 +2,7 @@
 using System.Xml;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
-using System.Net.Sockets;
 using Mountain.classes.helpers;
-using Mountain.classes.Interfaces;
 
 namespace Mountain.classes {
     
@@ -26,35 +24,10 @@ namespace Mountain.classes {
                     writer.WriteAttributeString("Name", base.name);
                     writer.WriteAttributeString("GUID", base.id.ToString());
                     writer.WriteAttributeString("Description", base.description);
-
                 }
             } catch {
                 return false;
             }
-            /* using (XmlWriter writer = XmlWriter.Create("employees.xml"))
-	            {
-	                writer.WriteStartDocument();
-	                writer.WriteStartElement("Employees");
-
-	                foreach (Employee employee in employees)
-	                {
-		            writer.WriteStartElement("Employee");
-
-		            writer.WriteElementString("ID", employee.Id.ToString());
-		            writer.WriteElementString("FirstName", employee.FirstName);
-		            writer.WriteElementString("LastName", employee.LastName);
-		            writer.WriteElementString("Salary", employee.Salary.ToString());
-
-		            writer.WriteEndElement();
-	                }
-
-	                writer.WriteEndElement();
-	                writer.WriteEndDocument();
-	            } */
-
-
-
-            // grab properties and add to xml
             return true;
         }
         protected bool LoadFromXml(string xml) {
@@ -88,6 +61,7 @@ namespace Mountain.classes {
         protected Item undergarment; // specialized armour type, ie: skin of poison deflection, tights of girded strength..
 
         public Equipment() {
+            this.neck = new List<Item>();
         }
 
     }
