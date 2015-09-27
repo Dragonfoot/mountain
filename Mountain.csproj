@@ -50,7 +50,6 @@
     <Compile Include="classes\BaseObject.cs" />
     <Compile Include="classes\Character.cs" />
     <Compile Include="classes\Exit.cs" />
-    <Compile Include="classes\helpers\Heart.cs" />
     <Compile Include="classes\helpers\Linkage.cs" />
     <Compile Include="classes\helpers\Packet.cs" />
     <Compile Include="classes\Item.cs" />
