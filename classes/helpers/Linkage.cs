@@ -18,22 +18,6 @@ namespace Mountain.classes.helpers {
                 this.x = value;
             }
         }
-        public string Description {
-            get {
-                return base.description;
-            }
-            set {
-                base.description = value;
-            }
-        }
-        public Guid ID {
-            get {
-                return base.id;
-            }
-            set {
-                base.id = value;
-            }
-        }
 
         public Linkage() {
         }

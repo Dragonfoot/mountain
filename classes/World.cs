@@ -5,7 +5,7 @@ using Mountain.classes.helpers;
 
 namespace Mountain.classes {
 
-    public class World {
+    public class World : BaseObject {
 
         protected BlockingCollection<Area> Areas;
         protected Heart heart;
