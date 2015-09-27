@@ -47,3 +47,8 @@ Temporary Items
 
 # Executables
 *.exe
+
+# Folders
+bin/
+obj/
+debug/
