@@ -10,17 +10,28 @@ namespace Mountain.classes {
         protected List<Item> inventory;  // need thread safe dynamic list and/or sorted?
         protected Equipment equipment;
         protected Stats stats;
-        protected List<Player> madPlayers;
-        protected List<Mob> madMobs; //
+        protected Vault vault;
+        protected List<Player> enemyPlayers;
+        protected List<Mob> enemyMobs; //
         private string password;
         private string nickname;
 
         public Player() {
             this.inventory = new List<Item>();
             this.equipment = new Equipment();
-            this.madPlayers = new List<Player>();
-            this.madMobs = new List<Mob>();
+            this.enemyPlayers = new List<Player>();
+            this.enemyMobs = new List<Mob>();
             this.stats = new Stats();
+            this.vault = new Vault();
+            this.password = string.Empty;
+            this.nickname = string.Empty;
+        }
+
+        public override void Save() {
+            throw new NotImplementedException();
+        }
+        public override void Load() {
+            throw new NotImplementedException();
         }
         protected bool SaveToXml(string fileName) {
             try {
@@ -119,5 +130,15 @@ namespace Mountain.classes {
             return xml;
         }
     }
+
+    public class Vault {
+        private Guid key;
+        private int pin;
+        private int gold;
+        private List<Item> items;
+        private List<ItemContainer> containers;  // limited, additional on quests/levels/etc
+    }
+
+
 
 }

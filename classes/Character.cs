@@ -7,5 +7,18 @@ namespace Mountain.classes {
 
     abstract class Character : BaseObject {
         protected Socket socket;
+        public Socket Socket {
+            get {
+                return this.socket;
+            }
+            set {
+                this.socket = value;
+            }
+        }
+        public Character() {
+        }
+        public abstract void Save();        
+        public abstract void Load();
+
     }
 }

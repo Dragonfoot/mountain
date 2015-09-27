@@ -18,5 +18,10 @@ namespace Mountain.classes {
             this.buddies = new List<Mob>();
             this.enemies = new List<Mob>();
         }
+
+        public override void Save() {  // future potential, advanced combat mob, store between stalking player sessions
+        }
+        public override void Load() {
+        }
     }
 }
