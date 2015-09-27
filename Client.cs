@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Mountain.classes;
 
 namespace Mountain {
-    public partial class Client:Form {
+    public partial class Client : Form {
 
         protected World World;
 
@@ -17,6 +17,14 @@ namespace Mountain {
             this.World.Load();
 
             InitializeComponent();
-            }
+        }
+
+        private void startToolStripMenuItem_Click(object sender, EventArgs e) {
+            // start heartbeat
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.World.Save();
         }
     }
+}

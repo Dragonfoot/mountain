@@ -10,6 +10,10 @@ namespace Mountain.classes.helpers {
 
         public Heart() {
         }
+        public void Start() {
+        }
+        public void Stop() {
+        }
 
     }
 }

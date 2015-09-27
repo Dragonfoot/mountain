@@ -13,9 +13,20 @@ namespace Mountain.classes {
         public World() {
             this.heart = new Heart();
             this.Areas = new BlockingCollection<Area>();
-            // load and start heart;
         }
         public void Load() {
+        }
+        public void Save() {
+        }
+        public void Stop() {
+            this.heart.Stop();
+        }
+        public void Start() {
+            this.heart.Start();
+        }
+        public void CreateWorld() {
+        }
+        public void ClearWorld() {
         }
 
     }
