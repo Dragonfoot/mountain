@@ -57,3 +57,8 @@ Temporary Items
 bin/
 obj/
 debug/
+*.exe
+*.pdb
+obj/Debug/Mountain.csproj.GenerateResource.Cache
+*.dll
+*.resources
