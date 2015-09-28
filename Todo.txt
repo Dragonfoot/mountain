@@ -16,6 +16,16 @@
 	exit directions, perhaps two views, top down, and side on, for up-down visuals.
 	-- suggests a compass like data-point in exit linkage for mapping directions, up down, n, e, s, w, ne, nw..
 	-- suggests indirectly, distance data-point in the linkage for the mapper as well.
+<<<<<<< HEAD
 	
 (C) Mapper:  ability to search for a player/mob and be located in the map.
+=======
+
+<<<<<<< HEAD
+(R) SnowShoes: not needed for rabbit like races, and any rabbit character killed in battle would drop a pair of 
+	cold cone protected magical snow shoes
+=======
+Mapper:  (C) ability to search for a player/mob and be located in the map.
+>>>>>>> origin/master
+>>>>>>> origin/master
  
