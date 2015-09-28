@@ -1,9 +1,9 @@
-﻿Races: can the world define its own ideas on culture and race, ie: a mordor type world would have elves, giants, etc.
+﻿(R) Races: can the world define its own ideas on culture and race, ie: a mordor type world would have elves, giants, etc.
 	as defaults, but say the world admins also want a race of mobile plant like characters, would they have 
 	specialized armour, clothing and weapons needs.
 	-- suggests being able to build new races that aren't hard coded in.
 
-Size: chars can be small, fat, large, tall, wispy, massively muscled, normal, have a tail, ghostly, etc.
+(R) Size: chars can be small, fat, large, tall, wispy, massively muscled, normal, have a tail, ghostly, etc.
 	so how does that equate to clothing and armour, aside from the obvious sizing, a tail might exclude some gear,
 	ghostly might exclude all normal gear but add say an energy belt or light cloak of shimmer.
 	-- suggests gear can be race specific, new gear can be made on the fly specifically for it when a new race 
@@ -12,8 +12,11 @@ Size: chars can be small, fat, large, tall, wispy, massively muscled, normal, ha
 		and rather complex in having derived class that has to load data points and the like not hard coded,
 		lots of casting, pointer manipulation etc.
 
-Builder: Area specific, a grid like view of the area's rooms, with links between them based on the rooms
-	exit directions
+(R) Builder: Area specific, a grid like view of the area's rooms, with links between them based on the rooms
+	exit directions, perhaps two views, top down, and side on, for up-down visuals.
 	-- suggests a compass like data-point in exit linkage for mapping directions, up down, n, e, s, w, ne, nw..
 	-- suggests indirectly, distance data-point in the linkage for the mapper as well.
+
+(R) SnowShoes: not needed for rabbit like races, and any rabbit character killed in battle would drop a pair of 
+	cold cone protected magical snow shoes
  
