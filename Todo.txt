@@ -16,4 +16,6 @@ Builder: Area specific, a grid like view of the area's rooms, with links between
 	exit directions
 	-- suggests a compass like data-point in exit linkage for mapping directions, up down, n, e, s, w, ne, nw..
 	-- suggests indirectly, distance data-point in the linkage for the mapper as well.
+
+Mapper:  ability to search for a player/mob and be located in the map.
  
