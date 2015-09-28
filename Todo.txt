@@ -21,6 +21,6 @@
 (R) SnowShoes: not needed for rabbit like races, and any rabbit character killed in battle would drop a pair of 
 	cold cone protected magical snow shoes
 =======
-Mapper:  ability to search for a player/mob and be located in the map.
+Mapper:  (C) ability to search for a player/mob and be located in the map.
 >>>>>>> origin/master
  
