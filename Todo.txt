@@ -9,7 +9,7 @@
 		Dynamic casting, reflection and pointer manipulation likely.
 
 (R) Builder: Area specific, a grid like view of the area's rooms, with links between them based on the rooms
-	exit directions, perhaps two views, top down, and side on, for up-down visuals.
+	exit directions, perhaps two views, top down, and side on for depth visuals.
 	-- suggests a compass like data-point in exit linkage for mapping directions, up down, n, e, s, w, ne, nw..
 	-- suggests indirectly, distance data-point in the linkage for the mapper as well.
 
