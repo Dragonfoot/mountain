@@ -62,3 +62,4 @@ debug/
 obj/Debug/Mountain.csproj.GenerateResource.Cache
 *.dll
 *.resources
+.vs/Mountain/v14/.suo
