@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Mountain.classes.helpers;
@@ -7,36 +8,40 @@ using Mountain.classes.helpers;
 namespace Mountain.classes {
 
     public class World : BaseObject {
-
-        protected BlockingCollection<Area> Areas;
-        protected Thread heart;
+        protected List<Area> Areas;
+        protected Task heart;
 
         public World() {
-            this.Areas = new BlockingCollection<Area>();
-            this.heart = new Thread(new ThreadStart(this.HeartBeat));
-            heart.IsBackground = true;
-            heart.Name = "Heart Beat";
-        }
-        public void Load() {
-        }
-        public void Save() {
-        }
-        public void Stop() {
-            // Thread.Sleep(Timeout.Infinite); check to see if current thread is heart
-        }
-        public void Start() {
-            this.heart.Start();
-            while(!heart.IsAlive) ;
-        }
-        public void CreateWorld() {
-        }
-        public void ClearWorld() {
+            this.Areas = new List<Area>();
+            this.heart = new Task(new Action(this.HeartBeat));
         }
 
+        public void Load(string filename) { }
+        public void Save(string filename) { }
+        public void Reload() { }
+        public void Create() { }
+        public void Clear() { }
+        public void Shutdown() { }
+
+        public void Stop() { }
+        public void Start() { }
 
         private void HeartBeat() {
+            // sanity checks : world loaded, areas are present..
             while (true) {
-                Thread.Sleep(30000); // check current thread again..
+                // stopwatch.start()
+                // foreach((Area)area in this.Areas){
+                    // foreach((Room)room in area.Rooms){
+                        // foreach((Mob)mob in room.Mobs){ run mob.tasks() } end foreach
+                        // foreach((Player)player in room.Players){ run player.tasks() } end foreach
+                        // run room.tasks()
+                        // check UI, exit while(true) loop if requested
+                    // } end foreach
+                    // run area.tasks()
+                //} end foreach
+                // run world.tasks()
+                // stopwatch.stop().display(stopwatch.duration())
+                // check UI, exit while(true) loop if requested
             }
         }
 

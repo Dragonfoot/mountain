@@ -14,17 +14,17 @@ namespace Mountain {
 
         public Client() {
             this.World = new World();
-            this.World.Load();
+            this.World.Load(string.Empty);
 
             InitializeComponent();
         }
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e) {
-            // start heartbeat
+            this.World.Start();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            this.World.Save();
+            this.World.Save(string.Empty);
         }
     }
 }
