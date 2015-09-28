@@ -22,7 +22,7 @@ namespace Mountain.classes {
         public void Save() {
         }
         public void Stop() {
-           // this.heart.Stop();
+            // Thread.Sleep(Timeout.Infinite); check to see if current thread is heart
         }
         public void Start() {
             this.heart.Start();
@@ -36,7 +36,7 @@ namespace Mountain.classes {
 
         private void HeartBeat() {
             while (true) {
-                Thread.Sleep(30000);
+                Thread.Sleep(30000); // check current thread again..
             }
         }
 
