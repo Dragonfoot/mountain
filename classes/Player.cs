@@ -33,20 +33,20 @@ namespace Mountain.classes {
         public override void Load() {
             throw new NotImplementedException();
         }
-        protected bool SaveToXml(string fileName) {
+        protected bool SaveToXml(string fileName) {  // will use the static xml helper class to do this when it's ready, 
             try {
-                using (XmlWriter writer = XmlWriter.Create(fileName)) {
+               /* using (XmlWriter writer = XmlWriter.Create(fileName)) { // logic layout proof of concept...
                     writer.WriteStartDocument();
                     writer.WriteStartElement("Player");
-                    writer.WriteAttributeString("Name", base.Name);
-                    writer.WriteAttributeString("GUID", base.ID.ToString());
-                    writer.WriteAttributeString("Description", base.Description);
+                    writer.WriteAttributeString("Name", base.name);
+                    writer.WriteAttributeString("GUID", base.id.ToString());
+                    writer.WriteAttributeString("Description", base.description);
                     writer.WriteAttributeString("Password", Encrypt(this.password));
                     writer.WriteAttributeString("NickName", this.nickname);
                     //continue looping through lists/stats/equipment/enemies etc
-                    // close off elements/document, rename old file, move old old file to backup?, save
+                    // close off elements/document, rename old file, move old old file to backup?, save */
                 }
-            } catch {
+            catch {
                 return false;
             }
             return true;
@@ -54,7 +54,7 @@ namespace Mountain.classes {
         protected bool LoadFromXml(string xml) {
             // create restore point with clone of this file on disk with date/time last loaded
             // parse xml and populate properties
-            // check if madMobs are still alive, remove others from list
+            // check if enemyMobs are still alive, remove others from list
             return true;
         }
         protected string Encrypt(string password) {

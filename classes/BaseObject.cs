@@ -7,12 +7,12 @@ namespace Mountain.classes {
     public enum objectType { baseObject, heart, player, room, mob, quest, timer, system, unknown };
 
     public class BaseObject {
-        private Guid id;
-        private objectType objectType;
-        private string name;
-        private string description;
+        protected Guid id;
+        protected objectType objectType;
+        protected string name;
+        protected string description;
 
-        protected Guid ID {
+      /*  protected Guid ID {
             get {
                 return this.id; // if objectType is derived and id is empty, throw exception here?
             }
@@ -35,7 +35,7 @@ namespace Mountain.classes {
             set {
                 this.description = value;
             }
-        }
+        } */
         public objectType ObjectType {
             get {
                 return this.objectType;

@@ -12,8 +12,8 @@ namespace Mountain.classes {
         protected bool magical = false;
 
         public Item() {
-            base.Name = "new item";
-            base.Description = "new item";
+            base.name = "new item";
+            base.description = "new item";
         }       
     }
 

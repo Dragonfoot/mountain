@@ -9,12 +9,11 @@ using Mountain.classes;
 
 namespace Mountain {
     public partial class Client : Form {
-
         protected World World;
 
         public Client() {
             this.World = new World();
-            this.World.Load(string.Empty);
+            this.World.Load(Properties.Settings.Default.LastWorldSaved);
 
             InitializeComponent();
         }
