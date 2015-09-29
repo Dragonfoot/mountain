@@ -59,7 +59,7 @@ obj/
 debug/
 *.exe
 *.pdb
-obj/Debug/Mountain.csproj.GenerateResource.Cache
+*.Cache
 *.dll
 *.resources
 .vs/Mountain/v14/.suo
