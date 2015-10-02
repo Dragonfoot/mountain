@@ -78,38 +78,21 @@ namespace Mountain.classes {
             }
             if (this.players.Count > 0) {
                 sb.Append("Players: ");
-                objectType ot = ((Player)players[0]).ObjectType;
-                es = ArrayToName(players.ToArray(), ((Player)players[0]).ObjectType);
-                
-                sb.Append(es);
-                
+                for (int i = 0; i < players.Count; i++) {
+                    es = ((Player)players[i]).Name;
+                    if (i != players.Count - 1) {
+                        es = es + ", ";
+                    }
+                    if (i == players.Count - 1) {
+                        es = es + ".";
+                    }
+                    sb.Append(es);
+                }                 
                 view.Add(sb.ToString());
                 sb.Clear();
             }
             
             return view.ToArray();
-        }
-
-        private string ArrayToName(Array list, objectType type) {
-            string es = string.Empty;
-            switch (type) {
-                case objectType.player:
-                    for (int i = 0; i < players.Count; i++) {
-                        es = ((Player)players[i]).Name;
-                        if (i != players.Count - 1) {
-                            es = es + ", ";
-                        }
-                        if (i == players.Count - 1) {
-                            es = es + ".";
-                        }
-                    }
-                    break;
-                case objectType.mob:
-                    break;
-                case objectType.exit:
-                    break;
-            }            
-            return es;
         }
 
         public void AddExit(Exit exit) {
