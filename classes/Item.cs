@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes {
 
-    enum ItemType { unknown = 1, weapon, armour, money, consumable, clothing, valuables, text, container, ingredients };
+    public enum ItemType { unknown = 1, weapon, armour, money, consumable, clothing, valuables, text, container, ingredients };
 
-    class Item : BaseObject {
+    public class Item : BaseObject {
         protected ItemType type = ItemType.unknown;
         protected bool magical = false;
 
@@ -17,7 +17,7 @@ namespace Mountain.classes {
         }       
     }
 
-    class ItemContainer : Item {
+    public class ItemContainer : Item {
         protected BlockingCollection<Item> items;
 
         public ItemContainer(string name, string description) {

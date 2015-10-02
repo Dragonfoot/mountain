@@ -5,8 +5,16 @@ using Mountain.classes.helpers;
 
 namespace Mountain.classes {
 
-    class Exit : BaseObject {
+    public class Exit : BaseObject {
         protected Linkage link;
+        public string Name {
+            get {
+                return base.name;
+            }
+            set {
+                base.name = value;
+            }
+        }
 
         public Exit() {
         }

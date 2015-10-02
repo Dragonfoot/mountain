@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using System.Text;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
@@ -18,6 +19,12 @@ namespace Mountain.classes {
         protected ConcurrentQueue<Packet> msgs;
         protected Queue<Packet> innerQueue;
 
+        public List<Exit> Exits {
+            get {
+                return this.exits;
+            }
+        }
+
         public Room() {
             this.exits = new List<Exit>();
             this.players = new List<Player>();
@@ -26,6 +33,93 @@ namespace Mountain.classes {
             this.events = new ConcurrentQueue<Packet>();
             this.msgs = new ConcurrentQueue<Packet>();
             this.innerQueue = new Queue<Packet>();
+            this.id = new Guid();
+            this.name = "New Room";
+            this.description = "This is a newly created room";
+        }
+
+        public string[] View() {
+            StringBuilder sb = new StringBuilder();
+            string es;
+            List<string> view = new List<string>();
+            view.Add(this.name);
+            view.Add("");
+            view.Add(this.description);
+            view.Add("");
+            if (this.exits.Count > 0) { // exits
+                sb.Append("Exits: ");
+                for (int i = 0; i < exits.Count; i++) {
+                    es = ((Exit)exits[i]).Name;
+                    if (i != exits.Count - 1) {
+                        es = es + ", ";
+                    }
+                    if (i == exits.Count - 1) {
+                        es = es + ".";
+                    }
+                    sb.Append(es);
+                }
+                view.Add(sb.ToString());
+                sb.Clear();
+            }
+            if (this.mobs.Count > 0) {
+                sb.Append("Mobs: ");
+                for (int i = 0; i < mobs.Count; i++) {
+                    es = ((Mob)mobs[i]).Name;
+                    if (i != mobs.Count - 1) {
+                        es = es + ", ";
+                    }
+                    if (i == mobs.Count - 1) {
+                        es = es + ".";
+                    }
+                    sb.Append(es);
+                }
+                view.Add(sb.ToString());
+                sb.Clear();
+            }
+            if (this.players.Count > 0) {
+                sb.Append("Players: ");
+                objectType ot = ((Player)players[0]).ObjectType;
+                es = ArrayToName(players.ToArray(), ((Player)players[0]).ObjectType);
+                
+                sb.Append(es);
+                
+                view.Add(sb.ToString());
+                sb.Clear();
+            }
+            
+            return view.ToArray();
+        }
+
+        private string ArrayToName(Array list, objectType type) {
+            string es = string.Empty;
+            switch (type) {
+                case objectType.player:
+                    for (int i = 0; i < players.Count; i++) {
+                        es = ((Player)players[i]).Name;
+                        if (i != players.Count - 1) {
+                            es = es + ", ";
+                        }
+                        if (i == players.Count - 1) {
+                            es = es + ".";
+                        }
+                    }
+                    break;
+                case objectType.mob:
+                    break;
+                case objectType.exit:
+                    break;
+            }            
+            return es;
+        }
+
+        public void AddExit(Exit exit) {
+            this.exits.Add(exit);
+        }
+        public void AddMob(Mob mob) {
+            this.mobs.Add(mob);
+        }
+        public void AddPlayer(Player player) {
+            this.players.Add(player);
         }
 
         protected bool Save() {

@@ -4,13 +4,21 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes {
 
-    class Mob : Character {
+    public class Mob : Character {
         protected List<Player> fighting;
         protected List<Player> friends;
         protected List<Player> associates;
         protected List<Mob> buddies;
         protected List<Mob> enemies;
 
+        public string Name {
+            get {
+                return base.name;
+            }
+            set {
+                base.name = value;
+            }
+        }
         public Mob() {
             this.fighting = new List<Player>();
             this.friends = new List<Player>();

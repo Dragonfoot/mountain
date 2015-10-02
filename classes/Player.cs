@@ -6,7 +6,7 @@ using Mountain.classes.helpers;
 
 namespace Mountain.classes {
     
-    class Player : Character {
+    public class Player : Character {
         protected List<Item> inventory;  // need thread safe dynamic list and/or sorted?
         protected Equipment equipment;
         protected Stats stats;
@@ -15,6 +15,15 @@ namespace Mountain.classes {
         protected List<Mob> enemyMobs; //
         private string password;
         private string nickname;
+
+        public string Name {
+            get {
+                return base.name;
+            }
+            set {
+                base.name = value;
+            }
+        }
 
         public Player() {
             this.inventory = new List<Item>();
@@ -67,7 +76,7 @@ namespace Mountain.classes {
 
     }
 
-    class Equipment {       // possible player gear locations
+    public class Equipment {       // possible player gear locations
         protected Item head;
         protected Item eyes;
         protected Item face;
@@ -95,7 +104,7 @@ namespace Mountain.classes {
 
     }
 
-    class Stats {   // list of possible player attributes set at arbitrary level 1 defaults
+    public class Stats {   // list of possible player attributes set at arbitrary level 1 defaults
         protected int health = 18;
         protected int maxHealth = 18;
         protected int strength = 4;

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes {
 
-    abstract class Character : BaseObject {
+    abstract public class Character : BaseObject {
         protected Socket socket;
         public Socket Socket {
             get {

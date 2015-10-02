@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
 
-    class Linkage : BaseObject {
+    public class Linkage : BaseObject {
         protected RoomPointer x;
         protected RoomPointer y;
 
@@ -23,7 +23,7 @@ namespace Mountain.classes.helpers {
         }
     }
 
-    class RoomPointer {
+    public class RoomPointer {
         protected string label;
         protected Guid roomID;
 

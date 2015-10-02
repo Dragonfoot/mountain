@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes {
 
-    public enum objectType { baseObject, heart, player, room, mob, quest, timer, system, unknown };
+    public enum objectType { baseObject, heart, player, room, mob, quest, timer, system, exit, item, unknown };
 
     public class BaseObject {
         protected Guid id;
