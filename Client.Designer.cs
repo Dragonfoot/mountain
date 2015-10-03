@@ -26,32 +26,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.worldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.areaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.roomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.standardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.healToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mobToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lawfulToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.specialistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.armourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.weaponToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.valuableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consumableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.containerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ingredientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clothingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.moneyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.noteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.questToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -97,8 +71,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -110,14 +84,13 @@
             this.commandsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(986, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1070, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
             this.saveToolStripMenuItem,
             this.loadToolStripMenuItem,
             this.toolStripSeparator1,
@@ -125,191 +98,6 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.worldToolStripMenuItem,
-            this.areaToolStripMenuItem,
-            this.roomToolStripMenuItem,
-            this.mobToolStripMenuItem,
-            this.itemToolStripMenuItem,
-            this.eventToolStripMenuItem,
-            this.questToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
-            this.toolStripMenuItem1.Text = "New";
-            // 
-            // worldToolStripMenuItem
-            // 
-            this.worldToolStripMenuItem.Name = "worldToolStripMenuItem";
-            this.worldToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.worldToolStripMenuItem.Text = "World";
-            // 
-            // areaToolStripMenuItem
-            // 
-            this.areaToolStripMenuItem.Name = "areaToolStripMenuItem";
-            this.areaToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.areaToolStripMenuItem.Text = "Area";
-            // 
-            // roomToolStripMenuItem
-            // 
-            this.roomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.standardToolStripMenuItem,
-            this.shopToolStripMenuItem,
-            this.homeToolStripMenuItem,
-            this.adminToolStripMenuItem,
-            this.healToolStripMenuItem});
-            this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
-            this.roomToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.roomToolStripMenuItem.Text = "Room";
-            // 
-            // standardToolStripMenuItem
-            // 
-            this.standardToolStripMenuItem.Name = "standardToolStripMenuItem";
-            this.standardToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.standardToolStripMenuItem.Text = "Standard";
-            // 
-            // shopToolStripMenuItem
-            // 
-            this.shopToolStripMenuItem.Name = "shopToolStripMenuItem";
-            this.shopToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.shopToolStripMenuItem.Text = "Shop";
-            // 
-            // homeToolStripMenuItem
-            // 
-            this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.homeToolStripMenuItem.Text = "Home";
-            // 
-            // adminToolStripMenuItem
-            // 
-            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.adminToolStripMenuItem.Text = "Admin";
-            // 
-            // healToolStripMenuItem
-            // 
-            this.healToolStripMenuItem.Name = "healToolStripMenuItem";
-            this.healToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.healToolStripMenuItem.Text = "Healing";
-            // 
-            // mobToolStripMenuItem
-            // 
-            this.mobToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helperToolStripMenuItem,
-            this.lawfulToolStripMenuItem,
-            this.agroToolStripMenuItem,
-            this.specialistToolStripMenuItem});
-            this.mobToolStripMenuItem.Name = "mobToolStripMenuItem";
-            this.mobToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.mobToolStripMenuItem.Text = "Mob";
-            // 
-            // helperToolStripMenuItem
-            // 
-            this.helperToolStripMenuItem.Name = "helperToolStripMenuItem";
-            this.helperToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.helperToolStripMenuItem.Text = "Helper";
-            // 
-            // lawfulToolStripMenuItem
-            // 
-            this.lawfulToolStripMenuItem.Name = "lawfulToolStripMenuItem";
-            this.lawfulToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.lawfulToolStripMenuItem.Text = "Lawful";
-            // 
-            // agroToolStripMenuItem
-            // 
-            this.agroToolStripMenuItem.Name = "agroToolStripMenuItem";
-            this.agroToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.agroToolStripMenuItem.Text = "Agro";
-            // 
-            // specialistToolStripMenuItem
-            // 
-            this.specialistToolStripMenuItem.Name = "specialistToolStripMenuItem";
-            this.specialistToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.specialistToolStripMenuItem.Text = "Specialist";
-            // 
-            // itemToolStripMenuItem
-            // 
-            this.itemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.armourToolStripMenuItem,
-            this.weaponToolStripMenuItem,
-            this.valuableToolStripMenuItem,
-            this.consumableToolStripMenuItem,
-            this.containerToolStripMenuItem,
-            this.ingredientToolStripMenuItem,
-            this.clothingToolStripMenuItem,
-            this.moneyToolStripMenuItem,
-            this.noteToolStripMenuItem});
-            this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
-            this.itemToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.itemToolStripMenuItem.Text = "Item";
-            // 
-            // armourToolStripMenuItem
-            // 
-            this.armourToolStripMenuItem.Name = "armourToolStripMenuItem";
-            this.armourToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.armourToolStripMenuItem.Text = "Armour";
-            // 
-            // weaponToolStripMenuItem
-            // 
-            this.weaponToolStripMenuItem.Name = "weaponToolStripMenuItem";
-            this.weaponToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.weaponToolStripMenuItem.Text = "Weapon";
-            // 
-            // valuableToolStripMenuItem
-            // 
-            this.valuableToolStripMenuItem.Name = "valuableToolStripMenuItem";
-            this.valuableToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.valuableToolStripMenuItem.Text = "Valuables";
-            // 
-            // consumableToolStripMenuItem
-            // 
-            this.consumableToolStripMenuItem.Name = "consumableToolStripMenuItem";
-            this.consumableToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.consumableToolStripMenuItem.Text = "Consumable";
-            // 
-            // containerToolStripMenuItem
-            // 
-            this.containerToolStripMenuItem.Name = "containerToolStripMenuItem";
-            this.containerToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.containerToolStripMenuItem.Text = "Container";
-            // 
-            // ingredientToolStripMenuItem
-            // 
-            this.ingredientToolStripMenuItem.Name = "ingredientToolStripMenuItem";
-            this.ingredientToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.ingredientToolStripMenuItem.Text = "Ingredient";
-            // 
-            // clothingToolStripMenuItem
-            // 
-            this.clothingToolStripMenuItem.Name = "clothingToolStripMenuItem";
-            this.clothingToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.clothingToolStripMenuItem.Text = "Clothing";
-            // 
-            // moneyToolStripMenuItem
-            // 
-            this.moneyToolStripMenuItem.Name = "moneyToolStripMenuItem";
-            this.moneyToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.moneyToolStripMenuItem.Text = "Money";
-            // 
-            // noteToolStripMenuItem
-            // 
-            this.noteToolStripMenuItem.Name = "noteToolStripMenuItem";
-            this.noteToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.noteToolStripMenuItem.Text = "Note";
-            // 
-            // eventToolStripMenuItem
-            // 
-            this.eventToolStripMenuItem.Name = "eventToolStripMenuItem";
-            this.eventToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.eventToolStripMenuItem.Text = "Event";
-            // 
-            // questToolStripMenuItem
-            // 
-            this.questToolStripMenuItem.Name = "questToolStripMenuItem";
-            this.questToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.questToolStripMenuItem.Text = "Quest";
             // 
             // saveToolStripMenuItem
             // 
@@ -560,11 +348,10 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(786, 24);
+            this.panel1.Location = new System.Drawing.Point(870, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 470);
+            this.panel1.Size = new System.Drawing.Size(200, 589);
             this.panel1.TabIndex = 1;
             // 
             // panel3
@@ -575,7 +362,7 @@
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.button4);
-            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Location = new System.Drawing.Point(652, 302);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(90, 171);
             this.panel3.TabIndex = 9;
@@ -631,7 +418,7 @@
             // 
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.listBox1);
-            this.panel2.Location = new System.Drawing.Point(12, 220);
+            this.panel2.Location = new System.Drawing.Point(12, 36);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(596, 262);
             this.panel2.TabIndex = 2;
@@ -651,11 +438,21 @@
             this.listBox1.Size = new System.Drawing.Size(590, 212);
             this.listBox1.TabIndex = 0;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(15, 317);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(593, 246);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
+            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(986, 494);
+            this.ClientSize = new System.Drawing.Size(1070, 613);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip);
@@ -664,7 +461,6 @@
             this.Text = "Client";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -690,32 +486,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem worldToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem areaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem roomToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mobToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem itemToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem armourToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem weaponToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem valuableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consumableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem containerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ingredientToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clothingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem standardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem shopToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem healToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helperToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lawfulToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem agroToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem specialistToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem moneyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem noteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eventToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem questToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
@@ -749,6 +519,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.RichTextBox richTextBox1;
         }
     }
 

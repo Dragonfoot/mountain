@@ -8,6 +8,12 @@ using Mountain.classes.helpers;
 
 namespace Mountain.classes {
 
+    /* ansi color codes 
+     * 
+     http://pueblo.sourceforge.net/doc/manual/ansi_color_codes.html
+     * 
+     */
+
     public class Room : BaseObject {
 
         private List<Exit> exits;
@@ -91,7 +97,9 @@ namespace Mountain.classes {
                 view.Add(sb.ToString());
                 sb.Clear();
             }
-            
+            // items on floor, need to search for duplicates and display them in a language friendly form
+            // You see an orange, 23 pumpkin seeds, a hungry cat, Toetag's nose.
+            // ie: a or an, 's, 2 or two..
             return view.ToArray();
         }
 
