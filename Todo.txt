@@ -16,3 +16,8 @@
 (C) Mapper: World view, ability to search for a player/mob and show location on map. Perhaps show all players on map
 	in live mode as they move about..
 
+(C/R) - lag feature
+      - multi world hand offs, item/mob mapping between worlds
+	  - player set,  per player settings, lag commands, verbose, output types
+	  - main output class - output in plain or ascii mode dependent on player preference.
+	  - first iteration to be a server/client in one project
