@@ -63,3 +63,4 @@ debug/
 *.dll
 *.resources
 .vs/Mountain/v14/.suo
+Mountain.sln
