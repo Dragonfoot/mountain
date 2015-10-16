@@ -9,22 +9,22 @@ using Mountain.classes;
 
 namespace Mountain {
     public partial class Client : Form {
-        protected World World;
+        protected List<World> worlds;
+        protected World world;
         public Room room;
 
         public Client() {
-            this.World = new World();
-            this.World.Load(Properties.Settings.Default.LastWorldSaved);
+            this.world = new World(Properties.Settings.Default.LastWorldSaved);
 
             InitializeComponent();
         }
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e) {
-            this.World.Start();
+            this.world.Start();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            this.World.Save(string.Empty);
+            this.world.Save(string.Empty);
         }
 
         // room testing
@@ -46,27 +46,40 @@ namespace Mountain {
             mob = new Mob();
             mob.Name = "bullyboy";
             room.AddMob(mob);
-            Player player = new Player();
-            player.Name = "Toetag";
-            room.AddPlayer(player);
 
-            button5_Click(this, e);
+            button5_Click(this, e); // look at room
         }
 
         private void button4_Click(object sender, EventArgs e) {
-            //clear room.. destroy
+            //destroy room
             this.room = null;
-            listBox1.DataSource = null;
-            listBox1.Items.Clear();
+            listBox.DataSource = null;
+            listBox.Items.Clear();
         }
 
         private void button5_Click(object sender, EventArgs e) {
             // look at room
             if (this.room != null) {
-                listBox1.DataSource = null;
-                listBox1.Items.Clear();
-                listBox1.Items.AddRange(this.room.View());
+                listBox.DataSource = null;
+                listBox.Items.Clear();
+                listBox.Items.AddRange(this.room.View());
             }
+        }
+
+        private void button5_Click_1(object sender, EventArgs e) { // start
+            //create world and start listener
+            if (world == null) {
+                this.BuildWorld();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e) {
+            //stop server
+        }
+
+        private World BuildWorld() {
+            World world = new World("");
+            return world;
         }
     }
 }

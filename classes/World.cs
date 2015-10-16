@@ -11,9 +11,10 @@ namespace Mountain.classes {
         protected List<Area> Areas;
         protected Task heart;
 
-        public World() {
+        public World(string world) {
             this.Areas = new List<Area>();
             this.heart = new Task(new Action(this.HeartBeat));
+            Load(world);
         }
 
         public void Reload() { }
@@ -29,13 +30,15 @@ namespace Mountain.classes {
         public void Load(string world) {
             if (world != string.Empty) {
                 // if world is a valid file - this.loadXml(world);
+            } else {
+                // notify console of error and
+                CreateDefaultWorld();
             }
-            else this.CreateDefaultWorld(); 
         }
 
         public void CreateDefaultWorld() {
             base.name = "Default World";
-            base.id = new Guid();
+            base.ID = new Guid();
             base.description = "This world has been created by the Acme Corporate Funding Group for your life's passionate personal pleasures. " +
                 "Keep your new world growing with us. /n" +
                 "Invest in Acme Corporation's Life Insurance Policies and help make our gaming addition research goals a viable solution. " +
@@ -49,7 +52,7 @@ namespace Mountain.classes {
 
         private void CreateDefaultAdminArea() {
             Area area = new Area();
-            
+            // set area data
             Room room = new Room();
             // make new room ( admin.lobby )
             // make new room ( admin.office )
@@ -71,7 +74,7 @@ namespace Mountain.classes {
                         // foreach((Mob)mob in room.Mobs){ run mob.tasks() } end foreach
                         // foreach((Player)player in room.Players){ run player.tasks() } end foreach
                         // run room.tasks()
-                        // check UI, exit while(true) loop if requested
+                        // check UI, exit while(true)loop if required
                     // } end foreach
                     // run area.tasks()
                 //} end foreach

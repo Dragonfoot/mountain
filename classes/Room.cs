@@ -39,7 +39,7 @@ namespace Mountain.classes {
             this.events = new ConcurrentQueue<Packet>();
             this.msgs = new ConcurrentQueue<Packet>();
             this.innerQueue = new Queue<Packet>();
-            this.id = new Guid();
+            this.ID = new Guid();
             this.name = "New Room";
             this.description = "This is a newly created room";
         }

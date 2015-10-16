@@ -70,11 +70,18 @@
             this.button4 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBox = new System.Windows.Forms.ListBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.startServer = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -348,6 +355,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(870, 24);
             this.panel1.Name = "panel1";
@@ -362,7 +370,7 @@
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.button4);
-            this.panel3.Location = new System.Drawing.Point(652, 302);
+            this.panel3.Location = new System.Drawing.Point(105, 405);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(90, 171);
             this.panel3.TabIndex = 9;
@@ -417,7 +425,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.listBox1);
+            this.panel2.Controls.Add(this.listBox);
             this.panel2.Location = new System.Drawing.Point(12, 36);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(596, 262);
@@ -430,13 +438,13 @@
             this.textBox1.Size = new System.Drawing.Size(590, 20);
             this.textBox1.TabIndex = 1;
             // 
-            // listBox1
+            // listBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 15);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(590, 212);
-            this.listBox1.TabIndex = 0;
+            this.listBox.FormattingEnabled = true;
+            this.listBox.Location = new System.Drawing.Point(3, 15);
+            this.listBox.Name = "listBox";
+            this.listBox.Size = new System.Drawing.Size(590, 212);
+            this.listBox.TabIndex = 0;
             // 
             // richTextBox1
             // 
@@ -446,13 +454,64 @@
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.startServer);
+            this.groupBox1.Location = new System.Drawing.Point(637, 51);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(192, 191);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Server";
+            // 
+            // startServer
+            // 
+            this.startServer.Location = new System.Drawing.Point(17, 153);
+            this.startServer.Name = "startServer";
+            this.startServer.Size = new System.Drawing.Size(75, 23);
+            this.startServer.TabIndex = 0;
+            this.startServer.Text = "Start";
+            this.startServer.UseVisualStyleBackColor = true;
+            this.startServer.Click += new System.EventHandler(this.button5_Click_1);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(98, 153);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 1;
+            this.button6.Text = "Stop";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(20, 101);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(55, 20);
+            this.textBox2.TabIndex = 2;
+            this.textBox2.Text = "8090";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 85);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Port";
+            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1070, 613);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip);
@@ -461,10 +520,13 @@
             this.Text = "Client";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -484,7 +546,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
@@ -520,6 +582,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button startServer;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button6;
         }
     }
 

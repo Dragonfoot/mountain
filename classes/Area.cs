@@ -27,19 +27,11 @@ namespace Mountain.classes {
                 base.description = value;
             }
         }
-        public Guid ID {
-            get {
-                return base.id;
-            }
-            set {
-                base.id = value;
-            }
-        }
 
         public Area() {
             base.name = "unknown area name";
             base.description = "new generic area";
-            base.id = new Guid();
+            base.ID = new Guid();
         }
         public Area(string name, string description, Guid id) {
             this.Name = name;

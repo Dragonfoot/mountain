@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mountain.classes {
 
-    public class Mob : Character {
-        protected List<Player> fighting;
-        protected List<Player> friends;
-        protected List<Player> associates;
-        protected List<Mob> buddies;
-        protected List<Mob> enemies;
+    public class Mob : Dummy {
+        protected List<Player> playerFighting;
+        protected List<Player> playerFriends;
+        protected List<Player> playerAssociates;
+        protected List<Mob> mobBuddies;
+        protected List<Mob> mobEnemies;
 
         public string Name {
             get {
@@ -20,16 +22,16 @@ namespace Mountain.classes {
             }
         }
         public Mob() {
-            this.fighting = new List<Player>();
-            this.friends = new List<Player>();
-            this.associates = new List<Player>();
-            this.buddies = new List<Mob>();
-            this.enemies = new List<Mob>();
+            Construct();
         }
 
-        public override void Save() {  // future potential, advanced combat mob, store between stalking player sessions
+        protected virtual void Construct() {
+            this.playerFighting = new List<Player>();
+            this.playerFriends = new List<Player>();
+            this.playerAssociates = new List<Player>();
+            this.mobBuddies = new List<Mob>();
+            this.mobEnemies = new List<Mob>();
         }
-        public override void Load() {
-        }
+       
     }
 }

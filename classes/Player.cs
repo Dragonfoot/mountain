@@ -2,6 +2,8 @@
 using System.Xml;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Net;
+using System.Net.Sockets;
 using Mountain.classes.helpers;
 
 namespace Mountain.classes {
@@ -25,7 +27,7 @@ namespace Mountain.classes {
             }
         }
 
-        public Player() {
+        public Player(TcpClient socket) : base(socket) {
             this.inventory = new List<Item>();
             this.equipment = new Equipment();
             this.enemyPlayers = new List<Player>();

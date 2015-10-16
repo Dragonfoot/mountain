@@ -7,35 +7,20 @@ namespace Mountain.classes {
     public enum objectType { baseObject, heart, player, room, mob, quest, timer, system, exit, item, unknown };
 
     public class BaseObject {
-        protected Guid id;
+        private Guid id;
         protected objectType objectType;
         protected string name;
         protected string description;
 
-      /*  protected Guid ID {
+        protected Guid ID {
             get {
-                return this.id; // if objectType is derived and id is empty, throw exception here?
+                return this.id;
             }
             set {
                 this.id = (value == Guid.Empty) ? new Guid() : value;
             }
         }
-        protected string Name {
-            get {
-                return this.name;
-            }
-            set {
-                this.name = value;
-            }
-        }
-        protected string Description {
-            get {
-                return this.description;
-            }
-            set {
-                this.description = value;
-            }
-        } */
+
         public objectType ObjectType {
             get {
                 return this.objectType;

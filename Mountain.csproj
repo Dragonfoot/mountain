@@ -50,6 +50,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,10 +62,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="classes\AnsiColor.cs" />
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\BaseObject.cs" />
     <Compile Include="classes\Character.cs" />
+    <Compile Include="classes\Dummy.cs" />
     <Compile Include="classes\Exit.cs" />
     <Compile Include="classes\helpers\Colors.cs" />
     <Compile Include="classes\helpers\Linkage.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="classes\Item.cs" />
     <Compile Include="classes\Mob.cs" />
     <Compile Include="classes\Room.cs" />
+    <Compile Include="classes\Server.cs" />
     <Compile Include="classes\World.cs" />
     <Compile Include="classes\Player.cs" />
     <Compile Include="Client.cs">
