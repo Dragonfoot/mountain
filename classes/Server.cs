@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes {
 
-    class Server {
+    public class Server {
         protected int port;
         TcpListener listener;
         TcpClient client;
@@ -23,7 +23,7 @@ namespace Mountain.classes {
         }
         public Server() {
             ipAddress = IPAddress.Parse("127.0.0.1");
-            int port = 8090;
+            this.port = 8090;
             //     TcpClient client = listener.AcceptSocket();
         }
         public void Start() {
@@ -67,11 +67,11 @@ namespace Mountain.classes {
  *          send user message
  *          wait for user input
  *          do password check on user input
- *          if no password or no username, set user message with error and request for username and password or new player
- *          if response is nw player, call create new user
- *          if login successful, end loop
+ *          if no password or no username, set user message with error and request for username and password / ask if this is a new player
+ *          if response is new player, call create new user
+ *          if login successful, end loop, else set user message with error
  *      end loop
- *      return user packet
+ *      return user data packet
  * end login function
  * 
  */

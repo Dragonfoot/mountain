@@ -14,7 +14,7 @@ namespace Mountain {
         public Room room;
 
         public Client() {
-            this.world = new World(Properties.Settings.Default.LastWorldSaved);
+            this.world = new World(string.Empty);
 
             InitializeComponent();
         }

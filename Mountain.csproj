@@ -70,6 +70,8 @@
     <Compile Include="classes\helpers\Colors.cs" />
     <Compile Include="classes\helpers\Linkage.cs" />
     <Compile Include="classes\helpers\Packet.cs" />
+    <Compile Include="classes\helpers\Stats.cs" />
+    <Compile Include="classes\helpers\Vault.cs" />
     <Compile Include="classes\helpers\XmlHelper.cs" />
     <Compile Include="classes\Item.cs" />
     <Compile Include="classes\Mob.cs" />

@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 namespace Mountain.classes {
 
     public class Mob : Dummy {
-        protected List<Player> playerFighting;
-        protected List<Player> playerFriends;
-        protected List<Player> playerAssociates;
+        protected List<Player> fightingPlayers;
+        protected List<Player> friendPlayers;
+        protected List<Player> associatePlayers;
         protected List<Mob> mobBuddies;
         protected List<Mob> mobEnemies;
+        protected List<Item> inventory;
 
         public string Name {
             get {
@@ -26,11 +27,12 @@ namespace Mountain.classes {
         }
 
         protected virtual void Construct() {
-            this.playerFighting = new List<Player>();
-            this.playerFriends = new List<Player>();
-            this.playerAssociates = new List<Player>();
+            this.fightingPlayers = new List<Player>();
+            this.friendPlayers = new List<Player>();
+            this.associatePlayers = new List<Player>();
             this.mobBuddies = new List<Mob>();
             this.mobEnemies = new List<Mob>();
+            this.inventory = new List<Item>();
         }
        
     }

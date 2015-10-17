@@ -8,13 +8,21 @@ using Mountain.classes.helpers;
 namespace Mountain.classes {
 
     public class World : BaseObject {
+        protected Server portListener;
         protected List<Area> Areas;
         protected Task heart;
+        protected bool heartStop;
+        protected CancellationTokenSource tokenSource;
+        protected CancellationToken token;
 
         public World(string world) {
             this.Areas = new List<Area>();
-            this.heart = new Task(new Action(this.HeartBeat));
+            this.heartStop = false;
+            tokenSource = new CancellationTokenSource();
+            this.token = tokenSource.Token;
+            this.heart = Task.Factory.StartNew(() => HeartBeat(), token);
             Load(world);
+            portListener = new Server();
         }
 
         public void Reload() { }
@@ -22,9 +30,13 @@ namespace Mountain.classes {
         public void Shutdown() { }
 
         public void Stop() {
+            tokenSource.Cancel();
+            tokenSource.Dispose();
+            portListener.Stop();
         }
         public void Start() {
             heart.Start();
+            portListener.Start();
         }
 
         public void Load(string world) {
@@ -39,13 +51,14 @@ namespace Mountain.classes {
         public void CreateDefaultWorld() {
             base.name = "Default World";
             base.ID = new Guid();
-            base.description = "This world has been created by the Acme Corporate Funding Group for your life's passionate personal pleasures. " +
+            base.description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
                 "Keep your new world growing with us. /n" +
-                "Invest in Acme Corporation's Life Insurance Policies and help make our gaming addition research goals a viable solution. " +
-                "Become a gold member of our growing center of gaming excellence, do the right thing and " +
-                "donate your soul to our world class Gaming Society Center of Excellence./n" +
-                "Join today. (Please sign our body donor card, your body will be entered in our annual Grisly Corpse Competition Awards ceremony " +
-                "and could win a place in our Achievements of Horror vault of our societies most fascinating players.)";
+                "Invest in Toetag Corporation's Life Insurance Policies and help make our gaming addition goals a viable solution. " +
+                "Become a gold member of our growing centers of excellence, do the right thing, " +
+                "donate your soul to our world class Gaming Society Center of Excellence. You could win big!/n" +
+                "Join today. (Please sign our body donor card and be entered in our annual Grisly Corpse Competition Awards ceremony. " +
+                "You could win a place on the top shelf of our Achievements of Horror vault that houses the very best souls of our societies " +
+                "most fascinating players.)";
             this.CreateDefaultAdminArea();
             this.Save("defaultWorld");
         }
@@ -80,7 +93,8 @@ namespace Mountain.classes {
                 //} end foreach
                 // run world.tasks()
                 // stopwatch.stop().display(stopwatch.duration())
-                // check UI, exit while(true) loop if requested
+                // check GUI and exit while(true) loop if requested
+                if (this.heartStop == true) break;
             }
         }
 
