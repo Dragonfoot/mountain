@@ -14,7 +14,7 @@ namespace Mountain {
         public Room room;
 
         public Client() {
-            this.world = new World(string.Empty);
+            //this.world = new World(string.Empty);
 
             InitializeComponent();
         }
@@ -69,7 +69,7 @@ namespace Mountain {
         private void button5_Click_1(object sender, EventArgs e) { // start
             //create world and start listener
             if (world == null) {
-                this.BuildWorld();
+                world = BuildWorld();
             }
         }
 
