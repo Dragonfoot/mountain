@@ -4,19 +4,11 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes {
 
-    public class Area : BaseObject {
+    public class Area : Identity {
         protected List<Room> rooms;
         public List<Room> Rooms {
             get {
                 return this.rooms;
-            }
-        }
-        public string Name {
-            get {
-                return base.name;
-            }
-            set {
-                base.name = value;
             }
         }
         public string Description {
@@ -29,7 +21,7 @@ namespace Mountain.classes {
         }
 
         public Area() {
-            base.name = "unknown area name";
+            Name = "unknown area name";
             base.description = "new generic area";
             base.ID = new Guid();
         }

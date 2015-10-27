@@ -9,7 +9,7 @@ namespace Mountain.classes.helpers {
 
     public class Packet {
         protected packetType type;
-        public Packet(BaseObject sender, packetType t, DataPacket data) {
+        public Packet(Identity sender, packetType t, DataPacket data) {
         }
     }
 

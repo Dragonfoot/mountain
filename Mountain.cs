@@ -8,23 +8,24 @@ using System.Windows.Forms;
 using Mountain.classes;
 
 namespace Mountain {
-    public partial class Client : Form {
+    public partial class Mountain : Form {
         protected List<World> worlds;
         protected World world;
         public Room room;
 
-        public Client() {
+        public Mountain() {
             //this.world = new World(string.Empty);
 
             InitializeComponent();
         }
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e) {
-            this.world.Start();
+            // this.world.Start();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            this.world.Save(string.Empty);
+            Close();
+            //this.world.Save(string.Empty);
         }
 
         // room testing
@@ -53,23 +54,23 @@ namespace Mountain {
         private void button4_Click(object sender, EventArgs e) {
             //destroy room
             this.room = null;
-            listBox.DataSource = null;
-            listBox.Items.Clear();
+            Console.DataSource = null;
+            Console.Items.Clear();
         }
 
         private void button5_Click(object sender, EventArgs e) {
             // look at room
             if (this.room != null) {
-                listBox.DataSource = null;
-                listBox.Items.Clear();
-                listBox.Items.AddRange(this.room.View());
+                Console.DataSource = null;
+                Console.Items.Clear();
+                Console.Items.AddRange(this.room.View());
             }
         }
 
         private void button5_Click_1(object sender, EventArgs e) { // start
             //create world and start listener
             if (world == null) {
-                world = BuildWorld();
+                world = BuildWorld(Console);
             }
         }
 
@@ -77,9 +78,19 @@ namespace Mountain {
             //stop server
         }
 
-        private World BuildWorld() {
-            World world = new World("");
+        private World BuildWorld(ListBox console) {
+            World world = new World(console);
             return world;
         }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e) {
+            AreaForm areaForm = new AreaForm();
+            DialogResult dialogresult = areaForm.ShowDialog();
+            if (dialogresult == DialogResult.OK) {
+            } else if (dialogresult == DialogResult.Cancel) {
+            }
+            areaForm.Dispose();
+        }
     }
+
 }

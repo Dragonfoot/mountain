@@ -62,33 +62,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AreaForm.Designer.cs">
+      <DependentUpon>AreaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="classes\Area.cs" />
-    <Compile Include="classes\BaseObject.cs" />
-    <Compile Include="classes\Character.cs" />
-    <Compile Include="classes\Dummy.cs" />
+    <Compile Include="classes\Equipment.cs" />
+    <Compile Include="classes\helpers\Globals.cs" />
+    <Compile Include="classes\Login.cs" />
+    <Compile Include="classes\Identity.cs" />
+    <Compile Include="classes\Items\ClothingItem.cs" />
+    <Compile Include="classes\Items\OutfitItem.cs" />
+    <Compile Include="classes\Items\WeaponItem.cs" />
+    <Compile Include="classes\ClientConnection.cs" />
+    <Compile Include="classes\TcpServer.cs" />
+    <Compile Include="classes\Underling.cs" />
     <Compile Include="classes\Exit.cs" />
     <Compile Include="classes\helpers\Colors.cs" />
     <Compile Include="classes\helpers\Linkage.cs" />
     <Compile Include="classes\helpers\Packet.cs" />
     <Compile Include="classes\helpers\Stats.cs" />
-    <Compile Include="classes\helpers\Vault.cs" />
+    <Compile Include="classes\Vault.cs" />
     <Compile Include="classes\helpers\XmlHelper.cs" />
-    <Compile Include="classes\Item.cs" />
+    <Compile Include="classes\Items\Item.cs" />
     <Compile Include="classes\Mob.cs" />
     <Compile Include="classes\Room.cs" />
     <Compile Include="classes\Server.cs" />
     <Compile Include="classes\World.cs" />
     <Compile Include="classes\Player.cs" />
-    <Compile Include="Client.cs">
+    <Compile Include="Mountain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Client.Designer.cs">
-      <DependentUpon>Client.cs</DependentUpon>
+    <Compile Include="Mountain.Designer.cs">
+      <DependentUpon>Mountain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Client.resx">
-      <DependentUpon>Client.cs</DependentUpon>
+    <EmbeddedResource Include="AreaForm.resx">
+      <DependentUpon>AreaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mountain.resx">
+      <DependentUpon>Mountain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,6 +116,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\Mountain.classes.Room.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,6 +131,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="classes\helpers\ServerSocket.txt" />
     <Content Include="Todo.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +145,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="classes\Items\Armour\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

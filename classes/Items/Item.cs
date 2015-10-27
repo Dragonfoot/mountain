@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using Mountain.classes.helpers;
 using System.Threading.Tasks;
 
-namespace Mountain.classes {
+namespace Mountain.classes.Items {
 
-    public enum ItemType { unknown = 1, weapon, armour, money, consumable, clothing, valuables, text, container, ingredients };
-
-    public class Item : BaseObject {
-        protected ItemType type = ItemType.unknown;
+    public class Item : Identity {
+        protected itemType type = itemType.unknown;
         protected bool magical = false;
 
         public Item() {
-            base.name = "new item";
-            base.description = "new item";
+            Name = "new item";
+            base.ClassType = classType.item;
+            base.ItemType = itemType.unknown;
+            base.description = "new generic unknown item type";
         }       
     }
 
     public class ItemContainer : Item {
-        protected BlockingCollection<Item> items;
+        protected ConcurrentBag<Item> items;
 
         public ItemContainer(string name, string description) {
-            this.items = new BlockingCollection<Item>(); // not sure on threading needs yet
-            base.type = ItemType.container;
+            base.type = itemType.container;
+            this.items = new ConcurrentBag<Item>(); // not sure on threading needs yet
         }
         protected string Save(string txt) {
             return txt;
@@ -31,9 +32,6 @@ namespace Mountain.classes {
             return txt;
         }
 
-    }
-
-    class ItemArmor : Item {
     }
     class ItemWeapon : Item {
     }

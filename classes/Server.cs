@@ -2,42 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mountain.classes {
 
     public class Server {
-        protected int port;
+
+        public int Port {
+            get; set;
+            }
+        public List<Task> Logins {
+            get; set;
+            }
+        public List<Task> Clients {
+            get; set;
+            }
         TcpListener listener;
         TcpClient client;
-        IPAddress ipAddress;
-        public int Port {
-            get {
-                return this.port;
-            }
-            set {
-                this.port = value;
-            }
-        }
-        public Server() {
-            ipAddress = IPAddress.Parse("127.0.0.1");
-            this.port = 8090;
-            //     TcpClient client = listener.AcceptSocket();
-        }
-        public void Start() {
-            listener = new TcpListener(ipAddress, port);
+        object Activelock;
+
+        public Server(int port) {
+            Logins=new List<Task>();
+            Clients=new List<Task>();
+            Activelock=new object();
+            if (port<0) {
+                this.Port=8090;
+                }
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken cancel = cancellationTokenSource.Token;
+
+            listener=new TcpListener(IPAddress.Any, Port);
             listener.Start();
-            Console.WriteLine("The Server has started on port " + port.ToString());
-        }
-        public void Stop() {
-            //close all open connections
-            listener.Stop();
+            var task = AcceptClientsAsync(listener, cancel);
+            }
+
+        public async Task AcceptClientsAsync(TcpListener listener, CancellationToken cancel) {
+            await Task.Yield();
+            while (!cancel.IsCancellationRequested) {
+                var tcpClient = await listener.AcceptTcpClientAsync();
+                var task = HandleClientAsync(client, cancel);
+                if (task.IsFaulted)
+                    task.Wait();
+                }
+            }
+
+        public async Task HandleClientAsync(TcpClient client, CancellationToken cancel) {
+            await Task.Yield();
+            var local = client.Client.LocalEndPoint.ToString();
+            // Console.WriteLine("Connected " + local);
+            StreamReader sr = null;
+            StreamWriter sw = null;
+            try {
+                var stream = client.GetStream();
+                sr=new StreamReader(stream, Encoding.UTF8);
+                sw=new StreamWriter(stream, Encoding.UTF8);
+                while (!cancel.IsCancellationRequested&&client.Connected) {
+                    //sr = new StreamReader(stream, Encoding.UTF8);
+                    //sw = new StreamWriter(stream, Encoding.UTF8);
+
+                    var msg = await sr.ReadLineAsync();
+                    ;
+
+                    if (msg==null)
+                        continue;
+
+                    //_inMessages.Increment();
+                    // _inBytes.IncrementBy(msg.Length);
+
+                    await sw.WriteLineAsync(msg);
+                    await sw.FlushAsync();
+
+                    // _outMessages.Increment();
+                    // _outBytes.IncrementBy(msg.Length);
+
+                    }
+                }
+            catch (Exception aex) {
+                var ex = aex.GetBaseException();
+                Console.WriteLine("Client error: "+ex.Message);
+                }
+            finally {
+                //  Connected--;
+                if (sr!=null)
+                    sr.Dispose();
+
+                if (sw!=null)
+                    sw.Dispose();
+                }
+            Console.WriteLine("Disconnected "+local);
+            }
+
+        public void Send(Player player, string text) {
+
+            }
+
         }
 
     }
-}
 
 /*
  * server object

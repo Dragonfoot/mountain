@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,37 +8,30 @@ using Mountain.classes.helpers;
 
 namespace Mountain.classes {
 
-    public class World : BaseObject {
-        protected Server portListener;
+    public class World : Identity {
+        public List<ClientConnection> Logins { get; set; }
+        public List<Player> Players { get; set; }
+        protected ListBox Console;
+        protected TcpServer portListener;
         protected List<Area> Areas;
         protected Task heart;
         protected bool heartStop;
-        protected CancellationTokenSource tokenSource;
-        protected CancellationToken token;
 
-        public World(string world) {
+        public World(ListBox console) {
+            Logins = new List<ClientConnection>();
+            Players = new List<Player>();
             this.Areas = new List<Area>();
             this.heartStop = false;
-            tokenSource = new CancellationTokenSource();
-            this.token = tokenSource.Token;
-            this.heart = Task.Factory.StartNew(() => HeartBeat(), token);
-            Load(world);
-            portListener = new Server();
+          //  Load(world);
+            portListener = new TcpServer(this, console);
+            portListener.StartServer(8090);
         }
 
         public void Reload() { }
         public void Clear() { }
         public void Shutdown() { }
 
-        public void Stop() {
-            tokenSource.Cancel();
-            tokenSource.Dispose();
-            portListener.Stop();
-        }
-        public void Start() {
-            heart.Start();
-            portListener.Start();
-        }
+       
 
         public void Load(string world) {
             if (world != string.Empty) {
@@ -49,7 +43,7 @@ namespace Mountain.classes {
         }
 
         public void CreateDefaultWorld() {
-            base.name = "Default World";
+            Name = "Default World";
             base.ID = new Guid();
             base.description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
                 "Keep your new world growing with us. /n" +
