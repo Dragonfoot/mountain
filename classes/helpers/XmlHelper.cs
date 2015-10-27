@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Serialization;
 using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
@@ -10,8 +12,24 @@ namespace Mountain.classes.helpers {
         public static string WriteElement(ParamArrayAttribute parameters) {
             return "";
         }
+
         public static string ElementWithAttribute(string name, ParamArrayAttribute parameters) { 
+
             return "";
+        }
+
+        public static string getPrimaryXml(object item) {  // returns <boolean>true</boolean> if item passed is a boolean set to true
+            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+            var serializer = new XmlSerializer(item.GetType());
+            var settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.OmitXmlDeclaration = true;
+
+            using (var stream = new StringWriter())
+            using (var writer = XmlWriter.Create(stream, settings)) {
+                serializer.Serialize(writer, item, emptyNamepsaces);
+                return stream.ToString();
+            }
         }
     }
 }

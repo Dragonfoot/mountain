@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml;
+using System.Xml.Serialization;
 using System.Data;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -90,6 +93,26 @@ namespace Mountain {
             } else if (dialogresult == DialogResult.Cancel) {
             }
             areaForm.Dispose();
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            bool text = true;
+            string str = getXml(text);
+            richTextBox.AppendText(str);
+        }
+
+        private string getXml(object item) {
+            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+            var serializer = new XmlSerializer(item.GetType());
+            var settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.OmitXmlDeclaration = true;
+
+            using (var stream = new StringWriter())
+            using (var writer = XmlWriter.Create(stream, settings)) {
+                serializer.Serialize(writer, item, emptyNamepsaces);
+                return stream.ToString();
+            }
         }
     }
 
