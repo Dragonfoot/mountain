@@ -132,7 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="classes\helpers\ServerSocket.txt" />
-    <Content Include="Todo.txt" />
+    <Content Include="ToDo\firstMudIdeas.txt" />
+    <Content Include="ToDo\Todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
