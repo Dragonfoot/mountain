@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 namespace Mountain.classes.Items {
 
     public class Item : Identity {
-        protected itemType type = itemType.unknown;
-        protected bool magical = false;
+        protected bool magical;
 
         public Item() {
-            Name = "new item";
             base.ClassType = classType.item;
-            base.ItemType = itemType.unknown;
+            Name = "new item";
             base.Description = "new generic unknown item type";
         }       
     }
@@ -22,7 +20,7 @@ namespace Mountain.classes.Items {
         protected ConcurrentBag<Item> items;
 
         public ItemContainer(string name, string description) {
-            base.type = itemType.container;
+            base.ItemType = itemType.container;
             this.items = new ConcurrentBag<Item>(); // not sure on threading needs yet
         }
         protected string Save(string txt) {

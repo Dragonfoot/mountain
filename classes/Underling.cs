@@ -16,7 +16,9 @@ namespace Mountain.classes {
         public int Level { get; set; }
 
         public Underling() {
-            base.ClassType = classType.underling;
+            ClassType = classType.mob;
+            Name = "Underling";
+            Description = "This is a new underling";
             this.Inventory = new ConcurrentBag<Item>();
             this.Health = 10;
             this.Level = 1;

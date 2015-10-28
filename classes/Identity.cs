@@ -10,18 +10,15 @@ namespace Mountain.classes {
 
     public class Identity {
         public string Name { get; set; }
-        public string Description;
+        public string Description { get; set; }
         public Guid ID { get; set; }
         public itemType ItemType { get; set; }
         public classType ClassType { get; set; }
 
         public Identity() {
-            this.ClassType = classType.identity;
+            this.ClassType = classType.unknown;
             this.ItemType = itemType.unknown;
-        }
-        public Identity(classType classType, Guid id, string name, string description) {
-            // check for valid parameters, throw exception
-            // 
+            ID = Guid.NewGuid();
         }
 
     }

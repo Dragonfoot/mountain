@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mountain.classes.Items {
+namespace Mountain.classes.helpers {
 
-    public class ClothingItem {
+    public class RoomID {
 
-        public ClothingItem() {
+        public RoomID() {
         }
     }
 }

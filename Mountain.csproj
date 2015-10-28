@@ -73,8 +73,7 @@
     <Compile Include="classes\helpers\Globals.cs" />
     <Compile Include="classes\Login.cs" />
     <Compile Include="classes\Identity.cs" />
-    <Compile Include="classes\Items\ClothingItem.cs" />
-    <Compile Include="classes\Items\OutfitItem.cs" />
+    <Compile Include="classes\Items\WearableItem.cs" />
     <Compile Include="classes\Items\WeaponItem.cs" />
     <Compile Include="classes\ClientConnection.cs" />
     <Compile Include="classes\TcpServer.cs" />
@@ -149,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="classes\Items\Armour\" />
+    <Folder Include="classes\Items\Clothing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
