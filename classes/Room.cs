@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
 using System.Text;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Mountain.classes.helpers;
 using Mountain.classes.Items;
 
@@ -16,9 +18,12 @@ using Mountain.classes.Items;
 namespace Mountain.classes {
 
     public class Room : Identity {
+        [XmlIgnore]
         public List<Mob> Mobs { get; set; }
+        [XmlIgnore]
         public ConcurrentBag<Item> Items { get; set; }
         public List<Exit> Exits { get; set; }
+        [XmlIgnore]
         public List<Player> Players { get; set; }
 
         protected ConcurrentQueue<Packet> events;
@@ -34,9 +39,9 @@ namespace Mountain.classes {
             this.events = new ConcurrentQueue<Packet>();
             this.msgs = new ConcurrentQueue<Packet>();
             this.innerQueue = new ConcurrentQueue<Packet>();
-            this.ID = new Guid();
+            this.ID = Guid.NewGuid();
             this.Name = "New Room";
-            this.description = "This is a newly created room";
+            this.Description = "This is a newly created room";
         }
 
         public string[] View() {
@@ -44,7 +49,7 @@ namespace Mountain.classes {
             List<string> view = new List<string>();
             view.Add(Name);
             view.Add("");
-            view.Add(description);
+            view.Add(Description);
             view.Add("");
             if (Exits.Count > 0) { // exits
                 stringBuilder.Append("Exits: " + GetNames(Exits.ToArray()));                
@@ -92,6 +97,17 @@ namespace Mountain.classes {
         }
         public void AddPlayer(Player player) {
             this.Players.Add(player);
+        }
+
+        public string SaveXML() {
+            XmlSerializer serializer = new XmlSerializer(typeof(Room));
+            TextWriter writer = new StringWriter();
+            try {
+                serializer.Serialize(writer, this);
+            } catch (Exception e) {
+                return e.ToString();
+            }             
+            return writer.ToString();
         }
 
         protected bool Save() {

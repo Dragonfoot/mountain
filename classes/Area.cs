@@ -13,17 +13,17 @@ namespace Mountain.classes {
         }
         public string Description {
             get {
-                return base.description;
+                return base.Description;
             }
             set {
-                base.description = value;
+                base.Description = value;
             }
         }
 
         public Area() {
             Name = "unknown area name";
-            base.description = "new generic area";
-            base.ID = new Guid();
+            base.Description = "new generic area";
+            base.ID = Guid.NewGuid();
         }
         public Area(string name, string description, Guid id) {
             this.Name = name;

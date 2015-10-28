@@ -7,24 +7,25 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
 
-    public static class XmlHelper { // helper class to do code friendly xml disk access
+    public static class XmlHelper { 
 
         public static string WriteElement(ParamArrayAttribute parameters) {
+            // test function, will see how ParamArrayAttribute behaves
             return "";
         }
 
         public static string ElementWithAttribute(string name, ParamArrayAttribute parameters) { 
-
+            //test function
             return "";
         }
 
-        public static string getPrimaryXml(object item) {  // returns <boolean>true</boolean> if item passed is a boolean set to true
+        // returns <boolean>true</boolean> if item passed is a boolean set to true, etc
+        public static string PrimaryXml(object item) {  
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
             var serializer = new XmlSerializer(item.GetType());
             var settings = new XmlWriterSettings();
             settings.Indent = true;
             settings.OmitXmlDeclaration = true;
-
             using (var stream = new StringWriter())
             using (var writer = XmlWriter.Create(stream, settings)) {
                 serializer.Serialize(writer, item, emptyNamepsaces);

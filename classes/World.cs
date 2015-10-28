@@ -44,8 +44,8 @@ namespace Mountain.classes {
 
         public void CreateDefaultWorld() {
             Name = "Default World";
-            base.ID = new Guid();
-            base.description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
+            base.ID = Guid.NewGuid();
+            base.Description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
                 "Keep your new world growing with us. /n" +
                 "Invest in Toetag Corporation's Life Insurance Policies and help make our gaming addition goals a viable solution. " +
                 "Become a gold member of our growing centers of excellence, do the right thing, " +

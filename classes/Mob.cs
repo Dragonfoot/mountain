@@ -15,8 +15,8 @@ namespace Mountain.classes {
         protected List<Mob> mobEnemies;
 
         public string Description {
-            get { return base.description; }
-            set { base.description = value; }
+            get { return base.Description; }
+            set { base.Description = value; }
         }
 
         public Mob() {

@@ -18,7 +18,7 @@ namespace Mountain.classes.Items {
             ItemType = itemType.equipment;
             Repairable = true;
             Breakable = true;
-            description = "generic usable equipment";
+            Description = "generic usable equipment";
         }
 
     }

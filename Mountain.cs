@@ -38,6 +38,7 @@ namespace Mountain {
                 this.room = null;
             }
             this.room = new Room();
+
             Exit exit = new Exit();
             exit.Name = "South";
             room.AddExit(exit);
@@ -96,9 +97,6 @@ namespace Mountain {
         }
 
         private void button3_Click(object sender, EventArgs e) {
-            bool text = true;
-            string str = getXml(text);
-            richTextBox.AppendText(str);
         }
 
         private string getXml(object item) {
@@ -112,6 +110,12 @@ namespace Mountain {
             using (var writer = XmlWriter.Create(stream, settings)) {
                 serializer.Serialize(writer, item, emptyNamepsaces);
                 return stream.ToString();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            if (this.room != null) {
+                richTextBox.AppendText(this.room.SaveXML());
             }
         }
     }

@@ -102,24 +102,24 @@
             // 
             this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(95, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -309,19 +309,20 @@
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.button4);
-            this.panel3.Location = new System.Drawing.Point(639, 269);
+            this.panel3.Location = new System.Drawing.Point(629, 51);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(90, 171);
+            this.panel3.Size = new System.Drawing.Size(99, 171);
             this.panel3.TabIndex = 9;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(7, 129);
+            this.button2.Location = new System.Drawing.Point(11, 129);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
             this.button2.Text = "Save";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -334,7 +335,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(7, 42);
+            this.button1.Location = new System.Drawing.Point(11, 42);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -344,7 +345,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(7, 100);
+            this.button3.Location = new System.Drawing.Point(11, 100);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 5;
@@ -354,7 +355,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(7, 71);
+            this.button4.Location = new System.Drawing.Point(11, 71);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 6;
@@ -401,9 +402,9 @@
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.startServer);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox1.Location = new System.Drawing.Point(637, 51);
+            this.groupBox1.Location = new System.Drawing.Point(629, 317);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(99, 191);
+            this.groupBox1.Size = new System.Drawing.Size(99, 132);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Server";
@@ -428,7 +429,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(11, 156);
+            this.button6.Location = new System.Drawing.Point(11, 95);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 1;
@@ -438,7 +439,7 @@
             // 
             // startServer
             // 
-            this.startServer.Location = new System.Drawing.Point(11, 127);
+            this.startServer.Location = new System.Drawing.Point(11, 66);
             this.startServer.Name = "startServer";
             this.startServer.Size = new System.Drawing.Size(75, 23);
             this.startServer.TabIndex = 0;

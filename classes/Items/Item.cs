@@ -14,7 +14,7 @@ namespace Mountain.classes.Items {
             Name = "new item";
             base.ClassType = classType.item;
             base.ItemType = itemType.unknown;
-            base.description = "new generic unknown item type";
+            base.Description = "new generic unknown item type";
         }       
     }
 
