@@ -59,43 +59,6 @@ namespace Mountain.classes {
         public void Cancel() {
         }
 
-        public void HandleClient(TcpClient client) {
-            Connections++;
-            var local = client.Client.LocalEndPoint.ToString();
-            console.Items.Add("Connected " + local);
-            StreamReader sr = null;
-            StreamWriter sw = null;
-            try {
-                var stream = client.GetStream();
-                sr = new StreamReader(stream, Encoding.ASCII);
-                sw = new StreamWriter(stream, Encoding.ASCII);
-                while (client.Connected) {
-                    //sr = new StreamReader(stream, Encoding.UTF8);
-                    //sw = new StreamWriter(stream, Encoding.UTF8);
-
-                    var msg = sr.ReadLineAsync(); ;
-
-                    if (msg == null)
-                        continue;
-
-
-                    sw.WriteLine(msg);
-                    sw.FlushAsync();
-
-                }
-            } catch (Exception aex) {
-                var ex = aex.GetBaseException();
-                console.Items.Add("Client error: " + ex.Message);
-            } finally {
-                Connections--;
-                if (sr != null)
-                    sr.Dispose();
-
-                if (sw != null)
-                    sw.Dispose();
-            }
-            console.Items.Add("Disconnected " + local);
-        }
 
     }
 }

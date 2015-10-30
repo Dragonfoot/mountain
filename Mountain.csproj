@@ -70,7 +70,10 @@
     </Compile>
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\Equipment.cs" />
+    <Compile Include="classes\helpers\Functions.cs" />
     <Compile Include="classes\helpers\Globals.cs" />
+    <Compile Include="classes\helpers\MessageQueue.cs" />
+    <Compile Include="classes\helpers\RoomID.cs" />
     <Compile Include="classes\Login.cs" />
     <Compile Include="classes\Identity.cs" />
     <Compile Include="classes\Items\WearableItem.cs" />
@@ -88,7 +91,6 @@
     <Compile Include="classes\Items\Item.cs" />
     <Compile Include="classes\Mob.cs" />
     <Compile Include="classes\Room.cs" />
-    <Compile Include="classes\Server.cs" />
     <Compile Include="classes\World.cs" />
     <Compile Include="classes\Player.cs" />
     <Compile Include="Mountain.cs">

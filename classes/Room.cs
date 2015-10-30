@@ -51,43 +51,29 @@ namespace Mountain.classes {
             view.Add("");
             view.Add(Description);
             view.Add("");
-            if (Exits.Count > 0) { // exits
-                stringBuilder.Append("Exits: " + GetNames(Exits.ToArray()));                
+            if (Exits.Count > 0) { // add color coding's
+                stringBuilder.Append("Exits: " + Functions.GetNames(Exits.ToArray()));                
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Mobs.Count > 0) {
-                stringBuilder.Append("Mobs: " + GetNames(Mobs.ToArray()));
+                stringBuilder.Append("Mobs: " + Functions.GetNames(Mobs.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Players.Count > 0) {
-                stringBuilder.Append("Players: " + GetNames(Players.ToArray()));
+                stringBuilder.Append("Players: " + Functions.GetNames(Players.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
-            // items on floor, need to search for duplicates and display them in friendly(s) form
-            // You see an orange, 23 pumpkin seeds, a hungry cat, Toetag's nose.
-            // ie: a or an, 's, 2 or two..
+            if (Items.Count > 0) {
+                // items on floor; need to search for duplicates, pronouns, etc., and display them in friendly grammar form
+                // You see (an) orange, 23 pumpkin seed(s), (a) hungry cat, Toetag('s) nose.
+            }
             return view.ToArray();
         }
 
 
-        protected string GetNames(Array list) {
-            string names = string.Empty;
-            int i = 1;
-            foreach (Identity item in list) {
-                names = names + item.Name;
-                if (i != list.Length) {
-                    names = names + ", ";
-                }
-                if (i == list.Length) {
-                    names = names + ".";
-                }
-                i++;
-            }
-            return names;
-        }
 
         public void AddExit(Exit exit) {
             this.Exits.Add(exit);
@@ -99,7 +85,7 @@ namespace Mountain.classes {
             this.Players.Add(player);
         }
 
-        public string SaveXML() {
+        public string SaveXML() { // only public properties are serialized, use [XmlIgnore] attributes before any not required
             XmlSerializer serializer = new XmlSerializer(typeof(Room));
             TextWriter writer = new StringWriter();
             try {
@@ -110,18 +96,20 @@ namespace Mountain.classes {
             return writer.ToString();
         }
 
+        /*
         protected bool Save() {
             return false;
         }
         protected bool Load() {
             return false;
         }
+        
 
         protected Packet PopQueue() {
-            return new Packet(this, packetType.command, new DataPacket());
+            return new Packet(this, packetType.data, new DataPacket());
         }
         protected void PushQueue(Packet p) {
         }
-
+        */
     }
 }

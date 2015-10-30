@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
 
-    public class RoomID {
-
-        public RoomID() {
+    public struct RoomID {
+        public Guid ID;
+        public string Name;
+        public RoomID(Guid id, string name) {
+            ID = id;
+            Name = name;
         }
     }
 }

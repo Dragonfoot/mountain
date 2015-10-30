@@ -6,7 +6,7 @@ namespace Mountain.classes.helpers {
     public enum Ansi { reset, bold, italic, ul, boldOff, italicOff, ulOff, black, red, green, yellow, blue, magenta, cyan, 
                             white, blackBk, redBk, greenBK, yellowBk, blueBk, magentaBk, cyanBk, whiteBk };
 
-    class Colors {
+    public static class Colors {
         private static List<string> colorTable = new List<string>();
 
         static Colors() {   // change this to an array or list of strings
@@ -40,6 +40,9 @@ namespace Mountain.classes.helpers {
         }
         public static string Color(Ansi index, string text) { 
             return colorTable[(int)index] + text + colorTable[0];
+        }
+        public static string Color(this string str, Ansi index) {
+            return colorTable[(int)index] + str;
         }
     }
 }

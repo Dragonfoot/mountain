@@ -13,12 +13,13 @@ namespace Mountain.classes.Items {
         public int Value { get; set; }
         public bool Repairable { get; private set; }
         public bool Breakable { get; private set; }
+        public equipmentLocation locationHook { get; set; }
 
         public WearableItem() {
             ItemType = itemType.equipment;
             Repairable = true;
             Breakable = true;
-            Description = "generic usable equipment";
+            Description = "generic wearable base object";
         }
 
     }

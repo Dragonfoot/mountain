@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 namespace Mountain.classes.Items {
 
     public class Item : Identity {
-        protected bool magical;
+        public bool magical { get; set; }
+        public bool holdable { get; set; }
+        public int value { get; set; }
 
         public Item() {
-            base.ClassType = classType.item;
+            ClassType = classType.item;
             Name = "new item";
-            base.Description = "new generic unknown item type";
+            Description = "new generic unknown item";
         }       
     }
 

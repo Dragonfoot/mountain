@@ -10,26 +10,25 @@ using Mountain.classes.Items;
 namespace Mountain.classes {
 
     public class Player : ClientConnection {
-        protected List<Item> inventory;  // need thread safe dynamic list and/or sorted?
-        protected Equipment equipment;
-        protected Stats stats;
-        protected Vault vault;
-        protected List<Player> enemyPlayers;
-        protected List<Mob> enemyMobs; //
-        private string password;
-        private string nickname;
+        protected ConcurrentBag<Player> enemyPlayers;
+        protected ConcurrentBag<Mob> enemyMobs;
+        protected ConcurrentBag<Item> inventory;
+        protected Stats stats { get; set; }
+        protected Equipment equipment { get; set; }
+        public RoomID roomID { get; set; }
+        private string password { get; set; }
+        private string screenName { get; set; }
 
         public Player(TcpClient socket)
             : base(socket) {
-            base.ClassType = classType.player;
-            this.inventory = new List<Item>();
-            this.equipment = new Equipment();
-            this.enemyPlayers = new List<Player>();
-            this.enemyMobs = new List<Mob>();
-            this.stats = new Stats();
-            this.vault = new Vault();
-            this.password = string.Empty;
-            this.nickname = string.Empty;
+            ClassType = classType.player;
+            inventory = new ConcurrentBag<Item>();
+            equipment = new Equipment();
+            enemyPlayers = new ConcurrentBag<Player>();
+            enemyMobs = new ConcurrentBag<Mob>();
+            stats = new Stats();
+            password = string.Empty;
+            screenName = string.Empty;
         }
 
         public void Save() {
@@ -38,24 +37,22 @@ namespace Mountain.classes {
         public void Load() {
             throw new NotImplementedException();
         }
-        protected bool SaveToXml(string fileName) {
-            try {
-            } catch {
-                return false;
-            }
-            return true;
+        protected string SaveXml(string fileName) {
+            throw new NotImplementedException();
         }
-        protected bool LoadFromXml(string xml) {
+        protected bool LoadXml(string xml) {
+            throw new NotImplementedException();
             // create file backup with date/time last loaded
             // parse xml and populate properties
-            // check if enemyMobs are still alive, remove others from list
-            return true;
+            // check if enemyMobs are still alive, remove others from ConcurrentBag
+            
         }
-        protected string Encrypt(string password) {
-            return password;
+        protected byte[] Encrypt(string password) {
+            byte [] encryptedPassword = new byte[64];
+            return encryptedPassword;
         }
-        protected string Decrypt(string password) {
-            return password;
+        protected string Decrypt(byte[] password) {
+            return password.ToString();
         }
 
     }

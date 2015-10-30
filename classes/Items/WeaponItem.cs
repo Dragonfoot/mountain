@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes.Items {
 
-    public class WeaponItem {
+    public class WeaponItem : Item {
 
+        public WeaponItem() {
+        }
     }
 }

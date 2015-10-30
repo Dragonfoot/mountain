@@ -11,6 +11,7 @@ using Mountain.classes.Items;
 namespace Mountain.classes {
 
     public class Underling : Identity { //mob precursor
+        public RoomID roomID { get; set; } 
         public ConcurrentBag<Item> Inventory { get; set; }
         public int Health { get; set; }           
         public int Level { get; set; }
@@ -19,9 +20,9 @@ namespace Mountain.classes {
             ClassType = classType.mob;
             Name = "Underling";
             Description = "This is a new underling";
-            this.Inventory = new ConcurrentBag<Item>();
-            this.Health = 10;
-            this.Level = 1;
+            Inventory = new ConcurrentBag<Item>();
+            Health = 10;
+            Level = 1;
         }
     }
 }

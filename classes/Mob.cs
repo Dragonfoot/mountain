@@ -10,7 +10,6 @@ namespace Mountain.classes {
     public class Mob : Underling {
         protected List<Player> fightingPlayers;
         protected List<Player> friendPlayers;
-        protected List<Player> associatePlayers;
         protected List<Mob> mobBuddies;
         protected List<Mob> mobEnemies;
 
@@ -21,7 +20,6 @@ namespace Mountain.classes {
         protected virtual void Construct() {
             this.fightingPlayers = new List<Player>();
             this.friendPlayers = new List<Player>();
-            this.associatePlayers = new List<Player>();
             this.mobBuddies = new List<Mob>();
             this.mobEnemies = new List<Mob>();
         }       

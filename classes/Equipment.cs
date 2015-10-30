@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 using Mountain.classes.Items;
 
 namespace Mountain.classes {
-    public enum equipmentLocation {
-        unknown, head, eyes, face, neck, torso, shoulders, arms, wrists, hands, waist, thights,
-        shins, feet, back, chest, weapon1, weapon2, shield, holding, undergarment
-    }
     public class Equipment {       // possible player gear locations
         protected Item head;
         protected Item eyes;
@@ -30,7 +26,7 @@ namespace Mountain.classes {
         protected Item weapon2; // offhand
         protected Item shield; // if not holding something or using offhand
         protected Item holding; // any item that has the holdable flag set, torch, toetag's ear, divining rod of tracking..
-        protected Item undergarment; // specialized armour type, ie: skin of poison deflection, tights of girded strength..
+        protected Item undergarment; // specialized armour type, ie: snake skin of poison deflection, tights of jumping..
 
         public Equipment() {
             this.neck = new List<Item>();
