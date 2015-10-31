@@ -31,5 +31,30 @@ namespace Mountain.classes.helpers {
         public static string AddNewLine(this string str) {
             return str + Environment.NewLine;
         }
+
+        public static string WordWrap(this string sentence, int width) {
+            StringBuilder lines = new StringBuilder();
+            string[] pieces = sentence.Split(' ');
+            StringBuilder tempString = new StringBuilder("");
+            foreach (var piece in pieces) {
+                if (piece.Length + tempString.Length + 1 > width) {
+                    lines.Append(tempString.ToString().Indent(4).AddNewLine());
+                    tempString.Clear();
+                }
+                tempString.Append((tempString.Length == 0 ? "" : " ") + piece);
+            }
+            if (tempString.Length > 0) {
+                lines.Append(tempString.ToString().Indent(4).AddNewLine());
+            }
+            return lines.ToString();
+        }
+
+        public static string Indent(this string str, int size) {
+            string spaces = "";
+            for (int i = 0; i <= size; i++) {
+                spaces = spaces + " ";
+            }
+            return spaces + str;
+        }
     }
 }

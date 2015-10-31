@@ -9,12 +9,15 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Mountain.classes;
+using Mountain.classes.helpers;
 
 namespace Mountain {
+
     public partial class Mountain : Form {
         protected List<World> worlds;
         protected World world;
         public Room room;
+        private FormInterface form;
 
         public Mountain() {
             //this.world = new World(string.Empty);
@@ -83,7 +86,7 @@ namespace Mountain {
         }
 
         private World BuildWorld(ListBox console) {
-            World world = new World(console);
+            World world = new World(form);
             return world;
         }
 

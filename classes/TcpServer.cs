@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Mountain.classes.helpers;
 
 namespace Mountain.classes {
 
@@ -16,13 +17,13 @@ namespace Mountain.classes {
         public int Connections { get; private set; }
         protected AutoResetEvent connectionWaitHandle;
         TcpListener tcpListener;
-        ListBox console;
         World world;
+        FormInterface form;
 
-        public TcpServer(World world, ListBox console) {
+        public TcpServer(World world, FormInterface form) {
             this.world = world;
             connectionWaitHandle = new AutoResetEvent(false);
-            this.console = console;          
+            this.form = form;
         }
 
         public void StartServer(int port) {
@@ -45,7 +46,7 @@ namespace Mountain.classes {
             TcpClient client = listener.EndAcceptTcpClient(result);
             connectionWaitHandle.Set(); //Inform the main thread this connection is now handled
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
-            this.world.Logins.Add(new ClientConnection(client));
+            this.world.Logins.Add(new Login(client, form));
 
             //... Use your TcpClient here
             // create login object

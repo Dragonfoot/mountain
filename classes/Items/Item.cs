@@ -9,6 +9,8 @@ namespace Mountain.classes.Items {
     public class Item : Identity {
         public bool magical { get; set; }
         public bool holdable { get; set; }
+        public bool breakable { get; set; }
+        public bool consumable { get; set; }
         public int value { get; set; }
 
         public Item() {
@@ -23,7 +25,7 @@ namespace Mountain.classes.Items {
 
         public ItemContainer(string name, string description) {
             base.ItemType = itemType.container;
-            this.items = new ConcurrentBag<Item>(); // not sure on threading needs yet
+            this.items = new ConcurrentBag<Item>(); 
         }
         protected string Save(string txt) {
             return txt;

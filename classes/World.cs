@@ -17,13 +17,13 @@ namespace Mountain.classes {
         protected Task heart;
         protected bool heartStop;
 
-        public World(ListBox console) {
+        public World(FormInterface form) {
             Logins = new List<ClientConnection>();
             Players = new List<Player>();
             this.Areas = new List<Area>();
             this.heartStop = false;
           //  Load(world);
-            portListener = new TcpServer(this, console);
+            portListener = new TcpServer(this, form);
             portListener.StartServer(8090);
         }
 

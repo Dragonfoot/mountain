@@ -11,23 +11,27 @@ using Mountain.classes.helpers;
 namespace Mountain.classes {
 
     public class ClientConnection : Identity {
+        private FormInterface form;
         private StateObject state { get; set; }
         private readonly ManualResetEvent MessageReceived;
         private readonly ManualResetEvent MessageSent;
-        private object messageLock;
+        private readonly object messageLock;
         protected MessageQueue messageQueue;
 
-        public ClientConnection(TcpClient tcpClientSocket) {
+        public ClientConnection(TcpClient tcpClientSocket, FormInterface form) {
             ClassType = classType.client;
+            this.form = form;
             messageLock = new object();
             MessageReceived = new ManualResetEvent(false);
             MessageSent = new ManualResetEvent(false);
             messageQueue = new MessageQueue();
             messageQueue.OnMessageReceived += messageQueue_OnMessageReceived;
             state = new StateObject((tcpClientSocket));
+            StartReceiving();
         }
 
-        protected void Receive() {
+
+        protected void StartReceiving() {
             try {
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, SocketFlags.None, ReceiveCallback, state);
             } catch {
@@ -36,7 +40,6 @@ namespace Mountain.classes {
         }
         public void ReceiveCallback(IAsyncResult ar) {
             try {
-                //StateObject so = (StateObject)ar.AsyncState;
                 int read = state.Socket.Client.EndReceive(ar);
                 if (read > 0) {
                     string msg = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
@@ -44,33 +47,34 @@ namespace Mountain.classes {
                         messageQueue.Push(msg);
                     }
                     MessageReceived.Set();
-                    Send(state.Socket, msg.Color(Ansi.cyan) + " [response]".AddNewLine().Color(Ansi.red));
+                    Send(msg.Color(true, Ansi.cyan, Ansi.white) + " [echo]".AddNewLine().Color(Ansi.red, Ansi.white));
                 }
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state);
-
             } catch (ObjectDisposedException) {
                 // Handle the socket being closed with an async receive pending
             } catch (Exception e) {
+                form.console.Items.Add(e.ToString());
                 // Handle all other exceptions
             }
         }
 
-        private void Send(TcpClient client, String data) {
+
+        protected void Send(String data) {
             byte[] byteData = Encoding.ASCII.GetBytes(data);
-            client.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, client);
+            state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
         }
         private void SendCallback(IAsyncResult ar) {
             try {
                 int bytesSent = state.Socket.Client.EndSend(ar);
                 MessageSent.Set();
             } catch (Exception e) {
-              //  Console.WriteLine(e.ToString());
+                form.console.Items.Add(e.ToString());
             }
         }
 
 
 
-        private void messageQueue_OnMessageReceived(object myObject) {
+        protected void messageQueue_OnMessageReceived(object myObject) {
             //throw new NotImplementedException();
         }
         private void DropConnection() {
@@ -78,23 +82,14 @@ namespace Mountain.classes {
         }
     }
 
+
     public class StateObject {
-        private const int BUFFER_SIZE = 8 * 1024;
+        private const int BUFFER_SIZE = 1024;
         public byte[] Buffer = new byte[BUFFER_SIZE];
-        public readonly TcpClient Socket = null;
+        public TcpClient Socket { get; set; }
 
         public StateObject(TcpClient workSocket) {
             Socket = workSocket;
-        }
-    }
-    public class Packet {
-        public readonly byte[] Buffer;
-        public readonly DateTime Timestamp;
-
-        public Packet(DateTime timestamp, byte[] buffer, int size) {
-            Timestamp = timestamp;
-            Buffer = new byte[size];
-            System.Buffer.BlockCopy(buffer, 0, Buffer, 0, size);
         }
     }
 }

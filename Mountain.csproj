@@ -70,14 +70,15 @@
     </Compile>
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\Equipment.cs" />
+    <Compile Include="classes\helpers\FormInterface.cs" />
     <Compile Include="classes\helpers\Functions.cs" />
     <Compile Include="classes\helpers\Globals.cs" />
     <Compile Include="classes\helpers\MessageQueue.cs" />
     <Compile Include="classes\helpers\RoomID.cs" />
     <Compile Include="classes\Login.cs" />
     <Compile Include="classes\Identity.cs" />
-    <Compile Include="classes\Items\WearableItem.cs" />
-    <Compile Include="classes\Items\WeaponItem.cs" />
+    <Compile Include="classes\Items\WearableType.cs" />
+    <Compile Include="classes\Items\WeaponType.cs" />
     <Compile Include="classes\ClientConnection.cs" />
     <Compile Include="classes\TcpServer.cs" />
     <Compile Include="classes\Underling.cs" />

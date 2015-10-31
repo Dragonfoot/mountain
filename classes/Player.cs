@@ -16,31 +16,29 @@ namespace Mountain.classes {
         protected Stats stats { get; set; }
         protected Equipment equipment { get; set; }
         public RoomID roomID { get; set; }
-        private string password { get; set; }
+        private byte[] password { get; set; }
         private string screenName { get; set; }
 
-        public Player(TcpClient socket)
-            : base(socket) {
+        public Player(TcpClient socket, FormInterface form)
+            : base(socket, form) {
             ClassType = classType.player;
             inventory = new ConcurrentBag<Item>();
-            equipment = new Equipment();
             enemyPlayers = new ConcurrentBag<Player>();
             enemyMobs = new ConcurrentBag<Mob>();
+            equipment = new Equipment();
             stats = new Stats();
-            password = string.Empty;
-            screenName = string.Empty;
         }
 
-        public void Save() {
+        public virtual void Save() {
             throw new NotImplementedException();
         }
-        public void Load() {
+        public virtual void Load() {
             throw new NotImplementedException();
         }
-        protected string SaveXml(string fileName) {
+        protected virtual string SaveXml(string fileName) {
             throw new NotImplementedException();
         }
-        protected bool LoadXml(string xml) {
+        protected virtual bool LoadXml(string xml) {
             throw new NotImplementedException();
             // create file backup with date/time last loaded
             // parse xml and populate properties
