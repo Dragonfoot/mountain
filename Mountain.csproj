@@ -75,6 +75,7 @@
     <Compile Include="classes\helpers\Globals.cs" />
     <Compile Include="classes\helpers\MessageQueue.cs" />
     <Compile Include="classes\helpers\RoomID.cs" />
+    <Compile Include="classes\helpers\User.cs" />
     <Compile Include="classes\Login.cs" />
     <Compile Include="classes\Identity.cs" />
     <Compile Include="classes\Items\WearableType.cs" />
@@ -133,7 +134,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="classes\helpers\ServerSocket.txt" />
     <Content Include="ToDo\firstMudIdeas.txt" />
     <Content Include="ToDo\Todo.txt" />
   </ItemGroup>

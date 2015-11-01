@@ -22,7 +22,7 @@ namespace Mountain.classes.helpers {
             string msg;
             bool result;
             result = queue.TryDequeue(out msg);
-            return msg;
+            return (msg == null) ? string.Empty : msg;
         }
 
 

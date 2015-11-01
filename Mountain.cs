@@ -20,8 +20,6 @@ namespace Mountain {
         private FormInterface form;
 
         public Mountain() {
-            //this.world = new World(string.Empty);
-
             InitializeComponent();
         }
 
@@ -74,10 +72,12 @@ namespace Mountain {
             }
         }
 
-        private void button5_Click_1(object sender, EventArgs e) { // start
+        private void serverStart(object sender, EventArgs e) { // start
             //create world and start listener
+            form = new FormInterface(this);
+            form.console = this.Console;
             if (world == null) {
-                world = BuildWorld(Console);
+                world = BuildWorld();
             }
         }
 
@@ -85,7 +85,7 @@ namespace Mountain {
             //stop server
         }
 
-        private World BuildWorld(ListBox console) {
+        private World BuildWorld() {
             World world = new World(form);
             return world;
         }
@@ -121,6 +121,8 @@ namespace Mountain {
                 richTextBox.AppendText(this.room.SaveXML());
             }
         }
+
+       
     }
 
 }

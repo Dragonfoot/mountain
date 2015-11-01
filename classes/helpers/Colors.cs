@@ -38,17 +38,23 @@ namespace Mountain.classes.helpers {
             table.Add("\x1B[46m");     // cyan bg
             table.Add("\x1B[47m");    // white bg
         }
-
-        public static string Color(this string str, Ansi index, Ansi reset) {
+        // no bold, returns string in passed color then resets color to default
+        public static string Color(this string str, Ansi index, Ansi reset) { 
             return table[(int)index] + str + table[(int)reset];
         }
+        // allows for bold or no bold to be added to basic color and reset function 
         public static string Color(this string str, bool bold, Ansi index, Ansi reset) {
             string prefix = (bold) ? table[(int)Ansi.bold] : table[(int)Ansi.boldOff];
-            return prefix + table[(int)index] + str + table[(int)reset];
+            return prefix + str.Color(index, reset);
         }
+        // allows for bold or no bold, sets the string color, does not reset color
         public static string Color(this string str, bool bold, Ansi index) {
             string prefix = (bold) ? table[(int)Ansi.bold] : table[(int)Ansi.boldOff];
             return prefix + table[(int)index] + str;
+        }
+        // sets string to bold and color only
+        public static string Color(this string str, Ansi index) {
+            return str.Color(true, index);
         }
     }
 }

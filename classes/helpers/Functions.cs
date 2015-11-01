@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
@@ -38,13 +39,13 @@ namespace Mountain.classes.helpers {
             StringBuilder tempString = new StringBuilder("");
             foreach (var piece in pieces) {
                 if (piece.Length + tempString.Length + 1 > width) {
-                    lines.Append(tempString.ToString().Indent(4).AddNewLine());
+                    lines.Append(tempString.ToString().Indent(Global.indent).AddNewLine());
                     tempString.Clear();
                 }
                 tempString.Append((tempString.Length == 0 ? "" : " ") + piece);
             }
             if (tempString.Length > 0) {
-                lines.Append(tempString.ToString().Indent(4).AddNewLine());
+                lines.Append(tempString.ToString().Indent(Global.indent).AddNewLine());
             }
             return lines.ToString();
         }
@@ -55,6 +56,10 @@ namespace Mountain.classes.helpers {
                 spaces = spaces + " ";
             }
             return spaces + str;
+        }
+        public static string ToProper(this string str) {
+            TextInfo ti = new CultureInfo("en-US", false).TextInfo;
+            return ti.ToTitleCase(str);
         }
     }
 }
