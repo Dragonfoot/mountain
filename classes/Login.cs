@@ -9,7 +9,8 @@ using Mountain.classes.helpers;
 
 namespace Mountain.classes {
 
-    public enum login { error, start, name, newPlayer, password, done }
+    public enum login { error, start, name, newUser, password, done }
+    public enum userStatus { loggedIn, nonExistent, laggedOut, available } 
 
     public class Login : ClientConnection {
         protected login action;
@@ -29,8 +30,9 @@ namespace Mountain.classes {
         }
 
         protected void OnMessageReceived(object myObject) {
-            string message = messageQueue.Pop();
-            if (message == null || message == string.Empty) return;
+            string message = messageQueue.Pop().Trim();
+            string response = string.Empty;
+            if (message == null || message == string.Empty || message.Length == 0) return;
             switch (action) {
                 case login.name:
                     if (message.Length < 3 || message.Length > 64) {
@@ -40,19 +42,22 @@ namespace Mountain.classes {
                         SendIndent(UserNamePrompt.Color(true, Ansi.green));
                         return;
                     }
-                    if (checkName(message)) {
-                        Send(message.ToProper().Color(true, Ansi.yellow).AddNewLine());
-                        newUser.Name = message.ToProper();
-                        string response = "Password: ";
-                        SendIndent(response.Color(Ansi.green));
-                        action = login.password;
-                    } else {
-                        string response = "Create new character: " + message.ToProper() + "?";
-                        Send(response.Color(Ansi.yellow).AddNewLine());
-                        action = login.newPlayer;
+                    switch (checkName(message)) {
+                        case userStatus.available:
+                            Send(message.ToProper().Color(true, Ansi.yellow).AddNewLine());
+                            newUser.SetName(message.ToProper());
+                            response = "Password: ";
+                            SendIndent(response.Color(Ansi.green));
+                            action = login.password;
+                            break;
+                        case userStatus.nonExistent:
+                            response = "Create new account: " + message.ToProper() + "?";
+                            Send(response.Color(Ansi.yellow).AddNewLine());
+                            action = login.newUser;
+                            break;
                     }
                     break;
-                case login.newPlayer:
+                case login.newUser:
                     break;
                 case login.password:
                     break;
@@ -64,17 +69,21 @@ namespace Mountain.classes {
         }
 
         public void Welcome(){
+            string clearScreen = "";
             string welcome = "Welcome to the Mountain Foundation. ";
-            welcome += "The food is good, the drinks even better and if you like road kill you'll love Greggor's famous ";
-            welcome += "Fizzle and Sizzle Griller just off Flatout Road near Pancake Drive. ";
-            welcome += "Be prepared for unexpected behaviour from our many other guests you meet. They ";
-            welcome += "have taken a solemn oath to 'compete' to their fullest with anyone they come across. ";
-            welcome += "Please help them enjoy their stay as, ";
-            welcome += "I'm sure you'll be finding out, they'll be doing their utmost to see you enjoy yours. ";
-            Send(welcome.WordWrap(75).Indent(Global.indent).Color(true, Ansi.white).AddNewLine());
+            welcome += "The food is good, the drinks even better. If you like road kill you'll love Greggor's infamous ";
+            welcome += "Frizzled Sizzle-Griller just off Flatstomp Road near Pancake Hill. ";
+            welcome += "Be prepared for unexpected behaviour from our many other guests. They ";
+            welcome += "have taken solemn oaths to do their best for you. ";
+            welcome += "Please help them enjoy their stay, as, ";
+            welcome += "I'm sure you'll find out, they'll be doing their utmost to see you do. ";
+            Send(clearScreen.Color(Ansi.clearScreen).AddNewLine().AddNewLine());
+            Send(welcome.WordWrap(75).Color(true, Ansi.white).AddNewLine());
         }
-        private bool checkName(string str) {
-            return true;
+        private userStatus checkName(string str) {
+            // is name currently logged in, check to see if its lagged out, timed out..
+            // is name in userList
+            return userStatus.available;
         }
     }
 }

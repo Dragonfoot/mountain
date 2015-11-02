@@ -5,21 +5,26 @@ using System.ComponentModel;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Data;
+using System.Xml.Linq;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 using Mountain.classes;
 using Mountain.classes.helpers;
 
 namespace Mountain {
 
     public partial class Mountain : Form {
+        protected appSettings settings;
         protected List<World> worlds;
         protected World world;
         public Room room;
         private FormInterface form;
+        private User user;
 
         public Mountain() {
+            settings = new appSettings();
             InitializeComponent();
         }
 
@@ -35,11 +40,8 @@ namespace Mountain {
         // room testing
         private void button1_Click(object sender, EventArgs e) {
             // create room
-            if (this.room != null) {
-                this.room = null;
-            }
+            if (this.room != null) {this.room = null;}
             this.room = new Room();
-
             Exit exit = new Exit();
             exit.Name = "South";
             room.AddExit(exit);
@@ -101,8 +103,12 @@ namespace Mountain {
 
         private void button3_Click(object sender, EventArgs e) {
         }
-
-        private string getXml(object item) {
+        private void button2_Click(object sender, EventArgs e) {
+            if (this.room != null) {
+                richTextBox.AppendText(this.room.SaveXML());
+            }
+        }
+        private string viewXml(object item) {
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
             var serializer = new XmlSerializer(item.GetType());
             var settings = new XmlWriterSettings();
@@ -115,14 +121,36 @@ namespace Mountain {
                 return stream.ToString();
             }
         }
+        private void CreateUserFile() {
+            XDocument d = new XDocument(
+                new XElement("Users",
+                new XElement("User",
+                new XElement("Name", "admin"),
+                new XElement("Password", "password")
+                ))
+                );
+           // d.Declaration = new XDeclaration("1.0", "utf-8", "true");
 
-        private void button2_Click(object sender, EventArgs e) {
-            if (this.room != null) {
-                richTextBox.AppendText(this.room.SaveXML());
-            }
+         //   d.Save("test.xml");
+            richTextBox.Clear();
+            richTextBox.AppendText(d.ToString());
+        }
+    
+
+        private void userButton_Click(object sender, EventArgs e) {
+           // CreateUserFile();
+            user = new User();
+            user.SetName("buckey owens");
+            user.SetPassword("password");
+            richTextBox.Clear();
+            string xmlPath = settings.UsersXML;
+            richTextBox.AppendText(xmlPath);
+
         }
 
-       
+        private void configButton_Click(object sender, EventArgs e) {
+            richTextBox.Clear();
+            richTextBox.AppendText(settings.AppDirectory);
+        }
     }
-
 }

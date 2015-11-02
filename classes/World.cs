@@ -29,10 +29,7 @@ namespace Mountain.classes {
 
         public void Reload() { }
         public void Clear() { }
-        public void Shutdown() { }
-
-       
-
+        public void Shutdown() { } 
         public void Load(string world) {
             if (world != string.Empty) {
                 // if world is a valid file - this.loadXml(world);

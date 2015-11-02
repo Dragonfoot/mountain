@@ -70,6 +70,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.startServer = new System.Windows.Forms.Button();
+            this.userButton = new System.Windows.Forms.Button();
+            this.configButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -447,11 +449,33 @@
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.serverStart);
             // 
+            // userButton
+            // 
+            this.userButton.Location = new System.Drawing.Point(629, 240);
+            this.userButton.Name = "userButton";
+            this.userButton.Size = new System.Drawing.Size(99, 23);
+            this.userButton.TabIndex = 12;
+            this.userButton.Text = "Create User File";
+            this.userButton.UseVisualStyleBackColor = true;
+            this.userButton.Click += new System.EventHandler(this.userButton_Click);
+            // 
+            // configButton
+            // 
+            this.configButton.Location = new System.Drawing.Point(629, 269);
+            this.configButton.Name = "configButton";
+            this.configButton.Size = new System.Drawing.Size(99, 23);
+            this.configButton.TabIndex = 13;
+            this.configButton.Text = "Configuration";
+            this.configButton.UseVisualStyleBackColor = true;
+            this.configButton.Click += new System.EventHandler(this.configButton_Click);
+            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 568);
+            this.Controls.Add(this.configButton);
+            this.Controls.Add(this.userButton);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox);
@@ -522,6 +546,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button userButton;
+        private System.Windows.Forms.Button configButton;
         }
     }
 

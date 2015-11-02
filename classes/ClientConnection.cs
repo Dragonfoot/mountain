@@ -31,7 +31,6 @@ namespace Mountain.classes {
             StartReceiving();
         }
 
-
         protected void StartReceiving() {
             try {
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, SocketFlags.None, ReceiveCallback, state);
@@ -48,13 +47,11 @@ namespace Mountain.classes {
                         messageQueue.Push(msg);
                     }
                     MessageReceived.Set();
-                  //  Send(msg.Color(true, Ansi.cyan, Ansi.white) + " [echo]".AddNewLine().Color(Ansi.red, Ansi.white));
                 }
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state);
             } catch (ObjectDisposedException) {
                 // Handle the socket being closed with an async receive pending
             } catch (Exception e) {
-                //form.console.Items.Add(e.ToString());
                 // Handle all other exceptions
             }
         }
@@ -64,7 +61,6 @@ namespace Mountain.classes {
             byte[] byteData = Encoding.ASCII.GetBytes(data);
             state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
         }
-
         protected void SendIndent(String data) {
             byte[] byteData = Encoding.ASCII.GetBytes(data.Indent(Global.indent));
             state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
@@ -74,20 +70,17 @@ namespace Mountain.classes {
                 int bytesSent = state.Socket.Client.EndSend(ar);
                 MessageSent.Set();
             } catch (Exception e) {
-                form.console.Items.Add(e.ToString());
+              //  form.console.Items.Add(e.ToString());
             }
         }
-
-
-
+        
         protected void base_OnMessageReceived(object myObject) {
         }
         private void DropConnection() {
             // log event
         }
     }
-
-
+    
     public class StateObject {
         private const int BUFFER_SIZE = 1024;
         public byte[] Buffer = new byte[BUFFER_SIZE];

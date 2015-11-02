@@ -7,7 +7,6 @@ using Mountain.classes.helpers;
 
 namespace Mountain.classes {
 
-
     public class Identity {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -35,31 +35,49 @@ namespace Mountain.classes.helpers {
 
         public static string WordWrap(this string sentence, int width) {
             StringBuilder lines = new StringBuilder();
-            string[] pieces = sentence.Split(' ');
-            StringBuilder tempString = new StringBuilder("");
-            foreach (var piece in pieces) {
-                if (piece.Length + tempString.Length + 1 > width) {
-                    lines.Append(tempString.ToString().Indent(Global.indent).AddNewLine());
-                    tempString.Clear();
+            string[] words = sentence.Split(' ');
+            StringBuilder buildLine = new StringBuilder("");
+            foreach (var word in words) {
+                if (word.Length + buildLine.Length + 1 > width) {
+                    lines.Append(buildLine.ToString().Indent(Global.indent).AddNewLine());
+                    buildLine.Clear();
                 }
-                tempString.Append((tempString.Length == 0 ? "" : " ") + piece);
+                buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);
             }
-            if (tempString.Length > 0) {
-                lines.Append(tempString.ToString().Indent(Global.indent).AddNewLine());
+            if (buildLine.Length > 0) {
+                lines.Append(buildLine.ToString().Indent(Global.indent).AddNewLine());
             }
             return lines.ToString();
         }
-
         public static string Indent(this string str, int size) {
-            string spaces = "";
-            for (int i = 0; i <= size; i++) {
-                spaces = spaces + " ";
-            }
-            return spaces + str;
+            return str.PadLeft(size);
         }
         public static string ToProper(this string str) {
-            TextInfo ti = new CultureInfo("en-US", false).TextInfo;
-            return ti.ToTitleCase(str);
+            TextInfo info = new CultureInfo("en-US", false).TextInfo;
+            return info.ToTitleCase(str);
+        }
+        public static bool IsNumeric(this string value) {
+            float result;
+            return float.TryParse(value, out result);
+        }
+        public static bool IsNumberOnly(this string value, bool floatPoint) {
+            value = value.Trim();
+            if (value.Length == 0)
+                return false;
+            foreach (char chr in value) {
+                if (!char.IsDigit(chr)) {
+                    if (floatPoint && (chr == '.'))
+                        continue;
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static bool IsNullOrWhiteSpace(this string value) {
+            return String.IsNullOrWhiteSpace(value);
+        }
+        public static string Camelize(this string str) {
+            return str.ToProper().Replace(" ", string.Empty);
         }
     }
 }

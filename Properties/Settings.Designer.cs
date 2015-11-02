@@ -43,5 +43,17 @@ namespace Mountain.Properties {
                 this["LastWorldSaved"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/configuration/users.xml")]
+        public string Users {
+            get {
+                return ((string)(this["Users"]));
+            }
+            set {
+                this["Users"] = value;
+            }
+        }
     }
 }

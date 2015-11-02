@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 namespace Mountain.classes.helpers {
 
     public class User {
-        private const string passPhrase = "the lit^le do_key Duck#y DingdYnglededoo4U";
+        private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
         public string Name { get; set; }
-        public string Password { get; private set; }
+        public string Password { get; set; }
         public string FileName { get; set; }
+        public string Email { get; set; }
+        public List<World> Worlds;
 
         public User() {
             Password = string.Empty;
@@ -27,13 +29,19 @@ namespace Mountain.classes.helpers {
         public void SetPassword(string newPassword) {
             Password = StringCipher.Encrypt(newPassword, passPhrase);
         }
+        public void SetName(string name) {
+            Name = name.Camelize();
+            FileName = Name + ".xml";
+        }
+        public void AddWorld(World world) {
+        }
     }
 
-    public static class StringCipher {
+    public static class StringCipher {  // from web
         // This constant string is used as a "salt" value for the PasswordDeriveBytes function calls.
         // This size of the IV (in bytes) must = (keysize / 8).  Default keysize is 256, so the IV must be
         // 32 bytes long.  Using a 16 character string here gives us 32 bytes when converted to a byte array.
-        private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("ts89pEji3L0t73u2");
+        private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
 
         // This constant is used to determine the keysize of the encryption algorithm.
         private const int keysize = 256;
@@ -57,7 +65,6 @@ namespace Mountain.classes.helpers {
                 }
             }
         }
-
         public static string Decrypt(string cipherText, string passPhrase) {
             byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
             using (PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null)) {

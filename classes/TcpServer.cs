@@ -26,6 +26,7 @@ namespace Mountain.classes {
             this.form = form;
         }
 
+
         public void StartServer(int port) {
             if (tcpListener != null) {
                 tcpListener.Stop();
@@ -34,32 +35,19 @@ namespace Mountain.classes {
             tcpListener = new TcpListener(IPAddress.Any, port);
             tcpListener.Start();
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, tcpListener);
-
-
-
-            //    console.Items.Add("Service listening at " + tcpListener.LocalEndpoint.ToString());
-            //   PollClients(tcpListener);
         }
-
         protected void HandleAsyncConnection(IAsyncResult result) {
             TcpListener listener = (TcpListener)result.AsyncState;
             TcpClient client = listener.EndAcceptTcpClient(result);
             connectionWaitHandle.Set(); //Inform the main thread this connection is now handled
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
             this.world.Logins.Add(new Login(client, form));
-
-            //... Use your TcpClient here
-            // create login object
-            // start client reader
-
-
            // client.Close();
         }
 
 
         public void Cancel() {
         }
-
 
     }
 }

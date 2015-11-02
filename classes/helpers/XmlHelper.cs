@@ -37,6 +37,20 @@ namespace Mountain.classes.helpers {
 
 /* example off the web
  * 
+ * /*        
+        private string getXml(object item) {
+            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+            var serializer = new XmlSerializer(item.GetType());
+            var settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.OmitXmlDeclaration = true;
+
+            using (var stream = new StringWriter())
+            using (var writer = XmlWriter.Create(stream, settings)) {
+                serializer.Serialize(writer, item, emptyNamepsaces);
+                return stream.ToString();
+            }
+        }
  private XmlElement CreateXmlDoc(string name, int age, string city, string country)
     {
         XmlDocument xDoc = new XmlDocument();

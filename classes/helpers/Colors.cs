@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/* ansi color codes     
+ http://pueblo.sourceforge.net/doc/manual/ansi_color_codes.html    
+ */
+
 namespace Mountain.classes.helpers {
 
-    public enum Ansi { reset, bold, italic, ul, boldOff, italicOff, ulOff, black, red, green, yellow, blue, magenta, cyan, 
-                            white, blackBk, redBk, greenBK, yellowBk, blueBk, magentaBk, cyanBk, whiteBk };
+    public enum Ansi { reset, bold, dim, italic, ul, boldOff, italicOff, ulOff, black, red, green, yellow, blue, magenta, cyan, 
+                            white, blackBk, redBk, greenBK, yellowBk, blueBk, magentaBk, cyanBk, whiteBk, clearScreen };
 
     public static class Colors {
         private readonly static List<string> table = new List<string>();
 
-        static Colors() {   // change this to an array or list of strings
-            table.Add("\x1B[0m");     // reset
+        static Colors() {   
+            table.Add("\x1B[0m");      // reset
             // Style Modifiers (on)
             table.Add("\x1B[1m");      // bold
+            table.Add("\x1B[2m");      // dim
             table.Add("\x1B[3m");      // italic
-            table.Add("\x1B[4m");     // underline
+            table.Add("\x1B[4m");      // underline
             // Style Modifiers (off)
             table.Add("\x1B[22m");     // stop bold
             table.Add("\x1B[23m");     // stop italic
@@ -36,7 +41,9 @@ namespace Mountain.classes.helpers {
             table.Add("\x1B[44m");     // blue bg
             table.Add("\x1B[45m");     // magenta bg
             table.Add("\x1B[46m");     // cyan bg
-            table.Add("\x1B[47m");    // white bg
+            table.Add("\x1B[47m");     // white bg
+            // screen
+            table.Add("\x1B[2J");      // clear screen
         }
         // no bold, returns string in passed color then resets color to default
         public static string Color(this string str, Ansi index, Ansi reset) { 
