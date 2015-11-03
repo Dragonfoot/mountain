@@ -39,7 +39,7 @@ namespace Mountain.classes.helpers {
         }
         public static void ReCreateUserXmlFile(string path) {
             Users users = new Users();
-            UserInfo adminUser = new UserInfo();
+            Account adminUser = new Account();
             adminUser.SetName("Admin");
             adminUser.SetPassword("Admin");
             adminUser.Email = "Admin@com";

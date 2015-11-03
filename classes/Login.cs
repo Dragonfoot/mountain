@@ -14,11 +14,11 @@ namespace Mountain.classes {
 
     public class Login : ClientConnection {
         protected login action;
-        protected UserInfo newUser;
+        protected Account newUser;
 
         public Login(TcpClient socket, FormInterface form) : base(socket, form) {
             messageQueue.OnMessageReceived += OnMessageReceived;
-            newUser = new UserInfo();
+            newUser = new Account();
             StartLogin();
         }
 
