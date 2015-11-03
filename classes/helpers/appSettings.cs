@@ -13,16 +13,9 @@ namespace Mountain.classes.helpers {
 
     public class appSettings {
         public string AppDirectory { get; private set; }
-        public string UsersXML {
-            get {
-                return Settings.Default.UserFile;
-            }
-        }
-        public string WorldDirectory {
-            get {
-                return AppDirectory + Settings.Default.WorldDirectory;
-            }
-        }
+        public string WorldDirectory { get { return AppDirectory + Settings.Default.WorldDirectory; } }
+        public string UsersXML { get { return Settings.Default.UserFile; } }
+
         public appSettings() {
             InitializeSettings();
             if (!Directory.Exists(WorldDirectory)) {
