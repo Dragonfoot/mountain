@@ -21,11 +21,11 @@ namespace Mountain {
         protected World world;
         public Room room;
         private FormInterface form;
-        private User user;
 
         public Mountain() {
             settings = new appSettings();
             InitializeComponent();
+            BuildWorld();
         }
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -88,7 +88,9 @@ namespace Mountain {
         }
 
         private World BuildWorld() {
-            World world = new World(form);
+            if (world != null) { world = null; }
+            world = new World(form);
+            world.Name = "Grumpy Mountain";
             return world;
         }
 
@@ -114,7 +116,6 @@ namespace Mountain {
             var settings = new XmlWriterSettings();
             settings.Indent = true;
             settings.OmitXmlDeclaration = true;
-
             using (var stream = new StringWriter())
             using (var writer = XmlWriter.Create(stream, settings)) {
                 serializer.Serialize(writer, item, emptyNamepsaces);
@@ -139,12 +140,6 @@ namespace Mountain {
 
         private void userButton_Click(object sender, EventArgs e) {
            // CreateUserFile();
-            user = new User();
-            user.SetName("buckey owens");
-            user.SetPassword("password");
-            richTextBox.Clear();
-            string xmlPath = settings.UsersXML;
-            richTextBox.AppendText(xmlPath);
 
         }
 

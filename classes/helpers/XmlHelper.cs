@@ -9,16 +9,7 @@ namespace Mountain.classes.helpers {
 
     public static class XmlHelper { 
 
-        public static string WriteElement(ParamArrayAttribute parameters) {
-            // test function, will see how ParamArrayAttribute behaves
-            return "";
-        }
-
-        public static string ElementWithAttribute(string name, ParamArrayAttribute parameters) { 
-            //test function
-            return "";
-        }
-
+      
         // returns <boolean>true</boolean> if item passed is a boolean set to true, etc
         public static string PrimaryXml(object item) {  
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
@@ -30,6 +21,21 @@ namespace Mountain.classes.helpers {
             using (var writer = XmlWriter.Create(stream, settings)) {
                 serializer.Serialize(writer, item, emptyNamepsaces);
                 return stream.ToString();
+            }
+        }
+        //saves class to xml file
+        public static void ObjectToXml(object item, string path) {
+            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+            var serializer = new XmlSerializer(item.GetType());
+            var settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.OmitXmlDeclaration = true;
+            using (var stream = new StringWriter())
+            using (var writer = XmlWriter.Create(stream, settings)) {
+                serializer.Serialize(writer, item, emptyNamepsaces);
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(new StringReader(stream.ToString()));
+                xmlDocument.Save(path);
             }
         }
     }

@@ -20,27 +20,28 @@ namespace Mountain.classes.helpers {
         }
         public string WorldDirectory {
             get {
-                return AppDirectory + Settings.Default.WorldFiles;
+                return AppDirectory + Settings.Default.WorldDirectory;
             }
         }
-
         public appSettings() {
             InitializeSettings();
             if (!Directory.Exists(WorldDirectory)) {
                 Directory.CreateDirectory(WorldDirectory);
             }
-
-            string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string appData2 = AppDomain.CurrentDomain.BaseDirectory;
         }
         public void InitializeSettings() {
             AppDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            if (Settings.Default.UserFile.IsNullOrWhiteSpace()) {
-                Settings.Default.UserFile = "world/Users.xml";
+            string file = WorldDirectory + "\\" + UsersXML;
+            if (!File.Exists(file)){
+                ReCreateUserXmlFile(file);
             }
-            if (Settings.Default.WorldFiles.IsNullOrWhiteSpace()) {
-                Settings.Default.WorldFiles = "world";
-            }
+        }
+        public void ReCreateUserXmlFile(string path) {
+            User user = new User();
+            user.SetName("Admin");
+            user.SetPassword("Admin");
+            user.AddWorld("Admin");
+            XmlHelper.ObjectToXml(user, path);
         }
     }
 }

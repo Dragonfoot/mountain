@@ -13,7 +13,7 @@ namespace Mountain.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -32,27 +32,21 @@ namespace Mountain.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
-        public string LastWorldSaved {
+        [global::System.Configuration.DefaultSettingValueAttribute("users.xml")]
+        public string UserFile {
             get {
-                return ((string)(this["LastWorldSaved"]));
-            }
-            set {
-                this["LastWorldSaved"] = value;
+                return ((string)(this["UserFile"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/configuration/users.xml")]
-        public string Users {
+        [global::System.Configuration.DefaultSettingValueAttribute("worlds")]
+        public string WorldDirectory {
             get {
-                return ((string)(this["Users"]));
-            }
-            set {
-                this["Users"] = value;
+                return ((string)(this["WorldDirectory"]));
             }
         }
     }
