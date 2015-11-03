@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace Mountain.classes.helpers {
 
     public static class XmlHelper { 
-
       
         //saves class to xml file
         public static void ObjectToXml(object item, string path) {
