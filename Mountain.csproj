@@ -76,13 +76,13 @@
     <Compile Include="classes\helpers\Globals.cs" />
     <Compile Include="classes\helpers\MessageQueue.cs" />
     <Compile Include="classes\helpers\RoomID.cs" />
-    <Compile Include="classes\helpers\User.cs" />
+    <Compile Include="classes\helpers\Users.cs" />
     <Compile Include="classes\Login.cs" />
     <Compile Include="classes\Identity.cs" />
     <Compile Include="classes\Items\WearableType.cs" />
     <Compile Include="classes\Items\WeaponType.cs" />
     <Compile Include="classes\ClientConnection.cs" />
-    <Compile Include="classes\helpers\appSettings.cs" />
+    <Compile Include="classes\helpers\ApplicationSettings.cs" />
     <Compile Include="classes\TcpServer.cs" />
     <Compile Include="classes\Underling.cs" />
     <Compile Include="classes\Exit.cs" />

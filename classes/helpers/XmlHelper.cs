@@ -37,5 +37,16 @@ namespace Mountain.classes.helpers {
                 return stream.ToString();
             }
         }
+        public static void ReCreateUserXmlFile(string path) {
+            Users users = new Users();
+            UserInfo adminUser = new UserInfo();
+            adminUser.SetName("Admin");
+            adminUser.SetPassword("Admin");
+            adminUser.Email = "Admin@com";
+            adminUser.FileName = adminUser.Name + ".xml";
+            adminUser.Administrator = true;
+            users.List.Add(adminUser);
+            XmlHelper.ObjectToXml(users, path);
+        }
     }
 }

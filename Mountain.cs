@@ -16,14 +16,14 @@ using Mountain.classes.helpers;
 namespace Mountain {
 
     public partial class Mountain : Form {
-        protected appSettings settings;
+        protected ApplicationSettings settings;
         protected List<World> worlds;
         protected World world;
         public Room room;
         private FormInterface form;
 
         public Mountain() {
-            settings = new appSettings();
+            settings = new ApplicationSettings();
             InitializeComponent();
             BuildWorld();
         }

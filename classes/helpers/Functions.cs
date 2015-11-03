@@ -15,7 +15,6 @@ namespace Mountain.classes.helpers {
     public static class Functions {
 
         #region arrays
-
         public static string GetNames(Array list) {
             string names = string.Empty;
             int i = 1;
@@ -31,7 +30,6 @@ namespace Mountain.classes.helpers {
             }
             return names;
         }
-
         #endregion
 
         #region string extensions

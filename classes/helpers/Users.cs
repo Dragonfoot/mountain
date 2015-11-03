@@ -1,27 +1,25 @@
 ﻿using System;
-using System.IO;
-using System.Xml;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Mountain.Properties;
 
 namespace Mountain.classes.helpers {
 
-    public class User {
+    public class Users {
+        public List<UserInfo> List { get; set; }
+        public Users() {
+            List = new List<UserInfo>();
+        }
+    }
+
+    public class UserInfo {
         private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
         public string Name { get; set; }
         public string Password { get; set; }
-        public List<string> Worlds { get; set; }
-        public string FileName { get; set; }
+        public bool Administrator { get; set; }
         public string Email { get; set; }
-
-        public User() {
-            Worlds = new List<string>();
-        }
+        public string FileName { get; set; }
 
         public bool CheckPassword(string inputPassword) {
             if (Password == string.Empty) return false;
@@ -33,14 +31,9 @@ namespace Mountain.classes.helpers {
         }
         public void SetName(string name) {
             Name = name.Camelize();
-            FileName = Name + ".xml";
+            if (FileName.IsNullOrWhiteSpace()) {
+                FileName = Name + ".xml";
+            }
         }
-        public void AddWorld(string world) {
-            Worlds.Add(world);
-        }
-
-        
     }
-
-   
 }
