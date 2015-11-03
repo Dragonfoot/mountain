@@ -37,7 +37,7 @@ namespace Mountain.classes.helpers {
         public static string StripNewLine(this string str) {
             return Regex.Replace(str, @"\t|\n|\r", "");
         }
-        public static string AddNewLine(this string str) {
+        public static string NewLine(this string str) {
             return str + Environment.NewLine;
         }
         public static string WordWrap(this string sentence, int width) {
@@ -46,13 +46,13 @@ namespace Mountain.classes.helpers {
             StringBuilder buildLine = new StringBuilder("");
             foreach (var word in words) {
                 if (word.Length + buildLine.Length + 1 > width) {
-                    lines.Append(buildLine.ToString().Indent(Global.indent).AddNewLine());
+                    lines.Append(buildLine.ToString().Indent(Global.indent).NewLine());
                     buildLine.Clear();
                 }
                 buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);
             }
             if (buildLine.Length > 0) {
-                lines.Append(buildLine.ToString().Indent(Global.indent).AddNewLine());
+                lines.Append(buildLine.ToString().Indent(Global.indent).NewLine());
             }
             return lines.ToString();
         }

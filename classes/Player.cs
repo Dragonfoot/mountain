@@ -19,8 +19,8 @@ namespace Mountain.classes {
         private byte[] password { get; set; }
         private string screenName { get; set; }
 
-        public Player(TcpClient socket, FormInterface form)
-            : base(socket, form) {
+        public Player(TcpClient socket)
+            : base(socket) {
             ClassType = classType.player;
             inventory = new ConcurrentBag<Item>();
             enemyPlayers = new ConcurrentBag<Player>();

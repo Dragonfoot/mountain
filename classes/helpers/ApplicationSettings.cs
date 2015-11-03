@@ -22,10 +22,10 @@ namespace Mountain.classes.helpers {
         public ApplicationSettings() {
             InitializeSettings();
             Users = new List<Account>();
-            LoadUsers();
+            LoadAllUserAccounts();
         }
 
-        private void LoadUsers() {
+        private void LoadAllUserAccounts() {
             var doc = XDocument.Load(WorldDirectory + "\\" + UsersXML);
             var users = from item in doc.Descendants("Account")
                        select new {

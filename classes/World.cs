@@ -17,13 +17,12 @@ namespace Mountain.classes {
         protected Task heart;
         protected bool heartStop;
 
-        public World(FormInterface form) {
+        public World(ApplicationSettings settings) {
             Logins = new List<ClientConnection>();
             Players = new List<Player>();
             this.Areas = new List<Area>();
             this.heartStop = false;
-          //  Load(world);
-            portListener = new TcpServer(this, form);
+            portListener = new TcpServer(this, settings);
             portListener.StartServer(8090);
         }
 
@@ -31,7 +30,7 @@ namespace Mountain.classes {
         public void Clear() { }
         public void Shutdown() { } 
         public void Load(string world) {
-            if (world != string.Empty) {
+            if (!world.IsNullOrWhiteSpace()) {
                 // if world is a valid file - this.loadXml(world);
             } else {
                 // notify console of error and
@@ -65,8 +64,8 @@ namespace Mountain.classes {
 
         public void Save(string filename) {
             // check to see if we need to overwrite / update same world on disk
-            // save
-            // update properties settings for lastWorldSaved
+            // save with backup
+            // update settings
         }
 
         private void HeartBeat() {

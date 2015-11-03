@@ -16,44 +16,44 @@ namespace Mountain.classes {
         protected login action;
         protected Account newUser;
 
-        public Login(TcpClient socket, FormInterface form) : base(socket, form) {
-            messageQueue.OnMessageReceived += OnMessageReceived;
+        public Login(TcpClient socket) : base(socket) {
+            messageQueue.OnMessageReceived += OnMessageReceived; // lets get notified when the messageQueue has a new message
             newUser = new Account();
             StartLogin();
         }
 
         private void StartLogin() {
             Welcome();
-            action = login.name;
+            action = login.name; // lets start with getting the name from the user
             string UserNamePrompt = "User Name: ";
             SendIndent(UserNamePrompt.Color(true, Ansi.green));
         }
 
-        protected void OnMessageReceived(object myObject) {
+        protected void OnMessageReceived(object myObject) { // do stuff with the user message
             string message = messageQueue.Pop().Trim();
             string response = string.Empty;
-            if (message == null || message == string.Empty || message.Length == 0) return;
+            if (message == null || message == string.Empty || message.Length == 0) return; // oops, lets wait for another
             switch (action) {
                 case login.name:
-                    if (message.Length < 3 || message.Length > 64) {
+                    if (message.Length < 3 || message.Length > 45) {  // oops, sanity check
                         string usage = "Name length must be from between 3 and 64 characters";
-                        Send(usage.AddNewLine().Color(Ansi.red));
+                        Send(usage.NewLine().Color(Ansi.yellow));
                         string UserNamePrompt = "User Name: ";
-                        SendIndent(UserNamePrompt.Color(true, Ansi.green));
+                        SendIndent(UserNamePrompt.Color(true, Ansi.green)); // re-ask for name
                         return;
                     }
                     switch (checkName(message)) {
-                        case userStatus.available:
-                            Send(message.ToProper().Color(true, Ansi.yellow).AddNewLine());
+                        case userStatus.available: // name is in the user account list
+                            Send(message.ToProper().Color(true, Ansi.yellow).NewLine());
                             newUser.SetName(message.ToProper());
-                            response = "Password: ";
+                            response = "Password: "; // so lets ask him for his password
                             SendIndent(response.Color(Ansi.green));
-                            action = login.password;
+                            action = login.password; // channel next incoming message to check for valid password
                             break;
-                        case userStatus.nonExistent:
+                        case userStatus.nonExistent:  // name doesn't exist, lets ask if its a new account request
                             response = "Create new account: " + message.ToProper() + "?";
-                            Send(response.Color(Ansi.yellow).AddNewLine());
-                            action = login.newUser;
+                            Send(response.Color(Ansi.yellow).NewLine());
+                            action = login.newUser; // channel next incoming for new user answer
                             break;
                     }
                     break;
@@ -69,16 +69,13 @@ namespace Mountain.classes {
         }
 
         public void Welcome(){
-            string clearScreen = "";
             string welcome = "Welcome to the Mountain Foundation. ";
             welcome += "The food is good, the drinks even better. If you like road kill you'll love Greggor's infamous ";
             welcome += "Frizzled Sizzle-Griller just off Flatstomp Road near Pancake Hill. ";
-            welcome += "Be prepared for unexpected behaviour from our many other guests. They ";
-            welcome += "have taken solemn oaths to do their best for you. ";
-            welcome += "Please help them enjoy their stay, as, ";
-            welcome += "I'm sure you'll find out, they'll be doing their utmost to see you do. ";
-            Send(clearScreen.Color(Ansi.clearScreen).AddNewLine().AddNewLine());
-            Send(welcome.WordWrap(75).Color(true, Ansi.white).AddNewLine());
+            welcome += "Be prepared for unexpected behaviour from our many inhabitants. They ";
+            welcome += "have taken solemn oaths to do their very best when meeting you. ";
+            Send("".Color(Ansi.clearScreen).NewLine().NewLine());
+            Send(welcome.WordWrap(70).Color(true, Ansi.white).NewLine());
         }
         private userStatus checkName(string str) {
             // is name currently logged in, check to see if its lagged out, timed out..

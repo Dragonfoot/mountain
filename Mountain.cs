@@ -89,7 +89,7 @@ namespace Mountain {
 
         private World BuildWorld() {
             if (world != null) { world = null; }
-            world = new World(form);
+            world = new World(settings);
             world.Name = "Grumpy Mountain";
             return world;
         }

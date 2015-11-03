@@ -15,17 +15,16 @@ namespace Mountain.classes {
 
     public class TcpServer {
         public int Connections { get; private set; }
-        protected AutoResetEvent connectionWaitHandle;
+        protected AutoResetEvent connectionWaitDone;
         TcpListener tcpListener;
         World world;
-        FormInterface form;
+        ApplicationSettings settings;
 
-        public TcpServer(World world, FormInterface form) {
+        public TcpServer(World world, ApplicationSettings appSettings) {
             this.world = world;
-            connectionWaitHandle = new AutoResetEvent(false);
-            this.form = form;
+            connectionWaitDone = new AutoResetEvent(false);
+            this.settings = appSettings;
         }
-
 
         public void StartServer(int port) {
             if (tcpListener != null) {
@@ -39,14 +38,15 @@ namespace Mountain.classes {
         protected void HandleAsyncConnection(IAsyncResult result) {
             TcpListener listener = (TcpListener)result.AsyncState;
             TcpClient client = listener.EndAcceptTcpClient(result);
-            connectionWaitHandle.Set(); //Inform the main thread this connection is now handled
+            connectionWaitDone.Set();
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
-            this.world.Logins.Add(new Login(client, form));
-           // client.Close();
+            this.world.Logins.Add(new Login(client));
         }
-
-
-        public void Cancel() {
+        public void StopServer() {
+            if (tcpListener != null) {
+                tcpListener.Stop();
+                tcpListener = null;
+            }
         }
 
     }
