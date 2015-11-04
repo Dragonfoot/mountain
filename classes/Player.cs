@@ -33,9 +33,7 @@ namespace Mountain.classes {
         }
         protected void OnMessageReceived(object myObject) {
         }
-        public void Send(string msg) {
-            base.Send(msg);
-        }
+
         public void Shutdown() {
             Send("Shutting down now.".Color(Ansi.yellow));
             base.ClientSocket.Close();

@@ -94,7 +94,7 @@ namespace Mountain.classes {
             welcome += "Be prepared for unexpected behaviour from our many inhabitants. They ";
             welcome += "have taken solemn oaths to do their very best when meeting you. Good luck!";
             Send("".Color(Ansi.clearScreen).NewLine().NewLine());
-            Send(welcome.WordWrap(70).Color(true, Ansi.white).NewLine());
+            SendIndented(welcome.WordWrap(70).Color(true, Ansi.white).NewLine());
         }
 
         private userStatus checkName(string str) {

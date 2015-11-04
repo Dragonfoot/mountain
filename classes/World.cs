@@ -11,7 +11,7 @@ namespace Mountain.classes {
     public class World : Identity {
         protected ListBox Console;
         protected TcpServer portListener;
-        protected List<Area> Areas;
+        protected ConcurrentBag<Area> Areas;
         protected Task heart;
         protected bool heartStop;
         protected ApplicationSettings settings;
@@ -19,11 +19,14 @@ namespace Mountain.classes {
 
         public World(ApplicationSettings appSettings) {
             InitializeSettings(appSettings);
-            Areas = new List<Area>();
+            Areas = new ConcurrentBag<Area>();
             heartStop = false;
             portListener = new TcpServer(this, appSettings);
             portListener.StartServer(8090);
+            Load("get configuration file world to use");
+            HeartBeat(); // background thread activating world
         }
+
         private void InitializeSettings(ApplicationSettings appSettings) {
             settings = appSettings;
             settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
@@ -38,8 +41,12 @@ namespace Mountain.classes {
             throw new NotImplementedException("Player added");
         }
 
-        public void Reload() { }
-        public void Clear() { }
+        public void Reload() {
+            throw new NotImplementedException("World Reload");
+        }
+        public void Clear() {
+            throw new NotImplementedException("World Clear");
+        }
 
 
         public void Shutdown() {
@@ -48,12 +55,9 @@ namespace Mountain.classes {
             portListener.StopServer();
         }
 
-
         public void Load(string world) {
             if (!world.IsNullOrWhiteSpace()) {
-                // if world is a valid file - this.loadXml(world);
             } else {
-                // notify console of error and
                 CreateDefaultWorld();
             }
         }
@@ -70,40 +74,40 @@ namespace Mountain.classes {
                 "You could win a place on the top shelf of our Achievements of Horror vault that houses the very best souls of our societies " +
                 "most fascinating players.)";
             this.CreateDefaultAdminArea();
-            this.Save("defaultWorld");
+          //  this.Save("defaultWorld");
         }
 
         private void CreateDefaultAdminArea() {
-            Area area = new Area();
-            // set area data
+            Area area = new Area(); // empty stubs
             Room room = new Room();
-            // make new room ( admin.lobby )
-            // make new room ( admin.office )
-            // make new room ( admin.closet/lab/builder/training.. )
+            area.Rooms.Add(room);
+            this.Areas.Add(area);
         }
 
         public void Save(string filename) {
-            // check to see if we need to overwrite / update same world on disk
-            // save with backup
-            // update settings
+            throw new NotImplementedException("World Save");
         }
-
+       
         private void HeartBeat() {
-            // sanity checks : world loaded, areas present..
-            while (true) {
-                if (this.heartStop == true) break;
+            cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            foreach (Area area in Areas) {
+                area.StartHeartBeat();
             }
-        }
-        private void StartBackgroundTask() {
-            this.cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = this.cancellationTokenSource.Token;
             var task = Task.Factory.StartNew(() => {
                 while (true) {
                     cancellationToken.ThrowIfCancellationRequested();
-                    Thread.Sleep(30); // Do some work. 
+                    // do event ticks, 
+                    // do schedule checks, 
+                    // update time,
+                    // update weather
+                    // other stuff
+                    // possibly sleep(30) to give functions time to complete. 
                 }
             }, cancellationToken);
-
+            foreach (Area area in Areas) {
+                area.Close();
+            }
         }
     }
 }

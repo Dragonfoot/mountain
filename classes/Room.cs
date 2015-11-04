@@ -19,12 +19,10 @@ namespace Mountain.classes {
         [XmlIgnore]
         public List<Player> Players { get; set; }        
         
+        public RoomID RoomID;
         public List<Exit> Exits { get; set; }
         protected EventQueue Events;
         protected MessageQueue Messages;
-        private Object QueueLock;
-        public RoomID RoomID;
-      //  protected ConcurrentQueue<Packet> innerQueue;
 
         public Room() {
             ClassType = classType.room;
@@ -35,8 +33,6 @@ namespace Mountain.classes {
             Events = new EventQueue();
             Messages = new MessageQueue();
             Messages.OnMessageReceived += Messages_OnMessageReceived;
-            QueueLock = new object();
-         //   innerQueue = new ConcurrentQueue<Packet>();
             Name = "New Room";
             Description = "This is a newly created room";
             RoomID = new RoomID(ID, Name);
@@ -46,8 +42,10 @@ namespace Mountain.classes {
             throw new NotImplementedException("Room message queue");
         }
 
-       
-        
+        public void Beat() {
+            throw new NotImplementedException("Room beat");
+        }
+
         public void AddExit(Exit exit) {
             this.Exits.Add(exit);
         }
@@ -59,7 +57,7 @@ namespace Mountain.classes {
             player.RoomID = RoomID;
         }
 
-        public string SaveXML() { // only public properties are serialized, use [XmlIgnore] attributes before any not required
+        public string SaveXML() { 
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
             XmlSerializer serializer = new XmlSerializer(typeof(Room));
             TextWriter writer = new StringWriter();
@@ -99,18 +97,13 @@ namespace Mountain.classes {
             }
             return view.ToArray();
         }
-        /* 
-        protected bool Save() {
-            return false;
+
+        protected void Save() {
+            throw new NotImplementedException("Room save");
         }
-        protected bool Load() {
-            return false;
+        protected void Load() {
+            throw new NotImplementedException("Room load");
         }
-        protected Packet PopQueue() {
-            return new Packet(this, packetType.data, new DataPacket());
-        }
-        protected void PushQueue(Packet p) {
-        }
-        */
+        
     }
 }
