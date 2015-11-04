@@ -40,7 +40,7 @@ namespace Mountain.classes {
             TcpClient client = listener.EndAcceptTcpClient(result);
             connectionWaitDone.Set();
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
-            this.world.Logins.Add(new Login(client));
+            this.settings.Logins.Add(new Login(client, settings));
         }
         public void StopServer() {
             if (tcpListener != null) {

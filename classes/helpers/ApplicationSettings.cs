@@ -14,14 +14,18 @@ using Mountain.Properties;
 namespace Mountain.classes.helpers {
 
     public class ApplicationSettings {
-        public List<Account> Users;
+        public List<Account> RegisteredUsers { get; set; }
+        public List<Login> Logins { get; set; }
+        public Players Players { get; set; }
         public string AppDirectory { get; private set; }
         public string WorldDirectory { get { return AppDirectory + Settings.Default.WorldDirectory; } }
         public string UsersXML { get { return Settings.Default.UserFile; } }
 
         public ApplicationSettings() {
             InitializeSettings();
-            Users = new List<Account>();
+            Logins = new List<Login>();
+            RegisteredUsers = new List<Account>();
+            Players = new Players();
             LoadAllUserAccounts();
         }
 
@@ -42,7 +46,13 @@ namespace Mountain.classes.helpers {
                 info.Email = user.email;
                 info.FileName = user.filename;
                 info.Administrator = Convert.ToBoolean(user.administrator);
-                Users.Add(info);
+                RegisteredUsers.Add(info);
+            }
+        }
+        public void MoveLoginToPlayer(Account user) {
+            Login newUser = Logins.Find(x => x.ID == user.ID);
+            if (newUser != null) {
+                Players.Add(new Player(newUser.ClientSocket, user)); // have player list trigger event on add/remove.
             }
         }
 
@@ -52,7 +62,7 @@ namespace Mountain.classes.helpers {
                 Directory.CreateDirectory(WorldDirectory);
             }
             string file = WorldDirectory + "\\" + UsersXML;
-           // if (!File.Exists(file)){  // remove comments after debugging
+           // if (!File.Exists(file)){  // remove exists check after debugging
                 XmlHelper.ReCreateUserXmlFile(file);
            // }
         }

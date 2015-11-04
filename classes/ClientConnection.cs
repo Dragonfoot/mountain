@@ -12,6 +12,7 @@ namespace Mountain.classes {
 
     public class ClientConnection : Identity {
         private StateObject state { get; set; }
+        public TcpClient ClientSocket {get;set;}
         private readonly ManualResetEvent MessageReceivedDone;
         private readonly ManualResetEvent MessageSentDone;
         private readonly object messageLock;
@@ -19,6 +20,7 @@ namespace Mountain.classes {
 
         public ClientConnection(TcpClient tcpClientSocket) {
             ClassType = classType.client;
+            ClientSocket = tcpClientSocket;
             messageLock = new object();
             MessageReceivedDone = new ManualResetEvent(false);
             MessageSentDone = new ManualResetEvent(false);
@@ -58,7 +60,7 @@ namespace Mountain.classes {
             byte[] byteData = Encoding.ASCII.GetBytes(data);
             state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
         }
-        protected void SendIndent(String data) { // duplicate of above but for the additional tab at start of line
+        protected void SendIndented(String data) { // duplicate of above but for the additional tab at start of line
             byte[] byteData = Encoding.ASCII.GetBytes(data.Indent(Global.indent));
             state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
         }

@@ -10,47 +10,35 @@ using Mountain.classes.Items;
 namespace Mountain.classes {
 
     public class Player : ClientConnection {
-        protected ConcurrentBag<Player> enemyPlayers;
-        protected ConcurrentBag<Mob> enemyMobs;
-        protected ConcurrentBag<Item> inventory;
-        protected Stats stats { get; set; }
-        protected Equipment equipment { get; set; }
-        public RoomID roomID { get; set; }
-        private byte[] password { get; set; }
-        private string screenName { get; set; }
+        protected ConcurrentBag<Player> EnemyPlayers;
+        protected ConcurrentBag<Mob> EnemyMobs;
+        protected ConcurrentBag<Item> Inventory;
+        protected Stats Stats { get; set; }
+        protected Equipment Equipment { get; set; }
+        public RoomID RoomID { get; set; }
+        public Account UserAccount { get; set; }
+        public string NickName { get; set; }
 
-        public Player(TcpClient socket)
+        public Player(TcpClient socket, Account user)
             : base(socket) {
-            ClassType = classType.player;
-            inventory = new ConcurrentBag<Item>();
-            enemyPlayers = new ConcurrentBag<Player>();
-            enemyMobs = new ConcurrentBag<Mob>();
-            equipment = new Equipment();
-            stats = new Stats();
+            ClassType = classType.player; 
+            UserAccount = user;
+            NickName = user.Name;
+            messageQueue.OnMessageReceived += OnMessageReceived; 
+            Inventory = new ConcurrentBag<Item>();
+            EnemyPlayers = new ConcurrentBag<Player>();
+            EnemyMobs = new ConcurrentBag<Mob>();
+            Equipment = new Equipment();
+            Stats = new Stats();
+        }
+        protected void OnMessageReceived(object myObject) {
         }
 
-        public virtual void Save() {
+        protected virtual string Save(string fileName) {
             throw new NotImplementedException();
         }
-        public virtual void Load() {
-            throw new NotImplementedException();
-        }
-        protected virtual string SaveXml(string fileName) {
-            throw new NotImplementedException();
-        }
-        protected virtual bool LoadXml(string xml) {
-            throw new NotImplementedException();
-            // create file backup with date/time last loaded
-            // parse xml and populate properties
-            // check if enemyMobs are still alive, remove others from ConcurrentBag
-            
-        }
-        protected byte[] Encrypt(string password) {
-            byte [] encryptedPassword = new byte[64];
-            return encryptedPassword;
-        }
-        protected string Decrypt(byte[] password) {
-            return password.ToString();
+        protected virtual bool Load(string fileName) {
+            throw new NotImplementedException();            
         }
 
     }

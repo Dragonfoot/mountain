@@ -9,8 +9,6 @@ using Mountain.classes.helpers;
 namespace Mountain.classes {
 
     public class World : Identity {
-        public List<ClientConnection> Logins { get; set; }
-        public List<Player> Players { get; set; }
         protected ListBox Console;
         protected TcpServer portListener;
         protected List<Area> Areas;
@@ -18,8 +16,6 @@ namespace Mountain.classes {
         protected bool heartStop;
 
         public World(ApplicationSettings settings) {
-            Logins = new List<ClientConnection>();
-            Players = new List<Player>();
             this.Areas = new List<Area>();
             this.heartStop = false;
             portListener = new TcpServer(this, settings);
