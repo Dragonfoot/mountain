@@ -14,15 +14,14 @@ namespace Mountain.classes.helpers {
         public MessageQueue() {
             queue = new ConcurrentQueue<string>();
         }
-        public void Push(string msg) {
-            queue.Enqueue(msg);
+
+        public void Push(string message) {
+            queue.Enqueue(message);
             OnMessageReceived(this);
         }
         public string Pop() {
-            string msg;
-            bool result;
-            result = queue.TryDequeue(out msg);
-            return (msg == null) ? string.Empty : msg;
+            string message;
+            return (queue.TryDequeue(out message)) ? message : string.Empty;
         }
 
 

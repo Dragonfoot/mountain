@@ -15,6 +15,7 @@ namespace Mountain.classes {
         protected Task heart;
         protected bool heartStop;
         protected ApplicationSettings settings;
+        private CancellationTokenSource cancellationTokenSource;
 
         public World(ApplicationSettings appSettings) {
             InitializeSettings(appSettings);
@@ -39,7 +40,15 @@ namespace Mountain.classes {
 
         public void Reload() { }
         public void Clear() { }
-        public void Shutdown() { } 
+
+
+        public void Shutdown() {
+            settings.Players.Shutdown();
+            cancellationTokenSource.Cancel();
+            portListener.StopServer();
+        }
+
+
         public void Load(string world) {
             if (!world.IsNullOrWhiteSpace()) {
                 // if world is a valid file - this.loadXml(world);
@@ -82,23 +91,20 @@ namespace Mountain.classes {
         private void HeartBeat() {
             // sanity checks : world loaded, areas present..
             while (true) {
-                // stopwatch.start()
-                // foreach((Area)area in this.Areas){
-                    // foreach((Room)room in area.Rooms){
-                        // foreach((Mob)mob in room.Mobs){ run mob.tasks() } end foreach
-                        // foreach((Player)player in room.Players){ run player.tasks() } end foreach
-                        // run room.tasks()
-                        // check UI, exit while(true)loop if required
-                    // } end foreach
-                    // run area.tasks()
-                //} end foreach
-                // run world.tasks()
-                // stopwatch.stop().display(stopwatch.duration())
-                // check GUI and exit while(true) loop if requested
                 if (this.heartStop == true) break;
             }
         }
+        private void StartBackgroundTask() {
+            this.cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = this.cancellationTokenSource.Token;
+            var task = Task.Factory.StartNew(() => {
+                while (true) {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    Thread.Sleep(30); // Do some work. 
+                }
+            }, cancellationToken);
 
+        }
     }
-
 }
+

@@ -80,8 +80,8 @@ namespace Mountain {
             }
         }
 
-        private void button6_Click(object sender, EventArgs e) {
-            //stop server
+        private void button6_Click(object sender, EventArgs e) { //stop server
+            world.Shutdown();           
         }
 
         private World BuildWorld() {

@@ -70,7 +70,8 @@ namespace Mountain.classes {
                 case login.password:
                     if(newUser.CheckPassword(message)){
                         messageQueue.OnMessageReceived -= OnMessageReceived; // stop processing input from here
-                        Send("Welcome back " + newUser.Name + ".".Color(Ansi.green));
+                        Send("- OK -".NewLine().NewLine().Color(Ansi.yellow));
+                        SendIndented("Welcome back ".Color(Ansi.white, Ansi.white) + newUser.Name + "!");
                         settings.ConvertLoginToPlayer(newUser); // start processing input with player class
                         return;
                     };

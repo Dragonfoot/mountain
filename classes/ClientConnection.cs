@@ -42,9 +42,9 @@ namespace Mountain.classes {
                 int read = state.Socket.Client.EndReceive(ar); // get number of bytes read in
                 if (read > 0) {
                     string msg = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
-                    lock (messageLock) { // stop other threads from accessing the messageQueue while this message is added
+                  //  lock (messageLock) { // stop other threads from accessing the messageQueue while this message is added
                         messageQueue.Push(msg); // put the received message into the threaded queue for processing by another thread
-                    }
+                 //   }
                     MessageReceivedDone.Set(); // tell parent thread we are done
                 }
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // loop to wait for more

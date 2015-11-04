@@ -33,11 +33,18 @@ namespace Mountain.classes {
         }
         protected void OnMessageReceived(object myObject) {
         }
-
-        protected virtual string Save(string fileName) {
+        public void Send(string msg) {
+            base.Send(msg);
+        }
+        public void Shutdown() {
+            Send("Shutting down now.".Color(Ansi.yellow));
+            base.ClientSocket.Close();
+            Save();
+        }
+        protected virtual void Save() {
             throw new NotImplementedException();
         }
-        protected virtual bool Load(string fileName) {
+        protected virtual bool Load() {
             throw new NotImplementedException();            
         }
 

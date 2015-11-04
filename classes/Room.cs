@@ -34,11 +34,16 @@ namespace Mountain.classes {
             Items = new ConcurrentBag<Item>();
             Events = new EventQueue();
             Messages = new MessageQueue();
+            Messages.OnMessageReceived += Messages_OnMessageReceived;
             QueueLock = new object();
          //   innerQueue = new ConcurrentQueue<Packet>();
             Name = "New Room";
             Description = "This is a newly created room";
             RoomID = new RoomID(ID, Name);
+        }
+
+        void Messages_OnMessageReceived(object myObject) {
+            throw new NotImplementedException("Room message queue");
         }
 
        

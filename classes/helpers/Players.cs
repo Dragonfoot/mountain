@@ -22,13 +22,26 @@ namespace Mountain.classes.helpers {
             OnPlayerAdded(this, player);
         }
         public void Remove(string name) {
-            int index = List.FindIndex(player => player.Name == name);
+            int index = GetIndex(name);
             Player loggingOut = List[index];
             List.RemoveAt(index);
             OnPlayerRemoved(this, loggingOut);
         }
         public int Count() {
             return List.Count;
+        }
+        private int GetIndex(string name) {
+            return List.FindIndex(player => player.Name == name);
+        }
+
+        public void Shutdown() { 
+            List.ForEach(player => {
+                player.Shutdown();  //send shutdown message, save, close connection
+            });
+            List.RemoveRange(0, List.Count);
+        }
+        public void Broadcast() {
+            // foreach player in players, send message
         }
     }
 }
