@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\Equipment.cs" />
+    <Compile Include="classes\helpers\EventQueue.cs" />
     <Compile Include="classes\helpers\FormInterface.cs" />
     <Compile Include="classes\helpers\Functions.cs" />
     <Compile Include="classes\helpers\Globals.cs" />

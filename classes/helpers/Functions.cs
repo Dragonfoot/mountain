@@ -98,16 +98,18 @@ namespace Mountain.classes.helpers {
     }
 
     #region cryptography 
+ // taken from Stack Overflow.
+    // change and hide IV and passPhrase before production release
 
-    // will want to hide this at some point, exclude from github, then change IV sometime before production 
-    public static class StringCipher {  // taken from somewhere on the web, was freely given.
+    public static class StringCipher { 
+
         // This constant string is used as a "salt" value for the PasswordDeriveBytes function calls.
         // This size of the IV (in bytes) must = (key size / 8).  Default key size is 256, so the IV must be
         // 32 bytes long.  Using a 16 character string here gives us 32 bytes when converted to a byte array.
 
-        private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U"; // will want to change and hide before production
-        private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5"); // will need to change this at production
-
+        private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
+        // passPhrase was originally a parameter for each function, storing it here for simplicity for now
+        private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
         // This constant is used to determine the key size of the encryption algorithm.
         private const int keysize = 256;
 

@@ -8,10 +8,10 @@ namespace Mountain.classes.helpers {
 
     public class Players {
         private List<Player> List;
-        public delegate void AddHandler(object myObject);
+        public delegate void AddHandler(object myObject, Player player);
         public event AddHandler OnPlayerAdded;
 
-        public delegate void RemoveHandler(object myObject);
+        public delegate void RemoveHandler(object myObject, Player player);
         public event RemoveHandler OnPlayerRemoved;
 
         public Players() {
@@ -19,12 +19,13 @@ namespace Mountain.classes.helpers {
         }
         public void Add(Player player) {
             List.Add(player);
-            OnPlayerAdded(this);
+            OnPlayerAdded(this, player);
         }
         public void Remove(string name) {
             int index = List.FindIndex(player => player.Name == name);
+            Player loggingOut = List[index];
             List.RemoveAt(index);
-            OnPlayerRemoved(this);
+            OnPlayerRemoved(this, loggingOut);
         }
         public int Count() {
             return List.Count;

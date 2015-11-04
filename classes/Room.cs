@@ -16,26 +16,54 @@ namespace Mountain.classes {
         public List<Mob> Mobs { get; set; }
         [XmlIgnore]
         public ConcurrentBag<Item> Items { get; set; }
-        public List<Exit> Exits { get; set; }
         [XmlIgnore]
-        public List<Player> Players { get; set; }
-
-        protected ConcurrentQueue<Packet> events;
-        protected ConcurrentQueue<Packet> msgs;
-        protected ConcurrentQueue<Packet> innerQueue;
+        public List<Player> Players { get; set; }        
+        
+        public List<Exit> Exits { get; set; }
+        protected EventQueue Events;
+        protected MessageQueue Messages;
+        private Object QueueLock;
+        public RoomID RoomID;
+      //  protected ConcurrentQueue<Packet> innerQueue;
 
         public Room() {
-            base.ClassType = classType.room;
-            this.Exits = new List<Exit>();
-            this.Players = new List<Player>();
-            this.Mobs = new List<Mob>();
-            this.Items = new ConcurrentBag<Item>();
-            this.events = new ConcurrentQueue<Packet>();
-            this.msgs = new ConcurrentQueue<Packet>();
-            this.innerQueue = new ConcurrentQueue<Packet>();
-            this.ID = Guid.NewGuid();
-            this.Name = "New Room";
-            this.Description = "This is a newly created room";
+            ClassType = classType.room;
+            Exits = new List<Exit>();
+            Players = new List<Player>();
+            Mobs = new List<Mob>();
+            Items = new ConcurrentBag<Item>();
+            Events = new EventQueue();
+            Messages = new MessageQueue();
+            QueueLock = new object();
+         //   innerQueue = new ConcurrentQueue<Packet>();
+            Name = "New Room";
+            Description = "This is a newly created room";
+            RoomID = new RoomID(ID, Name);
+        }
+
+       
+        
+        public void AddExit(Exit exit) {
+            this.Exits.Add(exit);
+        }
+        public void AddMob(Mob mob) {
+            this.Mobs.Add(mob);
+        }
+        public void AddPlayer(Player player) {
+            this.Players.Add(player);
+            player.RoomID = RoomID;
+        }
+
+        public string SaveXML() { // only public properties are serialized, use [XmlIgnore] attributes before any not required
+            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+            XmlSerializer serializer = new XmlSerializer(typeof(Room));
+            TextWriter writer = new StringWriter();
+            try {
+                serializer.Serialize(writer, this, emptyNamepsaces);
+            } catch (Exception e) {
+                return e.ToString();
+            }             
+            return writer.ToString();
         }
 
         public string[] View() {
@@ -46,7 +74,7 @@ namespace Mountain.classes {
             view.Add(Description);
             view.Add("");
             if (Exits.Count > 0) { // add color coding's
-                stringBuilder.Append("Exits: " + Functions.GetNames(Exits.ToArray()));                
+                stringBuilder.Append("Exits: " + Functions.GetNames(Exits.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
@@ -66,42 +94,7 @@ namespace Mountain.classes {
             }
             return view.ToArray();
         }
-        
-        public void AddExit(Exit exit) {
-            this.Exits.Add(exit);
-        }
-        public void AddMob(Mob mob) {
-            this.Mobs.Add(mob);
-        }
-        public void AddPlayer(Player player) {
-            this.Players.Add(player);
-        }
-
-        public string SaveXML() { // only public properties are serialized, use [XmlIgnore] attributes before any not required
-            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
-            XmlSerializer serializer = new XmlSerializer(typeof(Room));
-            TextWriter writer = new StringWriter();
-            try {
-                serializer.Serialize(writer, this, emptyNamepsaces);
-            } catch (Exception e) {
-                return e.ToString();
-            }             
-            return writer.ToString();
-        }
-        /*        
-        private string viewXml(object item) {
-            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
-            var serializer = new XmlSerializer(item.GetType());
-            var settings = new XmlWriterSettings();
-            settings.Indent = true;
-            settings.OmitXmlDeclaration = true;
-
-            using (var stream = new StringWriter())
-            using (var writer = XmlWriter.Create(stream, settings)) {
-                serializer.Serialize(writer, item, emptyNamepsaces);
-                return stream.ToString();
-            }
-        }
+        /* 
         protected bool Save() {
             return false;
         }

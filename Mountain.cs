@@ -20,7 +20,6 @@ namespace Mountain {
         protected List<World> worlds;
         protected World world;
         public Room room;
-        private FormInterface form;
 
         public Mountain() {
             settings = new ApplicationSettings();
@@ -76,8 +75,6 @@ namespace Mountain {
 
         private void serverStart(object sender, EventArgs e) { // start
             //create world and start listener
-            form = new FormInterface(this);
-            form.console = this.Console;
             if (world == null) {
                 world = BuildWorld();
             }

@@ -49,7 +49,8 @@ namespace Mountain.classes.helpers {
                 RegisteredUsers.Add(info);
             }
         }
-        public void MoveLoginToPlayer(Account user) {
+
+        public void ConvertLoginToPlayer(Account user) {
             Login newUser = Logins.Find(x => x.ID == user.ID);
             if (newUser != null) {
                 Players.Add(new Player(newUser.ClientSocket, user)); // have player list trigger event on add/remove.

@@ -14,12 +14,27 @@ namespace Mountain.classes {
         protected List<Area> Areas;
         protected Task heart;
         protected bool heartStop;
+        protected ApplicationSettings settings;
 
-        public World(ApplicationSettings settings) {
-            this.Areas = new List<Area>();
-            this.heartStop = false;
-            portListener = new TcpServer(this, settings);
+        public World(ApplicationSettings appSettings) {
+            InitializeSettings(appSettings);
+            Areas = new List<Area>();
+            heartStop = false;
+            portListener = new TcpServer(this, appSettings);
             portListener.StartServer(8090);
+        }
+        private void InitializeSettings(ApplicationSettings appSettings) {
+            settings = appSettings;
+            settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
+            settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
+        }
+
+        void Players_OnPlayerRemoved(object myObject, Player player) {
+            throw new NotImplementedException("Player removed");
+        }
+
+        void Players_OnPlayerAdded(object myObject, Player player) {
+            throw new NotImplementedException("Player added");
         }
 
         public void Reload() { }
