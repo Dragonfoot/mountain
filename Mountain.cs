@@ -91,15 +91,6 @@ namespace Mountain {
             return world;
         }
 
-        private void toolStripMenuItem5_Click(object sender, EventArgs e) {
-            AreaForm areaForm = new AreaForm();
-            DialogResult dialogresult = areaForm.ShowDialog();
-            if (dialogresult == DialogResult.OK) {
-            } else if (dialogresult == DialogResult.Cancel) {
-            }
-            areaForm.Dispose();
-        }
-
         private void button3_Click(object sender, EventArgs e) {
         }
         private void button2_Click(object sender, EventArgs e) {
@@ -144,5 +135,19 @@ namespace Mountain {
             richTextBox.Clear();
             richTextBox.AppendText(settings.AppDirectory);
         }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e) {  //edit area
+            AreaForm areaForm = new AreaForm(world);
+            DialogResult dialogresult = areaForm.ShowDialog();
+            if (dialogresult == DialogResult.OK) {
+
+            } else {
+                if (dialogresult == DialogResult.Cancel) {
+
+                }
+            }
+            areaForm.Dispose();
+        }
+
     }
 }

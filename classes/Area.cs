@@ -24,26 +24,32 @@ namespace Mountain.classes {
         }
 
 
+        public void Load(string filename) {
+            throw new NotImplementedException("Area Load (filename)");
+        }
         public void Load() {
-            throw new NotImplementedException("Area Load");
+            throw new NotImplementedException("Area Load ()");
         }
         public void Save() {
-            throw new NotImplementedException("Area Save");
+            throw new NotImplementedException("Area Save()");
+        }
+        public void Save(string filename) {
+            throw new NotImplementedException("Area Save(filename)");
         }
 
-        public void Close() {
+        public void StopHeart() {
             cancellationTokenSource.Cancel(); // stop heartbeat
         }
 
 
-        public void StartHeartBeat() {
+        public void StartHeart() {
             this.cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = this.cancellationTokenSource.Token;
             var task = Task.Factory.StartNew(() => {
                 while (true) {
                     cancellationToken.ThrowIfCancellationRequested();
                     foreach (Room room in Rooms) {
-                        room.Beat();
+                        room.HeartBeat();
                     } 
                     // do schedule checks, 
                     // update time,

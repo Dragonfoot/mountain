@@ -69,7 +69,7 @@ namespace Mountain.classes {
                     break;
                 case login.password:
                     if(newUser.CheckPassword(message)){
-                        messageQueue.OnMessageReceived -= OnMessageReceived; // stop processing input from here
+                        messageQueue.OnMessageReceived -= OnMessageReceived; // stop processing input for here
                         Send("- OK -".NewLine().NewLine().Color(Ansi.yellow));
                         SendIndented("Welcome back ".Color(Ansi.white, Ansi.white) + newUser.Name + "!");
                         settings.ConvertLoginToPlayer(newUser); // start processing input with player class
@@ -94,7 +94,7 @@ namespace Mountain.classes {
             welcome += "Be prepared for unexpected behaviour from our many inhabitants. They ";
             welcome += "have taken solemn oaths to do their very best when meeting you. Good luck!";
             Send("".Color(Ansi.clearScreen).NewLine().NewLine());
-            SendIndented(welcome.WordWrap(70).Color(true, Ansi.white).NewLine());
+            Send(welcome.WordWrap(65).Color(true, Ansi.yellow).NewLine());
         }
 
         private userStatus checkName(string str) {

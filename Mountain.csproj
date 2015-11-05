@@ -89,7 +89,6 @@
     <Compile Include="classes\Underling.cs" />
     <Compile Include="classes\Exit.cs" />
     <Compile Include="classes\helpers\Colors.cs" />
-    <Compile Include="classes\helpers\Linkage.cs" />
     <Compile Include="classes\helpers\Packet.cs" />
     <Compile Include="classes\helpers\Stats.cs" />
     <Compile Include="classes\Vault.cs" />

@@ -9,12 +9,12 @@ using Mountain.classes.helpers;
 namespace Mountain.classes {
 
     public class World : Identity {
+        public ConcurrentBag<Area> Areas;
+        public ApplicationSettings settings;
         protected ListBox Console;
         protected TcpServer portListener;
-        protected ConcurrentBag<Area> Areas;
-        protected Task heart;
+    //    protected Task heart;
         protected bool heartStop;
-        protected ApplicationSettings settings;
         private CancellationTokenSource cancellationTokenSource;
 
         public World(ApplicationSettings appSettings) {
@@ -24,7 +24,7 @@ namespace Mountain.classes {
             portListener = new TcpServer(this, appSettings);
             portListener.StartServer(8090);
             Load("get configuration file world to use");
-            HeartBeat(); // background thread activating world
+         //   StartHeart(); // activate world
         }
 
         private void InitializeSettings(ApplicationSettings appSettings) {
@@ -51,7 +51,7 @@ namespace Mountain.classes {
 
         public void Shutdown() {
             settings.Players.Shutdown();
-            cancellationTokenSource.Cancel();
+            StopHeart();
             portListener.StopServer();
         }
 
@@ -88,11 +88,11 @@ namespace Mountain.classes {
             throw new NotImplementedException("World Save");
         }
        
-        private void HeartBeat() {
+        private void StartHeart() {
             cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = cancellationTokenSource.Token;
             foreach (Area area in Areas) {
-                area.StartHeartBeat();
+                area.StartHeart();
             }
             var task = Task.Factory.StartNew(() => {
                 while (true) {
@@ -106,8 +106,11 @@ namespace Mountain.classes {
                 }
             }, cancellationToken);
             foreach (Area area in Areas) {
-                area.Close();
-            }
+                area.StopHeart();
+            }           
+        }
+        private void StopHeart() {
+            cancellationTokenSource.Cancel();
         }
     }
 }

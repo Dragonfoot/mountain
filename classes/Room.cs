@@ -25,6 +25,19 @@ namespace Mountain.classes {
         protected MessageQueue Messages;
 
         public Room() {
+            InitializeRoom();
+            Name = "New Room";
+            Description = "This is a newly created room";
+            RoomID = new RoomID(ID, Name);
+        }
+        public Room(string name) {
+            InitializeRoom();
+            Name = name;
+            Description = Name + " is a newly created room";
+            RoomID = new RoomID(ID, Name);
+        }
+
+        private void InitializeRoom() {
             ClassType = classType.room;
             Exits = new List<Exit>();
             Players = new List<Player>();
@@ -33,16 +46,13 @@ namespace Mountain.classes {
             Events = new EventQueue();
             Messages = new MessageQueue();
             Messages.OnMessageReceived += Messages_OnMessageReceived;
-            Name = "New Room";
-            Description = "This is a newly created room";
-            RoomID = new RoomID(ID, Name);
         }
 
         void Messages_OnMessageReceived(object myObject) {
             throw new NotImplementedException("Room message queue");
         }
 
-        public void Beat() {
+        public void HeartBeat() {
             throw new NotImplementedException("Room beat");
         }
 

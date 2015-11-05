@@ -61,6 +61,7 @@ namespace Mountain.classes {
             state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
         }
         protected void SendIndented(String data) { // duplicate of above but for the additional tab at start of line
+            string stringData = data.Indent(Global.indent);
             byte[] byteData = Encoding.ASCII.GetBytes(data.Indent(Global.indent));
             state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
         }

@@ -43,25 +43,12 @@ namespace Mountain.classes.helpers {
             return str + Environment.NewLine;
         }
 
-        public static string WordWrap(this string sentence, int width) {  // takes a long string and formats to width
-            StringBuilder lines = new StringBuilder();
-            string[] words = sentence.Split(' ');
-            StringBuilder buildLine = new StringBuilder("");
-            foreach (var word in words) {
-                if (word.Length + buildLine.Length + 1 > width) { // have we exceeded line width?
-                    lines.Append(buildLine.ToString().Indent(Global.indent).NewLine()); 
-                    buildLine.Clear(); 
-                }
-                buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);  // no space at start of new line
-            }
-            if (buildLine.Length > 0) { // finished loop, check for final words to include
-                lines.Append(buildLine.ToString().Indent(Global.indent).NewLine());
-            }
-            return lines.ToString();
-        }
 
         public static string Indent(this string str, int size) { //  find ansi code for tab settings?
-            return str.PadLeft(size);
+            for (int i = 0; i <= size; i++) {
+                str = " " + str;
+            }
+            return str;
         }
 
         public static string ToProper(this string str) { // make all words uppercase
@@ -95,10 +82,33 @@ namespace Mountain.classes.helpers {
         }
 
         #endregion
-    }
+        #region Ansi
 
-    #region cryptography 
- // taken from Stack Overflow.
+        public static string ClearScreenWithTab(this string str, int size) {
+            return "\x1B[2J" + "\x1B[" + size.ToString() + "C" + "\x1B[H" + str;
+        }        
+        
+        public static string WordWrap(this string sentence, int width) {  // takes a long string and formats to width
+            StringBuilder lines = new StringBuilder();
+            string[] words = sentence.Split(' ');
+            StringBuilder buildLine = new StringBuilder("");
+            foreach (var word in words) {
+                if (word.Length + buildLine.Length + 1 > width) { // check if have we exceeded line width
+                    lines.Append(buildLine.ToString().Indent(Global.indent).NewLine());
+                    buildLine.Clear();
+                }
+                buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);  // remove space at start of new line
+            }
+            if (buildLine.Length > 0) { // finished loop, check for final words to include
+                lines.Append(buildLine.ToString().Indent(Global.indent).NewLine());
+            }
+            return lines.ToString();
+        }
+        #endregion
+    }
+        
+    #region cryptography
+    // taken from Stack Overflow.
     // change and hide IV and passPhrase before production release
 
     public static class StringCipher { 
