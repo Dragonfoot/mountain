@@ -74,7 +74,7 @@ namespace Mountain.classes {
             string verb = str.FirstWord();
             if (Commands.IsVerb(verb)) {
                 string tail = str.StripFirstWord().ToLower();
-                VerbPacket packet = new VerbPacket(verb, tail);
+                VerbPacket packet = new VerbPacket(verb, tail, user);
                 return packet;
             }
             return null;

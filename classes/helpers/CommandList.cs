@@ -10,7 +10,6 @@ namespace Mountain.classes.helpers {
         private Dictionary<string, Action<VerbPacket>> CommunicationVerbs;
         public List<string> communicationKeys;
 
-
         public CommandList() {
             LoadCommands();
         }
@@ -32,7 +31,7 @@ namespace Mountain.classes.helpers {
             return false;
         }
         public bool IsVerb(string verb) {
-            return communicationKeys.Any(o => o.StartsWith(verb));
+            return communicationKeys.Any(key => key.StartsWith(verb));
         }
 
         private void Say(VerbPacket vp) {
