@@ -48,7 +48,9 @@ namespace Mountain.classes {
             Messages.OnMessageReceived += Messages_OnMessageReceived;
         }
 
-        void Messages_OnMessageReceived(object myObject) {
+        void Messages_OnMessageReceived(object myObject, string msg) {
+            string message = Messages.Pop(); // pull the message
+            if (message.IsNullOrWhiteSpace()) message = msg;
             throw new NotImplementedException("Room message queue");
         }
 

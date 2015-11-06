@@ -6,13 +6,26 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
 
-    public enum packetType { message, data, command, activity, callback };
+    public enum PacketType { data, command, action, events, callback, verb };
 
     public class Packet {
-        protected packetType type;
+        public PacketType packetType;
         public Packet() {
+            packetType = PacketType.data;
         }
-        public Packet(object value) {
+    }
+    public class VerbPacket : Packet {
+        public string verb;
+        public string parameter;
+        public VerbPacket(string verb, string parameter) {
+            packetType = PacketType.verb;
+            this.parameter = parameter;
+            this.verb = verb;
+        }
+    }
+    public class EventPacket : Packet {
+        public EventPacket() {
+            packetType = PacketType.events;
         }
     }
 

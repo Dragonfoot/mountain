@@ -29,6 +29,7 @@ namespace Mountain.classes.helpers {
         }
 
         #endregion
+
         #region string extensions
 
         public static string StripNewLine(this string str) {
@@ -42,7 +43,6 @@ namespace Mountain.classes.helpers {
         public static string NewLine(this string str) {
             return str + Environment.NewLine;
         }
-
 
         public static string Indent(this string str, int size) { //  find ansi code for tab settings?
             for (int i = 0; i <= size; i++) {
@@ -81,7 +81,46 @@ namespace Mountain.classes.helpers {
             return str.ToProper().Replace(" ", string.Empty);
         }
 
+        public static string FirstWord(this string str) {
+            str = str.TrimStart(' ');
+            if (str.WordCount() > 1) {
+                return str.Substring(0, str.IndexOf(" "));
+            }
+            return str;
+        }
+        public static string StripFirstWord(this string str) {
+            if (str.WordCount() > 1) {
+                return str.Substring(str.FirstWordLength()).Trim() ;
+            }
+            return "";
+        }
+        public static int WordCount(this string str) {
+            char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
+            string[] words = str.Split(delimiterChars);
+            return words.Length;
+        }
+        public static int FirstWordLength(this string str) {
+            if (str.WordCount() > 1) {
+                string first =  str.Substring(0, str.IndexOf(" "));
+                return first.Length;
+            }
+            return str.Length;
+        }
+        public static string StripExtraSpaces(this string str) {
+            string build = str.Trim();
+            string result = string.Empty;
+            while (build.Length > 0) {
+                result += build.FirstWord().Trim() + " ";
+                build = build.StripFirstWord();
+                build = build.Trim();
+            }
+            result = result.Trim();
+            return result;
+        }
+
+
         #endregion
+
         #region Ansi
 
         public static string ClearScreenWithTab(this string str, int size) {

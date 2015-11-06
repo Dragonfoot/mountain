@@ -15,36 +15,69 @@ namespace Mountain.classes {
         protected ConcurrentBag<Item> Inventory;
         protected Stats Stats { get; set; }
         protected Equipment Equipment { get; set; }
+        protected CommandList Commands { get; set; }
         public RoomID RoomID { get; set; }
         public Account UserAccount { get; set; }
-        public string NickName { get; set; }
+        public string Nick { get; set; }
 
         public Player(TcpClient socket, Account user)
             : base(socket) {
             ClassType = classType.player; 
             UserAccount = user;
-            NickName = user.Name;
-            messageQueue.OnMessageReceived += OnMessageReceived; 
+            Nick = user.Name;
+            Name = user.Name;
+            base.messageQueue.OnMessageReceived += OnPlayerMessageReceived; 
             Inventory = new ConcurrentBag<Item>();
             EnemyPlayers = new ConcurrentBag<Player>();
             EnemyMobs = new ConcurrentBag<Mob>();
             Equipment = new Equipment();
             Stats = new Stats();
+            Commands = new CommandList();
+            Send("Ready".Color(Ansi.yellow).NewLine(), true);
         }
-        protected void OnMessageReceived(object myObject) {
+
+        public void OnPlayerMessageReceived(object myObject, string msg) {
+            string message = messageQueue.Pop(); // pull the message
+            if (message.IsNullOrWhiteSpace()) message = msg;
+
+            VerbPacket packet = Parse(message, UserAccount);
+            if (packet == null) {
+                string verb = message.FirstWord();
+                Send("I don't know what to do with \"".Color(Ansi.yellow) + verb.Color(Ansi.white) + "\" just yet.".Color(Ansi.yellow).NewLine(), true);
+                string help = Commands.ShowVerbs(45).TrimStart(' ');
+                Send("For now I recognize ".Color(Ansi.yellow) + help.Color(Ansi.white).NewLine(), true);
+                return;
+            }
+            string response = "\"" + packet.verb + "\" - " + packet.parameter;
+            Send(response.Color(Ansi.white).NewLine(), true);
         }
 
         public void Shutdown() {
-            Send("Shutting down now.".Color(Ansi.yellow));
+            Send("Shutting down now.".Color(Ansi.yellow), false);
             base.ClientSocket.Close();
             Save();
         }
+        private void SetRoom(RoomID id) {
+            RoomID = id;
+            UserAccount.RoomID = id;
+        }
         protected virtual void Save() {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
         protected virtual bool Load() {
-            throw new NotImplementedException();            
+            //throw new NotImplementedException();            
+            return false;
         }
-
+        private VerbPacket Parse(string str, Account user) {
+            str = str.TrimStart(' ');
+            str = str.StripExtraSpaces();
+            string verb = str.FirstWord();
+            if (Commands.IsVerb(verb)) {
+                string tail = str.StripFirstWord().ToLower();
+                VerbPacket packet = new VerbPacket(verb, tail);
+                return packet;
+            }
+            return null;
+        }     
     }
 }

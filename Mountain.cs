@@ -25,6 +25,7 @@ namespace Mountain {
             settings = new ApplicationSettings();
             InitializeComponent();
             BuildWorld();
+            Console.Items.Add("Server has started");
         }
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -77,11 +78,16 @@ namespace Mountain {
             //create world and start listener
             if (world == null) {
                 world = BuildWorld();
+                Console.Items.Add("Server has started");
+            } else {
+                Console.Items.Add("Server is already running");
             }
         }
 
         private void button6_Click(object sender, EventArgs e) { //stop server
-            world.Shutdown();           
+        //    world.Shutdown();
+         //   world = null;
+            Console.Items.Add("Shutdown not implemented yet");
         }
 
         private World BuildWorld() {
@@ -128,7 +134,6 @@ namespace Mountain {
 
         private void userButton_Click(object sender, EventArgs e) {
            // CreateUserFile();
-
         }
 
         private void configButton_Click(object sender, EventArgs e) {

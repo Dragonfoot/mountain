@@ -110,7 +110,9 @@ namespace Mountain.classes {
             }           
         }
         private void StopHeart() {
-            cancellationTokenSource.Cancel();
+            if (cancellationTokenSource != null) {
+                cancellationTokenSource.Cancel();
+            }
         }
     }
 }

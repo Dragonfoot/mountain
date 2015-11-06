@@ -37,7 +37,7 @@ namespace Mountain.classes.helpers {
                 return stream.ToString();
             }
         }
-        public static void ReCreateUserXmlFile(string path) {
+        public static void ReCreateDefaultUserXmlFile(string path) {
             Users users = new Users();
             Account adminUser = new Account(Guid.NewGuid());
             adminUser.SetName("Admin");

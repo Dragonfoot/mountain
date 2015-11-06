@@ -9,7 +9,7 @@ namespace Mountain.classes.helpers {
 
     public class MessageQueue {
         private ConcurrentQueue<string> queue;
-        public delegate void MessageHandler(object myObject);
+        public delegate void MessageHandler(object myObject, string msg);
         public event MessageHandler OnMessageReceived;
         public MessageQueue() {
             queue = new ConcurrentQueue<string>();
@@ -17,7 +17,7 @@ namespace Mountain.classes.helpers {
 
         public void Push(string message) {
             queue.Enqueue(message);
-            OnMessageReceived(this);
+            OnMessageReceived(this, message);
         }
         public string Pop() {
             string message;

@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 namespace Mountain.classes.helpers {
 
     public class EventQueue {
-        private ConcurrentQueue<Packet> queue;
+        private ConcurrentQueue<EventPacket> queue;
         public delegate void EventHandler(object myObject);
         public event EventHandler OnEventReceived;
 
         public EventQueue() {
-            queue = new ConcurrentQueue<Packet>();
+            queue = new ConcurrentQueue<EventPacket>();
         }
 
-        public void Push(Packet packet) {
+        public void Push(EventPacket packet) {
             queue.Enqueue(packet);
             OnEventReceived(this);
         }
-        public Packet Pop() {
-            Packet packet;
-            return (queue.TryDequeue(out packet)) ? packet : new Packet(null);
+        public EventPacket Pop() {
+            EventPacket packet;
+            return (queue.TryDequeue(out packet)) ? packet : new EventPacket();
         }
 
     }

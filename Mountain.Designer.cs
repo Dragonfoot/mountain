@@ -33,12 +33,11 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mobToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.questToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.Console = new System.Windows.Forms.ListBox();
@@ -48,15 +47,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.startServer = new System.Windows.Forms.Button();
-            this.userButton = new System.Windows.Forms.Button();
-            this.configButton = new System.Windows.Forms.Button();
-            this.mobToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.questToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +59,7 @@
             this.commandsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(849, 24);
+            this.menuStrip.Size = new System.Drawing.Size(762, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -134,72 +125,42 @@
             this.commandsToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.commandsToolStripMenuItem.Text = "Edit";
             // 
-            // panel3
+            // toolStripMenuItem3
             // 
-            this.panel3.Controls.Add(this.button2);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.button3);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Location = new System.Drawing.Point(629, 51);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(99, 171);
-            this.panel3.TabIndex = 9;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(103, 22);
+            this.toolStripMenuItem3.Text = "Area";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
-            // button2
+            // mobToolStripMenuItem
             // 
-            this.button2.Location = new System.Drawing.Point(11, 129);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.mobToolStripMenuItem.Name = "mobToolStripMenuItem";
+            this.mobToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.mobToolStripMenuItem.Text = "Mob";
             // 
-            // label1
+            // itemToolStripMenuItem
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Room";
+            this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
+            this.itemToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.itemToolStripMenuItem.Text = "Item";
             // 
-            // button1
+            // eventToolStripMenuItem
             // 
-            this.button1.Location = new System.Drawing.Point(11, 42);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Create";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.eventToolStripMenuItem.Name = "eventToolStripMenuItem";
+            this.eventToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.eventToolStripMenuItem.Text = "Event";
             // 
-            // button3
+            // questToolStripMenuItem
             // 
-            this.button3.Location = new System.Drawing.Point(11, 100);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Load";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(11, 71);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Clear";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.questToolStripMenuItem.Name = "questToolStripMenuItem";
+            this.questToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.questToolStripMenuItem.Text = "Quest";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.Console);
-            this.panel2.Location = new System.Drawing.Point(12, 36);
+            this.panel2.Location = new System.Drawing.Point(148, 39);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(596, 262);
             this.panel2.TabIndex = 2;
@@ -221,7 +182,7 @@
             // 
             // richTextBox
             // 
-            this.richTextBox.Location = new System.Drawing.Point(15, 317);
+            this.richTextBox.Location = new System.Drawing.Point(148, 310);
             this.richTextBox.Name = "richTextBox";
             this.richTextBox.Size = new System.Drawing.Size(593, 246);
             this.richTextBox.TabIndex = 10;
@@ -234,7 +195,7 @@
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.startServer);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox1.Location = new System.Drawing.Point(629, 317);
+            this.groupBox1.Location = new System.Drawing.Point(22, 39);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(99, 132);
             this.groupBox1.TabIndex = 11;
@@ -279,65 +240,11 @@
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.serverStart);
             // 
-            // userButton
-            // 
-            this.userButton.Location = new System.Drawing.Point(629, 240);
-            this.userButton.Name = "userButton";
-            this.userButton.Size = new System.Drawing.Size(99, 23);
-            this.userButton.TabIndex = 12;
-            this.userButton.Text = "Create User File";
-            this.userButton.UseVisualStyleBackColor = true;
-            this.userButton.Click += new System.EventHandler(this.userButton_Click);
-            // 
-            // configButton
-            // 
-            this.configButton.Location = new System.Drawing.Point(629, 269);
-            this.configButton.Name = "configButton";
-            this.configButton.Size = new System.Drawing.Size(99, 23);
-            this.configButton.TabIndex = 13;
-            this.configButton.Text = "Configuration";
-            this.configButton.UseVisualStyleBackColor = true;
-            this.configButton.Click += new System.EventHandler(this.configButton_Click);
-            // 
-            // mobToolStripMenuItem
-            // 
-            this.mobToolStripMenuItem.Name = "mobToolStripMenuItem";
-            this.mobToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.mobToolStripMenuItem.Text = "Mob";
-            // 
-            // itemToolStripMenuItem
-            // 
-            this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
-            this.itemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.itemToolStripMenuItem.Text = "Item";
-            // 
-            // eventToolStripMenuItem
-            // 
-            this.eventToolStripMenuItem.Name = "eventToolStripMenuItem";
-            this.eventToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.eventToolStripMenuItem.Text = "Event";
-            // 
-            // questToolStripMenuItem
-            // 
-            this.questToolStripMenuItem.Name = "questToolStripMenuItem";
-            this.questToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.questToolStripMenuItem.Text = "Quest";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem3.Text = "Area";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
-            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 568);
-            this.Controls.Add(this.configButton);
-            this.Controls.Add(this.userButton);
-            this.Controls.Add(this.panel3);
+            this.ClientSize = new System.Drawing.Size(762, 573);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.panel2);
@@ -348,8 +255,6 @@
             this.Text = "Mountain";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -371,20 +276,12 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListBox Console;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button startServer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button userButton;
-        private System.Windows.Forms.Button configButton;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;

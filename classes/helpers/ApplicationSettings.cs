@@ -53,7 +53,8 @@ namespace Mountain.classes.helpers {
         public void ConvertLoginToPlayer(Account user) {
             Login newUser = Logins.Find(x => x.ID == user.ID);
             if (newUser != null) {
-                Players.Add(new Player(newUser.ClientSocket, user)); // have player list trigger event on add/remove.
+                Player newPlayer = new Player(newUser.ClientSocket, user);
+                Players.Add(newPlayer); 
             }
         }
 
@@ -64,7 +65,7 @@ namespace Mountain.classes.helpers {
             }
             string file = WorldDirectory + "\\" + UsersXML;
            // if (!File.Exists(file)){  // remove exists check after debugging
-                XmlHelper.ReCreateUserXmlFile(file);
+                XmlHelper.ReCreateDefaultUserXmlFile(file);
            // }
         }
     }
