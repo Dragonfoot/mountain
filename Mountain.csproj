@@ -75,6 +75,7 @@
     <Compile Include="classes\helpers\Account.cs" />
     <Compile Include="classes\helpers\Build.cs" />
     <Compile Include="classes\helpers\CommandList.cs" />
+    <Compile Include="classes\helpers\CommunicationCommand.cs" />
     <Compile Include="classes\helpers\EventQueue.cs" />
     <Compile Include="classes\helpers\FormInterface.cs" />
     <Compile Include="classes\helpers\Functions.cs" />

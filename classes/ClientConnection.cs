@@ -53,7 +53,7 @@ namespace Mountain.classes {
         }
 
         protected void Send(string data, bool indent) {
-            if (indent) { data = data.Indent(Global.indent); }
+            if (indent) { data = data.Indent(); }
             byte[] byteData = Encoding.ASCII.GetBytes(data);
             state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
         }

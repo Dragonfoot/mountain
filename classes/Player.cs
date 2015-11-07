@@ -33,8 +33,8 @@ namespace Mountain.classes {
             EnemyMobs = new ConcurrentBag<Mob>();
             Equipment = new Equipment();
             Stats = new Stats();
-            Commands = new CommandList();
-            Send("Ready".Color(Ansi.yellow).NewLine(), true);
+            Commands = new CommandList(this);
+          //  Send("Ready".Color(Ansi.yellow).NewLine(), true);
         }
 
         public void OnPlayerMessageReceived(object myObject, string msg) {
@@ -46,12 +46,12 @@ namespace Mountain.classes {
                 string verb = message.FirstWord();
                 Send("I don't know what to do with \"".Color(Ansi.yellow) + verb.Color(Ansi.white) + "\" just yet.".Color(Ansi.yellow).NewLine(), true);
                 // string help = Commands.ShowVerbs(45).TrimStart(' ');
-                if (Commands.IsVerb(verb)) {
+                if (Commands.IsCommunicationVerb(verb)) {
                     Send("But, um.. I did a few minutes ago..\"scratch\"".Color(Ansi.yellow).NewLine(), true);
                 }
                 //return;
             }
-            // Commands.DoAction(packet.verb, packet);
+           // Commands.InvokeCommand(packet.verb, packet);
             string str = message.TrimStart(' ');
             str = str.StripExtraSpaces();
             string command = str.FirstWord();
@@ -84,7 +84,7 @@ namespace Mountain.classes {
             str = str.TrimStart(' ');
             str = str.StripExtraSpaces();
             string verb = str.FirstWord();
-            if (Commands.IsVerb(verb)) {
+            if (Commands.IsCommunicationVerb(verb)) {
                 string tail = str.StripFirstWord().ToLower();
                 VerbPacket packet = new VerbPacket(verb, tail, user);
                 return packet;

@@ -15,8 +15,11 @@ namespace Mountain.classes.helpers {
         public string FileName { get; set; }
         [XmlIgnore]
         public Guid ID { get; set; }
+        [XmlIgnore]
         public RoomID RoomID;
+        [XmlIgnore]
         public Room Room { get; set; }
+        [XmlIgnore]
         public Player Player { get; set; }
 
         public Account(Guid id) {

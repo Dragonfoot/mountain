@@ -33,7 +33,7 @@ namespace Mountain.classes.helpers {
         #region string extensions
 
         public static string StripNewLine(this string str) {
-            return Regex.Replace(str, @"\t|\n|\r", "");
+            return Regex.Replace(str, @"\n|\r", "");
         }
 
         public static bool IsYes(this string str) { // we will just check the first char to see if the intent was Yes
@@ -44,14 +44,11 @@ namespace Mountain.classes.helpers {
             return str + Environment.NewLine;
         }
 
-        public static string Indent(this string str, int size) { //  find ansi code for tab settings?
-            for (int i = 0; i <= size; i++) {
-                str = " " + str;
-            }
-            return str;
+        public static string Indent(this string str) { //  find ansi code for tab settings?           
+            return "\t" + str;
         }
 
-        public static string ToProper(this string str) { // make all words uppercase
+        public static string ToProper(this string str) { // make all words' first char uppercase
             TextInfo info = new CultureInfo("en-US", false).TextInfo;
             return info.ToTitleCase(str);
         }
@@ -61,7 +58,7 @@ namespace Mountain.classes.helpers {
             return float.TryParse(value, out result); // an error returns false
         }
 
-        public static bool IsNumberOnly(this string value, bool floatPoint) { // is it a string representation of a number
+        public static bool IsNumberOnly(this string value, bool floatPoint) { // string representation of a number?
             value = value.Trim();
             if (value.Length == 0) return false;
             foreach (char chr in value) {
@@ -81,14 +78,14 @@ namespace Mountain.classes.helpers {
             return str.ToProper().Replace(" ", string.Empty);
         }
 
-        public static string FirstWord(this string str) {
+        public static string FirstWord(this string str) { // gets the first word of a sentence
             str = str.TrimStart(' ');
             if (str.WordCount() > 1) {
                 return str.Substring(0, str.IndexOf(" "));
             }
             return str;
         }
-        public static string StripFirstWord(this string str) {
+        public static string StripFirstWord(this string str) { // returns all but the first word
             if (str.WordCount() > 1) {
                 return str.Substring(str.FirstWordLength()).Trim() ;
             }
@@ -100,8 +97,10 @@ namespace Mountain.classes.helpers {
             return words.Length;
         }
         public static int FirstWordLength(this string str) {
+            str = str.Trim();
             if (str.WordCount() > 1) {
                 string first =  str.Substring(0, str.IndexOf(" "));
+                first = first.Trim();
                 return first.Length;
             }
             return str.Length;
@@ -133,13 +132,13 @@ namespace Mountain.classes.helpers {
             StringBuilder buildLine = new StringBuilder("");
             foreach (var word in words) {
                 if (word.Length + buildLine.Length + 1 > width) { // check if have we exceeded line width
-                    lines.Append(buildLine.ToString().Indent(Global.indent).NewLine());
+                    lines.Append(buildLine.ToString().Indent().NewLine());
                     buildLine.Clear();
                 }
                 buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);  // remove space at start of new line
             }
             if (buildLine.Length > 0) { // finished loop, check for final words to include
-                lines.Append(buildLine.ToString().Indent(Global.indent).NewLine());
+                lines.Append(buildLine.ToString().Indent().NewLine());
             }
             return lines.ToString();
         }
