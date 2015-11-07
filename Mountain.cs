@@ -23,6 +23,7 @@ namespace Mountain {
         public Mountain() {
             settings = new ApplicationSettings(Messages);
             InitializeComponent();
+            Messages = new MessageQueue();
             this.Messages.OnMessageReceived += Messages_OnMessageReceived;
             world = BuildEmptyWorld();
             Console.Items.Add("Server has started");
@@ -59,11 +60,16 @@ namespace Mountain {
             if (world != null) { world = null; }
             world = new World(settings);
             world.Name = "Grumpy Mountain";
+            Area area = new Area();
+            area.Name = "Empty";
+            Room room = new Room("Empty");
+            area.Rooms.Add(room);
+            world.Areas.Add(area);
             return world;
         }
 
         private void areaForm_Button_Click(object sender, EventArgs e) { 
-            AreaForm areaForm = new AreaForm(world);
+            AreaForm areaForm = new AreaForm(world.Areas[0]);
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
 

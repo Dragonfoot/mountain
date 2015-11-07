@@ -41,19 +41,28 @@ namespace Mountain.classes {
             string message = messageQueue.Pop(); // pull the message
             if (message.IsNullOrWhiteSpace()) message = msg;
 
-            VerbPacket packet = Parse(message, UserAccount);
+            VerbPacket packet = null; // Parse(message, UserAccount);
             if (packet == null) {
                 string verb = message.FirstWord();
                 Send("I don't know what to do with \"".Color(Ansi.yellow) + verb.Color(Ansi.white) + "\" just yet.".Color(Ansi.yellow).NewLine(), true);
-                string help = Commands.ShowVerbs(45).TrimStart(' ');
-                Send("For now I recognize ".Color(Ansi.yellow) + help.Color(Ansi.white).NewLine(), true);
-                return;
+                // string help = Commands.ShowVerbs(45).TrimStart(' ');
+                if (Commands.IsVerb(verb)) {
+                    Send("But, um.. I did a few minutes ago..\"scratch\"".Color(Ansi.yellow).NewLine(), true);
+                }
+                //return;
             }
-            Commands.DoAction(packet.verb, packet);
-            string response = "\"" + packet.verb + "\" - " + packet.parameter;
+            // Commands.DoAction(packet.verb, packet);
+            string str = message.TrimStart(' ');
+            str = str.StripExtraSpaces();
+            string command = str.FirstWord();
+            string tail = str.StripFirstWord();
+                
+            string response = command + " \"" + tail.Trim() + "\"";
             Send(response.Color(Ansi.white).NewLine(), true);
         }
-
+        public new void Send(string msg, bool indent) {
+            base.Send(msg, indent);
+        }
         public void Shutdown() {
             Send("Shutting down now.".Color(Ansi.yellow), false);
             base.ClientSocket.Close();

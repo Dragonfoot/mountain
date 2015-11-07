@@ -15,19 +15,12 @@ namespace Mountain {
 
     public partial class AreaForm : Form {
         private ApplicationSettings settings;
-        private World world;
         private Area area;
 
-        public AreaForm(World world) {
+        public AreaForm(Area area) {
+            this.area = area;
             InitializeComponent();
             settings = new ApplicationSettings(null);
-            this.world = world;
-            area = new Area();
-            if (world.Areas.Count > 0) {
-                CreateDefaultArea();
-            } else {
-                CreateDefaultAdminArea();
-            }
             DisplayArea();
             RefreshRooms();
         }
@@ -36,6 +29,7 @@ namespace Mountain {
             areaGroupBox.Text = area.Name;
             areaDescriptionLabel.Text = area.Description;
         }
+
         private void RefreshRooms() {
             RoomListBox.Items.Clear();            
             if (area.Rooms.Count > 0) {
@@ -49,32 +43,11 @@ namespace Mountain {
            // if (File.Exists("path to area template folder.adminTemplate.xml"){
             //    area.Load("adminTemplate.xml");
             //} else {
-
-            area.Name = "Administration Complex";
-            area.Description = "One of this worlds extraordinary wonders. It houses top minds from all the major worlds within our galaxy. " +
-               "As well it houses the most advanced technological and military equipment available. All this in order to make this world " +
-               "the leader in vital galactic government growth and management.";
-
-            Room controlRoom = new Room();
-            controlRoom.SetName("Administration Control Center");
-            controlRoom.Description = "You see the nerve center of world operations unfold around you. Computer stations with white clad operators quietly " +
-                "talking into headsets while they adjust controls and relay information, in a long line of cubicles fading into the distance on your " +
-                "right. Radar and sonar sensors, routing maps and scheduling timers all glowing quietly above them. To your left are a long range of office " +
-                "doors with armed guards filtering and recording those wanting accessing to each. ";
-
-            Room TransitHub = CreateTransitHubRoom("Transit Hub", new RoomID(Guid.NewGuid(), "Transit Hub"));
-            Exit exit = new Exit();
-            exit.linkTo = controlRoom.RoomID;
-            exit.Name = "Control Room";
-            exit.linkTo.Name = "Control Room";            
-
-            controlRoom.AddExit(exit);
-            area.Rooms.Add(controlRoom);
-            area.Rooms.Add(TransitHub);
+            Area adminArea = Build.AdminArea();
         }
         
         private void CreateDefaultArea() {
-            area.Name = "Default New Area";
+         /*   area.Name = "Default New Area";
             Room areaHub = new Room();
             areaHub.SetName("Area Transit Room");
             areaHub.Description = "A hub station between Administration Control Center and area";
@@ -87,32 +60,24 @@ namespace Mountain {
 
             areaHub.AddExit(exit);
             area.Rooms.Add(areaHub);
-            area.Rooms.Add(TransitHub);
+            area.Rooms.Add(TransitHub);*/
         }
 
-        private Room CreateTransitHubRoom(string Name, RoomID roomId) {
-            Room hub = new Room(Name);
-            hub.Description = "Area's transit point to Administration Transit Hub";
 
-            Exit exit = new Exit();
-            exit.Name = "Control Center";
-            exit.linkTo.Name = "To Administration Control Center";
-            hub.Exits.Add(exit);
-            return hub;
-        }
-
-        private Room BuildRoom(string name, string description) {
-            Room room = new Room(name);
+        private Room BuildRoom(string name, string description) { // stub - move to static builder class in helpers
+           Room room = new Room(name); 
             room.Description = description;
             return room;
         }
 
+       private Exit BuildExit() { // stub - move to static builder class in helpers
+            Exit exit = new Exit();
+            return exit;
+       }
 
-       // private Exit BuildExit() {
-      //  }
-
-        private Room BuildVoid() {
-            string voidDesciption = "You find youself in an empty, silent and lonely place.";
+        private Room BuildVoid() { // stub - move to static builder class in helpers
+            string voidDesciption = "You find youself weightlessly floating in some kind of silent, lonely, dark, " +
+                "endless, and as many other voidy words there might be.. space.";
             Room room = BuildRoom("Void", voidDesciption);
             return room;
         }

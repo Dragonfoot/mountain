@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mountain));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,9 +48,12 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.startServer = new System.Windows.Forms.Button();
+            this.areaListBox = new System.Windows.Forms.ListBox();
+            this.worldBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.worldBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -59,7 +63,7 @@
             this.commandsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(762, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1000, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -240,11 +244,20 @@
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.serverStart);
             // 
+            // areaListBox
+            // 
+            this.areaListBox.FormattingEnabled = true;
+            this.areaListBox.Location = new System.Drawing.Point(775, 54);
+            this.areaListBox.Name = "areaListBox";
+            this.areaListBox.Size = new System.Drawing.Size(171, 498);
+            this.areaListBox.TabIndex = 12;
+            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(762, 573);
+            this.ClientSize = new System.Drawing.Size(1000, 573);
+            this.Controls.Add(this.areaListBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.panel2);
@@ -259,6 +272,7 @@
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.worldBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,6 +303,8 @@
         private System.Windows.Forms.ToolStripMenuItem itemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eventToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem questToolStripMenuItem;
-        }
+        private System.Windows.Forms.ListBox areaListBox;
+        private System.Windows.Forms.BindingSource worldBindingSource;
+    }
     }
 

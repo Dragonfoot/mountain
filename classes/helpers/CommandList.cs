@@ -42,22 +42,28 @@ namespace Mountain.classes.helpers {
         }
 
         private void Say(VerbPacket vp) {
-            vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
+         //   vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
+        //    vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
         }
         private void Tell(VerbPacket vp) {
-            throw new NotImplementedException();
+           // vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
+            // vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
         }
         private void Yell(VerbPacket vp) {
-            throw new NotImplementedException();
+          //  vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
+            //   vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
         }
         private void Talk(VerbPacket vp) {
-            throw new NotImplementedException();
+          //  vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
+            //   vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
         }
         private void Whisper(VerbPacket vp) {
-            throw new NotImplementedException();
+          //  vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
+            //   vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
         }
         private void Broadcast(VerbPacket vp) {
-            throw new NotImplementedException();
+            //vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
+            //   vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
         }
 
         public string ShowVerbs(int size) {

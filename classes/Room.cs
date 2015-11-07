@@ -13,14 +13,14 @@ namespace Mountain.classes {
 
     public class Room : Identity {
         [XmlIgnore]
-        public List<Mob> Mobs { get; set; }
+        public ConcurrentBag<Mob> Mobs { get; set; }
         [XmlIgnore]
         public ConcurrentBag<Item> Items { get; set; }
         [XmlIgnore]
         public List<Player> Players { get; set; }
-
+        [XmlIgnore]
         public RoomID RoomID;
-        [XmlArray("RoomExits")]
+        [XmlArray("Exits")]
         public List<Exit> Exits { get; set; }
         protected EventQueue Events;
         [XmlIgnore]
@@ -38,6 +38,12 @@ namespace Mountain.classes {
             SetName(name);
             Description = Name + " is a newly created room";
         }
+        public Room(string name, string description) {
+            InitializeRoom();
+            SetName(name);
+            Description = description;
+            RoomID = new RoomID(ID, Name);
+        }
         public void SetName(string name) {
             Name = name;
             this.RoomID.Name = name;
@@ -47,7 +53,7 @@ namespace Mountain.classes {
             ClassType = classType.room;
             Exits = new List<Exit>();
             Players = new List<Player>();
-            Mobs = new List<Mob>();
+            Mobs = new ConcurrentBag<Mob>();
             Items = new ConcurrentBag<Item>();
             Events = new EventQueue();
             Messages = new MessageQueue();

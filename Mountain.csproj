@@ -73,6 +73,7 @@
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\Equipment.cs" />
     <Compile Include="classes\helpers\Account.cs" />
+    <Compile Include="classes\helpers\Build.cs" />
     <Compile Include="classes\helpers\CommandList.cs" />
     <Compile Include="classes\helpers\EventQueue.cs" />
     <Compile Include="classes\helpers\FormInterface.cs" />
@@ -128,6 +129,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\DataSources\Mountain.classes.Room.datasource" />
+    <None Include="Properties\DataSources\Mountain.classes.World.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

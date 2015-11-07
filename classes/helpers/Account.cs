@@ -17,6 +17,7 @@ namespace Mountain.classes.helpers {
         public Guid ID { get; set; }
         public RoomID RoomID;
         public Room Room { get; set; }
+        public Player Player { get; set; }
 
         public Account(Guid id) {
             ID = id;
