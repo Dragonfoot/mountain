@@ -27,4 +27,6 @@
       - more complex citizenry.  don't want 90% of the area empty with just spawn camping
         ie: {area}{mob}{levelmin}{levelmax}{random%}
       - need function opposite of "lag detect".  if 5 commands received in 5 second, agro mob can stop the player type function
+(C/R) - address the need to compile for simple things as new commands, emotes, etc.
+        hard code base functions, grouping by command function.
 
