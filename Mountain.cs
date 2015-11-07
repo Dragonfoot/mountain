@@ -18,68 +18,31 @@ namespace Mountain {
     public partial class Mountain : Form {
         protected ApplicationSettings settings;
         protected MessageQueue Messages;
-        protected List<World> worlds;
         protected World world;
-        public Room room;
 
         public Mountain() {
             settings = new ApplicationSettings(Messages);
             InitializeComponent();
-            BuildWorld();
-
+            this.Messages.OnMessageReceived += Messages_OnMessageReceived;
+            world = BuildEmptyWorld();
             Console.Items.Add("Server has started");
         }
 
-        private void startToolStripMenuItem_Click(object sender, EventArgs e) {
-            // this.world.Start();
+        private void Messages_OnMessageReceived(object myObject, string msg) {
+            string message = Messages.Pop();
+            if (message==null)  message = msg;
+            Console.Items.Add(message);
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void exitProgram_ToolStripMenuItem_Click(object sender, EventArgs e) {
             Close();
             //this.world.Save(string.Empty);
         }
-
-        // room testing
-        private void button1_Click(object sender, EventArgs e) {
-            // create room
-            if (this.room != null) {this.room = null;}
-            this.room = new Room();
-            Exit exit = new Exit();
-            exit.Name = "South";
-            room.AddExit(exit);
-            exit = new Exit();
-            exit.Name = "East";
-            room.AddExit(exit);
-            Mob mob = new Mob();
-            mob.Name = "farmerClive";
-            room.AddMob(mob);
-            mob = new Mob();
-            mob.Name = "bullyboy";
-            room.AddMob(mob);
-
-            button5_Click(this, e); // look at room
-        }
-
-        private void button4_Click(object sender, EventArgs e) {
-            //destroy room
-            this.room = null;
-            Console.DataSource = null;
-            Console.Items.Clear();
-        }
-
-        private void button5_Click(object sender, EventArgs e) {
-            // look at room
-            if (this.room != null) {
-                Console.DataSource = null;
-                Console.Items.Clear();
-                Console.Items.AddRange(this.room.View());
-            }
-        }
-
+        
         private void serverStart(object sender, EventArgs e) { // start
             //create world and start listener
             if (world == null) {
-                world = BuildWorld();
+                world = BuildEmptyWorld();
                 Console.Items.Add("Server has started");
             } else {
                 Console.Items.Add("Server is already running");
@@ -89,61 +52,17 @@ namespace Mountain {
         private void button6_Click(object sender, EventArgs e) { //stop server
         //    world.Shutdown();
          //   world = null;
-            Console.Items.Add("Shutdown not implemented yet");
+            Console.Items.Add("Shutdown not implemented yet"); // settings.players needs each player to disconnect/save
         }
 
-        private World BuildWorld() {
+        private World BuildEmptyWorld() {
             if (world != null) { world = null; }
             world = new World(settings);
             world.Name = "Grumpy Mountain";
             return world;
         }
 
-        private void button3_Click(object sender, EventArgs e) {
-        }
-        private void button2_Click(object sender, EventArgs e) {
-            if (this.room != null) {
-                richTextBox.AppendText(this.room.SaveXML());
-            }
-        }
-        private string viewXml(object item) {
-            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
-            var serializer = new XmlSerializer(item.GetType());
-            var settings = new XmlWriterSettings();
-            settings.Indent = true;
-            settings.OmitXmlDeclaration = true;
-            using (var stream = new StringWriter())
-            using (var writer = XmlWriter.Create(stream, settings)) {
-                serializer.Serialize(writer, item, emptyNamepsaces);
-                return stream.ToString();
-            }
-        }
-        private void CreateUserFile() {
-            XDocument d = new XDocument(
-                new XElement("Users",
-                new XElement("User",
-                new XElement("Name", "admin"),
-                new XElement("Password", "password")
-                ))
-                );
-           // d.Declaration = new XDeclaration("1.0", "utf-8", "true");
-
-         //   d.Save("test.xml");
-            richTextBox.Clear();
-            richTextBox.AppendText(d.ToString());
-        }
-    
-
-        private void userButton_Click(object sender, EventArgs e) {
-           // CreateUserFile();
-        }
-
-        private void configButton_Click(object sender, EventArgs e) {
-            richTextBox.Clear();
-            richTextBox.AppendText(settings.AppDirectory);
-        }
-
-        private void toolStripMenuItem3_Click(object sender, EventArgs e) {  //edit area
+        private void areaForm_Button_Click(object sender, EventArgs e) { 
             AreaForm areaForm = new AreaForm(world);
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {

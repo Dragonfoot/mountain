@@ -111,7 +111,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitProgram_ToolStripMenuItem_Click);
             // 
             // commandsToolStripMenuItem
             // 
@@ -130,7 +130,7 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(103, 22);
             this.toolStripMenuItem3.Text = "Area";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.areaForm_Button_Click);
             // 
             // mobToolStripMenuItem
             // 

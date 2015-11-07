@@ -101,6 +101,27 @@ namespace Mountain {
             return hub;
         }
 
+        private Room BuildRoom(string name, string description) {
+            Room room = new Room(name);
+            room.Description = description;
+            return room;
+        }
+
+
+       // private Exit BuildExit() {
+      //  }
+
+        private Room BuildVoid() {
+            string voidDesciption = "You find youself in an empty, silent and lonely place.";
+            Room room = BuildRoom("Void", voidDesciption);
+            return room;
+        }
+
+
+
+
+
+
         private void ok_Button_Click(object sender, EventArgs e) {
 
         }
