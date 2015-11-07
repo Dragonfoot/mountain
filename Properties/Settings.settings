@@ -5,32 +5,50 @@
     <Setting Name="RegisteredAccounts" Type="System.String" Scope="Application">
       <Value Profile="(Default)">users.xml</Value>
     </Setting>
-    <Setting Name="WorldDirectory" Type="System.String" Scope="Application">
+    <Setting Name="WorldsDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">worlds</Value>
     </Setting>
     <Setting Name="LastSavedWorld" Type="System.String" Scope="User">
       <Value Profile="(Default)">""</Value>
     </Setting>
     <Setting Name="TemplateDirectory" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">build/templates</Value>
+      <Value Profile="(Default)">templates</Value>
     </Setting>
-    <Setting Name="AreaDirectory" Type="System.String" Scope="Application">
+    <Setting Name="AreaBuildDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">build/area</Value>
     </Setting>
-    <Setting Name="RoomDirectory" Type="System.String" Scope="Application">
+    <Setting Name="RoomBuildDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">build/room</Value>
     </Setting>
-    <Setting Name="ExitDirectory" Type="System.String" Scope="Application">
+    <Setting Name="ExitBuildDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">build/exit</Value>
     </Setting>
     <Setting Name="LastLoadedWorld" Type="System.String" Scope="User">
       <Value Profile="(Default)">""</Value>
     </Setting>
-    <Setting Name="ItemDirectory" Type="System.String" Scope="Application">
+    <Setting Name="ItemBuildDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">build/item</Value>
     </Setting>
-    <Setting Name="BuildDirectory" Type="System.String" Scope="User">
+    <Setting Name="BuildDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">build</Value>
+    </Setting>
+    <Setting Name="WorldBuildDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">build/world</Value>
+    </Setting>
+    <Setting Name="WorldTemplateDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">templates/world</Value>
+    </Setting>
+    <Setting Name="AreaTemplateDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">templates/area</Value>
+    </Setting>
+    <Setting Name="RoomTemplateDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">templates/room</Value>
+    </Setting>
+    <Setting Name="ItemTemplateDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">templates/item</Value>
+    </Setting>
+    <Setting Name="ExitTemplateDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">templates/exit</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -12,7 +12,7 @@ namespace Mountain.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -35,9 +35,9 @@ namespace Mountain.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("worlds")]
-        public string WorldDirectory {
+        public string WorldsDirectory {
             get {
-                return ((string)(this["WorldDirectory"]));
+                return ((string)(this["WorldsDirectory"]));
             }
         }
         
@@ -55,7 +55,7 @@ namespace Mountain.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("build/templates")]
+        [global::System.Configuration.DefaultSettingValueAttribute("templates")]
         public string TemplateDirectory {
             get {
                 return ((string)(this["TemplateDirectory"]));
@@ -65,27 +65,27 @@ namespace Mountain.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("build/area")]
-        public string AreaDirectory {
+        public string AreaBuildDirectory {
             get {
-                return ((string)(this["AreaDirectory"]));
+                return ((string)(this["AreaBuildDirectory"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("build/room")]
-        public string RoomDirectory {
+        public string RoomBuildDirectory {
             get {
-                return ((string)(this["RoomDirectory"]));
+                return ((string)(this["RoomBuildDirectory"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("build/exit")]
-        public string ExitDirectory {
+        public string ExitBuildDirectory {
             get {
-                return ((string)(this["ExitDirectory"]));
+                return ((string)(this["ExitBuildDirectory"]));
             }
         }
         
@@ -104,21 +104,72 @@ namespace Mountain.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("build/item")]
-        public string ItemDirectory {
+        public string ItemBuildDirectory {
             get {
-                return ((string)(this["ItemDirectory"]));
+                return ((string)(this["ItemBuildDirectory"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("build")]
         public string BuildDirectory {
             get {
                 return ((string)(this["BuildDirectory"]));
             }
-            set {
-                this["BuildDirectory"] = value;
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("build/world")]
+        public string WorldBuildDirectory {
+            get {
+                return ((string)(this["WorldBuildDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("templates/world")]
+        public string WorldTemplateDirectory {
+            get {
+                return ((string)(this["WorldTemplateDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("templates/area")]
+        public string AreaTemplateDirectory {
+            get {
+                return ((string)(this["AreaTemplateDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("templates/room")]
+        public string RoomTemplateDirectory {
+            get {
+                return ((string)(this["RoomTemplateDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("templates/item")]
+        public string ItemTemplateDirectory {
+            get {
+                return ((string)(this["ItemTemplateDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("templates/exit")]
+        public string ExitTemplateDirectory {
+            get {
+                return ((string)(this["ExitTemplateDirectory"]));
             }
         }
     }
