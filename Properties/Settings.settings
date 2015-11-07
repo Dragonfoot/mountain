@@ -2,14 +2,35 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Mountain.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Setting" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="UserFile" Type="System.String" Scope="Application">
+    <Setting Name="RegisteredAccounts" Type="System.String" Scope="Application">
       <Value Profile="(Default)">users.xml</Value>
     </Setting>
     <Setting Name="WorldDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">worlds</Value>
+    </Setting>
+    <Setting Name="LastSavedWorld" Type="System.String" Scope="User">
+      <Value Profile="(Default)">""</Value>
+    </Setting>
+    <Setting Name="TemplateDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">build/templates</Value>
+    </Setting>
+    <Setting Name="AreaDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">build/area</Value>
+    </Setting>
+    <Setting Name="RoomDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">build/room</Value>
+    </Setting>
+    <Setting Name="ExitDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">build/exit</Value>
+    </Setting>
+    <Setting Name="LastLoadedWorld" Type="System.String" Scope="User">
+      <Value Profile="(Default)">""</Value>
+    </Setting>
+    <Setting Name="ItemDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">build/item</Value>
+    </Setting>
+    <Setting Name="BuildDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">build</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -16,6 +16,7 @@ namespace Mountain.classes {
         protected Stats Stats { get; set; }
         protected Equipment Equipment { get; set; }
         protected CommandList Commands { get; set; }
+        public Room Room { get; set; }
         public RoomID RoomID { get; set; }
         public Account UserAccount { get; set; }
         public string Nick { get; set; }
@@ -48,6 +49,7 @@ namespace Mountain.classes {
                 Send("For now I recognize ".Color(Ansi.yellow) + help.Color(Ansi.white).NewLine(), true);
                 return;
             }
+            Commands.DoAction(packet.verb, packet);
             string response = "\"" + packet.verb + "\" - " + packet.parameter;
             Send(response.Color(Ansi.white).NewLine(), true);
         }
@@ -57,9 +59,10 @@ namespace Mountain.classes {
             base.ClientSocket.Close();
             Save();
         }
-        private void SetRoom(RoomID id) {
-            RoomID = id;
-            UserAccount.RoomID = id;
+        private void SetRoom(Room room) {
+            Room = room;
+            UserAccount.RoomID = room.RoomID;
+            UserAccount.Room = room;
         }
         protected virtual void Save() {
             //throw new NotImplementedException();

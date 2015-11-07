@@ -17,14 +17,16 @@ namespace Mountain {
 
     public partial class Mountain : Form {
         protected ApplicationSettings settings;
+        protected MessageQueue Messages;
         protected List<World> worlds;
         protected World world;
         public Room room;
 
         public Mountain() {
-            settings = new ApplicationSettings();
+            settings = new ApplicationSettings(Messages);
             InitializeComponent();
             BuildWorld();
+
             Console.Items.Add("Server has started");
         }
 

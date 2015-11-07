@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Mountain.classes.helpers;
@@ -9,21 +10,25 @@ using Mountain.classes.helpers;
 namespace Mountain.classes {
 
     public class World : Identity {
-        public ConcurrentBag<Area> Areas;
+        [XmlArray("Areas")]
+        public List<Area> Areas;
+        [XmlIgnore]
         public ApplicationSettings settings;
         protected ListBox Console;
         protected TcpServer portListener;
-    //    protected Task heart;
-        protected bool heartStop;
         private CancellationTokenSource cancellationTokenSource;
 
         public World(ApplicationSettings appSettings) {
             InitializeSettings(appSettings);
-            Areas = new ConcurrentBag<Area>();
-            heartStop = false;
+            Areas = new List<Area>();
             portListener = new TcpServer(this, appSettings);
             portListener.StartServer(8090);
-            Load("get configuration file world to use");
+            string lastworld = settings.LastSavedWorld;
+            if (lastworld.IsNullOrWhiteSpace()) {
+                Load("default world");
+            } else {
+                Load(lastworld);
+            }
          //   StartHeart(); // activate world
         }
 
@@ -55,7 +60,7 @@ namespace Mountain.classes {
             portListener.StopServer();
         }
 
-        public void Load(string world) {
+        public void Load(string world) { 
             if (!world.IsNullOrWhiteSpace()) {
             } else {
                 CreateDefaultWorld();

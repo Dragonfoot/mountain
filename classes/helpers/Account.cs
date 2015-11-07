@@ -16,6 +16,7 @@ namespace Mountain.classes.helpers {
         [XmlIgnore]
         public Guid ID { get; set; }
         public RoomID RoomID;
+        public Room Room { get; set; }
 
         public Account(Guid id) {
             ID = id;

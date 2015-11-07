@@ -33,9 +33,16 @@ namespace Mountain.classes.helpers {
         public bool IsVerb(string verb) {
             return communicationKeys.Any(key => key.StartsWith(verb));
         }
+        public void DoAction(string verb, VerbPacket packet) {
+            foreach (var cmd in CommunicationVerbs) {
+                if (cmd.Key.Equals(verb)) {
+                    cmd.Value.Invoke(packet);
+                }
+            }
+        }
 
         private void Say(VerbPacket vp) {
-            throw new NotImplementedException();
+            vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
         }
         private void Tell(VerbPacket vp) {
             throw new NotImplementedException();

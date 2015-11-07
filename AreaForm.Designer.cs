@@ -29,7 +29,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.areaGroupBox = new System.Windows.Forms.GroupBox();
+            this.areaDescriptionLabel = new System.Windows.Forms.Label();
             this.areaNameTextBox = new System.Windows.Forms.TextBox();
+            this.areaDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.RoomListBox = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.areaMenuStrip = new System.Windows.Forms.MenuStrip();
@@ -38,8 +40,7 @@
             this.loadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.areaDescriptionLabel = new System.Windows.Forms.Label();
-            this.areaDescriptionTextBox = new System.Windows.Forms.TextBox();
+            this.saveAreaFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.areaGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -106,6 +107,15 @@
             this.areaGroupBox.Text = "Area";
             this.areaGroupBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.areaGroupBox_MouseClick);
             // 
+            // areaDescriptionLabel
+            // 
+            this.areaDescriptionLabel.Location = new System.Drawing.Point(6, 19);
+            this.areaDescriptionLabel.Name = "areaDescriptionLabel";
+            this.areaDescriptionLabel.Size = new System.Drawing.Size(401, 78);
+            this.areaDescriptionLabel.TabIndex = 3;
+            this.areaDescriptionLabel.Text = "areaDescriptonLabel";
+            this.areaDescriptionLabel.Click += new System.EventHandler(this.descriptionLabel_Click);
+            // 
             // areaNameTextBox
             // 
             this.areaNameTextBox.Location = new System.Drawing.Point(0, 0);
@@ -115,6 +125,18 @@
             this.areaNameTextBox.Visible = false;
             this.areaNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areaNameTextBox_KeyPress);
             this.areaNameTextBox.LostFocus += new System.EventHandler(this.areaNameTextBox_Lost_Focus);
+            // 
+            // areaDescriptionTextBox
+            // 
+            this.areaDescriptionTextBox.Location = new System.Drawing.Point(6, 19);
+            this.areaDescriptionTextBox.Multiline = true;
+            this.areaDescriptionTextBox.Name = "areaDescriptionTextBox";
+            this.areaDescriptionTextBox.Size = new System.Drawing.Size(401, 78);
+            this.areaDescriptionTextBox.TabIndex = 2;
+            this.areaDescriptionTextBox.Text = "Area Description";
+            this.areaDescriptionTextBox.Visible = false;
+            this.areaDescriptionTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areaDescriptionTextBox_KeyPress);
+            this.areaDescriptionTextBox.LostFocus += new System.EventHandler(this.areaDescriptionTextBox_Lost_Focus);
             // 
             // RoomListBox
             // 
@@ -175,6 +197,7 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsTemplateToolStripMenuItem
             // 
@@ -182,26 +205,11 @@
             this.saveAsTemplateToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveAsTemplateToolStripMenuItem.Text = "Save toTemplate";
             // 
-            // areaDescriptionLabel
+            // saveAreaFileDialog
             // 
-            this.areaDescriptionLabel.Location = new System.Drawing.Point(6, 19);
-            this.areaDescriptionLabel.Name = "areaDescriptionLabel";
-            this.areaDescriptionLabel.Size = new System.Drawing.Size(401, 78);
-            this.areaDescriptionLabel.TabIndex = 3;
-            this.areaDescriptionLabel.Text = "areaDescriptonLabel";
-            this.areaDescriptionLabel.Click += new System.EventHandler(this.descriptionLabel_Click);
-            // 
-            // areaDescriptionTextBox
-            // 
-            this.areaDescriptionTextBox.Location = new System.Drawing.Point(6, 19);
-            this.areaDescriptionTextBox.Multiline = true;
-            this.areaDescriptionTextBox.Name = "areaDescriptionTextBox";
-            this.areaDescriptionTextBox.Size = new System.Drawing.Size(401, 78);
-            this.areaDescriptionTextBox.TabIndex = 2;
-            this.areaDescriptionTextBox.Text = "Area Description";
-            this.areaDescriptionTextBox.Visible = false;
-            this.areaDescriptionTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.areaDescriptionTextBox_KeyPress);
-            this.areaDescriptionTextBox.LostFocus += new System.EventHandler(this.areaDescriptionTextBox_Lost_Focus);
+            this.saveAreaFileDialog.DefaultExt = "xml";
+            this.saveAreaFileDialog.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*\"";
+            this.saveAreaFileDialog.Title = "Save Area";
             // 
             // AreaForm
             // 
@@ -248,6 +256,7 @@
         private System.Windows.Forms.TextBox areaNameTextBox;
         private System.Windows.Forms.Label areaDescriptionLabel;
         private System.Windows.Forms.TextBox areaDescriptionTextBox;
+        private System.Windows.Forms.SaveFileDialog saveAreaFileDialog;
 
     }
 }

@@ -42,7 +42,7 @@ namespace Mountain.classes.helpers {
             Account adminUser = new Account(Guid.NewGuid());
             adminUser.SetName("Admin");
             adminUser.SetPassword("Admin");
-            adminUser.Email = "Admin@com";
+            adminUser.Email = "Admin@thisserver.com";
             adminUser.FileName = adminUser.Name + ".xml";
             adminUser.Administrator = true;
             users.List.Add(adminUser);

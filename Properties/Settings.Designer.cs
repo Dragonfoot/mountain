@@ -25,19 +25,10 @@ namespace Mountain.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting {
-            get {
-                return ((string)(this["Setting"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("users.xml")]
-        public string UserFile {
+        public string RegisteredAccounts {
             get {
-                return ((string)(this["UserFile"]));
+                return ((string)(this["RegisteredAccounts"]));
             }
         }
         
@@ -47,6 +38,87 @@ namespace Mountain.Properties {
         public string WorldDirectory {
             get {
                 return ((string)(this["WorldDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        public string LastSavedWorld {
+            get {
+                return ((string)(this["LastSavedWorld"]));
+            }
+            set {
+                this["LastSavedWorld"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("build/templates")]
+        public string TemplateDirectory {
+            get {
+                return ((string)(this["TemplateDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("build/area")]
+        public string AreaDirectory {
+            get {
+                return ((string)(this["AreaDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("build/room")]
+        public string RoomDirectory {
+            get {
+                return ((string)(this["RoomDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("build/exit")]
+        public string ExitDirectory {
+            get {
+                return ((string)(this["ExitDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        public string LastLoadedWorld {
+            get {
+                return ((string)(this["LastLoadedWorld"]));
+            }
+            set {
+                this["LastLoadedWorld"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("build/item")]
+        public string ItemDirectory {
+            get {
+                return ((string)(this["ItemDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("build")]
+        public string BuildDirectory {
+            get {
+                return ((string)(this["BuildDirectory"]));
+            }
+            set {
+                this["BuildDirectory"] = value;
             }
         }
     }

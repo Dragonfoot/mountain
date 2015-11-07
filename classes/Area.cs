@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Mountain.classes {
 
     public class Area : Identity {
         private CancellationTokenSource cancellationTokenSource;
-        public ConcurrentBag<Room> Rooms { get; private set; }
+        [XmlArray("Rooms")]
+        public List<Room> Rooms { get; private set; }
         public bool Active { get; set; }
 
         public Area() {
             Name = "new area";
             Description = "new area";
             cancellationTokenSource = new CancellationTokenSource();
-            Rooms = new ConcurrentBag<Room>();
+            Rooms = new List<Room>();
         }
         public Area(string name, string description, Guid id) {
             Name = name;
@@ -23,6 +25,9 @@ namespace Mountain.classes {
             ID = id;
         }
 
+        public void AddRoom(Room room) {
+            Rooms.Add(room);
+        }
 
         public void Load(string filename) {
             throw new NotImplementedException("Area Load (filename)");

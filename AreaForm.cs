@@ -14,11 +14,13 @@ using Mountain.classes.helpers;
 namespace Mountain {
 
     public partial class AreaForm : Form {
+        private ApplicationSettings settings;
         private World world;
         private Area area;
 
         public AreaForm(World world) {
             InitializeComponent();
+            settings = new ApplicationSettings(null);
             this.world = world;
             area = new Area();
             if (world.Areas.Count > 0) {
@@ -41,9 +43,7 @@ namespace Mountain {
                     RoomListBox.Items.Add(room.Name);
                 }
             }
-        }
-
-         
+        }  
 
         private void CreateDefaultAdminArea() {
            // if (File.Exists("path to area template folder.adminTemplate.xml"){
@@ -56,17 +56,17 @@ namespace Mountain {
                "the leader in vital galactic government growth and management.";
 
             Room controlRoom = new Room();
-            controlRoom.Name = "Administration Control Center";
+            controlRoom.SetName("Administration Control Center");
             controlRoom.Description = "You see the nerve center of world operations unfold around you. Computer stations with white clad operators quietly " +
                 "talking into headsets while they adjust controls and relay information, in a long line of cubicles fading into the distance on your " +
                 "right. Radar and sonar sensors, routing maps and scheduling timers all glowing quietly above them. To your left are a long range of office " +
                 "doors with armed guards filtering and recording those wanting accessing to each. ";
 
-            Room TransitHub = CreateTransitHubRoom(controlRoom.Name + " transit station", controlRoom.RoomID);
+            Room TransitHub = CreateTransitHubRoom("Transit Hub", new RoomID(Guid.NewGuid(), "Transit Hub"));
             Exit exit = new Exit();
-            exit.link = TransitHub.RoomID;
-            exit.Name = "Transit Hub";
-            exit.link.Name = "To World Areas";            
+            exit.linkTo = controlRoom.RoomID;
+            exit.Name = "Control Room";
+            exit.linkTo.Name = "Control Room";            
 
             controlRoom.AddExit(exit);
             area.Rooms.Add(controlRoom);
@@ -76,14 +76,14 @@ namespace Mountain {
         private void CreateDefaultArea() {
             area.Name = "Default New Area";
             Room areaHub = new Room();
-            areaHub.Name = "Area Transit Room";
+            areaHub.SetName("Area Transit Room");
             areaHub.Description = "A hub station between Administration Control Center and area";
 
-            Room TransitHub = CreateTransitHubRoom(areaHub.Name + " transit station", areaHub.RoomID);
+            Room TransitHub = CreateTransitHubRoom("Transit Hub", new RoomID(Guid.NewGuid(), "Transit Hub"));
             Exit exit = new Exit();
-            exit.link = TransitHub.RoomID;
-            exit.Name = "Transit Hub";
-            exit.link.Name = "To World Areas";
+            exit.linkTo = areaHub.RoomID;
+            exit.Name = "Central";
+            exit.linkTo.Name = "To Area Hub";
 
             areaHub.AddExit(exit);
             area.Rooms.Add(areaHub);
@@ -96,7 +96,7 @@ namespace Mountain {
 
             Exit exit = new Exit();
             exit.Name = "Control Center";
-            exit.link.Name = "To Administration Control Center";
+            exit.linkTo.Name = "To Administration Control Center";
             hub.Exits.Add(exit);
             return hub;
         }
@@ -109,7 +109,13 @@ namespace Mountain {
             this.ok_Button_Click(this, e);
         }
 
-       
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+            saveAreaFileDialog.InitialDirectory = settings.BaseDirectory;
+            if (saveAreaFileDialog.ShowDialog() == DialogResult.OK) {
+                XmlHelper.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName);
+            }
+        }
 
         private void areaNameTextBox_KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar == (char)13) {
@@ -155,5 +161,6 @@ namespace Mountain {
             }
 
         }
+
     }
 }
