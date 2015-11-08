@@ -65,15 +65,14 @@ namespace Mountain.classes {
             if (message == null) message = packet;
             switch (packet.verb) {
                 case "say":
-                    if (!packet.parameter.HasLastCharPunctuation()) { packet.parameter += "."; }
-                    foreach (Player player in Players) {
-                        if (player.Name == packet.player.Name) {
-                            player.Send("You say, \"" + packet.parameter + "\"".NewLine().Color(Ansi.white), true);
-                        }
-                        else {
-                            player.Send(packet.player.Name + " says, \"" + packet.parameter + "\"".NewLine().Color(Ansi.white), true);
-                        }
-                    }
+                    break;
+                case "yell":
+                    break;
+                case "shout":
+                    break;
+                case "whisper":
+                    break;
+                case "look":
                     break;
             }
         }        

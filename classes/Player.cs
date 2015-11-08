@@ -46,9 +46,8 @@ namespace Mountain.classes {
         }
 
         public void OnPlayerMessageReceived(object myObject, string msg) {
-            string message = messageQueue.Pop(); // pull the message
+            string message = messageQueue.Pop(); 
             if (message.IsNullOrWhiteSpace()) message = msg;
-
             VerbPacket packet = Parse(message, this);
             if (packet == null) {
                 string verb = message.FirstWord();
@@ -61,33 +60,38 @@ namespace Mountain.classes {
                 str = str.StripExtraSpaces();
                 string command = str.FirstWord();
                 string tail = str.StripFirstWord();
-
                 string response = command + " \"" + tail.Trim() + "\"";
                 Send(response.Color(Ansi.cyan).NewLine(), true);
                 return;
             }
             Commands.InvokeCommand(packet.verb, packet);
         }
+
         public new void Send(string msg, bool indent) {
             base.Send(msg, indent);
         }
+
         public void Shutdown() {
             Send("Shutting down now.".Color(Ansi.yellow), false);
             base.ClientSocket.Close();
             Save();
         }
+
         private void SetRoom(Room room) {
             Room = room;
             UserAccount.RoomID = room.RoomID;
             UserAccount.Room = room;
         }
+
         protected virtual void Save() {
             //throw new NotImplementedException();
         }
+
         protected virtual bool Load() {
             //throw new NotImplementedException();            
             return false;
         }
+
         private VerbPacket Parse(string str, Player player) {
             string verb, tail = string.Empty;
             str = str.TrimStart(' ');
