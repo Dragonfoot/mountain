@@ -19,8 +19,10 @@ namespace Mountain.classes.helpers {
 
         private void LoadCommands() {
             Communications = new CommunicationCommands();
-        }        
-
+        }
+        public void InvokeCommand(string verb, VerbPacket packet) {
+            Communications.InvokeCommand(verb, packet);
+        }
         public bool DoCommand(string verb, VerbPacket vp, Dictionary<string, Action<VerbPacket>> dictionary) {
             return false;
         }

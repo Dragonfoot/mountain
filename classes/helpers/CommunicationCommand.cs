@@ -14,8 +14,8 @@ namespace Mountain.classes.helpers {
             LoadCommunications();
         }
         private void LoadCommunications() {
-            List = new Dictionary<string, Action<VerbPacket>>()
-              {
+            List = new Dictionary<string, Action<VerbPacket>>(){
+                {"'", Say },
                 {"say", Say},
                 {"tell", Tell},
                 {"yell", Yell},
@@ -23,10 +23,13 @@ namespace Mountain.classes.helpers {
                 {"talk", Talk},
                 {"whisper", Whisper},
                 {"broadcast", Broadcast}
-              };
+            };
             Keys = new List<string>(List.Keys);
         }
 
+        public bool IsVerb(string verb) {
+            return Keys.Any(key => key.StartsWith(verb));
+        }
         public string ShowCommands(int size) {
             string helplist = string.Join(", ", Keys.ToArray());
             return helplist.WordWrap(size);
@@ -40,8 +43,12 @@ namespace Mountain.classes.helpers {
         }
 
         private void Say(VerbPacket packet) {
-            //   vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
-            //    vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
+            PlayerEventPacket ePacket = new PlayerEventPacket(packet.verb, packet.parameter, packet.player);
+            try {
+                packet.player.Room.Messages.Push(ePacket);
+            } catch (Exception e) {
+                // Handle all other exceptions
+            }
         }
         private void Shout(VerbPacket packet) {
             //   vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);

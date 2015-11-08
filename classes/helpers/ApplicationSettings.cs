@@ -18,6 +18,7 @@ namespace Mountain.classes.helpers {
         public List<Account> RegisteredUsers { get; set; }
         public List<Login> Logins { get; set; }
         public Players Players { get; set; }
+        public Room Void { get; set; }
         public string AppDirectory { get; private set; }
         public string BaseDirectory { get { return AppDirectory + Settings.Default.WorldsDirectory; } }
         public string RegisteredUsersAccounts { get { return Settings.Default.RegisteredAccounts; } }
@@ -72,7 +73,8 @@ namespace Mountain.classes.helpers {
             if (newUser != null) {
                 Player newPlayer = new Player(newUser.ClientSocket, user);
                 Players.Add(newPlayer);
-                // add player to room once we have a default world to work in
+                newPlayer.Room = Void;
+                Void.AddPlayer(newPlayer);
             }
         }
 
@@ -91,7 +93,9 @@ namespace Mountain.classes.helpers {
             if (!Directory.Exists(ExitTemplateDirectory)) { Directory.CreateDirectory(ExitTemplateDirectory); }
             if (!Directory.Exists(ItemTemplateDirectory)) { Directory.CreateDirectory(ItemTemplateDirectory); }
             string file = BaseDirectory + "\\" + RegisteredUsersAccounts;
-            if (!File.Exists(file)) { XmlHelper.ReCreateDefaultUserXmlFile(file); }
+         //   if (!File.Exists(file)) {
+                XmlHelper.ReCreateDefaultUserXmlFile(file);
+          //  }
         }
     }
 

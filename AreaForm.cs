@@ -15,7 +15,7 @@ namespace Mountain {
 
     public partial class AreaForm : Form {
         private ApplicationSettings settings;
-        private Area area;
+        public Area area;
 
         public AreaForm(Area area) {
             this.area = area;
@@ -43,7 +43,9 @@ namespace Mountain {
            // if (File.Exists("path to area template folder.adminTemplate.xml"){
             //    area.Load("adminTemplate.xml");
             //} else {
-            Area adminArea = Build.AdminArea();
+            area = Build.AdminArea();
+            DisplayArea();
+            RefreshRooms();
         }
         
         private void CreateDefaultArea() {
@@ -148,5 +150,9 @@ namespace Mountain {
 
         }
 
+        private void newToolStripMenuItem_Click(object sender, EventArgs e) {
+            CreateDefaultAdminArea();
+            RefreshRooms();
+        }
     }
 }

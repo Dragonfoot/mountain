@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Data;
+using System.Linq;
 using System.Xml.Linq;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -59,20 +60,18 @@ namespace Mountain {
         private World BuildEmptyWorld() {
             if (world != null) { world = null; }
             world = new World(settings);
-            world.Name = "Grumpy Mountain";
-            Area area = new Area();
-            area.Name = "Empty";
-            Room room = new Room("Empty");
-            area.Rooms.Add(room);
-            world.Areas.Add(area);
+            world.Name = "Mountain";
             return world;
         }
 
         private void areaForm_Button_Click(object sender, EventArgs e) { 
-            AreaForm areaForm = new AreaForm(world.Areas[0]);
+            AreaForm areaForm = new AreaForm(new Area());
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-
+                world.Areas.Add(areaForm.area);
+                world.settings.Void = areaForm.area.Rooms.Find(room => room.Name == "Void");                
+                areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
+                areaListBox.SelectedIndex = 0;
             } else {
                 if (dialogresult == DialogResult.Cancel) {
 
@@ -81,5 +80,11 @@ namespace Mountain {
             areaForm.Dispose();
         }
 
+        private void areaListBox_SelectedIndexChanged(object sender, EventArgs e) {
+            string name = areaListBox.SelectedItem.ToString();
+            Area selectedArea = world.Areas.Find(area => area.Name == (string)areaListBox.SelectedItem);
+            roomsListBox.Items.Clear();
+            roomsListBox.Items.AddRange(selectedArea.Rooms.Select(room => room.Name).ToArray());
+        }
     }
 }

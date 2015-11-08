@@ -7,23 +7,26 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
 
-    public class EventQueue {
-        private ConcurrentQueue<EventPacket> queue;
-        public delegate void EventHandler(object myObject);
+    public class PlayerEventQueue {
+        private ConcurrentQueue<PlayerEventPacket> queue;
+        public delegate void EventHandler(object myObject, PlayerEventPacket packet);
         public event EventHandler OnEventReceived;
 
-        public EventQueue() {
-            queue = new ConcurrentQueue<EventPacket>();
+        public PlayerEventQueue() {
+            queue = new ConcurrentQueue<PlayerEventPacket>();
         }
 
-        public void Push(EventPacket packet) {
+        public void Push(PlayerEventPacket packet) {
             queue.Enqueue(packet);
-            OnEventReceived(this);
+            OnEventReceived(this, packet);
         }
-        public EventPacket Pop() {
-            EventPacket packet;
-            return (queue.TryDequeue(out packet)) ? packet : new EventPacket();
+        public PlayerEventPacket Pop() {
+            PlayerEventPacket packet;
+            return (queue.TryDequeue(out packet)) ? packet : null;
         }
 
+    }
+
+    public class GeneralEventQueue {
     }
 }

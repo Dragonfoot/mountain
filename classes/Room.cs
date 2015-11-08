@@ -22,9 +22,9 @@ namespace Mountain.classes {
         public RoomID RoomID;
         [XmlArray("Exits")]
         public List<Exit> Exits { get; set; }
-        protected EventQueue Events;
+        protected GeneralEventQueue Events;
         [XmlIgnore]
-        public MessageQueue Messages;
+        public PlayerEventQueue Messages;
 
         public Room() {
             InitializeRoom();
@@ -40,9 +40,9 @@ namespace Mountain.classes {
         }
         public Room(string name, string description) {
             InitializeRoom();
+            RoomID = new RoomID(ID, name);
             SetName(name);
             Description = description;
-            RoomID = new RoomID(ID, Name);
         }
         public void SetName(string name) {
             Name = name;
@@ -55,17 +55,29 @@ namespace Mountain.classes {
             Players = new List<Player>();
             Mobs = new ConcurrentBag<Mob>();
             Items = new ConcurrentBag<Item>();
-            Events = new EventQueue();
-            Messages = new MessageQueue();
-            Messages.OnMessageReceived += Messages_OnMessageReceived;
+            Events = new GeneralEventQueue();
+            Messages = new PlayerEventQueue();
+            Messages.OnEventReceived += Messages_OnPlayerEventReceived;
         }
 
-        void Messages_OnMessageReceived(object myObject, string msg) {
-            string message = Messages.Pop(); // pull the message
-            if (message.IsNullOrWhiteSpace()) message = msg;
-            throw new NotImplementedException("Room message queue");
-        }
-
+        private void Messages_OnPlayerEventReceived(object myObject, PlayerEventPacket packet) {
+            Packet message = Messages.Pop(); 
+            if (message == null) message = packet;
+            switch (packet.verb) {
+                case "say":
+                    if (!packet.parameter.HasLastCharPunctuation()) { packet.parameter += "."; }
+                    foreach (Player player in Players) {
+                        if (player.Name == packet.player.Name) {
+                            player.Send("You say, \"" + packet.parameter + "\"".NewLine().Color(Ansi.white), true);
+                        }
+                        else {
+                            player.Send(packet.player.Name + " says, \"" + packet.parameter + "\"".NewLine().Color(Ansi.white), true);
+                        }
+                    }
+                    break;
+            }
+        }        
+        
         public void HeartBeat() {
             throw new NotImplementedException("Room beat");
         }
@@ -127,6 +139,10 @@ namespace Mountain.classes {
         }
         protected void Load() {
             throw new NotImplementedException("Room load");
+        }
+
+        public void Show(Player player) {
+
         }
         
     }

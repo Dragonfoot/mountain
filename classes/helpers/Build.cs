@@ -9,53 +9,85 @@ namespace Mountain.classes.helpers {
 
     public static class Build {
 
-        public static Area AdminArea() { 
+        public static Area AdminArea() {
             string name, description;
+
             Area area = new classes.Area();
+
             area.Name = "Administration Complex";
             area.Description = "One of this worlds extraordinary wonders. It houses top minds from all the major worlds within our galaxy. " +
                "As well it houses the most advanced technological and military equipment available. All this in order to make this world " +
                "the leader in vital galactic government growth and management.";
 
+            Room controlRoom;
             name = "Administration Control Center";
-            description = "You see the nerve center of world operations unfold around you. Computer stations with white clad operators quietly " +
-                "talking into headsets while they adjust controls and relay information, in a long line of cubicles fading into the distance on your " +
-                "right. Radar and sonar sensors, routing maps and scheduling timers all glowing quietly above them. To your left are a long range of office " +
-                "doors with armed guards filtering and recording those wanting accessing to each. ";
-            Room controlRoom = Room(name, description);
+            description = "You see the nerve center of world operations unfold around you. You see computer stations with white clad technitians " +
+                "mermering into headsets as they adjust controls and issue commands, in a long line of cubicles fading into the distance to your " +
+                "right. Sensor arrays, routing maps and schedulers glowing quietly above them, monitoring every aspect of this worlds events and " +
+                "activities. To your left, a long line of guarded office doors, guard challenging and recording those wanting access. ";
+            controlRoom = Room(name, description);
 
+            Room transitHub;
             name = "Central Transit Hub";
             description = "Administration Transit Hub Lobby";
-            Room transitHub = Room(name, description);
+            transitHub = Room(name, description);
 
-            LinkRooms(controlRoom, "Transit hub", transitHub, "Control Center");
+            ExitAttributes controlExitAttributes = new ExitAttributes() {
+                AdminOnly = true,
+                Label = "Transit Hub"
+            };
+
+            ExitAttributes transitHubAttributes = new ExitAttributes() {
+                AdminOnly = true,
+                Label = "Control Center",
+                Hidden = true,
+            };
+          
+            LinkRooms(controlRoom, controlExitAttributes, transitHub, transitHubAttributes);
+
+            Room theVoid;
+            name = "Void";
+            description = "";
+            theVoid = new classes.Room(name, description);
+            ExitAttributes voidExitAttributes = new ExitAttributes() {
+                Label = "Return to the Known Place",
+            };
+            Exit voidExit = Exit(voidExitAttributes);
+            voidExit.link = transitHub;
+            theVoid.AddExit(voidExit);
 
             area.Rooms.Add(controlRoom);
             area.Rooms.Add(transitHub);
+            area.Rooms.Add(theVoid);
 
             return area;
         }
 
         public static Area DefaultArea() {
-            string name, description;
+           // string name, description;
             Area area = new classes.Area();
-            area.Name = "Default Area";
+          //  area.Name = "Default Area";
 
 
             return area;
         }
 
-        public static void LinkRooms(Room firstRoom, string firstExitName, Room secondRoom, string secondExitName) {
+        public static void LinkRooms(Room firstRoom, ExitAttributes first, Room secondRoom, ExitAttributes second) {
             Exit firstExit = new classes.Exit();
-            firstExit.Name = firstExitName;
+            firstExit.Attributes = first;
+            firstExit.Name = firstExit.Attributes.Label;
             firstExit.link = secondRoom;
             firstRoom.AddExit(firstExit);
+
             Exit secondExit = new classes.Exit();
             secondExit = new classes.Exit();
-            secondExit.Name = secondExitName;
+            secondExit.Attributes = second;
+            secondExit.Name = secondExit.Attributes.Label;
             secondExit.link = firstRoom;
             secondRoom.AddExit(secondExit);
         }
+
+
 
         public static Area Area() { // stub
             return new classes.Area();
@@ -65,16 +97,17 @@ namespace Mountain.classes.helpers {
             return new classes.Room();
         }
 
-        public static Room Room(string name, string description) {
-            Room room = new classes.Room(name, description);
-            return room;
+        public static Room Room(string name, string description) { // stub
+            return new classes.Room(name, description);
         }
 
-        public static Exit Exit() {
-            return new classes.Exit();
+        public static Exit Exit(ExitAttributes attributes) { 
+            Exit exit =  new classes.Exit();
+            exit.Attributes = attributes;
+            return exit;
         }
 
-        public static Item Item() {
+        public static Item Item() {  // stub
             return new Items.Item();
         }
        

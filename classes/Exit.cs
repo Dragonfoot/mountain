@@ -6,15 +6,15 @@ using Mountain.classes.helpers;
 
 namespace Mountain.classes {
 
-    public class Exit : Identity {
-        
+    public class Exit : Identity {        
         public Room link { get; set; }
+        public ExitAttributes Attributes { get; set; }
 
         public Exit() {
             ClassType = classType.exit;
-            ItemType = itemType.unknown;
+            Attributes = new ExitAttributes();
             Name = "New exit";
         }
-
     }
+
 }

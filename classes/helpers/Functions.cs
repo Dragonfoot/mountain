@@ -44,7 +44,7 @@ namespace Mountain.classes.helpers {
             return str + Environment.NewLine;
         }
 
-        public static string Indent(this string str) { //  find ansi code for tab settings?           
+        public static string Indent(this string str) {            
             return "\t" + str;
         }
 
@@ -69,21 +69,27 @@ namespace Mountain.classes.helpers {
             }
             return true;
         }
-
         public static bool IsNullOrWhiteSpace(this string value) { // better string.empty test
             return String.IsNullOrWhiteSpace(value);
         }
-
         public static string Camelize(this string str) { // return camel-case words in string ie: "joe moe" = "JoeMoe"
             return str.ToProper().Replace(" ", string.Empty);
         }
-
         public static string FirstWord(this string str) { // gets the first word of a sentence
             str = str.TrimStart(' ');
             if (str.WordCount() > 1) {
                 return str.Substring(0, str.IndexOf(" "));
             }
             return str;
+        }
+        public static char FirstChar(this string str) {
+            return str[0];
+        }
+        public static string StripFirstChar(this string str) {
+            return str.Substring(1);
+        }
+        public static bool HasLastCharPunctuation(this string str) {
+            return Char.IsPunctuation(str[str.Length - 1]);
         }
         public static string StripFirstWord(this string str) { // returns all but the first word
             if (str.WordCount() > 1) {

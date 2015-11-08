@@ -17,18 +17,27 @@ namespace Mountain.classes.helpers {
     public class VerbPacket : Packet {
         public string verb;
         public string parameter;
-        public Account player;
-        public VerbPacket(string verb, string parameter, Account user) {
+        public Player player;
+        public VerbPacket(string verb, string parameter, Player player) {
             packetType = PacketType.verb;
             this.verb = verb;
             this.parameter = parameter;
-            this.player = user;
+            this.player = player;
         }
     }
-    public class EventPacket : Packet {
-        public EventPacket() {
+    public class PlayerEventPacket : Packet {
+        public string verb;
+        public string parameter;
+        public Player player;
+        public PlayerEventPacket(string verb, string parameter, Player player) {
             packetType = PacketType.events;
+            this.verb = verb;
+            this.parameter = parameter;
+            this.player = player;
         }
+    }
+    public class GeneralEventPacket : Packet {
+
     }
 
 }

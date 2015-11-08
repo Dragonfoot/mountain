@@ -46,6 +46,23 @@ namespace Mountain.classes.helpers {
             adminUser.FileName = adminUser.Name + ".xml";
             adminUser.Administrator = true;
             users.List.Add(adminUser);
+
+            Account toetag = new Account(Guid.NewGuid());
+            toetag.SetName("Toetag");
+            toetag.SetPassword("Toetag");
+            toetag.Email = "Toetag@thisserver.com";
+            toetag.FileName = toetag.Name + ".xml";
+            toetag.Administrator = true;
+            users.List.Add(toetag);
+
+            Account haystack = new Account(Guid.NewGuid());
+            haystack.SetName("Haystack");
+            haystack.SetPassword("haystack");
+            haystack.Email = "haystack@thisserver.com";
+            haystack.FileName = haystack.Name + ".xml";
+            haystack.Administrator = true;
+            users.List.Add(haystack);
+
             XmlHelper.ObjectToXml(users, path);
         }
     }

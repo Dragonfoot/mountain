@@ -50,6 +50,9 @@
             this.startServer = new System.Windows.Forms.Button();
             this.areaListBox = new System.Windows.Forms.ListBox();
             this.worldBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.roomsListBox = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -166,7 +169,7 @@
             this.panel2.Controls.Add(this.Console);
             this.panel2.Location = new System.Drawing.Point(148, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(596, 262);
+            this.panel2.Size = new System.Drawing.Size(446, 262);
             this.panel2.TabIndex = 2;
             // 
             // textBox1
@@ -188,7 +191,7 @@
             // 
             this.richTextBox.Location = new System.Drawing.Point(148, 310);
             this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(593, 246);
+            this.richTextBox.Size = new System.Drawing.Size(446, 242);
             this.richTextBox.TabIndex = 10;
             this.richTextBox.Text = "";
             // 
@@ -247,16 +250,46 @@
             // areaListBox
             // 
             this.areaListBox.FormattingEnabled = true;
-            this.areaListBox.Location = new System.Drawing.Point(775, 54);
+            this.areaListBox.Location = new System.Drawing.Point(616, 67);
             this.areaListBox.Name = "areaListBox";
-            this.areaListBox.Size = new System.Drawing.Size(171, 498);
+            this.areaListBox.Size = new System.Drawing.Size(171, 485);
             this.areaListBox.TabIndex = 12;
+            this.areaListBox.SelectedIndexChanged += new System.EventHandler(this.areaListBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(616, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Areas";
+            // 
+            // roomsListBox
+            // 
+            this.roomsListBox.FormattingEnabled = true;
+            this.roomsListBox.Location = new System.Drawing.Point(793, 67);
+            this.roomsListBox.Name = "roomsListBox";
+            this.roomsListBox.Size = new System.Drawing.Size(185, 485);
+            this.roomsListBox.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(793, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Rooms";
             // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 573);
+            this.ClientSize = new System.Drawing.Size(1000, 570);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.roomsListBox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.areaListBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox);
@@ -305,6 +338,9 @@
         private System.Windows.Forms.ToolStripMenuItem questToolStripMenuItem;
         private System.Windows.Forms.ListBox areaListBox;
         private System.Windows.Forms.BindingSource worldBindingSource;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox roomsListBox;
+        private System.Windows.Forms.Label label3;
     }
     }
 

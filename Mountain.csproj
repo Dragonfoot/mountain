@@ -73,6 +73,7 @@
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\Equipment.cs" />
     <Compile Include="classes\helpers\Account.cs" />
+    <Compile Include="classes\helpers\Attribute.cs" />
     <Compile Include="classes\helpers\Build.cs" />
     <Compile Include="classes\helpers\CommandList.cs" />
     <Compile Include="classes\helpers\CommunicationCommand.cs" />

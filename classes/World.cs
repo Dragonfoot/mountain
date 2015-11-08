@@ -43,7 +43,7 @@ namespace Mountain.classes {
         }
 
         void Players_OnPlayerAdded(object myObject, Player player) {
-            throw new NotImplementedException("Player added");
+           // throw new NotImplementedException("Player added");
         }
 
         public void Reload() {
