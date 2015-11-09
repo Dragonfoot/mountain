@@ -25,20 +25,24 @@ namespace Mountain.classes {
         protected GeneralEventQueue Events;
         [XmlIgnore]
         public PlayerEventQueue Messages;
+        public ApplicationSettings settings;
 
-        public Room() {
+        public Room(ApplicationSettings appSettings) {
+            settings = appSettings;
             InitializeRoom();
             Name = "New Room";
             Description = "This is a newly created room";
             RoomID = new RoomID(ID, Name);
         }
-        public Room(string name) {
+        public Room(string name, ApplicationSettings appSettings) {
+            settings = appSettings;
             InitializeRoom();
             RoomID = new RoomID(ID, Name);
             SetName(name);
             Description = Name + " is a newly created room";
         }
-        public Room(string name, string description) {
+        public Room(string name, string description, ApplicationSettings appSettings) {
+            settings = appSettings;
             InitializeRoom();
             RoomID = new RoomID(ID, name);
             SetName(name);
@@ -99,6 +103,7 @@ namespace Mountain.classes {
             try {
                 serializer.Serialize(writer, this, emptyNamepsaces);
             } catch (Exception e) {
+                settings.SystemMessageQueue.Push(e.ToString());
                 return e.ToString();
             }             
             return writer.ToString();
@@ -140,8 +145,7 @@ namespace Mountain.classes {
             throw new NotImplementedException("Room load");
         }
 
-        public void Show(Player player) {
-
+        public void ShowRoomTo(Player player) {
         }
         
     }

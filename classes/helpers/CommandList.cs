@@ -11,14 +11,16 @@ namespace Mountain.classes.helpers {
         private Dictionary<string, Action<VerbPacket>> RoomFunctions;
         private Dictionary<string, Action<VerbPacket>> InternalFunctions;
         private CommunicationCommands Communications;
+        private ApplicationSettings settings;
 
-        public CommandList(Player player) {
+        public CommandList(Player player, ApplicationSettings appSettings) {
+            this.settings = appSettings;
             this.player = player;
             LoadCommands();
         }
 
         private void LoadCommands() {
-            Communications = new CommunicationCommands();
+            Communications = new CommunicationCommands(settings);
         }
         public void InvokeCommand(string verb, VerbPacket packet) {
             Communications.InvokeCommand(verb, packet);

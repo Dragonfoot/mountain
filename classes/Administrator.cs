@@ -13,13 +13,13 @@ namespace Mountain.classes {
 
     public class Administrator : Player {
 
-        public Administrator(TcpClient socket, Account user)
-            : base(socket, user) {
+        public Administrator(TcpClient socket, Account user, ApplicationSettings appSettings)
+            : base(socket, user, appSettings) {
             ClassType = classType.player; 
             UserAccount = user;
             Nick = user.Name;
             Name = user.Name;
-            messageQueue.OnMessageReceived += AdminOnMessageReceived; 
+            baseMessageQueue.OnMessageReceived += AdminOnMessageReceived; 
             Inventory = new ConcurrentBag<Item>();
             EnemyPlayers = new ConcurrentBag<Player>();
             EnemyMobs = new ConcurrentBag<Mob>();

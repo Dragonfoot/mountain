@@ -9,11 +9,10 @@ namespace Mountain.classes.helpers {
 
     public static class Build {
 
-        public static Area AdminArea() {
+        public static Area AdminArea(ApplicationSettings settings) {
             string name, description;
 
             Area area = new classes.Area();
-
             area.Name = "Administration Complex";
             area.Description = "One of this worlds extraordinary wonders. It houses top minds from all the major worlds within our galaxy. " +
                "As well it houses the most advanced technological and military equipment available. All this in order to make this world " +
@@ -25,37 +24,36 @@ namespace Mountain.classes.helpers {
                 "mermering into headsets as they adjust controls and issue commands, in a long line of cubicles fading into the distance to your " +
                 "right. Sensor arrays, routing maps and schedulers glowing quietly above them, monitoring every aspect of this worlds events and " +
                 "activities. To your left, a long line of guarded office doors, guard challenging and recording those wanting access. ";
-            controlRoom = Room(name, description);
+            controlRoom = Room(name, description, settings);
 
             Room transitHub;
             name = "Central Transit Hub";
             description = "Administration Transit Hub Lobby";
-            transitHub = Room(name, description);
+            transitHub = Room(name, description, settings);
 
             ExitAttributes controlExitAttributes = new ExitAttributes() {
                 AdminOnly = true,
                 Label = "Transit Hub"
             };
-
             ExitAttributes transitHubAttributes = new ExitAttributes() {
                 AdminOnly = true,
                 Label = "Control Center",
                 Hidden = true,
-            };
-          
+            };                      
             LinkRooms(controlRoom, controlExitAttributes, transitHub, transitHubAttributes);
 
             Room theVoid;
             name = "Void";
-            description = "";
-            theVoid = new classes.Room(name, description);
+            description = "You find youself weightlessly floating in some kind of silent, lonely, dark, " +
+                "endless, and as many other voidy spacy words there might be.. space..";
+            theVoid = new classes.Room(name, description, settings);
             ExitAttributes voidExitAttributes = new ExitAttributes() {
                 Label = "Return to the Known Place",
             };
+
             Exit voidExit = Exit(voidExitAttributes);
             voidExit.link = transitHub;
             theVoid.AddExit(voidExit);
-
             area.Rooms.Add(controlRoom);
             area.Rooms.Add(transitHub);
             area.Rooms.Add(theVoid);
@@ -63,12 +61,8 @@ namespace Mountain.classes.helpers {
             return area;
         }
 
-        public static Area DefaultArea() {
-           // string name, description;
+        public static Area DefaultArea() { // stub
             Area area = new classes.Area();
-          //  area.Name = "Default Area";
-
-
             return area;
         }
 
@@ -87,18 +81,16 @@ namespace Mountain.classes.helpers {
             secondRoom.AddExit(secondExit);
         }
 
-
-
         public static Area Area() { // stub
             return new classes.Area();
         }
 
-        public static Room Void() {  // stub
-            return new classes.Room();
+        public static Room Void(ApplicationSettings settings) {  // stub
+            return new classes.Room(settings);
         }
 
-        public static Room Room(string name, string description) { // stub
-            return new classes.Room(name, description);
+        public static Room Room(string name, string description, ApplicationSettings settings) { // stub
+            return new classes.Room(name, description, settings);
         }
 
         public static Exit Exit(ExitAttributes attributes) { 

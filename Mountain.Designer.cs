@@ -42,7 +42,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.Console = new System.Windows.Forms.ListBox();
-            this.richTextBox = new System.Windows.Forms.RichTextBox();
+            this.logRichTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -182,18 +182,19 @@
             // Console
             // 
             this.Console.FormattingEnabled = true;
+            this.Console.HorizontalScrollbar = true;
             this.Console.Location = new System.Drawing.Point(3, 15);
             this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(590, 212);
+            this.Console.Size = new System.Drawing.Size(443, 212);
             this.Console.TabIndex = 0;
             // 
-            // richTextBox
+            // logRichTextBox
             // 
-            this.richTextBox.Location = new System.Drawing.Point(148, 310);
-            this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(446, 242);
-            this.richTextBox.TabIndex = 10;
-            this.richTextBox.Text = "";
+            this.logRichTextBox.Location = new System.Drawing.Point(148, 310);
+            this.logRichTextBox.Name = "logRichTextBox";
+            this.logRichTextBox.Size = new System.Drawing.Size(446, 242);
+            this.logRichTextBox.TabIndex = 10;
+            this.logRichTextBox.Text = "";
             // 
             // groupBox1
             // 
@@ -292,7 +293,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.areaListBox);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.richTextBox);
+            this.Controls.Add(this.logRichTextBox);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
@@ -323,7 +324,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListBox Console;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.RichTextBox richTextBox;
+        private System.Windows.Forms.RichTextBox logRichTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button startServer;
         private System.Windows.Forms.Label label2;

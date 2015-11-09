@@ -21,10 +21,10 @@ namespace Mountain.classes {
         public new Guid ID { get; set; }
 
         public Login(TcpClient socket, ApplicationSettings appSettings)
-            : base(socket) {
+            : base(socket, appSettings) {
             indent = true;
             noIndent = false;
-            messageQueue.OnMessageReceived += OnMessageReceived; // get notified when the messageQueue has a new one
+            baseMessageQueue.OnMessageReceived += OnMessageReceived; // get notified when the messageQueue has a new one
             ID = Guid.NewGuid();
             newUser = new Account(ID);
             settings = appSettings;
@@ -48,7 +48,7 @@ namespace Mountain.classes {
         }
 
         protected void OnMessageReceived(object myObject, string msg) { // do stuff with incoming user message
-            string message = messageQueue.Pop().Trim(); // pull the message
+            string message = baseMessageQueue.Pop().Trim(); // pull the message
             if (message.IsNullOrWhiteSpace()) message = msg;
             string response = string.Empty;
             if (message.IsNullOrWhiteSpace()) return; // oops, lets have this thread wait for another message
@@ -85,7 +85,7 @@ namespace Mountain.classes {
                     break;
                 case login.password:
                     if (newUser.CheckPassword(message)) {
-                        messageQueue.OnMessageReceived -= OnMessageReceived; // stop processing input for here
+                        baseMessageQueue.OnMessageReceived -= OnMessageReceived; // stop processing input for here
                         Send("".NewLine().NewLine().Color(Ansi.yellow), noIndent);
                         Send("Welcome back ".Color(Ansi.white, Ansi.white) + newUser.Name + "!".NewLine(), indent);
                         settings.ConvertLoginToPlayer(newUser); // start processing input with player class

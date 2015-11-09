@@ -22,18 +22,29 @@ namespace Mountain {
         protected World world;
 
         public Mountain() {
+            Messages = new MessageQueue(settings);
             settings = new ApplicationSettings(Messages);
             InitializeComponent();
-            Messages = new MessageQueue();
             this.Messages.OnMessageReceived += Messages_OnMessageReceived;
-            world = BuildEmptyWorld();
+            world = BuildDefaultWorld();
             Console.Items.Add("Server has started");
         }
 
         private void Messages_OnMessageReceived(object myObject, string msg) {
-            string message = Messages.Pop();
-            if (message==null)  message = msg;
-            Console.Items.Add(message);
+            try {
+                string message = Messages.Pop();
+                if (message == null) message = msg;
+                this.Invoke((MethodInvoker) delegate {
+                    logRichTextBox.AppendText("\r\n" + message);
+                 //   Console.Items.Add(message); // runs on UI thread
+                });
+            } catch ( Exception e) {
+                this.Invoke((MethodInvoker)delegate {
+                    logRichTextBox.AppendText("\r\n" + e.ToString());
+                  //  Console.Items.Add(e.ToString()); // runs on UI thread
+                });
+
+            }
         }
 
         private void exitProgram_ToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -42,9 +53,8 @@ namespace Mountain {
         }
         
         private void serverStart(object sender, EventArgs e) { // start
-            //create world and start listener
             if (world == null) {
-                world = BuildEmptyWorld();
+                world = BuildDefaultWorld();
                 Console.Items.Add("Server has started");
             } else {
                 Console.Items.Add("Server is already running");
@@ -57,15 +67,17 @@ namespace Mountain {
             Console.Items.Add("Shutdown not implemented yet"); // settings.players needs each player to disconnect/save
         }
 
-        private World BuildEmptyWorld() {
+        private World BuildDefaultWorld() {
             if (world != null) { world = null; }
             world = new World(settings);
-            world.Name = "Mountain";
+            world.settings.Void = world.Areas[0].Rooms.Find(room => room.Name == "Void");
+            areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
+            areaListBox.SelectedIndex = 0;
             return world;
         }
 
         private void areaForm_Button_Click(object sender, EventArgs e) { 
-            AreaForm areaForm = new AreaForm(new Area());
+            AreaForm areaForm = new AreaForm(new Area(), settings);
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 world.Areas.Add(areaForm.area);

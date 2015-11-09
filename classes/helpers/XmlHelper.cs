@@ -10,20 +10,25 @@ namespace Mountain.classes.helpers {
     public static class XmlHelper { 
       
         //saves class to xml file
-        public static void ObjectToXml(object item, string path) {
-            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
-            var serializer = new XmlSerializer(item.GetType());
-            var settings = new XmlWriterSettings();
-            settings.Indent = true;
-            settings.OmitXmlDeclaration = true;
-            using (var stream = new StringWriter())
-            using (var writer = XmlWriter.Create(stream, settings)) {
-                serializer.Serialize(writer, item, emptyNamepsaces);
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(new StringReader(stream.ToString()));
-                xmlDocument.Save(path);
+        public static void ObjectToXml(object item, string path, ApplicationSettings settngs) {
+            try {
+                var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+                var serializer = new XmlSerializer(item.GetType());
+                var settings = new XmlWriterSettings();
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+                using (var stream = new StringWriter())
+                using (var writer = XmlWriter.Create(stream, settings)) {
+                    serializer.Serialize(writer, item, emptyNamepsaces);
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(new StringReader(stream.ToString()));
+                    xmlDocument.Save(path);
+                }
+            } catch (Exception e) {
+                settngs.SystemMessageQueue.Push(e.ToString());
             }
         }
+
         // returns a string <boolean>true</boolean> if item passed is a boolean set to true, etc
         public static string PrimaryXml(object item) {  
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
@@ -37,7 +42,8 @@ namespace Mountain.classes.helpers {
                 return stream.ToString();
             }
         }
-        public static void ReCreateDefaultUserXmlFile(string path) {
+
+        public static void ReCreateDefaultUserXmlFile(string path, ApplicationSettings appSettings) {
             Users users = new Users();
             Account adminUser = new Account(Guid.NewGuid());
             adminUser.SetName("Admin");
@@ -63,7 +69,7 @@ namespace Mountain.classes.helpers {
             haystack.Administrator = true;
             users.List.Add(haystack);
 
-            XmlHelper.ObjectToXml(users, path);
+            XmlHelper.ObjectToXml(users, path, appSettings);
         }
     }
 }

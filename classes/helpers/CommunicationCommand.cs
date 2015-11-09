@@ -8,9 +8,11 @@ namespace Mountain.classes.helpers {
 
     public class CommunicationCommands {
         private Dictionary<string, Action<VerbPacket>> List;
+        ApplicationSettings settings;
         public List<string> Keys;
 
-        public CommunicationCommands() {
+        public CommunicationCommands(ApplicationSettings appSettings) {
+            settings = appSettings;
             LoadCommunications();
         }
         private void LoadCommunications() {
@@ -46,18 +48,17 @@ namespace Mountain.classes.helpers {
         private void Say(VerbPacket packet) {
             PlayerEventPacket ePacket = new PlayerEventPacket(packet.verb, packet.parameter, packet.player);
             try {
-                if (!packet.parameter.HasLastCharPunctuation()) { packet.parameter += "."; }
-                foreach (Player player in packet.player.Room.Players) {
-                    if (player.Name == packet.player.Name) {
-                        player.Send("You say, \"" + packet.parameter + "\"".NewLine().Color(Ansi.white), true);
+                if (!ePacket.parameter.HasLastCharPunctuation()) { ePacket.parameter += "."; }
+                foreach (Player player in ePacket.player.Room.Players) {
+                    if (player.Name == ePacket.player.Name) {
+                        player.Send("You say, \"" + ePacket.parameter + "\"".NewLine().Color(Ansi.white), true);
                     }
                     else {
-                        player.Send(packet.player.Name + " says, \"" + packet.parameter + "\"".NewLine().Color(Ansi.white), true);
+                        player.Send(ePacket.player.Name + " says, \"" + ePacket.parameter + "\"".NewLine().Color(Ansi.white), true);
                     }
                 }
-             //   packet.player.Room.Messages.Push(ePacket);
             } catch (Exception e) {
-                // Handle all other exceptions
+                settings.SystemMessageQueue.Push(e.ToString());
             }
         }
 

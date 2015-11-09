@@ -36,12 +36,11 @@ namespace Mountain.classes.helpers {
         public string RoomTemplateDirectory { get { return AppDirectory + Settings.Default.RoomTemplateDirectory; } }
         public string ExitTemplateDirectory { get { return AppDirectory + Settings.Default.ExitTemplateDirectory; } }
         public string ItemTemplateDirectory { get { return AppDirectory + Settings.Default.ItemTemplateDirectory; } }
-        private MessageQueue SystemMessageQueue;
+        public MessageQueue SystemMessageQueue;
 
         public ApplicationSettings(MessageQueue systemQueue) {
             InitializeSettings();
-            if (systemQueue != null)
-                SystemMessageQueue = systemQueue;
+            if (systemQueue != null) SystemMessageQueue = systemQueue;
             Logins = new List<Login>();
             RegisteredUsers = new List<Account>();
             Players = new Players();
@@ -69,9 +68,9 @@ namespace Mountain.classes.helpers {
         }
 
         public void ConvertLoginToPlayer(Account user) {
-            Login newUser = Logins.Find(x => x.ID == user.ID);
+            Login newUser = Logins.Find(client => client.ID == user.ID);
             if (newUser != null) {
-                Player newPlayer = new Player(newUser.ClientSocket, user);
+                Player newPlayer = new Player(newUser.ClientSocket, user, this);
                 Players.Add(newPlayer);
                 newPlayer.Room = Void;
                 Void.AddPlayer(newPlayer);
@@ -94,7 +93,7 @@ namespace Mountain.classes.helpers {
             if (!Directory.Exists(ItemTemplateDirectory)) { Directory.CreateDirectory(ItemTemplateDirectory); }
             string file = BaseDirectory + "\\" + RegisteredUsersAccounts;
          //   if (!File.Exists(file)) {
-                XmlHelper.ReCreateDefaultUserXmlFile(file);
+                XmlHelper.ReCreateDefaultUserXmlFile(file, this);
           //  }
         }
     }

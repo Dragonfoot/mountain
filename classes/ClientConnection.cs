@@ -12,17 +12,19 @@ namespace Mountain.classes {
 
     public class ClientConnection : Identity {
         private StateObject state { get; set; }
-        public TcpClient ClientSocket {get;set;}
+        public TcpClient ClientSocket { get; set; }
+        private ApplicationSettings settings;
         private readonly ManualResetEvent MessageReceivedDone;
         private readonly ManualResetEvent MessageSentDone;
-        protected MessageQueue messageQueue;  // derived ConcurrentQueue with added event - "new message available"
+        protected BaseMessageQueue baseMessageQueue;
 
-        public ClientConnection(TcpClient tcpClientSocket) {
+        public ClientConnection(TcpClient tcpClientSocket, ApplicationSettings appSettings) {
             ClassType = classType.client;
             ClientSocket = tcpClientSocket;
+            baseMessageQueue = new BaseMessageQueue(settings);
+            settings = appSettings;
             MessageReceivedDone = new ManualResetEvent(false);
             MessageSentDone = new ManualResetEvent(false);
-            messageQueue = new MessageQueue();
             state = new StateObject((tcpClientSocket));
             StartReceiving();
         }
@@ -30,27 +32,32 @@ namespace Mountain.classes {
         protected void StartReceiving() {
             try {
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, SocketFlags.None, ReceiveCallback, state);
-            } catch {
-                DropConnection("client closed by user or socket error");
+            }
+            catch (Exception e) {
+                DropConnection("Client closed by user or socket error", e);
             }
         }
         public void ReceiveCallback(IAsyncResult ar) {
             try {
-
                 int read = state.Socket.Client.EndReceive(ar); // get number of bytes read in
                 if (read > 0) {
                     string incomingMessage = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
-                    messageQueue.Push(incomingMessage); // put the received message into queue for processing by derived class                
+                    baseMessageQueue.Push(incomingMessage); // put the received message into queue for processing by derived classes                
                     MessageReceivedDone.Set(); // tell calling thread we are done with this message
                 }
-                state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // continue to wait for more
+                state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // wait for next
 
-            } catch (ObjectDisposedException) {
-                // Handle the socket being closed with an async receive pending
-            } catch (Exception e) {
-                // Handle all other exceptions
             }
-        }
+            catch (ObjectDisposedException e) {
+                settings.SystemMessageQueue.Push("CC1: " + e.ToString());
+            }
+            catch (SocketException e) {
+                settings.SystemMessageQueue.Push("Socket: " + e.ToString());
+            }
+            catch (Exception e) {
+                settings.SystemMessageQueue.Push("CC2: " + e.ToString());
+            }
+        } 
 
         protected void Send(string data, bool indent) {
             if (indent) { data = data.Indent(); }
@@ -63,12 +70,12 @@ namespace Mountain.classes {
                 int bytesSent = state.Socket.Client.EndSend(ar);
                 MessageSentDone.Set(); // tell parent thread we are good to go
             } catch (Exception e) {
-              //  add error message to world concurrentQueue
+                settings.SystemMessageQueue.Push("CC3: " + e.ToString());
             }
         }        
        
-        private void DropConnection(string action) { // connection has died, been requested by world or an error occurred 
-            // logErrorEvent(this.ID + " : " + action);
+        private void DropConnection(string action, Exception e) { // connection has died, been requested by world or an error occurred 
+            settings.SystemMessageQueue.Push(this.ID.ToString() + " connection dropped. (" + e.ToString() +") " + action);
         }
     }
     

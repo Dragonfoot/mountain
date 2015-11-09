@@ -17,10 +17,10 @@ namespace Mountain {
         private ApplicationSettings settings;
         public Area area;
 
-        public AreaForm(Area area) {
+        public AreaForm(Area area, ApplicationSettings appSettings) {
             this.area = area;
             InitializeComponent();
-            settings = new ApplicationSettings(null);
+            settings = appSettings;
             DisplayArea();
             RefreshRooms();
         }
@@ -31,77 +31,45 @@ namespace Mountain {
         }
 
         private void RefreshRooms() {
-            RoomListBox.Items.Clear();            
+            RoomListBox.Items.Clear();
             if (area.Rooms.Count > 0) {
                 foreach (Room room in area.Rooms) {
                     RoomListBox.Items.Add(room.Name);
                 }
             }
-        }  
+        }
 
         private void CreateDefaultAdminArea() {
-           // if (File.Exists("path to area template folder.adminTemplate.xml"){
+            // if (File.Exists("path to area template folder.adminTemplate.xml"){
             //    area.Load("adminTemplate.xml");
             //} else {
-            area = Build.AdminArea();
+            area = Build.AdminArea(settings);
             DisplayArea();
             RefreshRooms();
         }
-        
-        private void CreateDefaultArea() {
-         /*   area.Name = "Default New Area";
-            Room areaHub = new Room();
-            areaHub.SetName("Area Transit Room");
-            areaHub.Description = "A hub station between Administration Control Center and area";
-
-            Room TransitHub = CreateTransitHubRoom("Transit Hub", new RoomID(Guid.NewGuid(), "Transit Hub"));
-            Exit exit = new Exit();
-            exit.linkTo = areaHub.RoomID;
-            exit.Name = "Central";
-            exit.linkTo.Name = "To Area Hub";
-
-            areaHub.AddExit(exit);
-            area.Rooms.Add(areaHub);
-            area.Rooms.Add(TransitHub);*/
-        }
-
 
         private Room BuildRoom(string name, string description) { // stub - move to static builder class in helpers
-           Room room = new Room(name); 
+            Room room = new Room(name, settings);
             room.Description = description;
             return room;
         }
 
-       private Exit BuildExit() { // stub - move to static builder class in helpers
+        private Exit BuildExit() { // stub - move to static builder class in helpers
             Exit exit = new Exit();
             return exit;
-       }
-
-        private Room BuildVoid() { // stub - move to static builder class in helpers
-            string voidDesciption = "You find youself weightlessly floating in some kind of silent, lonely, dark, " +
-                "endless, and as many other voidy words there might be.. space.";
-            Room room = BuildRoom("Void", voidDesciption);
-            return room;
         }
 
-
-
-
-
-
         private void ok_Button_Click(object sender, EventArgs e) {
-
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             this.ok_Button_Click(this, e);
         }
 
-
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
             saveAreaFileDialog.InitialDirectory = settings.BaseDirectory;
             if (saveAreaFileDialog.ShowDialog() == DialogResult.OK) {
-                XmlHelper.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName);
+                XmlHelper.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName, settings);
             }
         }
 
@@ -129,7 +97,6 @@ namespace Mountain {
             areaNameTextBox.Text = areaGroupBox.Text;
             areaNameTextBox.Visible = true;
             areaNameTextBox.Focus();
-
         }
 
         private void descriptionPanel_MouseClick(object sender, MouseEventArgs e) {
@@ -147,7 +114,6 @@ namespace Mountain {
             if (e.KeyChar == (char)13) {
                 areaDescriptionTextBox_Lost_Focus(sender, new EventArgs());
             }
-
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {

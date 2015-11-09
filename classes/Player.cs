@@ -16,43 +16,44 @@ namespace Mountain.classes {
         protected Stats Stats { get; set; }
         protected Equipment Equipment { get; set; }
         protected CommandList Commands { get; set; }
-        public MessageQueue Messages { get; set; }
+        public MessageQueue InternalMessages;
         public Room Room { get; set; }
         public RoomID RoomID { get; set; }
         public Account UserAccount { get; set; }
+        public ApplicationSettings settings;
         public string Nick { get; set; }
 
-        public Player(TcpClient socket, Account user)
-            : base(socket) {
+        public Player(TcpClient socket, Account user, ApplicationSettings appSettings)
+            : base(socket, appSettings) {
             ClassType = classType.player; 
+            base.baseMessageQueue.OnMessageReceived += OnPlayerMessageReceived;
             UserAccount = user;
             Nick = user.Name;
             Name = user.Name;
-            base.messageQueue.OnMessageReceived += OnPlayerMessageReceived;
-            Messages = new MessageQueue();
-            Messages.OnMessageReceived += Messages_OnMessageReceived;
+            settings = appSettings;
+            InternalMessages = new MessageQueue(settings);
+            InternalMessages.OnMessageReceived += Messages_OnInternalMessageReceived;
             Inventory = new ConcurrentBag<Item>();
             EnemyPlayers = new ConcurrentBag<Player>();
             EnemyMobs = new ConcurrentBag<Mob>();
             Equipment = new Equipment();
             Stats = new Stats();
-            Commands = new CommandList(this);
+            Commands = new CommandList(this, settings);
         }
 
-        private void Messages_OnMessageReceived(object myObject, string msg) {
-            string message = Messages.Pop();
+        private void Messages_OnInternalMessageReceived(object myObject, string msg) {
+            string message = InternalMessages.Pop();
             if (message.IsNullOrWhiteSpace()) { message = msg; }
             Send(message, true);
         }
 
         public void OnPlayerMessageReceived(object myObject, string msg) {
-            string message = messageQueue.Pop(); 
+            string message = baseMessageQueue.Pop(); 
             if (message.IsNullOrWhiteSpace()) message = msg;
             VerbPacket packet = Parse(message, this);
             if (packet == null) {
                 string verb = message.FirstWord();
                 Send("I don't know what to do with \"".Color(Ansi.yellow) + verb.Color(Ansi.white) + "\" just yet.".Color(Ansi.yellow).NewLine(), true);
-                // string help = Commands.ShowVerbs(45).TrimStart(' ');
                 if (Commands.IsCommunicationVerb(verb)) {
                     Send("But, um.. I did a few minutes ago..\"scratch\"".Color(Ansi.yellow).NewLine(), true);
                 }

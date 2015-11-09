@@ -25,9 +25,9 @@ namespace Mountain.classes {
             portListener.StartServer(8090);
             string lastworld = settings.LastSavedWorld;
             if (lastworld.IsNullOrWhiteSpace()) {
-                Load("default world");
+                Load(null);
             } else {
-                Load(lastworld);
+                Load(null);
             }
          //   StartHeart(); // activate world
         }
@@ -39,7 +39,7 @@ namespace Mountain.classes {
         }
 
         void Players_OnPlayerRemoved(object myObject, Player player) {
-            throw new NotImplementedException("Player removed");
+           // throw new NotImplementedException("Player removed");
         }
 
         void Players_OnPlayerAdded(object myObject, Player player) {
@@ -47,12 +47,11 @@ namespace Mountain.classes {
         }
 
         public void Reload() {
-            throw new NotImplementedException("World Reload");
+          //  throw new NotImplementedException("World Reload");
         }
         public void Clear() {
-            throw new NotImplementedException("World Clear");
+           // throw new NotImplementedException("World Clear");
         }
-
 
         public void Shutdown() {
             settings.Players.Shutdown();
@@ -68,7 +67,7 @@ namespace Mountain.classes {
         }
 
         public void CreateDefaultWorld() {
-            Name = "Default World";
+            Name = "Mountain";
             base.ID = Guid.NewGuid();
             base.Description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
                 "Keep your new world growing with us. /n" +
@@ -83,10 +82,7 @@ namespace Mountain.classes {
         }
 
         private void CreateDefaultAdminArea() {
-            Area area = new Area(); // empty stubs
-            Room room = new Room();
-            area.Rooms.Add(room);
-            this.Areas.Add(area);
+            this.Areas.Add(Build.AdminArea(settings));
         }
 
         public void Save(string filename) {
