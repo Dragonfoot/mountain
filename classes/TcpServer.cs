@@ -10,7 +10,7 @@ namespace Mountain.classes {
         [XmlIgnore]
         public int Connections { get; private set; }
         protected AutoResetEvent connectionWaitDone;
-        public TcpListener tcpListener;
+        public TcpListenerEx tcpListener;
         public int Port;
         [XmlIgnore]
         World world;
@@ -29,19 +29,22 @@ namespace Mountain.classes {
                 tcpListener.Stop();
                 tcpListener = null;
             }
-            tcpListener = new TcpListener(IPAddress.Any, port);
+            tcpListener = new TcpListenerEx(IPAddress.Any, port);
             tcpListener.Start();
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, tcpListener);
         }
 
+        public bool Active() {
+            return tcpListener.Active;
+        }
+
         protected void HandleAsyncConnection(IAsyncResult result) {
-            TcpListener listener = (TcpListener)result.AsyncState;
+            TcpListenerEx listener = (TcpListenerEx)result.AsyncState;
             TcpClient client = listener.EndAcceptTcpClient(result);
             connectionWaitDone.Set();
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
             Connection player = new Connection(client, settings);
             player.StartLogin();
-         //   this.settings.Logins.Add(new Login(client, settings));
         }
 
         public void StopServer() {

@@ -50,7 +50,6 @@ namespace Mountain.classes {
                             name = item.Element("Name").Value,
                             password = item.Element("Password").Value,
                             email = item.Element("Email").Value,
-                            filename = item.Element("FileName").Value,
                             administrator = item.Element("Administrator").Value
                         };
             foreach (var user in users) {
@@ -58,7 +57,6 @@ namespace Mountain.classes {
                 account.Name = user.name;
                 account.Password = user.password;
                 account.Email = user.email;
-                account.FileName = user.filename;
                 account.Administrator = Convert.ToBoolean(user.administrator);
                 RegisteredUsers.Add(account);
             }

@@ -23,6 +23,7 @@ namespace Mountain {
             InitializeComponent();
             Messages.OnMessageReceived += Messages_OnMessageReceived;
             world = BuildDefaultWorld();
+            world.StartListen(world.Port);
             logRichTextBox.AppendText("Server has started\r\n");
         }
 
@@ -50,17 +51,19 @@ namespace Mountain {
         }
 
         private void serverStart(object sender, EventArgs e) { // start
-            if (world == null) {
-                world = BuildDefaultWorld();
+            if (world != null) {
+                world.StartListen(world.Port);
                 Console.Items.Add("Server has started");
             } else {
-                Console.Items.Add("Server is already running");
+                if (world.portListener.Active()) {
+                    Console.Items.Add("Server is already running");
+                }
             }
         }
 
         private void button6_Click(object sender, EventArgs e) { //stop server
-                                                                 //    world.Shutdown();
-                                                                 //   world = null;
+            //    world.Shutdown();
+            //   world = null;
             Console.Items.Add("Shutdown not implemented yet"); // settings.players needs each player to disconnect/save
         }
 

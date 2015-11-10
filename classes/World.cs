@@ -25,7 +25,7 @@ namespace Mountain.classes {
             portListener = new TcpServer(this, appSettings);
             if (Port < 5000 || Port > 10000)
                 Port = 8090;
-            portListener.StartServer(Port);
+      //      portListener.StartServer(Port);
             string lastworld = settings.LastSavedWorld;
             if (lastworld.IsNullOrWhiteSpace()) {
                 Load(null);
@@ -42,6 +42,10 @@ namespace Mountain.classes {
             settings = appSettings;
             settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
             settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
+        }
+
+        public void StartListen(int port) {
+            portListener.StartServer(port);
         }
 
         void Players_OnPlayerRemoved(object myObject, Connection player) {
@@ -80,12 +84,11 @@ namespace Mountain.classes {
                 "Keep your new world growing with us. \r\n" +
                 "Invest in Toetag Corporation's Life Insurance Policies and help make our gaming addition goals a viable solution. " +
                 "Become a gold member of our growing centers of excellence, do the right thing, " +
-                "donate your soul to our world class Gaming Society Center of Excellence. You could win big!\r\n" +
+                "donate your soul to our world class gaming society's Center of Excellence. You could win big!\r\n" +
                 "Join today. (Please sign our body donor card and be entered in our annual Grisly Corpse Competition Awards ceremony. " +
-                "You could win a place on the top shelf of our Achievements of Horror vault that houses the very best souls of our societies " +
+                "You could win a place on the top shelf of our Achievements of Horror vault that houses the very best souls of our society's " +
                 "most fascinating players.)\r\n";
             this.CreateDefaultAdminArea();
-          //  this.Save("defaultWorld");
         }
 
         private void CreateDefaultAdminArea() {

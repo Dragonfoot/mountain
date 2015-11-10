@@ -8,10 +8,8 @@ namespace Mountain.classes.helpers {
         public string Password { get; set; }
         public bool Administrator { get; set; }
         public string Email { get; set; }
-        public string FileName { get; set; }
         [XmlIgnore]
         public Guid ID { get; set; }
-        [XmlIgnore]
         public RoomID RoomID;
         [XmlIgnore]
         public Room Room { get; set; }
@@ -21,6 +19,7 @@ namespace Mountain.classes.helpers {
         public Account(Guid id) {
             ID = id;
         }
+
         public Account() {
         }
 
@@ -34,9 +33,6 @@ namespace Mountain.classes.helpers {
         }
         public void SetName(string name) {
             Name = name.Camelize();
-            if (FileName.IsNullOrWhiteSpace()) {
-                FileName = Name + ".xml";
-            }
         }
     }
 }

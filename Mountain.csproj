@@ -95,6 +95,7 @@
     <Compile Include="classes\Items\WearableType.cs" />
     <Compile Include="classes\Items\WeaponType.cs" />
     <Compile Include="classes\ApplicationSettings.cs" />
+    <Compile Include="classes\TcpListenerEx.cs" />
     <Compile Include="classes\TcpServer.cs" />
     <Compile Include="classes\Mobs\Underling.cs" />
     <Compile Include="classes\Exit.cs" />

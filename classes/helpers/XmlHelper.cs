@@ -44,19 +44,11 @@ namespace Mountain.classes.helpers {
 
         public static void ReCreateDefaultUserXmlFile(string path, ApplicationSettings appSettings) {
             RegisteredUsers users = new RegisteredUsers();
-            Account adminUser = new Account(Guid.NewGuid());
-            adminUser.SetName("Admin");
-            adminUser.SetPassword("Admin");
-            adminUser.Email = "Admin@thisserver.com";
-            adminUser.FileName = adminUser.Name + ".xml";
-            adminUser.Administrator = true;
-            users.List.Add(adminUser);
 
             Account toetag = new Account(Guid.NewGuid());
             toetag.SetName("Toetag");
-            toetag.SetPassword("Toetag");
+            toetag.SetPassword("toetag");
             toetag.Email = "Toetag@thisserver.com";
-            toetag.FileName = toetag.Name + ".xml";
             toetag.Administrator = true;
             users.List.Add(toetag);
 
@@ -64,15 +56,13 @@ namespace Mountain.classes.helpers {
             haystack.SetName("Haystack");
             haystack.SetPassword("haystack");
             haystack.Email = "haystack@thisserver.com";
-            haystack.FileName = haystack.Name + ".xml";
             haystack.Administrator = true;
             users.List.Add(haystack);
 
             Account bucky = new Account(Guid.NewGuid());
             bucky.SetName("Bucky");
-            bucky.SetPassword("Bucky");
+            bucky.SetPassword("bucky");
             bucky.Email = "bucky@thisserver.com";
-            bucky.FileName = bucky.Name + ".xml";
             bucky.Administrator = false;
             users.List.Add(bucky);
 
