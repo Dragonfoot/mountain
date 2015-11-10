@@ -10,7 +10,7 @@ using Mountain.classes.helpers;
 namespace Mountain.classes {
 
     public class ApplicationSettings {
-        public List<Account> RegisteredUsers { get; set; }
+        public RegisteredUsers RegisteredUsers { get; set; }
         public List<Connection> Logins { get; set; }
         public World world;
         public Players Players { get; set; }
@@ -38,7 +38,7 @@ namespace Mountain.classes {
             InitializeSettings();
             if (systemQueue != null) SystemMessageQueue = systemQueue;
             Logins = new List<Connection>();
-            RegisteredUsers = new List<Account>();
+            RegisteredUsers = new RegisteredUsers();
             Players = new Players();
             LoadAllUserAccounts();
         }

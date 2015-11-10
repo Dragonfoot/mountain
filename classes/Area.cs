@@ -10,6 +10,7 @@ namespace Mountain.classes {
         private CancellationTokenSource cancellationTokenSource;
         [XmlArray("Rooms")]
         public List<Room> Rooms { get; private set; }
+        [XmlIgnore]
         public bool Active { get; set; }
 
         public Area() {

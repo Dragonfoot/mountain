@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Mountain.classes.Items;
 
-namespace Mountain.classes {
+namespace Mountain.classes.helpers {
+
     public class Equipment {       // possible player gear locations
         protected Item head;
         protected Item eyes;

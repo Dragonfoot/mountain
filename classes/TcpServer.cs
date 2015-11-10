@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Net;
+using System.Xml.Serialization;
 using System.Net.Sockets;
 using System.Threading;
 
 namespace Mountain.classes {
 
     public class TcpServer {
+        [XmlIgnore]
         public int Connections { get; private set; }
         protected AutoResetEvent connectionWaitDone;
-        TcpListener tcpListener;
+        public TcpListener tcpListener;
+        public int Port;
+        [XmlIgnore]
         World world;
+        [XmlIgnore]
         ApplicationSettings settings;
 
         public TcpServer(World world, ApplicationSettings appSettings) {
@@ -19,6 +24,7 @@ namespace Mountain.classes {
         }
 
         public void StartServer(int port) {
+            Port = port;
             if (tcpListener != null) {
                 tcpListener.Stop();
                 tcpListener = null;

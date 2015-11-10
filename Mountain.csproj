@@ -71,7 +71,7 @@
     </Compile>
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\Connection.cs" />
-    <Compile Include="classes\Equipment.cs" />
+    <Compile Include="classes\helpers\Equipment.cs" />
     <Compile Include="classes\helpers\Account.cs" />
     <Compile Include="classes\helpers\Attribute.cs" />
     <Compile Include="classes\helpers\Build.cs" />
@@ -90,17 +90,17 @@
     <Compile Include="classes\helpers\XmlHelper.cs" />
     <Compile Include="classes\Collections\Players.cs" />
     <Compile Include="classes\Collections\Rooms.cs" />
-    <Compile Include="classes\Collections\Users.cs" />
+    <Compile Include="classes\Collections\RegisteredUsers.cs" />
     <Compile Include="classes\Identity.cs" />
     <Compile Include="classes\Items\WearableType.cs" />
     <Compile Include="classes\Items\WeaponType.cs" />
     <Compile Include="classes\ApplicationSettings.cs" />
     <Compile Include="classes\TcpServer.cs" />
-    <Compile Include="classes\Underling.cs" />
+    <Compile Include="classes\Mobs\Underling.cs" />
     <Compile Include="classes\Exit.cs" />
-    <Compile Include="classes\Vault.cs" />
+    <Compile Include="classes\Collections\Vault.cs" />
     <Compile Include="classes\Items\Item.cs" />
-    <Compile Include="classes\Mob.cs" />
+    <Compile Include="classes\Mobs\Mob.cs" />
     <Compile Include="classes\Room.cs" />
     <Compile Include="classes\World.cs" />
     <Compile Include="Mountain.cs">

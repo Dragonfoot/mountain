@@ -67,6 +67,8 @@ namespace Mountain.classes.helpers {
             firstExit.Attributes = first;
             firstExit.Name = firstExit.Attributes.Label;
             firstExit.link = secondRoom;
+            firstExit.LinkToRoomName = secondRoom.Name;
+            firstExit.LinkToRoomID = secondRoom.RoomID;
             firstRoom.AddExit(firstExit);
 
             Exit secondExit = new classes.Exit();
@@ -74,6 +76,8 @@ namespace Mountain.classes.helpers {
             secondExit.Attributes = second;
             secondExit.Name = secondExit.Attributes.Label;
             secondExit.link = firstRoom;
+            secondExit.LinkToRoomName = firstRoom.Name;
+            secondExit.LinkToRoomID = firstRoom.RoomID;
             secondRoom.AddExit(secondExit);
         }
 

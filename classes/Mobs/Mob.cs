@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mountain.classes.mobs;
 namespace Mountain.classes {
 
     public class Mob : Underling {

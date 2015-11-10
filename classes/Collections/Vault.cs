@@ -2,7 +2,7 @@
 using Mountain.classes.helpers;
 using Mountain.classes.Items;
 
-namespace Mountain.classes {
+namespace Mountain.classes.collections {
 
     public class Vault : Identity {
         protected int pin;

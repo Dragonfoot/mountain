@@ -25,6 +25,7 @@ namespace Mountain.classes {
         protected GeneralEventQueue Events;
         [XmlIgnore]
         public PlayerEventQueue Messages;
+        [XmlIgnore]
         public ApplicationSettings settings;
 
         public Room(ApplicationSettings appSettings) {
@@ -47,6 +48,9 @@ namespace Mountain.classes {
             RoomID = new RoomID(ID, name);
             SetName(name);
             Description = description;
+        }
+        public Room() {
+
         }
         public void SetName(string name) {
             Name = name;

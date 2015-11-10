@@ -43,7 +43,7 @@ namespace Mountain.classes.helpers {
         }
 
         public static void ReCreateDefaultUserXmlFile(string path, ApplicationSettings appSettings) {
-            Users users = new Users();
+            RegisteredUsers users = new RegisteredUsers();
             Account adminUser = new Account(Guid.NewGuid());
             adminUser.SetName("Admin");
             adminUser.SetPassword("Admin");

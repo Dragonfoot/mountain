@@ -14,14 +14,18 @@ namespace Mountain.classes {
         [XmlIgnore]
         public ApplicationSettings settings;
         protected ListBox Console;
-        protected TcpServer portListener;
+        [XmlIgnore]
+        public TcpServer portListener;
+        public int Port;
         private CancellationTokenSource cancellationTokenSource;
 
         public World(ApplicationSettings appSettings) {
             InitializeSettings(appSettings);
             Areas = new List<Area>();
             portListener = new TcpServer(this, appSettings);
-            portListener.StartServer(8090);
+            if (Port < 5000 || Port > 10000)
+                Port = 8090;
+            portListener.StartServer(Port);
             string lastworld = settings.LastSavedWorld;
             if (lastworld.IsNullOrWhiteSpace()) {
                 Load(null);
@@ -29,6 +33,9 @@ namespace Mountain.classes {
                 Load(null);
             }
          //   StartHeart(); // activate world
+        }
+
+        public World() {
         }
 
         private void InitializeSettings(ApplicationSettings appSettings) {
@@ -70,13 +77,13 @@ namespace Mountain.classes {
             Name = "Mountain";
             base.ID = Guid.NewGuid();
             base.Description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
-                "Keep your new world growing with us. /n" +
+                "Keep your new world growing with us. \r\n" +
                 "Invest in Toetag Corporation's Life Insurance Policies and help make our gaming addition goals a viable solution. " +
                 "Become a gold member of our growing centers of excellence, do the right thing, " +
-                "donate your soul to our world class Gaming Society Center of Excellence. You could win big!/n" +
+                "donate your soul to our world class Gaming Society Center of Excellence. You could win big!\r\n" +
                 "Join today. (Please sign our body donor card and be entered in our annual Grisly Corpse Competition Awards ceremony. " +
                 "You could win a place on the top shelf of our Achievements of Horror vault that houses the very best souls of our societies " +
-                "most fascinating players.)";
+                "most fascinating players.)\r\n";
             this.CreateDefaultAdminArea();
           //  this.Save("defaultWorld");
         }

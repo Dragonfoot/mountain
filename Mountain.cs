@@ -3,6 +3,10 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using Mountain.classes;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using Mountain.classes.helpers;
 using Mountain.classes.collections;
 
 namespace Mountain {
@@ -25,12 +29,13 @@ namespace Mountain {
         private void Messages_OnMessageReceived(object myObject, string msg) {
             try {
                 string message = Messages.Pop();
-                if (message == null) message = msg;
-                this.Invoke((MethodInvoker) delegate {
+                if (message == null)
+                    message = msg;
+                this.Invoke((MethodInvoker)delegate {
                     logRichTextBox.AppendText(">>>" + message + "\r\n");
                     logRichTextBox.ScrollToCaret();
                 });
-            } catch ( Exception e) {
+            } catch (Exception e) {
                 this.Invoke((MethodInvoker)delegate {
                     logRichTextBox.AppendText(">>>" + e.ToString() + "\r\n");
                     logRichTextBox.ScrollToCaret();
@@ -43,7 +48,7 @@ namespace Mountain {
             Close();
             //this.world.Save(string.Empty);
         }
-        
+
         private void serverStart(object sender, EventArgs e) { // start
             if (world == null) {
                 world = BuildDefaultWorld();
@@ -54,8 +59,8 @@ namespace Mountain {
         }
 
         private void button6_Click(object sender, EventArgs e) { //stop server
-        //    world.Shutdown();
-         //   world = null;
+                                                                 //    world.Shutdown();
+                                                                 //   world = null;
             Console.Items.Add("Shutdown not implemented yet"); // settings.players needs each player to disconnect/save
         }
 
@@ -68,12 +73,12 @@ namespace Mountain {
             return world;
         }
 
-        private void areaForm_Button_Click(object sender, EventArgs e) { 
+        private void areaForm_Button_Click(object sender, EventArgs e) {
             AreaForm areaForm = new AreaForm(new Area(), settings);
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 world.Areas.Add(areaForm.area);
-                world.settings.Void = areaForm.area.Rooms.Find(room => room.Name == "Void");                
+                world.settings.Void = areaForm.area.Rooms.Find(room => room.Name == "Void");
                 areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                 areaListBox.SelectedIndex = 0;
             } else {
@@ -90,5 +95,40 @@ namespace Mountain {
             roomsListBox.Items.Clear();
             roomsListBox.Items.AddRange(selectedArea.Rooms.Select(room => room.Name).ToArray());
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+            string file = settings.BaseDirectory + "\\" + world.Name + "test.xml";
+            TextWriter txtWriter = new StreamWriter(file);
+            //    XmlHelper.ObjectToXml(world.Areas, file, settings);
+            try {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(World));
+                xmlSerializer.Serialize(txtWriter, world);
+                logRichTextBox.AppendText(world.Name + " Saved.");
+            } catch (Exception ex) {
+                settings.SystemMessageQueue.Push(ex.ToString());
+            } finally {
+                txtWriter.Close();
+            }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
+            string file = settings.BaseDirectory + "\\" + world.Name + "test.xml";
+            TextReader txtReader = new StreamReader(file);
+            try {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(World));
+                World loadWorld = new World(settings);
+                    loadWorld = (World)xmlSerializer.Deserialize(txtReader);
+                loadWorld.portListener.StartServer(9080);
+                logRichTextBox.AppendText(world.Name + " Loaded.");
+            } catch (Exception ex) {
+                settings.SystemMessageQueue.Push(ex.ToString());
+            } finally {
+                txtReader.Close();
+            }
+        }
     }
 }
+        
+    
+
+

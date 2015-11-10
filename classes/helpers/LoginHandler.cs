@@ -105,7 +105,8 @@ namespace Mountain.classes.helpers {
                     LoginClient.Email = user.Email;
                     LoginClient.FileName = user.FileName;
                     LoginClient.Administrator = user.Administrator;
-                    if (settings.Players.Exists(user.Name)) return userStatus.loggedIn;
+                    if (settings.Players.Exists(user.Name))
+                        return userStatus.loggedIn;
                     return userStatus.available; 
                 }
             }
