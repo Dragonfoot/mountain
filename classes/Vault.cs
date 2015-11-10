@@ -11,7 +11,7 @@ namespace Mountain.classes {
 
     public class Vault : Identity {
         protected int pin;
-        protected Player Owner;
+        protected Connection Owner;
         protected int gold;
         protected ConcurrentBag<Item> items; // limit
         protected ConcurrentBag<ItemContainer> containers;  //limit, additional might be had on quests/levels/etc

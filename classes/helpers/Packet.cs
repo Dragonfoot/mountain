@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
 
-    public enum PacketType { data, command, action, events, callback, verb };
+    public enum PacketType { data, command, activity, callback, verb };
 
     public class Packet {
         public PacketType packetType;
@@ -17,23 +17,23 @@ namespace Mountain.classes.helpers {
     public class VerbPacket : Packet {
         public string verb;
         public string parameter;
-        public Player player;
-        public VerbPacket(string verb, string parameter, Player player) {
+        public Connection Client;
+        public VerbPacket(string verb, string parameter, Connection client) {
             packetType = PacketType.verb;
             this.verb = verb;
             this.parameter = parameter;
-            this.player = player;
+            Client = client;
         }
     }
     public class PlayerEventPacket : Packet {
         public string verb;
         public string parameter;
-        public Player player;
-        public PlayerEventPacket(string verb, string parameter, Player player) {
-            packetType = PacketType.events;
+        public Connection Client;
+        public PlayerEventPacket(string verb, string parameter, Connection client) {
+            packetType = PacketType.activity;
             this.verb = verb;
             this.parameter = parameter;
-            this.player = player;
+            Client = client;
         }
     }
     public class GeneralEventPacket : Packet {

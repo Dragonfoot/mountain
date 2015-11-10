@@ -1,22 +1,18 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Xml.Serialization;
-using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
-using System.Text;
-using System.Configuration;
-using System.Threading.Tasks;
 using Mountain.Properties;
+using Mountain.classes.collections;
+using Mountain.classes.helpers;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes {
 
     public class ApplicationSettings {
         public List<Account> RegisteredUsers { get; set; }
-        public List<Login> Logins { get; set; }
+        public List<Connection> Logins { get; set; }
+        public World world;
         public Players Players { get; set; }
         public Room Void { get; set; }
         public string AppDirectory { get; private set; }
@@ -41,11 +37,12 @@ namespace Mountain.classes.helpers {
         public ApplicationSettings(MessageQueue systemQueue) {
             InitializeSettings();
             if (systemQueue != null) SystemMessageQueue = systemQueue;
-            Logins = new List<Login>();
+            Logins = new List<Connection>();
             RegisteredUsers = new List<Account>();
             Players = new Players();
             LoadAllUserAccounts();
         }
+
         private void LoadAllUserAccounts() {
             var doc = XDocument.Load(BaseDirectory + "\\" + RegisteredUsersAccounts);
             var users = from item in doc.Descendants("Account")
@@ -67,14 +64,10 @@ namespace Mountain.classes.helpers {
             }
         }
 
-        public void ConvertLoginToPlayer(Account user) {
-            Login newUser = Logins.Find(client => client.ID == user.ID);
-            if (newUser != null) {
-                Player newPlayer = new Player(newUser.ClientSocket, user, this);
-                Players.Add(newPlayer);
-                newPlayer.Room = Void;
-                Void.AddPlayer(newPlayer);
-            }
+        public void SwapLoginForPlayer(Connection connection) {
+            Players.Add(connection);
+            Logins.Remove(connection);
+            connection.StartPlayer();
         }
 
         public void InitializeSettings() {

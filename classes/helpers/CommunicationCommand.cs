@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
 
@@ -46,15 +44,15 @@ namespace Mountain.classes.helpers {
         }
 
         private void Say(VerbPacket packet) {
-            PlayerEventPacket ePacket = new PlayerEventPacket(packet.verb, packet.parameter, packet.player);
             try {
-                if (!ePacket.parameter.HasLastCharPunctuation()) { ePacket.parameter += "."; }
-                foreach (Player player in ePacket.player.Room.Players) {
-                    if (player.Name == ePacket.player.Name) {
-                        player.Send("You say, \"" + ePacket.parameter + "\"".NewLine().Color(Ansi.white), true);
+                if (!packet.parameter.HasLastCharPunctuation()) { packet.parameter += "."; }
+                string message = "\"" + packet.parameter + "\"".NewLine().Color(Ansi.white);
+                foreach (Connection player in packet.Client.Room.Players) {
+                    if (player.Account.Name == packet.Client.Account.Name) {
+                        player.Send("You say, " + message, true);
                     }
                     else {
-                        player.Send(ePacket.player.Name + " says, \"" + ePacket.parameter + "\"".NewLine().Color(Ansi.white), true);
+                        player.Send(packet.Client.Account.Name + " says, " + message, true);
                     }
                 }
             } catch (Exception e) {
@@ -62,34 +60,16 @@ namespace Mountain.classes.helpers {
             }
         }
 
-        private void Shout(VerbPacket packet) {
-            //   vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
-            //    vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
-        }
+        private void Shout(VerbPacket packet) { }
 
-        private void Tell(VerbPacket packet) {
-            // vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
-            // vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
-        }
+        private void Tell(VerbPacket packet) { }
 
-        private void Yell(VerbPacket packet) {
-            //  vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
-            //   vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
-        }
+        private void Yell(VerbPacket packet) { }
 
-        private void Talk(VerbPacket packet) {
-            //  vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
-            //   vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
-        }
+        private void Talk(VerbPacket packet) { }
 
-        private void Whisper(VerbPacket packet) {
-            //  vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
-            //   vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
-        }
+        private void Whisper(VerbPacket packet) { }
 
-        private void Broadcast(VerbPacket packet) {
-            //vp.player.Player.Send(vp.verb + " " + vp.parameter.Color(Ansi.white).NewLine(), true);
-            //   vp.player.Room.Messages.Push(vp.verb + " " + vp.parameter);
-        }
+        private void Broadcast(VerbPacket packet) { }
     }
 }

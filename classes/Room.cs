@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Mountain.classes.helpers;
 using Mountain.classes.Items;
+using Mountain.classes.collections;
 
 namespace Mountain.classes {
 
@@ -17,7 +18,7 @@ namespace Mountain.classes {
         [XmlIgnore]
         public ConcurrentBag<Item> Items { get; set; }
         [XmlIgnore]
-        public List<Player> Players { get; set; }
+        public List<Connection> Players { get; set; }
         [XmlIgnore]
         public RoomID RoomID;
         [XmlArray("Exits")]
@@ -56,29 +57,19 @@ namespace Mountain.classes {
         private void InitializeRoom() {
             ClassType = classType.room;
             Exits = new List<Exit>();
-            Players = new List<Player>();
+            Players = new List<Connection>();
             Mobs = new ConcurrentBag<Mob>();
             Items = new ConcurrentBag<Item>();
             Events = new GeneralEventQueue();
             Messages = new PlayerEventQueue();
+            
             Messages.OnEventReceived += Messages_OnPlayerEventReceived;
         }
 
         private void Messages_OnPlayerEventReceived(object myObject, PlayerEventPacket packet) {
             Packet message = Messages.Pop(); 
             if (message == null) message = packet;
-            switch (packet.verb) {
-                case "say":
-                    break;
-                case "yell":
-                    break;
-                case "shout":
-                    break;
-                case "whisper":
-                    break;
-                case "look":
-                    break;
-            }
+            settings.SystemMessageQueue.Push("Room received: " + message);
         }        
         
         public void HeartBeat() {
@@ -91,9 +82,9 @@ namespace Mountain.classes {
         public void AddMob(Mob mob) {
             this.Mobs.Add(mob);
         }
-        public void AddPlayer(Player player) {
-            this.Players.Add(player);
-            player.RoomID = RoomID;
+        public void AddPlayer(Connection client) {
+            this.Players.Add(client);
+            client.Account.RoomID = RoomID;
         }
 
         public string SaveXML() { 
@@ -145,7 +136,7 @@ namespace Mountain.classes {
             throw new NotImplementedException("Room load");
         }
 
-        public void ShowRoomTo(Player player) {
+        public void ShowRoomTo(Connection client) {
         }
         
     }

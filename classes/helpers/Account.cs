@@ -20,7 +20,7 @@ namespace Mountain.classes.helpers {
         [XmlIgnore]
         public Room Room { get; set; }
         [XmlIgnore]
-        public Player Player { get; set; }
+        public Connection Client { get; set; }
 
         public Account(Guid id) {
             ID = id;

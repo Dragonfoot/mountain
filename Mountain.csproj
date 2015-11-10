@@ -69,42 +69,40 @@
     <Compile Include="AreaForm.Designer.cs">
       <DependentUpon>AreaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="classes\Administrator.cs" />
     <Compile Include="classes\Area.cs" />
+    <Compile Include="classes\Connection.cs" />
     <Compile Include="classes\Equipment.cs" />
     <Compile Include="classes\helpers\Account.cs" />
     <Compile Include="classes\helpers\Attribute.cs" />
     <Compile Include="classes\helpers\Build.cs" />
-    <Compile Include="classes\helpers\CommandList.cs" />
+    <Compile Include="classes\helpers\Colors.cs" />
     <Compile Include="classes\helpers\CommunicationCommand.cs" />
-    <Compile Include="classes\helpers\EventQueue.cs" />
-    <Compile Include="classes\helpers\FormInterface.cs" />
+    <Compile Include="classes\helpers\Dispatch.cs" />
+    <Compile Include="classes\Collections\EventQueue.cs" />
     <Compile Include="classes\helpers\Functions.cs" />
     <Compile Include="classes\helpers\Globals.cs" />
-    <Compile Include="classes\helpers\MessageQueue.cs" />
-    <Compile Include="classes\helpers\Players.cs" />
+    <Compile Include="classes\helpers\LoginHandler.cs" />
+    <Compile Include="classes\Collections\MessageQueue.cs" />
+    <Compile Include="classes\helpers\Packet.cs" />
+    <Compile Include="classes\helpers\PlayerHandler.cs" />
     <Compile Include="classes\helpers\RoomID.cs" />
-    <Compile Include="classes\helpers\Rooms.cs" />
-    <Compile Include="classes\helpers\Users.cs" />
-    <Compile Include="classes\Login.cs" />
+    <Compile Include="classes\helpers\Stats.cs" />
+    <Compile Include="classes\helpers\XmlHelper.cs" />
+    <Compile Include="classes\Collections\Players.cs" />
+    <Compile Include="classes\Collections\Rooms.cs" />
+    <Compile Include="classes\Collections\Users.cs" />
     <Compile Include="classes\Identity.cs" />
     <Compile Include="classes\Items\WearableType.cs" />
     <Compile Include="classes\Items\WeaponType.cs" />
-    <Compile Include="classes\ClientConnection.cs" />
-    <Compile Include="classes\helpers\ApplicationSettings.cs" />
+    <Compile Include="classes\ApplicationSettings.cs" />
     <Compile Include="classes\TcpServer.cs" />
     <Compile Include="classes\Underling.cs" />
     <Compile Include="classes\Exit.cs" />
-    <Compile Include="classes\helpers\Colors.cs" />
-    <Compile Include="classes\helpers\Packet.cs" />
-    <Compile Include="classes\helpers\Stats.cs" />
     <Compile Include="classes\Vault.cs" />
-    <Compile Include="classes\helpers\XmlHelper.cs" />
     <Compile Include="classes\Items\Item.cs" />
     <Compile Include="classes\Mob.cs" />
     <Compile Include="classes\Room.cs" />
     <Compile Include="classes\World.cs" />
-    <Compile Include="classes\Player.cs" />
     <Compile Include="Mountain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,7 +144,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ToDo\firstMudIdeas.txt" />
     <Content Include="ToDo\Todo.txt" />
   </ItemGroup>
   <ItemGroup>

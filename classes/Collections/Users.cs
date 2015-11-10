@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Mountain.classes.helpers;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.collections {
 
     [XmlRoot ("World")]
     public class Users {
@@ -15,5 +12,10 @@ namespace Mountain.classes.helpers {
             List = new List<Account>();
         }
     }
-
 }
+/* 
+add user
+edit user
+remove user
+backup users
+*/

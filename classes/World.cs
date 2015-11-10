@@ -38,17 +38,18 @@ namespace Mountain.classes {
             settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
         }
 
-        void Players_OnPlayerRemoved(object myObject, Player player) {
+        void Players_OnPlayerRemoved(object myObject, Connection player) {
            // throw new NotImplementedException("Player removed");
         }
 
-        void Players_OnPlayerAdded(object myObject, Player player) {
+        void Players_OnPlayerAdded(object myObject, Connection player) {
            // throw new NotImplementedException("Player added");
         }
 
         public void Reload() {
           //  throw new NotImplementedException("World Reload");
         }
+
         public void Clear() {
            // throw new NotImplementedException("World Clear");
         }
@@ -110,6 +111,7 @@ namespace Mountain.classes {
                 area.StopHeart();
             }           
         }
+
         private void StopHeart() {
             if (cancellationTokenSource != null) {
                 cancellationTokenSource.Cancel();

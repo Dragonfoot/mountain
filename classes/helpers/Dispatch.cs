@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
 
-    public class CommandList {
-        private Player player { get; set; }
-        private Dictionary<string, Action<VerbPacket>> RoomFunctions;
-        private Dictionary<string, Action<VerbPacket>> InternalFunctions;
+    public class Dispatch {
+        private Connection Client;
+      //  private Dictionary<string, Action<VerbPacket>> RoomFunctions;
+      //  private Dictionary<string, Action<VerbPacket>> InternalFunctions;
         private CommunicationCommands Communications;
         private ApplicationSettings settings;
 
-        public CommandList(Player player, ApplicationSettings appSettings) {
+        public Dispatch(Connection client, ApplicationSettings appSettings) {
             this.settings = appSettings;
-            this.player = player;
+            this.Client = client;
             LoadCommands();
         }
 
@@ -33,6 +31,6 @@ namespace Mountain.classes.helpers {
         }
 
 
-    } // end commandList
+    } 
 
 }

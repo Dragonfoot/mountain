@@ -1,31 +1,30 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Threading.Tasks;
+using Mountain.classes.collections;
 
 namespace Mountain.classes.helpers {
 
     public static class XmlHelper { 
       
         //saves class to xml file
-        public static void ObjectToXml(object item, string path, ApplicationSettings settngs) {
+        public static void ObjectToXml(object item, string path, ApplicationSettings settings) {
             try {
                 var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
                 var serializer = new XmlSerializer(item.GetType());
-                var settings = new XmlWriterSettings();
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                var flags = new XmlWriterSettings();
+                flags.Indent = true;
+                flags.OmitXmlDeclaration = true;
                 using (var stream = new StringWriter())
-                using (var writer = XmlWriter.Create(stream, settings)) {
+                using (var writer = XmlWriter.Create(stream, flags)) {
                     serializer.Serialize(writer, item, emptyNamepsaces);
                     XmlDocument xmlDocument = new XmlDocument();
                     xmlDocument.Load(new StringReader(stream.ToString()));
                     xmlDocument.Save(path);
                 }
             } catch (Exception e) {
-                settngs.SystemMessageQueue.Push(e.ToString());
+                settings.SystemMessageQueue.Push(e.ToString());
             }
         }
 
@@ -68,6 +67,14 @@ namespace Mountain.classes.helpers {
             haystack.FileName = haystack.Name + ".xml";
             haystack.Administrator = true;
             users.List.Add(haystack);
+
+            Account bucky = new Account(Guid.NewGuid());
+            bucky.SetName("Bucky");
+            bucky.SetPassword("Bucky");
+            bucky.Email = "bucky@thisserver.com";
+            bucky.FileName = bucky.Name + ".xml";
+            bucky.Administrator = false;
+            users.List.Add(bucky);
 
             XmlHelper.ObjectToXml(users, path, appSettings);
         }

@@ -1,14 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Globalization;
-using System.Threading.Tasks;
 
 namespace Mountain.classes.helpers {
 
@@ -89,6 +84,10 @@ namespace Mountain.classes.helpers {
             return str.Substring(1);
         }
         public static bool HasLastCharPunctuation(this string str) {
+            if (str.IsNullOrWhiteSpace())
+                return true;
+            if (str.Length == 1)
+                return Char.IsPunctuation(str[0]);
             return Char.IsPunctuation(str[str.Length - 1]);
         }
         public static string StripFirstWord(this string str) { // returns all but the first word

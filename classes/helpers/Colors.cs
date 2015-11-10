@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-/* ansi color codes     
+/* ansi color code references   
  http://pueblo.sourceforge.net/doc/manual/ansi_color_codes.html 
  * http://ascii-table.com/ansi-escape-sequences.php
  */
-
 namespace Mountain.classes.helpers {
 
     public enum Ansi { reset, bold, dim, italic, ul, boldOff, italicOff, ulOff, black, red, green, yellow, blue, magenta, cyan, 
@@ -15,13 +14,13 @@ namespace Mountain.classes.helpers {
         private readonly static List<string> table = new List<string>();
         public const string Esc = "\x1B[";
 
-        static Colors() {   
-            table.Add(Esc+"0m");      // reset
+        static Colors() {
+            table.Add(Esc + "0m");      // reset
             // Style Modifiers (on)
-            table.Add(Esc+"1m");      // bold
-            table.Add(Esc+"2m");      // dim
-            table.Add(Esc+"3m");      // italic
-            table.Add(Esc+"4m");      // underline
+            table.Add(Esc + "1m");      // bold
+            table.Add(Esc + "2m");      // dim
+            table.Add(Esc + "3m");      // italic
+            table.Add(Esc + "4m");      // underline
             // Style Modifiers (off)
             table.Add(Esc + "22m");     // stop bold
             table.Add(Esc + "23m");     // stop italic

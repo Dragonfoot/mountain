@@ -1,18 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Xml;
-using System.Xml.Serialization;
 using System.Data;
 using System.Linq;
-using System.Xml.Linq;
-using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
 using Mountain.classes;
-using Mountain.classes.helpers;
+using Mountain.classes.collections;
 
 namespace Mountain {
 
@@ -23,11 +14,12 @@ namespace Mountain {
 
         public Mountain() {
             Messages = new MessageQueue(settings);
+            Messages.Tag = "System";
             settings = new ApplicationSettings(Messages);
             InitializeComponent();
-            this.Messages.OnMessageReceived += Messages_OnMessageReceived;
+            Messages.OnMessageReceived += Messages_OnMessageReceived;
             world = BuildDefaultWorld();
-            Console.Items.Add("Server has started");
+            logRichTextBox.AppendText("Server has started\r\n");
         }
 
         private void Messages_OnMessageReceived(object myObject, string msg) {
@@ -35,13 +27,13 @@ namespace Mountain {
                 string message = Messages.Pop();
                 if (message == null) message = msg;
                 this.Invoke((MethodInvoker) delegate {
-                    logRichTextBox.AppendText("\r\n" + message);
-                 //   Console.Items.Add(message); // runs on UI thread
+                    logRichTextBox.AppendText(">>>" + message + "\r\n");
+                    logRichTextBox.ScrollToCaret();
                 });
             } catch ( Exception e) {
                 this.Invoke((MethodInvoker)delegate {
-                    logRichTextBox.AppendText("\r\n" + e.ToString());
-                  //  Console.Items.Add(e.ToString()); // runs on UI thread
+                    logRichTextBox.AppendText(">>>" + e.ToString() + "\r\n");
+                    logRichTextBox.ScrollToCaret();
                 });
 
             }
