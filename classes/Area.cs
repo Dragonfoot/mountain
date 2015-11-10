@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -45,7 +44,6 @@ namespace Mountain.classes {
         public void StopHeart() {
             cancellationTokenSource.Cancel(); // stop heartbeat
         }
-
 
         public void StartHeart() {
             this.cancellationTokenSource = new CancellationTokenSource();
