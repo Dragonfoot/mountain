@@ -1,5 +1,4 @@
-﻿
-using Mountain.classes.helpers;
+﻿using Mountain.classes.helpers;
 
 namespace Mountain.classes.Items {
 
