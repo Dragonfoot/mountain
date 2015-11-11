@@ -1,5 +1,5 @@
 ﻿using System.Collections.Concurrent;
-using Mountain.classes.helpers;
+using Mountain.classes.dataobjects;
 using Mountain.classes.Items;
 
 namespace Mountain.classes.mobs {

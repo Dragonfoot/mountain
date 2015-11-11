@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using Mountain.classes.mobs;
-namespace Mountain.classes {
+using Mountain.classes.tcp;
+
+namespace Mountain.classes.mobs {
 
     public class Mob : Underling {
         protected List<Connection> fightingPlayers;

@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Mountain.classes {
+namespace Mountain.classes.tcp {
 
     public class TcpServerListener {
         [XmlIgnore]

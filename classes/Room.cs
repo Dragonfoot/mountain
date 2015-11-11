@@ -5,9 +5,12 @@ using System.Text;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Xml.Serialization;
-using Mountain.classes.helpers;
+using Mountain.classes.handlers;
+using Mountain.classes.dataobjects;
 using Mountain.classes.Items;
+using Mountain.classes.mobs;
 using Mountain.classes.collections;
+using Mountain.classes.tcp;
 
 namespace Mountain.classes {
 
@@ -111,17 +114,17 @@ namespace Mountain.classes {
             view.Add(Description);
             view.Add("");
             if (Exits.Count > 0) { // add color coding's
-                stringBuilder.Append("Exits: " + Functions.GetNames(Exits.ToArray()));
+                stringBuilder.Append("Exits: " + Extensions.GetNames(Exits.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Mobs.Count > 0) {
-                stringBuilder.Append("Mobs: " + Functions.GetNames(Mobs.ToArray()));
+                stringBuilder.Append("Mobs: " + Extensions.GetNames(Mobs.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Players.Count > 0) {
-                stringBuilder.Append("Players: " + Functions.GetNames(Players.ToArray()));
+                stringBuilder.Append("Players: " + Extensions.GetNames(Players.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
@@ -131,6 +134,14 @@ namespace Mountain.classes {
             }
             return view.ToArray();
         }
+
+        public string GetName() { return Name; }
+        public string GetDesciption() { return Description; }
+        public string GetExits() { return Extensions.GetNames(Exits.ToArray()); }
+        public string GetMobs() { return Extensions.GetNames(Mobs.ToArray()); }
+        public string GetPlayers() { return Extensions.GetNames(Players.ToArray()); }
+        public string GetItems() { return Extensions.GetNames(Items.ToArray()); }
+
 
         protected void Save() {
             throw new NotImplementedException("Room save");

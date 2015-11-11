@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mountain.classes.dataobjects;
+using Mountain.classes.tcp;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.handlers {
 
     public class CommunicationCommands {
         private Dictionary<string, Action<VerbPacket>> List;

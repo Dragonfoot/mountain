@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.dataobjects {
 
     public class RoomID {
         public Guid ID { get; set; }

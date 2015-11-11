@@ -3,8 +3,9 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using Mountain.classes.collections;
+using Mountain.classes.dataobjects;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.handlers {
 
     public static class XmlHelper { 
       

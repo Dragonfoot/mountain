@@ -1,7 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Net;
 
-namespace Mountain.classes {
+namespace Mountain.classes.tcp {
 
     // TcpListener wrapper to access Active state
     public class TcpListenerActive : TcpListener {

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Xml.Serialization;
+using Mountain.classes.tcp;
+using Mountain.classes.handlers;
 
-namespace Mountain.classes.helpers {
+
+namespace Mountain.classes.dataobjects {
 
     public class Account {
         public string Name { get; set; }
@@ -20,16 +23,16 @@ namespace Mountain.classes.helpers {
             ID = id;
         }
 
-        public Account() { // empty constructor needed for de/serialization
+        public Account() { // empty constructor for de/serialization
         }
 
         public bool CheckPassword(string inputPassword) {
             if (Password.IsNullOrWhiteSpace()) return false;
-            string decryptedPassword = StringCipher.Decrypt(Password);
+            string decryptedPassword = Password.Decrypt();
             return inputPassword.Equals(decryptedPassword);
         }
         public void SetPassword(string newPassword) {
-            Password = StringCipher.Encrypt(newPassword);
+            Password = newPassword.Encrypt();
         }
         public void SetName(string name) {
             Name = name.Camelize();

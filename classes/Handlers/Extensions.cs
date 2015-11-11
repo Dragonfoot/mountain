@@ -5,9 +5,13 @@ using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Globalization;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.handlers {
 
-    public static class Functions {
+    public static class Extensions {
+
+        // hide/change before shifting to production
+        private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
+        private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
 
         #region arrays
 
@@ -39,7 +43,7 @@ namespace Mountain.classes.helpers {
             return str + Environment.NewLine;
         }
 
-        public static string Indent(this string str) {            
+        public static string Indent(this string str) {
             return "\t" + str;
         }
 
@@ -55,10 +59,12 @@ namespace Mountain.classes.helpers {
 
         public static bool IsNumberOnly(this string value, bool floatPoint) { // string representation of a number?
             value = value.Trim();
-            if (value.Length == 0) return false;
+            if (value.Length == 0)
+                return false;
             foreach (char chr in value) {
                 if (!char.IsDigit(chr)) {
-                    if (floatPoint && (chr == '.')) continue;
+                    if (floatPoint && (chr == '.'))
+                        continue;
                     return false;
                 }
             }
@@ -92,7 +98,7 @@ namespace Mountain.classes.helpers {
         }
         public static string StripFirstWord(this string str) { // returns all but the first word
             if (str.WordCount() > 1) {
-                return str.Substring(str.FirstWordLength()).Trim() ;
+                return str.Substring(str.FirstWordLength()).Trim();
             }
             return "";
         }
@@ -104,7 +110,7 @@ namespace Mountain.classes.helpers {
         public static int FirstWordLength(this string str) {
             str = str.Trim();
             if (str.WordCount() > 1) {
-                string first =  str.Substring(0, str.IndexOf(" "));
+                string first = str.Substring(0, str.IndexOf(" "));
                 first = first.Trim();
                 return first.Length;
             }
@@ -122,51 +128,9 @@ namespace Mountain.classes.helpers {
             return result;
         }
 
-
-        #endregion
-
-        #region Ansi
-
-        public static string ClearScreenWithTab(this string str, int size) {
-            return "\x1B[2J" + "\x1B[" + size.ToString() + "C" + "\x1B[H" + str;
-        }        
         
-        public static string WordWrap(this string sentence, int width) {  // takes a long string and formats to width
-            StringBuilder lines = new StringBuilder();
-            string[] words = sentence.Split(' ');
-            StringBuilder buildLine = new StringBuilder("");
-            foreach (var word in words) {
-                if (word.Length + buildLine.Length + 1 > width) { // check if have we exceeded line width
-                    lines.Append(buildLine.ToString().Indent().NewLine());
-                    buildLine.Clear();
-                }
-                buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);  // remove space at start of new line
-            }
-            if (buildLine.Length > 0) { // finished loop, check for final words to include
-                lines.Append(buildLine.ToString().Indent().NewLine());
-            }
-            return lines.ToString();
-        }
-        #endregion
-    }
-        
-    #region cryptography
-    // taken from Stack Overflow.
-    // change and hide IV and passPhrase before production release
-
-    public static class StringCipher { 
-
-        // This constant string is used as a "salt" value for the PasswordDeriveBytes function calls.
-        // This size of the IV (in bytes) must = (key size / 8).  Default key size is 256, so the IV must be
-        // 32 bytes long.  Using a 16 character string here gives us 32 bytes when converted to a byte array.
-
-        private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
-        // passPhrase was originally a parameter for each function, storing it here for simplicity for now
-        private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
-        // This constant is used to determine the key size of the encryption algorithm.
         private const int keysize = 256;
-
-        public static string Encrypt(string plainText) {
+        public static string Encrypt(this string plainText) {
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
             using (PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null)) {
                 byte[] keyBytes = password.GetBytes(keysize / 8);
@@ -185,7 +149,7 @@ namespace Mountain.classes.helpers {
                 }
             }
         }
-        public static string Decrypt(string cipherText) {
+        public static string Decrypt(this string cipherText) {
             byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
             using (PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null)) {
                 byte[] keyBytes = password.GetBytes(keysize / 8);
@@ -203,6 +167,34 @@ namespace Mountain.classes.helpers {
                 }
             }
         }
+
+
+
+        #endregion
+
+        #region Ansi
+
+        public static string ClearScreenWithTab(this string str, int size) {
+            return "\x1B[2J" + "\x1B[" + size.ToString() + "C" + "\x1B[H" + str;
+        }
+
+        public static string WordWrap(this string sentence, int width) {  // takes a long string and formats to width
+            StringBuilder lines = new StringBuilder();
+            string[] words = sentence.Split(' ');
+            StringBuilder buildLine = new StringBuilder("");
+            foreach (var word in words) {
+                if (word.Length + buildLine.Length + 1 > width) { // check if have we exceeded line width
+                    lines.Append(buildLine.ToString().Indent().NewLine());
+                    buildLine.Clear();
+                }
+                buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);  // remove space at start of new line
+            }
+            if (buildLine.Length > 0) { // finished loop, check for final words to include
+                lines.Append(buildLine.ToString().Indent().NewLine());
+            }
+            return lines.ToString();
+        }
+
+        #endregion
     }
-    #endregion
 }

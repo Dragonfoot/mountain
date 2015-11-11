@@ -1,5 +1,5 @@
 ﻿
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.dataobjects {
 
     public enum itemType {
         unknown, weapon, armour, money, consumable, clothing, valuables,

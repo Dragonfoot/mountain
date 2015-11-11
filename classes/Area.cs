@@ -11,7 +11,7 @@ namespace Mountain.classes {
         [XmlArray("Rooms")]
         public List<Room> Rooms { get; private set; }
         [XmlIgnore]
-        public bool Active { get; set; }  // is this currently in memory or null to conserver resources
+        public bool Active { get; set; }  // in memory or not, conserver resources
 
         public Area() {
             Name = "new area";

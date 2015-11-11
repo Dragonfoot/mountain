@@ -5,7 +5,7 @@ using System.Collections.Generic;
  http://pueblo.sourceforge.net/doc/manual/ansi_color_codes.html 
  * http://ascii-table.com/ansi-escape-sequences.php
  */
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.dataobjects {
 
     public enum Ansi { reset, bold, dim, italic, ul, boldOff, italicOff, ulOff, black, red, green, yellow, blue, magenta, cyan, 
                             white, blackBk, redBk, greenBK, yellowBk, blueBk, magentaBk, cyanBk, whiteBk, clearScreen };

@@ -3,17 +3,18 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using Mountain.classes.helpers;
+using Mountain.classes.dataobjects;
+using Mountain.classes.handlers;
 
-namespace Mountain.classes {
+namespace Mountain.classes.tcp {
 
     public class Connection {
         private StateObject state { get; set; }
         public TcpClient Socket { get; set; }
         public ApplicationSettings settings;
-        private LoginHandler LoginHandler;
-        private PlayerHandler PlayerHandler;
-        private AdminHandler AdminHandler; // todo
+        private LoginHandler LoginHandler;   // loggin plugin
+        private PlayerHandler PlayerHandler; // player pligin
+        private AdminHandler AdminHandler; // todo admin plugin
         public CommandHandler Commands;
         public Account Account { get; set; }
         public Room Room { get; set; }
@@ -73,11 +74,6 @@ namespace Mountain.classes {
             PlayerHandler = new PlayerHandler(this, settings);
             Commands = PlayerHandler.OnPlayerMessageReceived;
             LoginHandler = null;
-        }
-
-        public void StartAdministrator() {  // swap out login for admin dispatcher handler
-            StartPlayer();
-            // add in admin handler
         }
 
         private void SetRoom(Room room) {

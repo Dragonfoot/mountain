@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mountain.classes.tcp;
+using Mountain.classes.dataobjects;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.handlers {
 
     public class Dispatch {
         private Connection Client;

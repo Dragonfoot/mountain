@@ -1,4 +1,4 @@
-﻿using Mountain.classes.helpers;
+﻿using Mountain.classes.dataobjects;
 using System.Xml.Serialization;
 
 namespace Mountain.classes {

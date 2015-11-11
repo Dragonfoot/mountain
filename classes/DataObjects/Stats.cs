@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.dataobjects {
 
     public class Stats {   // list of possible player attributes set at arbitrary level 1 defaults
         protected int health = 18;

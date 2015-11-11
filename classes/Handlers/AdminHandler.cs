@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.handlers {
 
-    public class AdminHandler {
+    public class AdminHandler {  // add into player handler if player is admin
 
         public AdminHandler() {
         }

@@ -1,10 +1,7 @@
-﻿/*using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;*/
+﻿using Mountain.classes.tcp;
+using Mountain.classes.dataobjects;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.handlers {
 
     public class PlayerHandler {
         Connection Client;
@@ -18,7 +15,6 @@ namespace Mountain.classes.helpers {
         }
 
         public void OnPlayerMessageReceived(object myObject, string message) {
-        //    string message = baseMessageQueue.Pop();
             if (message.IsNullOrWhiteSpace()) return;
             VerbPacket packet = Parse(message, Client);
             if (packet == null) {

@@ -1,5 +1,5 @@
 ﻿
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.dataobjects {
 
     public class ObjectAttributes {
         public bool AdminOnly { get; set; }

@@ -1,5 +1,6 @@
-﻿
-namespace Mountain.classes.helpers {
+﻿using Mountain.classes.tcp;
+
+namespace Mountain.classes.dataobjects {
 
     public enum PacketType { data, command, activity, callback, verb };
 

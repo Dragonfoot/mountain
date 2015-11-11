@@ -1,6 +1,8 @@
 ﻿using System;
+using Mountain.classes.dataobjects;
+using Mountain.classes.tcp;
 
-namespace Mountain.classes.helpers {
+namespace Mountain.classes.handlers {
 
     public enum login { error, name, newUser, password, newpassword, confirmPassword, raceType, stats }
     public enum userStatus { loggedIn, nonExistent, laggedOut, available}
