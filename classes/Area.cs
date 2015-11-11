@@ -11,11 +11,12 @@ namespace Mountain.classes {
         [XmlArray("Rooms")]
         public List<Room> Rooms { get; private set; }
         [XmlIgnore]
-        public bool Active { get; set; }
+        public bool Active { get; set; }  // is this currently in memory or null to conserver resources
 
         public Area() {
             Name = "new area";
             Description = "new area";
+            Active = true;
             cancellationTokenSource = new CancellationTokenSource();
             Rooms = new List<Room>();
         }

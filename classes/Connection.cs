@@ -13,6 +13,7 @@ namespace Mountain.classes {
         public ApplicationSettings settings;
         private LoginHandler LoginHandler;
         private PlayerHandler PlayerHandler;
+        private AdminHandler AdminHandler; // todo
         public CommandHandler Commands;
         public Account Account { get; set; }
         public Room Room { get; set; }
@@ -50,11 +51,11 @@ namespace Mountain.classes {
                 }
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // wait for next
             }
+            catch (SocketException e) {
+                settings.SystemMessageQueue.Push("CC0: " + e.ToString());
+            }
             catch (ObjectDisposedException e) {
                 settings.SystemMessageQueue.Push("CC1: " + e.ToString());
-            }
-            catch (SocketException e) {
-                settings.SystemMessageQueue.Push("Socket: " + e.ToString());
             }
             catch (Exception e) {
                 settings.SystemMessageQueue.Push("CC2: " + e.ToString());
@@ -62,16 +63,21 @@ namespace Mountain.classes {
         }
 
         public void StartLogin() {
-            Commands = LoginHandler.OnMessageReceived; // load the login dispatcher
+            Commands = LoginHandler.OnMessageReceived; // load the login dispatch handler
             LoginHandler.Start(); //
         }
 
-        public void StartPlayer() { // swap out login for player dispatcher
+        public void StartPlayer() { // swap out login for player dispatcher handler
             Room = settings.Void;
             settings.Void.AddPlayer(this);
             PlayerHandler = new PlayerHandler(this, settings);
             Commands = PlayerHandler.OnPlayerMessageReceived;
             LoginHandler = null;
+        }
+
+        public void StartAdministrator() {  // swap out login for admin dispatcher handler
+            StartPlayer();
+            // add in admin handler
         }
 
         private void SetRoom(Room room) {

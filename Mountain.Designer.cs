@@ -53,6 +53,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.roomsListBox = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.listenerCheckBox = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -200,6 +201,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.listenerCheckBox);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.button6);
@@ -207,7 +209,7 @@
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.groupBox1.Location = new System.Drawing.Point(22, 39);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(99, 132);
+            this.groupBox1.Size = new System.Drawing.Size(99, 133);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Server";
@@ -228,7 +230,7 @@
             this.textBox2.Size = new System.Drawing.Size(55, 20);
             this.textBox2.TabIndex = 2;
             this.textBox2.Text = "8090";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button6
             // 
@@ -284,6 +286,19 @@
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 15;
             this.label3.Text = "Rooms";
+            // 
+            // listenerCheckBox
+            // 
+            this.listenerCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.listenerCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.listenerCheckBox.Checked = true;
+            this.listenerCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.listenerCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.listenerCheckBox.Location = new System.Drawing.Point(70, 19);
+            this.listenerCheckBox.Name = "listenerCheckBox";
+            this.listenerCheckBox.Size = new System.Drawing.Size(16, 16);
+            this.listenerCheckBox.TabIndex = 16;
+            this.listenerCheckBox.UseVisualStyleBackColor = false;
             // 
             // Mountain
             // 
@@ -344,6 +359,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox roomsListBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox listenerCheckBox;
     }
     }
 

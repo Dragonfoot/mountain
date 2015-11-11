@@ -2,7 +2,7 @@
 
 namespace Mountain.classes.helpers {
 
-    public enum login { error, name, newUser, password, newpassword, done }
+    public enum login { error, name, newUser, password, newpassword, confirmPassword, raceType, stats }
     public enum userStatus { loggedIn, nonExistent, laggedOut, available}
 
     public class LoginHandler {
@@ -82,34 +82,48 @@ namespace Mountain.classes.helpers {
                         Client.Send("".NewLine().NewLine().Color(Ansi.yellow), false);
                         Client.Send("Welcome back ".Color(Ansi.white, Ansi.white) + LoginClient.Name + "!".NewLine(), true);
                         Client.Account = LoginClient;
-                        Client.settings.SwapLoginForPlayer(Client); // swap out login for player dispatcher
+                        Client.settings.SwapLoginForPlayer(Client); // swap out login for player handler
                         return;
                     }
                     Client.Send(" Remember, passwords are case sensitive".NewLine().Color(Ansi.yellow), false);
                     StartLogin();
                     break;
                 case login.newpassword:
+                    // confirm new password
                     break;
-                case login.done:
+                case login.confirmPassword:
+                    if (NewUser()) {
+                        Client.Account = LoginClient;
+                        Client.settings.SwapLoginForPlayer(Client); // swap out login for player handler
+                        return;
+                    }
+                    break;
+                case login.raceType:
+                    break;
+                case login.stats:
                     break;
                 case login.error:
                     break;
             }
         }
 
-        private userStatus checkName(string str) {
-            foreach (Account user in Client.settings.RegisteredUsers) { // is name in our userList
-                if (String.Equals(str, user.Name, StringComparison.OrdinalIgnoreCase)) {
+        private bool NewUser() {
+            return false;
+        }
+
+        private userStatus checkName(string name) {
+            foreach (Account user in Client.settings.RegisteredUsers) { // find name in list
+                if (String.Equals(name, user.Name, StringComparison.OrdinalIgnoreCase)) {
                     LoginClient.Name = user.Name;
                     LoginClient.Password = user.Password;
                     LoginClient.Email = user.Email;
                     LoginClient.Administrator = user.Administrator;
                     if (settings.Players.Exists(user.Name))
-                        return userStatus.loggedIn;
-                    return userStatus.available; 
+                        return userStatus.loggedIn;  // name is already logged in.. timed out?
+                    return userStatus.available; // name is registered user
                 }
             }
-            return userStatus.nonExistent; // requesting new user?
+            return userStatus.nonExistent; // make new user?
         }
     }
 }

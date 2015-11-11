@@ -15,14 +15,14 @@ namespace Mountain.classes {
         public ApplicationSettings settings;
         protected ListBox Console;
         [XmlIgnore]
-        public TcpServer portListener;
+        public TcpServerListener portListener;
         public int Port;
         private CancellationTokenSource cancellationTokenSource;
 
         public World(ApplicationSettings appSettings) {
             InitializeSettings(appSettings);
             Areas = new List<Area>();
-            portListener = new TcpServer(this, appSettings);
+            portListener = new TcpServerListener(this, appSettings);
             if (Port < 5000 || Port > 10000)
                 Port = 8090;
       //      portListener.StartServer(Port);

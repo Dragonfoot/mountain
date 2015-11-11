@@ -8,7 +8,7 @@ namespace Mountain.classes.helpers {
 
     public static class XmlHelper { 
       
-        //saves class to xml file
+        //saves class to xml file without namespace
         public static void ObjectToXml(object item, string path, ApplicationSettings settings) {
             try {
                 var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });

@@ -20,7 +20,7 @@ namespace Mountain.classes.helpers {
             ID = id;
         }
 
-        public Account() {
+        public Account() { // empty constructor needed for de/serialization
         }
 
         public bool CheckPassword(string inputPassword) {

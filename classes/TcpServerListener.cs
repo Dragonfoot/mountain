@@ -6,18 +6,18 @@ using System.Threading;
 
 namespace Mountain.classes {
 
-    public class TcpServer {
+    public class TcpServerListener {
         [XmlIgnore]
         public int Connections { get; private set; }
         protected AutoResetEvent connectionWaitDone;
-        public TcpListenerEx tcpListener;
+        public TcpListenerActive tcpListener;
         public int Port;
         [XmlIgnore]
         World world;
         [XmlIgnore]
         ApplicationSettings settings;
 
-        public TcpServer(World world, ApplicationSettings appSettings) {
+        public TcpServerListener(World world, ApplicationSettings appSettings) {
             this.world = world;
             connectionWaitDone = new AutoResetEvent(false);
             this.settings = appSettings;
@@ -29,7 +29,7 @@ namespace Mountain.classes {
                 tcpListener.Stop();
                 tcpListener = null;
             }
-            tcpListener = new TcpListenerEx(IPAddress.Any, port);
+            tcpListener = new TcpListenerActive(IPAddress.Any, port);
             tcpListener.Start();
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, tcpListener);
         }
@@ -39,7 +39,7 @@ namespace Mountain.classes {
         }
 
         protected void HandleAsyncConnection(IAsyncResult result) {
-            TcpListenerEx listener = (TcpListenerEx)result.AsyncState;
+            TcpListenerActive listener = (TcpListenerActive)result.AsyncState;
             TcpClient client = listener.EndAcceptTcpClient(result);
             connectionWaitDone.Set();
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);

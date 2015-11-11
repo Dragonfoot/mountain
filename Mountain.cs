@@ -4,9 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Mountain.classes;
 using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
-using Mountain.classes.helpers;
 using Mountain.classes.collections;
 
 namespace Mountain {
@@ -24,7 +22,10 @@ namespace Mountain {
             Messages.OnMessageReceived += Messages_OnMessageReceived;
             world = BuildDefaultWorld();
             world.StartListen(world.Port);
-            logRichTextBox.AppendText("Server has started\r\n");
+            if (world.portListener.Active()) {
+                listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
+                logRichTextBox.AppendText("Server has started\r\n");
+            }
         }
 
         private void Messages_OnMessageReceived(object myObject, string msg) {
@@ -51,13 +52,11 @@ namespace Mountain {
         }
 
         private void serverStart(object sender, EventArgs e) { // start
-            if (world != null) {
-                world.StartListen(world.Port);
-                Console.Items.Add("Server has started");
+            if (world.portListener.Active()) {
+                listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
+                Console.Items.Add("Server is already running");
             } else {
-                if (world.portListener.Active()) {
-                    Console.Items.Add("Server is already running");
-                }
+                listenerCheckBox.BackColor = System.Drawing.Color.Red;
             }
         }
 
