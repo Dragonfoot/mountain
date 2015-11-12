@@ -8,9 +8,10 @@ namespace Mountain.classes.handlers {
 
     public class Dispatch {
         private Connection Client;
-      //  private Dictionary<string, Action<VerbPacket>> RoomFunctions;
-      //  private Dictionary<string, Action<VerbPacket>> InternalFunctions;
-        private CommunicationCommands Communications;
+        //  private Dictionary<string, Action<Packet>> playerCommands;
+        //  private Dictionary<string, Action<Packet>> areaCommands;
+        //  private Dictionary<string, Action<Packet>> worldCommands;
+        private RoomCommands RoomCommands;
         private ApplicationSettings settings;
 
         public Dispatch(Connection client, ApplicationSettings appSettings) {
@@ -20,16 +21,16 @@ namespace Mountain.classes.handlers {
         }
 
         private void LoadCommands() {
-            Communications = new CommunicationCommands(settings);
+            RoomCommands = new RoomCommands(settings);
         }
-        public void InvokeCommand(string verb, VerbPacket packet) {
-            Communications.InvokeCommand(verb, packet);
+        public void InvokeCommand(string verb, Packet packet) {
+            RoomCommands.InvokeCommand(verb, packet);
         }
-        public bool DoCommand(string verb, VerbPacket vp, Dictionary<string, Action<VerbPacket>> dictionary) {
+        public bool DoCommand(string verb, Packet vp, Dictionary<string, Action<Packet>> dictionary) {
             return false;
         }
         public bool IsCommunicationVerb(string verb) {
-            return Communications.Keys.Any(key => key.StartsWith(verb));
+            return RoomCommands.Keys.Any(key => key.StartsWith(verb));
         }
 
 

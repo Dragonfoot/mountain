@@ -21,6 +21,7 @@ namespace Mountain.classes.handlers {
                 "right. Sensor arrays, routing maps and schedulers glowing quietly above them, monitoring every aspect of this worlds events and " +
                 "activities. To your left, a long line of guarded office doors, guard challenging and recording those wanting access. ";
             controlRoom = Room(name, description, settings);
+            controlRoom.Tag = "ControlCenter";
 
             Room transitHub;
             name = "Central Transit Hub";
@@ -39,10 +40,11 @@ namespace Mountain.classes.handlers {
             LinkRooms(controlRoom, controlExitAttributes, transitHub, transitHubAttributes);
 
             Room theVoid;
-            name = "Void";
+            name = "The Empty Place";
             description = "You find youself weightlessly floating in some kind of silent, lonely, dark, " +
                 "endless, and as many other voidy spacy words there might be.. space..";
             theVoid = new classes.Room(name, description, settings);
+            theVoid.Tag = "Void";
             ExitAttributes voidExitAttributes = new ExitAttributes() {
                 Label = "Return to the Known Place",
             };
@@ -85,7 +87,7 @@ namespace Mountain.classes.handlers {
             return new classes.Area();
         }
 
-        public static Room Void(ApplicationSettings settings) {  // stub
+        public static Room TheVoid(ApplicationSettings settings) {  // stub
             return new classes.Room(settings);
         }
 
@@ -96,6 +98,7 @@ namespace Mountain.classes.handlers {
         public static Exit Exit(ExitAttributes attributes) { 
             Exit exit =  new classes.Exit();
             exit.Attributes = attributes;
+            exit.Name = attributes.Label;
             return exit;
         }
 

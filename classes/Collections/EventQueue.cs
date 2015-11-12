@@ -5,20 +5,20 @@ namespace Mountain.classes.collections {
 
     public class PlayerEventQueue {
         public string Tag { get; set; }
-        private ConcurrentQueue<PlayerEventPacket> queue;
-        public delegate void EventHandler(object myObject, PlayerEventPacket packet);
+        private ConcurrentQueue<Packet> queue;
+        public delegate void EventHandler(object myObject, Packet packet);
         public event EventHandler OnEventReceived;
 
         public PlayerEventQueue() {
-            queue = new ConcurrentQueue<PlayerEventPacket>();
+            queue = new ConcurrentQueue<Packet>();
         }
 
-        public void Push(PlayerEventPacket packet) {
+        public void Push(Packet packet) {
             queue.Enqueue(packet);
             OnEventReceived(this, packet);
         }
-        public PlayerEventPacket Pop() {
-            PlayerEventPacket packet;
+        public Packet Pop() {
+            Packet packet;
             return (queue.TryDequeue(out packet)) ? packet : null;
         }
 

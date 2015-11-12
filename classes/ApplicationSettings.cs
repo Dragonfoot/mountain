@@ -16,7 +16,7 @@ namespace Mountain.classes {
         public List<Connection> Logins { get; set; }
         public World world;
         public Players Players { get; set; }
-        public Room Void { get; set; }
+        public Room TheVoid { get; set; }
         public string AppDirectory { get; private set; }
         public string BaseDirectory { get { return AppDirectory + Settings.Default.WorldsDirectory; } }
         public string RegisteredUsersAccounts { get { return Settings.Default.RegisteredAccounts; } }

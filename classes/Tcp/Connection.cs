@@ -46,7 +46,7 @@ namespace Mountain.classes.tcp {
                 int read = state.Socket.Client.EndReceive(ar); // get number of bytes read in
                 if (read > 0) {
                     string incomingMessage = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
-                    Task HandleMessage = new Task(() => Commands(this, incomingMessage)); // setup thread for plugin's dispatcher
+                    Task HandleMessage = new Task(() => Commands(this, incomingMessage)); // setup thread for dispatcher
                     HandleMessage.Start(); // start thread
                     MessageReceivedDone.Set(); // tell calling thread we are done with this message
                 }
@@ -69,8 +69,8 @@ namespace Mountain.classes.tcp {
         }
 
         public void StartPlayer() { // swap out login for player dispatcher handler
-            Room = settings.Void;
-            settings.Void.AddPlayer(this);
+            Room = settings.TheVoid;
+            settings.TheVoid.AddPlayer(this);
             PlayerHandler = new PlayerHandler(this, settings);
             Commands = PlayerHandler.OnPlayerMessageReceived;
             LoginHandler = null;

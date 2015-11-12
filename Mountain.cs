@@ -69,7 +69,7 @@ namespace Mountain {
         private World BuildDefaultWorld() {
             if (world != null) { world = null; }
             world = new World(settings);
-            world.settings.Void = world.Areas[0].Rooms.Find(room => room.Name == "Void");
+            world.settings.TheVoid = world.Areas[0].Rooms.Find(room => room.Tag == "Void");
             areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
             areaListBox.SelectedIndex = 0;
             return world;
@@ -80,7 +80,7 @@ namespace Mountain {
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 world.Areas.Add(areaForm.area);
-                world.settings.Void = areaForm.area.Rooms.Find(room => room.Name == "Void");
+                world.settings.TheVoid = areaForm.area.Rooms.Find(room => room.Tag == "Void");
                 areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                 areaListBox.SelectedIndex = 0;
             } else {

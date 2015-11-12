@@ -28,7 +28,7 @@ namespace Mountain.classes.handlers {
             welcome += "Do be prepared for unexpected and mostly friendly behaviour from our many inhabitants. They ";
             welcome += "have all taken solemn oaths to do their very utmost for you. Good luck!";
             Client.Send("".Color(Ansi.clearScreen).NewLine().NewLine(), false);
-            Client.Send(welcome.WordWrap(65).Color(true, Ansi.yellow).NewLine(), false);
+            Client.Send(welcome.WordWrap().Color(true, Ansi.yellow).NewLine(), false);
             StartLogin();
         }
 
@@ -82,7 +82,7 @@ namespace Mountain.classes.handlers {
                 case login.password:
                     if (LoginClient.CheckPassword(message)) {
                         Client.Send("".NewLine().NewLine().Color(Ansi.yellow), false);
-                        Client.Send("Welcome back ".Color(Ansi.white, Ansi.white) + LoginClient.Name + "!".NewLine(), true);
+                        Client.Send("Welcome back ".Color(Ansi.white, Ansi.white) + LoginClient.Name + "!".NewLine().NewLine(), true);
                         Client.Account = LoginClient;
                         Client.settings.SwapLoginForPlayer(Client); // swap out login for player handler
                         return;

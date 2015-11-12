@@ -17,6 +17,7 @@ namespace Mountain.classes.dataobjects {
         fitsAll, tiny, small, medium, large, huge
     }
     public static class Global {
-        public const int indent = 3;
+        public const int indent = 1;
+        public const int pWidth = 65;
     }
 }

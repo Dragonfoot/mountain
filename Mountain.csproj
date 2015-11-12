@@ -70,6 +70,9 @@
       <DependentUpon>AreaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="classes\Area.cs" />
+    <Compile Include="classes\Handlers\Combat.cs" />
+    <Compile Include="classes\Handlers\Emote.cs" />
+    <Compile Include="classes\Handlers\RoomCommands.cs" />
     <Compile Include="classes\Tcp\Connection.cs" />
     <Compile Include="classes\Handlers\AdminHandler.cs" />
     <Compile Include="classes\DataObjects\Equipment.cs" />
@@ -77,7 +80,6 @@
     <Compile Include="classes\DataObjects\Attribute.cs" />
     <Compile Include="classes\Handlers\Build.cs" />
     <Compile Include="classes\DataObjects\Colors.cs" />
-    <Compile Include="classes\Handlers\CommunicationCommand.cs" />
     <Compile Include="classes\Handlers\Dispatch.cs" />
     <Compile Include="classes\Collections\EventQueue.cs" />
     <Compile Include="classes\Handlers\Extensions.cs" />

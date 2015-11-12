@@ -15,20 +15,15 @@ namespace Mountain.classes.handlers {
         }
 
         public void OnPlayerMessageReceived(object myObject, string message) {
-            if (message.IsNullOrWhiteSpace()) return;
-            VerbPacket packet = Parse(message, Client);
-            if (packet == null) {
-                string verb = message.FirstWord();
+            if (message.IsNullOrWhiteSpace())
+                return;
+            Packet packet = Parse(message, Client);
+            if (!packet.known) {
+                string verb = packet.verb;
                 Client.Send("I don't know what to do with \"".Color(Ansi.yellow) + verb.Color(Ansi.white) + "\" just yet.".Color(Ansi.yellow).NewLine(), true);
                 if (Commands.IsCommunicationVerb(verb)) {
                     Client.Send("But, um.. I did a few minutes ago..\"scratch\"".Color(Ansi.yellow).NewLine(), true);
                 }
-                string str = message.TrimStart(' ');
-                str = str.StripExtraSpaces();
-                string command = str.FirstWord();
-                string tail = str.StripFirstWord();
-                string response = command + " \"" + tail.Trim() + "\"";
-                Client.Send(response.Color(Ansi.cyan, Ansi.white).NewLine(), true);
                 return;
             }
             Commands.InvokeCommand(packet.verb, packet);
@@ -40,23 +35,39 @@ namespace Mountain.classes.handlers {
             Client.Account.Room = room;
         }
 
-        private VerbPacket Parse(string str, Connection player) {
-            string verb, tail = string.Empty;
+        private Packet Parse(string str, Connection player) {
+            Packet packet = new Packet(string.Empty, string.Empty, player);
             str = str.TrimStart(' ');
             str = str.StripExtraSpaces();
             if (str.FirstChar() == '\'') {
-                verb = "say";
-                tail = str.StripFirstChar();
-                tail = tail.TrimStart(' ');
+                str = str.Remove(0, 1).Insert(0, "say ").StripExtraSpaces();
+                packet.known = true;
             } else {
-                verb = str.FirstWord();
-                if (verb == "say") { tail = str.StripFirstWord(); } else { tail = str.StripFirstWord().ToLower(); }
+                if (str.FirstWordIsSingleChar()) {
+                    char ch = str.FirstChar();
+                    switch (ch) {
+                        case 'l':
+                            str = str.Remove(0, 1).Insert(0, "look");
+                            packet.known = true;
+                            break;
+                        case 'i':
+                            str = str.Remove(0, 1).Insert(0, "inventory");
+                            packet.known = true;
+                            break;
+                        case '?':
+                            str = str.Remove(0, 1).Insert(0, "help");
+                            packet.known = true;
+                            break;
+                    }
+                }
             }
-            if (Commands.IsCommunicationVerb(verb)) {
-                VerbPacket packet = new VerbPacket(verb, tail, player);
-                return packet;
+            packet.verb = str.FirstWord();
+            packet.parameter = str.StripFirstWord();
+            if (Commands.IsCommunicationVerb(packet.verb)) {
+                packet.known = true;
             }
-            return null;
+            return packet;
         }
     }
 }
+

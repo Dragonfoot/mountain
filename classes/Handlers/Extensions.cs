@@ -4,6 +4,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.handlers {
 
@@ -44,7 +45,10 @@ namespace Mountain.classes.handlers {
         }
 
         public static string Indent(this string str) {
-            return "\t" + str;
+            for (int i = 0; i <= Global.indent; i++) {
+                str = " " + str;
+            }
+            return str;
         }
 
         public static string ToProper(this string str) { // make all words' first char uppercase
@@ -85,6 +89,15 @@ namespace Mountain.classes.handlers {
         }
         public static char FirstChar(this string str) {
             return str[0];
+        }
+        public static bool FirstWordIsSingleChar(this string str) {
+            if (str.Length == 1)
+                return true;
+            if(str.Length > 1) {
+                if (str[1] == ' ')
+                    return true;
+            }
+            return false;
         }
         public static string StripFirstChar(this string str) {
             return str.Substring(1);
@@ -167,9 +180,6 @@ namespace Mountain.classes.handlers {
                 }
             }
         }
-
-
-
         #endregion
 
         #region Ansi
@@ -178,7 +188,7 @@ namespace Mountain.classes.handlers {
             return "\x1B[2J" + "\x1B[" + size.ToString() + "C" + "\x1B[H" + str;
         }
 
-        public static string WordWrap(this string sentence, int width) {  // takes a long string and formats to width
+        public static string WordWrap(this string sentence, int width = Global.pWidth) {  // takes a long string and formats to width
             StringBuilder lines = new StringBuilder();
             string[] words = sentence.Split(' ');
             StringBuilder buildLine = new StringBuilder("");

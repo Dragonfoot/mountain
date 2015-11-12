@@ -30,6 +30,7 @@ namespace Mountain.classes {
         public PlayerEventQueue Messages;
         [XmlIgnore]
         public ApplicationSettings settings;
+        public string Tag { get; set; }
 
         public Room(ApplicationSettings appSettings) {
             settings = appSettings;
@@ -55,6 +56,7 @@ namespace Mountain.classes {
         public Room() {
 
         }
+
         public void SetName(string name) {
             Name = name;
             this.RoomID.Name = name;
@@ -72,7 +74,7 @@ namespace Mountain.classes {
             Messages.OnEventReceived += Messages_OnPlayerEventReceived;
         }
 
-        private void Messages_OnPlayerEventReceived(object myObject, PlayerEventPacket packet) {
+        private void Messages_OnPlayerEventReceived(object myObject, Packet packet) {
             Packet message = Messages.Pop(); 
             if (message == null) message = packet;
             settings.SystemMessageQueue.Push("Room received: " + message);
