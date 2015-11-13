@@ -44,6 +44,7 @@
             this.Console = new System.Windows.Forms.ListBox();
             this.logRichTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listenerCheckBox = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
@@ -52,12 +53,25 @@
             this.worldBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.roomsListBox = new System.Windows.Forms.ListBox();
+            this.RoomsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.NewContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PasteContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.LoadContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveAsContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveAsTemplateContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.MoveToAreaContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
-            this.listenerCheckBox = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.worldBindingSource)).BeginInit();
+            this.RoomsContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -214,6 +228,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Server";
             // 
+            // listenerCheckBox
+            // 
+            this.listenerCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.listenerCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.listenerCheckBox.Checked = true;
+            this.listenerCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.listenerCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.listenerCheckBox.Location = new System.Drawing.Point(70, 19);
+            this.listenerCheckBox.Name = "listenerCheckBox";
+            this.listenerCheckBox.Size = new System.Drawing.Size(16, 16);
+            this.listenerCheckBox.TabIndex = 16;
+            this.listenerCheckBox.UseVisualStyleBackColor = false;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -272,11 +299,101 @@
             // 
             // roomsListBox
             // 
+            this.roomsListBox.ContextMenuStrip = this.RoomsContextMenu;
             this.roomsListBox.FormattingEnabled = true;
             this.roomsListBox.Location = new System.Drawing.Point(793, 67);
             this.roomsListBox.Name = "roomsListBox";
             this.roomsListBox.Size = new System.Drawing.Size(185, 485);
             this.roomsListBox.TabIndex = 14;
+            this.roomsListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.roomsListBox_MouseDown);
+            // 
+            // RoomsContextMenu
+            // 
+            this.RoomsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NewContextMenuItem,
+            this.EditContextMenuItem,
+            this.CopyContextMenuItem,
+            this.PasteContextMenuItem,
+            this.ClearContextMenuItem,
+            this.toolStripSeparator2,
+            this.LoadContextMenuItem,
+            this.SaveAsContextMenuItem,
+            this.SaveAsTemplateContextMenuItem,
+            this.toolStripSeparator3,
+            this.MoveToAreaContextMenuItem,
+            this.RemoveContextMenuItem});
+            this.RoomsContextMenu.Name = "NewRoom";
+            this.RoomsContextMenu.Size = new System.Drawing.Size(155, 258);
+            // 
+            // NewContextMenuItem
+            // 
+            this.NewContextMenuItem.Name = "NewContextMenuItem";
+            this.NewContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.NewContextMenuItem.Text = "New";
+            // 
+            // EditContextMenuItem
+            // 
+            this.EditContextMenuItem.Name = "EditContextMenuItem";
+            this.EditContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.EditContextMenuItem.Text = "Edit";
+            // 
+            // CopyContextMenuItem
+            // 
+            this.CopyContextMenuItem.Name = "CopyContextMenuItem";
+            this.CopyContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.CopyContextMenuItem.Text = "Copy";
+            // 
+            // PasteContextMenuItem
+            // 
+            this.PasteContextMenuItem.Name = "PasteContextMenuItem";
+            this.PasteContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.PasteContextMenuItem.Text = "Paste";
+            // 
+            // ClearContextMenuItem
+            // 
+            this.ClearContextMenuItem.Name = "ClearContextMenuItem";
+            this.ClearContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.ClearContextMenuItem.Text = "Clear";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(151, 6);
+            // 
+            // LoadContextMenuItem
+            // 
+            this.LoadContextMenuItem.Name = "LoadContextMenuItem";
+            this.LoadContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.LoadContextMenuItem.Text = "Load";
+            // 
+            // SaveAsContextMenuItem
+            // 
+            this.SaveAsContextMenuItem.Name = "SaveAsContextMenuItem";
+            this.SaveAsContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.SaveAsContextMenuItem.Text = "SaveAs";
+            // 
+            // SaveAsTemplateContextMenuItem
+            // 
+            this.SaveAsTemplateContextMenuItem.Name = "SaveAsTemplateContextMenuItem";
+            this.SaveAsTemplateContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.SaveAsTemplateContextMenuItem.Text = "SaveToTemplate";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(151, 6);
+            // 
+            // MoveToAreaContextMenuItem
+            // 
+            this.MoveToAreaContextMenuItem.Name = "MoveToAreaContextMenuItem";
+            this.MoveToAreaContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.MoveToAreaContextMenuItem.Text = "MoveTo";
+            // 
+            // RemoveContextMenuItem
+            // 
+            this.RemoveContextMenuItem.Name = "RemoveContextMenuItem";
+            this.RemoveContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.RemoveContextMenuItem.Text = "Remove";
             // 
             // label3
             // 
@@ -286,19 +403,6 @@
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 15;
             this.label3.Text = "Rooms";
-            // 
-            // listenerCheckBox
-            // 
-            this.listenerCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
-            this.listenerCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.listenerCheckBox.Checked = true;
-            this.listenerCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.listenerCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.listenerCheckBox.Location = new System.Drawing.Point(70, 19);
-            this.listenerCheckBox.Name = "listenerCheckBox";
-            this.listenerCheckBox.Size = new System.Drawing.Size(16, 16);
-            this.listenerCheckBox.TabIndex = 16;
-            this.listenerCheckBox.UseVisualStyleBackColor = false;
             // 
             // Mountain
             // 
@@ -324,6 +428,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.worldBindingSource)).EndInit();
+            this.RoomsContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -360,6 +465,19 @@
         private System.Windows.Forms.ListBox roomsListBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox listenerCheckBox;
+        private System.Windows.Forms.ContextMenuStrip RoomsContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem NewContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EditContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveAsContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveAsTemplateContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LoadContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MoveToAreaContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RemoveContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PasteContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ClearContextMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
     }
 

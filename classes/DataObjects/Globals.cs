@@ -3,10 +3,10 @@ namespace Mountain.classes.dataobjects {
 
     public enum itemType {
         unknown, weapon, armour, money, consumable, clothing, valuables,
-        text, container, ingredients, equipment
+        text, container, ingredients, equipment, none
     }
     public enum classType {
-        unknown, heart, player, client, room, mob, quest, timer,
+        unknown, heart, player, client, room, mob, quest, timer, world,
         system, script, action, exit, item, keyLock, comboLock, pinLock
     }
     public enum equipmentLocation {

@@ -12,9 +12,9 @@ namespace Mountain.classes.tcp {
         private StateObject state { get; set; }
         public TcpClient Socket { get; set; }
         public ApplicationSettings settings;
-        private LoginHandler LoginHandler;   // loggin plugin
-        private PlayerHandler PlayerHandler; // player pligin
-        private AdminHandler AdminHandler; // todo admin plugin
+        private LoginHandler LoginHandler;   // login functions
+        private PlayerHandler PlayerHandler; // player functions
+        private AdminHandler AdminHandler; // to-do admin functions
         public CommandHandler Commands;
         public Account Account { get; set; }
         public Room Room { get; set; }
@@ -48,7 +48,7 @@ namespace Mountain.classes.tcp {
                     string incomingMessage = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
                     Task HandleMessage = new Task(() => Commands(this, incomingMessage)); // setup thread for dispatcher
                     HandleMessage.Start(); // start thread
-                    MessageReceivedDone.Set(); // tell calling thread we are done with this message
+                    MessageReceivedDone.Set(); // tell calling thread we are now done here
                 }
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // wait for next
             }
@@ -114,8 +114,8 @@ namespace Mountain.classes.tcp {
         }
     }
 
-
-    public class StateObject {  // data that's passed between threads using delegates
+    // data container that's passed between threads to maintain state
+    public class StateObject {  
         private const int BUFFER_SIZE = 1024;
         public byte[] Buffer = new byte[BUFFER_SIZE];
         public TcpClient Socket { get; set; }

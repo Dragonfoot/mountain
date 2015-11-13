@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Mountain.classes.dataobjects;
@@ -19,14 +18,9 @@ namespace Mountain.classes.handlers {
         }
         private void LoadRoomCommands() {
             List = new Dictionary<string, Action<Packet>>(){
-                {"say", Say},
-                {"tell", Tell},
-                {"yell", Yell},
-                {"shout", Shout},
-                {"talk", Talk},
-                {"whisper", Whisper},
-                {"look", Look },
-
+                {"say", Say}, {"tell", Tell}, {"yell", Yell}, {"shout", Shout}, {"talk", Talk}, {"whisper", Whisper},
+                {"look", Look }, {"get", Get }, {"hide", Hide }, {"move", MoveTo }, {"go", MoveTo }, {"open", Open },
+                {"close", Close }, {"pick", Pick},
             };
             Keys = new List<string>(List.Keys);
         }
@@ -117,6 +111,36 @@ namespace Mountain.classes.handlers {
 
         private void Whisper(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) + 
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+        }
+
+        private void Get(Packet packet) {
+            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+        }
+
+        private void Hide(Packet packet) {
+            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+        }
+
+        private void MoveTo(Packet packet) {
+            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+        }
+
+        private void Open(Packet packet) {
+            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+        }
+
+        private void Close(Packet packet) {
+            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+        }
+
+        private void Pick(Packet packet) {
+            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
                 " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
         }
     }

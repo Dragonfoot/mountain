@@ -12,8 +12,6 @@ namespace Mountain.classes {
 
         public Exit() {
             ClassType = classType.exit;
-            Attributes = new ExitAttributes();
-            Name = "New exit";
         }
     }
 

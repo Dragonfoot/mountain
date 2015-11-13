@@ -33,6 +33,7 @@ namespace Mountain.classes {
         public string Tag { get; set; }
 
         public Room(ApplicationSettings appSettings) {
+            ClassType = classType.room;
             settings = appSettings;
             InitializeRoom();
             Name = "New Room";
@@ -40,6 +41,7 @@ namespace Mountain.classes {
             RoomID = new RoomID(ID, Name);
         }
         public Room(string name, ApplicationSettings appSettings) {
+            ClassType = classType.room;
             settings = appSettings;
             InitializeRoom();
             RoomID = new RoomID(ID, Name);
@@ -47,6 +49,7 @@ namespace Mountain.classes {
             Description = Name + " is a newly created room";
         }
         public Room(string name, string description, ApplicationSettings appSettings) {
+            ClassType = classType.room;
             settings = appSettings;
             InitializeRoom();
             RoomID = new RoomID(ID, name);
@@ -54,7 +57,7 @@ namespace Mountain.classes {
             Description = description;
         }
         public Room() {
-
+            ClassType = classType.room;
         }
 
         public void SetName(string name) {
@@ -69,8 +72,7 @@ namespace Mountain.classes {
             Mobs = new ConcurrentBag<Mob>();
             Items = new ConcurrentBag<Item>();
             Events = new GeneralEventQueue();
-            Messages = new PlayerEventQueue();
-            
+            Messages = new PlayerEventQueue();            
             Messages.OnEventReceived += Messages_OnPlayerEventReceived;
         }
 

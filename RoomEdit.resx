@@ -37,7 +37,7 @@
     mimetype set.
     
     The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to de-persist the object. This is currently not 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
     
     Note - application/x-microsoft.net.object.binary.base64 is the format 
@@ -117,40 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="saveToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAATQSURBVFhHxVdbTxtXEOZPNah5hZICaRCXKOFSaCCFAsGYkBgDBlwkIgq/oHlp+1N4IBKqokg8
-        tMGA7/Z61xd8xRdspvPNsmu7cSgoyB3pE+szc+b7Zs54j2k5ODggv99PXq+3qQDn/v5+uQUP/5cdHx9T
-        C9TAKpXLpgJ2dHSkC7jkz+VypamoEwBFxWK5DqVSmS4uKncC5AJq86Nol+tKgO68qEMul6dUKkPpdPaL
-        kEplKZPJCamRu1AocdE1AorFCi8WxZHPF6U9f/z2O/2yvU27OztfhB3O8fbXt5RMpk1ycJXLlyzApQso
-        FMpccYHOz4vyF7a2tka7u7t3AqfTSYlEiosrmRwoWgT4fF5eLHGb8owCty0vAtbX12kHFdwBnD87KRZL
-        MnFROMBVKFxUBeiOc3Gk0+ciwLG6Sttv3gicGxu05li9FTa4AGP/+pqDotEzymZ1cnDk8+WqAKhKJnOM
-        czo7y4mA5eVl2trakqM4PPxbptaY5v8CzjcSUcnhcEiO1dUVUtWEdBcc4MpmS1UBuiMrSCSyIsBms9Hm
-        5iatrKzQx4+nFI9nSNNSN0I0muL4FBdhlxx2+xILSvA3AuRZLhLfjKIhwCeq4vGcIBbTBSwuLNAGV7/O
-        sC/ZycFtREU3AsfaXttkL3K8WlxkAXEmrvKg66YAtB3E8XiW1WdEwLxlTuYAeLX4kqwWy63wcsFq7l+w
-        WikUinF3QZ5lrgwXnee74EoA2o5FwBAwMztDS3Y7WXnz+/eH/EYjGZyboFS6pHBYIQsLQY65uTn+HDPJ
-        AXRDBPj9PnbGKRiMCgIBTQT8NDlJr7l1c7Oz9OHDX+TzqeTxKDdEhHNGaXZ6WnLg7+lpqI5H05L6bRgI
-        4LdAmAOC5HaH6OQkIBM/MTFBVp4DYJoTWCzzUtHNME9TU1Pm/smpSR5kLwsLCwe4AgGVua4E+HyKOBAA
-        J+yHsTGyvHhhAp24DWr3ToyP883n40LRHV0EOv2JALc7zIu6gJGREZqembkTjI2NmgLAAa5QSKs9AoUR
-        kqNwu3UBg4NPpY0GRke/57VBWb8OQ0NDNDw8XLd3ZGSYyXxSKDg8nhDPQY0Avz8ii4BxBI8HBug5tw4Y
-        Hhqkd+/+lIsE12i53BiYHVWN8YBF6emTJ+Z+PB8f6502eDCkpoBAICJdMAJgfb299IznAHg80M/rQRHq
-        cnn4mHwN4XJ5udWehvtPTvRCjS6EQlcC8KM0GFTZEeaAsBwFrKuri9s+Kujr65UEsLa2Nv7c1xAdHd9I
-        q2E9PT11+93ugBQKDnApSqwqIBRS2aFIAJz4GYULpL+/X8700aPvOIEuoLu7W9Ya4XNxWPd4AlKoLkLh
-        V7MpAC8ijR2qBAAIgP34fIJ6uZUPH3bLEcA6Ozt52DCMn+JzcZ2d33JngzL5hghVjdcKwNspwgE68IxA
-        2NKSje7d+0paCGttbaUHDzoa4v79r4WoNq69vZ3Gx59J69FpI7+mJaoCFCUqTnTCAD4jEHc7DIljsTN5
-        vs4axeEKrs2P5zoBOA90AUL+DV21Ks/G5uvQKK42n+HHLyRTAL67iqKxkOYAXOiSCMB1rGlxdkSbinj8
-        SkAwGOS7OcMLyaYinc7xW/eUWvhf5Irb7eYXzUlTAc69vb2LfwAzW1b2fJIZYwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="worldBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>119, 17</value>
-  </metadata>
-  <metadata name="RoomsContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>269, 17</value>
   </metadata>
 </root>

@@ -16,8 +16,8 @@ namespace Mountain.classes.handlers {
 
             Room controlRoom;
             name = "Administration Control Center";
-            description = "You see the nerve center of world operations unfold around you. You see computer stations with white clad technitians " +
-                "mermering into headsets as they adjust controls and issue commands, in a long line of cubicles fading into the distance to your " +
+            description = "You see the nerve center of world operations unfold around you. You see computer stations with white clad technicians " +
+                "murmuring into headsets as they adjust controls and issue commands, in a long line of cubicles fading into the distance to your " +
                 "right. Sensor arrays, routing maps and schedulers glowing quietly above them, monitoring every aspect of this worlds events and " +
                 "activities. To your left, a long line of guarded office doors, guard challenging and recording those wanting access. ";
             controlRoom = Room(name, description, settings);
@@ -32,21 +32,21 @@ namespace Mountain.classes.handlers {
                 AdminOnly = true,
                 Label = "Transit Hub"
             };
-            ExitAttributes transitHubAttributes = new ExitAttributes() {
+            ExitAttributes transitExitAttributes = new ExitAttributes() {
                 AdminOnly = true,
                 Label = "Control Center",
                 Hidden = true,
             };                      
-            LinkRooms(controlRoom, controlExitAttributes, transitHub, transitHubAttributes);
+            LinkRooms(controlRoom, controlExitAttributes, transitHub, transitExitAttributes);
 
             Room theVoid;
-            name = "The Empty Place";
-            description = "You find youself weightlessly floating in some kind of silent, lonely, dark, " +
+            name = "The Unknown Place";
+            description = "You find yourself weightlessly floating in some kind of silent, lonely, dark, " +
                 "endless, and as many other voidy spacy words there might be.. space..";
             theVoid = new classes.Room(name, description, settings);
             theVoid.Tag = "Void";
             ExitAttributes voidExitAttributes = new ExitAttributes() {
-                Label = "Return to the Known Place",
+                Label = "Known Place",
             };
 
             Exit voidExit = Exit(voidExitAttributes);

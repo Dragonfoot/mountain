@@ -12,7 +12,7 @@ namespace Mountain.classes {
 
         public Identity() {
             this.ClassType = classType.unknown;
-            this.ItemType = itemType.unknown;
+            this.ItemType = itemType.none;
             ID = Guid.NewGuid();
         }
 

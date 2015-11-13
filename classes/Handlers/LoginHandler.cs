@@ -25,7 +25,7 @@ namespace Mountain.classes.handlers {
             string welcome = "Welcome to the Mountain Foundation. ";
             welcome += "The food is good, the drinks better. If you like road kill you'll love Greggor's ";
             welcome += "Frizzled Sizzle-Griller down by Flatstomp Road near Pancake Hill. ";
-            welcome += "Do be prepared for unexpected and mostly friendly behaviour from our many inhabitants. They ";
+            welcome += "Do be prepared for unexpected and mostly friendly behavior from our many inhabitants. They ";
             welcome += "have all taken solemn oaths to do their very utmost for you. Good luck!";
             Client.Send("".Color(Ansi.clearScreen).NewLine().NewLine(), false);
             Client.Send(welcome.WordWrap().Color(true, Ansi.yellow).NewLine(), false);

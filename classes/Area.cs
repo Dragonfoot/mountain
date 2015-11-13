@@ -11,7 +11,7 @@ namespace Mountain.classes {
         [XmlArray("Rooms")]
         public List<Room> Rooms { get; private set; }
         [XmlIgnore]
-        public bool Active { get; set; }  // in memory or not, conserver resources
+        public bool Active { get; set; }  // in memory or not, conserve resources?
 
         public Area() {
             Name = "new area";
@@ -20,6 +20,7 @@ namespace Mountain.classes {
             cancellationTokenSource = new CancellationTokenSource();
             Rooms = new List<Room>();
         }
+
         public Area(string name, string description, Guid id) {
             Name = name;
             Description = description;
@@ -33,12 +34,15 @@ namespace Mountain.classes {
         public void Load(string filename) {
             throw new NotImplementedException("Area Load (filename)");
         }
+
         public void Load() {
             throw new NotImplementedException("Area Load ()");
         }
+
         public void Save() {
             throw new NotImplementedException("Area Save()");
         }
+
         public void Save(string filename) {
             throw new NotImplementedException("Area Save(filename)");
         }
@@ -63,4 +67,5 @@ namespace Mountain.classes {
             }, cancellationToken);
         }
     }
+
 }

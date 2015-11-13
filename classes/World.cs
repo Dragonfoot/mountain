@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Mountain.classes.tcp;
+using Mountain.classes.dataobjects;
 using Mountain.classes.handlers;
 
 namespace Mountain.classes {
@@ -21,6 +22,7 @@ namespace Mountain.classes {
         private CancellationTokenSource cancellationTokenSource;
 
         public World(ApplicationSettings appSettings) {
+            ClassType = classType.world;
             InitializeSettings(appSettings);
             Areas = new List<Area>();
             portListener = new TcpServerListener(this, appSettings);

@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace Mountain.classes.tcp {
 
+    // listen for and accept connection requests
     public class TcpServerListener {
         [XmlIgnore]
         public int Connections { get; private set; }
@@ -40,7 +41,7 @@ namespace Mountain.classes.tcp {
 
         protected void HandleAsyncConnection(IAsyncResult result) {
             TcpListenerActive listener = (TcpListenerActive)result.AsyncState;
-            TcpClient client = listener.EndAcceptTcpClient(result);
+            TcpClient client = listener.EndAcceptTcpClient(result);     // new connection established 
             connectionWaitDone.Set();
             tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
             Connection player = new Connection(client, settings);

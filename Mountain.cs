@@ -128,6 +128,28 @@ namespace Mountain {
                 txtReader.Close();
             }
         }
+
+        private void roomsListBox_MouseDown(object sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Right)
+                return;
+            var index = roomsListBox.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches) {
+                roomsListBox.SelectedIndex = index;
+                for (int i = 0; i <= RoomsContextMenu.Items.Count - 1; i++) {                    
+                    RoomsContextMenu.Items[i].Enabled = true;
+                }
+                RoomsContextMenu.Show(Cursor.Position);
+            } else {
+                roomsListBox.SelectedIndex = -1;
+                for(int i = 0; i<= RoomsContextMenu.Items.Count - 1; i++) {
+                    if (i == 0)
+                        continue;
+                    RoomsContextMenu.Items[i].Enabled = false;
+                }
+            }
+
+        }
+    
     }
 }
         

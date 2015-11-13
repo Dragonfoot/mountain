@@ -21,7 +21,7 @@ namespace Mountain.classes.handlers {
             if (!packet.known) {
                 string verb = packet.verb;
                 Client.Send("I don't know what to do with \"".Color(Ansi.yellow) + verb.Color(Ansi.white) + "\" just yet.".Color(Ansi.yellow).NewLine(), true);
-                if (Commands.IsCommunicationVerb(verb)) {
+                if (Commands.IsCommand(verb)) {
                     Client.Send("But, um.. I did a few minutes ago..\"scratch\"".Color(Ansi.yellow).NewLine(), true);
                 }
                 return;
@@ -61,9 +61,13 @@ namespace Mountain.classes.handlers {
                     }
                 }
             }
+            if (!packet.known) {
+                // check for room exit names, see if player wants to go/moveTo
+                // if so, change verb to match moveTo
+            }
             packet.verb = str.FirstWord();
             packet.parameter = str.StripFirstWord();
-            if (Commands.IsCommunicationVerb(packet.verb)) {
+            if (Commands.IsCommand(packet.verb)) {
                 packet.known = true;
             }
             return packet;
