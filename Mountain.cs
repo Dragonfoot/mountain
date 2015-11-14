@@ -13,6 +13,8 @@ namespace Mountain {
         protected ApplicationSettings settings;
         protected MessageQueue Messages;
         protected World world;
+        protected Area SelectedArea;
+        protected Room SelectedRoom;
 
         public Mountain() {
             Messages = new MessageQueue(settings);
@@ -42,7 +44,6 @@ namespace Mountain {
                     logRichTextBox.AppendText(">>>" + e.ToString() + "\r\n");
                     logRichTextBox.ScrollToCaret();
                 });
-
             }
         }
 
@@ -68,10 +69,20 @@ namespace Mountain {
 
         private World BuildDefaultWorld() {
             if (world != null) { world = null; }
-            world = new World(settings);
-            world.settings.TheVoid = world.Areas[0].Rooms.Find(room => room.Tag == "Void");
-            areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
-            areaListBox.SelectedIndex = 0;
+            try {
+                world = new World(settings);
+                if (world.Areas.Count > 0) {
+                    world.settings.TheVoid = world.Areas[0].Rooms.Find(room => room.Tag == "Void");
+                    areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
+                    areaListBox.SelectedIndex = 0;
+                    if(SelectedArea.Rooms.Count > 0) {
+                        if(roomsListBox.Items.Count > 0) roomsListBox.SelectedIndex = 0;
+                    }
+                }
+            }
+            catch (Exception e) {
+                logRichTextBox.AppendText(">>> " + e.ToString());
+            }
             return world;
         }
 
@@ -93,9 +104,9 @@ namespace Mountain {
 
         private void areaListBox_SelectedIndexChanged(object sender, EventArgs e) {
             string name = areaListBox.SelectedItem.ToString();
-            Area selectedArea = world.Areas.Find(area => area.Name == (string)areaListBox.SelectedItem);
+            SelectedArea = world.Areas.Find(area => area.Name == (string)areaListBox.SelectedItem);
             roomsListBox.Items.Clear();
-            roomsListBox.Items.AddRange(selectedArea.Rooms.Select(room => room.Name).ToArray());
+            roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -135,21 +146,33 @@ namespace Mountain {
             var index = roomsListBox.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches) {
                 roomsListBox.SelectedIndex = index;
-                for (int i = 0; i <= RoomsContextMenu.Items.Count - 1; i++) {                    
-                    RoomsContextMenu.Items[i].Enabled = true;
+                SelectedRoom = SelectedArea.Rooms.Find(room => room.Name == (string)roomsListBox.SelectedItem);
+                for (int i = 0; i <= RoomContextMenu.Items.Count - 1; i++) {                    
+                    RoomContextMenu.Items[i].Enabled = true;
                 }
-                RoomsContextMenu.Show(Cursor.Position);
+                RoomContextMenu.Show(Cursor.Position);
             } else {
                 roomsListBox.SelectedIndex = -1;
-                for(int i = 0; i<= RoomsContextMenu.Items.Count - 1; i++) {
+                for(int i = 0; i<= RoomContextMenu.Items.Count - 1; i++) {
                     if (i == 0)
                         continue;
-                    RoomsContextMenu.Items[i].Enabled = false;
+                    RoomContextMenu.Items[i].Enabled = false;
                 }
             }
-
         }
-    
+
+        private void EditRoomContextMenuItem_Click(object sender, EventArgs e) {
+            RoomEdit roomForm = new RoomEdit(SelectedRoom, settings);
+            DialogResult dialogresult = roomForm.ShowDialog();
+            if (dialogresult == DialogResult.OK) {
+            } else {
+            }
+            roomForm.Dispose();
+        }
+
+        private void roomsListBox_SelectedIndexChanged(object sender, EventArgs e) {
+            SelectedRoom = SelectedArea.Rooms.Find(room => room.Name == (string)roomsListBox.SelectedItem);
+        }
     }
 }
         

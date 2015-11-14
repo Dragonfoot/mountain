@@ -50,10 +50,9 @@
             this.button6 = new System.Windows.Forms.Button();
             this.startServer = new System.Windows.Forms.Button();
             this.areaListBox = new System.Windows.Forms.ListBox();
-            this.worldBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.roomsListBox = new System.Windows.Forms.ListBox();
-            this.RoomsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.RoomContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.NewContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,8 +69,7 @@
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.worldBindingSource)).BeginInit();
-            this.RoomsContextMenu.SuspendLayout();
+            this.RoomContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -299,17 +297,18 @@
             // 
             // roomsListBox
             // 
-            this.roomsListBox.ContextMenuStrip = this.RoomsContextMenu;
+            this.roomsListBox.ContextMenuStrip = this.RoomContextMenu;
             this.roomsListBox.FormattingEnabled = true;
             this.roomsListBox.Location = new System.Drawing.Point(793, 67);
             this.roomsListBox.Name = "roomsListBox";
             this.roomsListBox.Size = new System.Drawing.Size(185, 485);
             this.roomsListBox.TabIndex = 14;
+            this.roomsListBox.SelectedIndexChanged += new System.EventHandler(this.roomsListBox_SelectedIndexChanged);
             this.roomsListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.roomsListBox_MouseDown);
             // 
-            // RoomsContextMenu
+            // RoomContextMenu
             // 
-            this.RoomsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RoomContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewContextMenuItem,
             this.EditContextMenuItem,
             this.CopyContextMenuItem,
@@ -322,8 +321,8 @@
             this.toolStripSeparator3,
             this.MoveToAreaContextMenuItem,
             this.RemoveContextMenuItem});
-            this.RoomsContextMenu.Name = "NewRoom";
-            this.RoomsContextMenu.Size = new System.Drawing.Size(155, 258);
+            this.RoomContextMenu.Name = "NewRoom";
+            this.RoomContextMenu.Size = new System.Drawing.Size(155, 236);
             // 
             // NewContextMenuItem
             // 
@@ -336,6 +335,7 @@
             this.EditContextMenuItem.Name = "EditContextMenuItem";
             this.EditContextMenuItem.Size = new System.Drawing.Size(154, 22);
             this.EditContextMenuItem.Text = "Edit";
+            this.EditContextMenuItem.Click += new System.EventHandler(this.EditRoomContextMenuItem_Click);
             // 
             // CopyContextMenuItem
             // 
@@ -427,8 +427,7 @@
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.worldBindingSource)).EndInit();
-            this.RoomsContextMenu.ResumeLayout(false);
+            this.RoomContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -460,12 +459,11 @@
         private System.Windows.Forms.ToolStripMenuItem eventToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem questToolStripMenuItem;
         private System.Windows.Forms.ListBox areaListBox;
-        private System.Windows.Forms.BindingSource worldBindingSource;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox roomsListBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox listenerCheckBox;
-        private System.Windows.Forms.ContextMenuStrip RoomsContextMenu;
+        private System.Windows.Forms.ContextMenuStrip RoomContextMenu;
         private System.Windows.Forms.ToolStripMenuItem NewContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EditContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveAsContextMenuItem;
