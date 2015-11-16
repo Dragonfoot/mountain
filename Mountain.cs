@@ -6,6 +6,7 @@ using Mountain.classes;
 using System.IO;
 using System.Xml.Serialization;
 using Mountain.classes.collections;
+using Mountain.classes.handlers;
 
 namespace Mountain {
 
@@ -162,12 +163,14 @@ namespace Mountain {
         }
 
         private void EditRoomContextMenuItem_Click(object sender, EventArgs e) {
-            RoomEdit roomForm = new RoomEdit(SelectedRoom, settings);
-            DialogResult dialogresult = roomForm.ShowDialog();
+            RoomEdit roomEditForm = new RoomEdit(SelectedRoom, settings);
+            DialogResult dialogresult = roomEditForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-            } else {
-            }
-            roomForm.Dispose();
+                Functions.SetRoomEdits(roomEditForm.roomEdits, SelectedRoom);
+                roomsListBox.Items.Clear();
+                roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
+            } 
+            roomEditForm.Dispose();
         }
 
         private void roomsListBox_SelectedIndexChanged(object sender, EventArgs e) {

@@ -20,7 +20,7 @@ namespace Mountain.classes.handlers {
             return names;
         }
 
-        public static Room CopyRoom(Room room, ApplicationSettings settings) {
+        public static Room CloneRoomEdit(Room room, ApplicationSettings settings) {
             Room copy = new Room(room.Name, room.Description, settings);
             copy.RoomID = room.RoomID;
             if (room.Exits.Count > 0) {
@@ -37,6 +37,25 @@ namespace Mountain.classes.handlers {
                 }
             }
             return copy;
+        }
+        public static void SetRoomEdits(Room fromRoom, Room toRoom) {
+            toRoom.Name = fromRoom.Name;
+            toRoom.Description = fromRoom.Description;
+            if(toRoom.Exits.Count > 0) {
+                toRoom.Exits.Clear();
+                foreach (Exit fromExit in fromRoom.Exits) {
+                    Exit toExit = new Exit();
+                    toExit.ID = fromExit.ID;
+                    toExit.Name = fromExit.Name;
+                    toExit.Description = fromExit.Description;
+                    toExit.link = fromExit.link;
+                    toExit.LinkToRoomID = fromExit.LinkToRoomID;
+                    toExit.LinkToRoomName = fromExit.LinkToRoomName;
+                    toExit.Attributes = fromExit.Attributes;
+                    toRoom.Exits.Add(toExit);
+
+                }
+            }
         }
     }
 }
