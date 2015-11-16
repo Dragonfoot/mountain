@@ -41,8 +41,8 @@ namespace Mountain.classes.handlers {
         public static void SetRoomEdits(Room fromRoom, Room toRoom) {
             toRoom.Name = fromRoom.Name;
             toRoom.Description = fromRoom.Description;
-            if(toRoom.Exits.Count > 0) {
-                toRoom.Exits.Clear();
+            if (toRoom.Exits.Count > 0) { toRoom.Exits.Clear(); }
+            if (fromRoom.Exits.Count > 0) {
                 foreach (Exit fromExit in fromRoom.Exits) {
                     Exit toExit = new Exit();
                     toExit.ID = fromExit.ID;
@@ -53,9 +53,9 @@ namespace Mountain.classes.handlers {
                     toExit.LinkToRoomName = fromExit.LinkToRoomName;
                     toExit.Attributes = fromExit.Attributes;
                     toRoom.Exits.Add(toExit);
-
                 }
             }
         }
+        
     }
 }
