@@ -173,6 +173,19 @@ namespace Mountain {
         private void roomsListBox_SelectedIndexChanged(object sender, EventArgs e) {
             SelectedRoom = SelectedArea.Rooms.Find(room => room.Name == (string)roomsListBox.SelectedItem);
         }
+
+        private void roomsListBox_MouseDoubleClick(object sender, MouseEventArgs e) {
+            var index = roomsListBox.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches) {
+                roomsListBox.SelectedIndex = index;
+                SelectedRoom = SelectedArea.Rooms.Find(room => room.Name == (string)roomsListBox.SelectedItem);
+                EditRoomContextMenuItem_Click(sender, e);
+            } else {
+                roomsListBox.SelectedIndex = -1;
+                // NewRoomContextMenuItem_Click(...
+            }
+
+        }
     }
 }
         

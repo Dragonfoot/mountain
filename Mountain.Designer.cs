@@ -304,6 +304,7 @@
             this.roomsListBox.Size = new System.Drawing.Size(185, 485);
             this.roomsListBox.TabIndex = 14;
             this.roomsListBox.SelectedIndexChanged += new System.EventHandler(this.roomsListBox_SelectedIndexChanged);
+            this.roomsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.roomsListBox_MouseDoubleClick);
             this.roomsListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.roomsListBox_MouseDown);
             // 
             // RoomContextMenu

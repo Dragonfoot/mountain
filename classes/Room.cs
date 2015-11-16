@@ -30,34 +30,37 @@ namespace Mountain.classes {
         public PlayerEventQueue Messages;
         [XmlIgnore]
         public ApplicationSettings settings;
+        public roomType roomType { get; set; }
         public string Tag { get; set; }
 
         public Room(ApplicationSettings appSettings) {
-            ClassType = classType.room;
-            settings = appSettings;
-            InitializeRoom();
+            InitializeRoom(appSettings);
             Name = "New Room";
             Description = "This is a newly created room";
             RoomID = new RoomID(ID, Name);
         }
         public Room(string name, ApplicationSettings appSettings) {
-            ClassType = classType.room;
-            settings = appSettings;
-            InitializeRoom();
+            InitializeRoom(appSettings);
             RoomID = new RoomID(ID, Name);
             SetName(name);
             Description = Name + " is a newly created room";
         }
         public Room(string name, string description, ApplicationSettings appSettings) {
-            ClassType = classType.room;
-            settings = appSettings;
-            InitializeRoom();
+            InitializeRoom(appSettings);
             RoomID = new RoomID(ID, name);
             SetName(name);
             Description = description;
         }
         public Room() {
             ClassType = classType.room;
+            Name = "New Room";
+            Description = "This is a newly created room";
+            RoomID = new RoomID(ID, Name);
+        }
+
+        public string RoomName {
+            get { return this.Name; }
+            set { this.Name = value; }
         }
 
         public void SetName(string name) {
@@ -65,8 +68,9 @@ namespace Mountain.classes {
             this.RoomID.Name = name;
         }
 
-        private void InitializeRoom() {
+        private void InitializeRoom(ApplicationSettings appSettings) {
             ClassType = classType.room;
+            settings = appSettings;
             Exits = new List<Exit>();
             Players = new List<Connection>();
             Mobs = new ConcurrentBag<Mob>();
@@ -118,17 +122,17 @@ namespace Mountain.classes {
             view.Add(Description);
             view.Add("");
             if (Exits.Count > 0) { // add color coding's
-                stringBuilder.Append("Exits: " + Extensions.GetNames(Exits.ToArray()));
+                stringBuilder.Append("Exits: " + Functions.GetNames(Exits.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Mobs.Count > 0) {
-                stringBuilder.Append("Mobs: " + Extensions.GetNames(Mobs.ToArray()));
+                stringBuilder.Append("Mobs: " + Functions.GetNames(Mobs.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Players.Count > 0) {
-                stringBuilder.Append("Players: " + Extensions.GetNames(Players.ToArray()));
+                stringBuilder.Append("Players: " + Functions.GetNames(Players.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
@@ -141,10 +145,10 @@ namespace Mountain.classes {
 
         public string GetName() { return Name; }
         public string GetDesciption() { return Description; }
-        public string GetExits() { return Extensions.GetNames(Exits.ToArray()); }
-        public string GetMobs() { return Extensions.GetNames(Mobs.ToArray()); }
-        public string GetPlayers() { return Extensions.GetNames(Players.ToArray()); }
-        public string GetItems() { return Extensions.GetNames(Items.ToArray()); }
+        public string GetExits() { return Functions.GetNames(Exits.ToArray()); }
+        public string GetMobs() { return Functions.GetNames(Mobs.ToArray()); }
+        public string GetPlayers() { return Functions.GetNames(Players.ToArray()); }
+        public string GetItems() { return Functions.GetNames(Items.ToArray()); }
 
 
         protected void Save() {

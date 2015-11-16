@@ -1,39 +1,23 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Linq;
 using Mountain.classes;
+using Mountain.classes.handlers;
 
 namespace Mountain {
 
     public partial class RoomEdit : Form {
-        Room room;
+        Room room, roomCopy;
         ApplicationSettings settings;
 
         public RoomEdit(Room room, ApplicationSettings settings) {
             InitializeComponent();
             this.room = room;
-            this.NameLabel.Text = room.Name;
-            this.descriptionLabel.Text = room.Description;
+            this.roomCopy = Functions.CopyRoom(room, settings);
+            this.roomNameTextBox.Text = room.Name;
+            this.descriptionTextBox.Text = room.Description;
+            exitsListBox.Items.AddRange(room.Exits.Select(exit => exit.Name).ToArray());
             this.settings = settings;
-        }
-
-        private void descriptionLabel_Click(object sender, EventArgs e) {
-            descriptionTextBox.Text = descriptionLabel.Text;
-            descriptionTextBox.Visible = true;
-            descriptionLabel.Visible = false;
-            descriptionTextBox.Focus();
-        }
-        
-        private void descriptionTextBox_Lost_Focus(object sender, EventArgs e) {
-            descriptionLabel.Text = descriptionTextBox.Text;
-            room.Description = descriptionTextBox.Text;
-            descriptionTextBox.Visible = false;
-            descriptionLabel.Visible = true;
-        }
-
-        private void descriptionTextBox_KeyPress(object sender, KeyPressEventArgs e) {
-            if (e.KeyChar == (char)13) {
-                descriptionTextBox_Lost_Focus(sender, new EventArgs());
-            }
         }
     }
 }

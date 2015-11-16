@@ -68,7 +68,7 @@ namespace Mountain.classes.handlers {
             packet.Client.Send(response.Color(Ansi.cyan).NewLine().NewLine(), true);
             response = packet.Client.Room.GetDesciption();
             packet.Client.Send(response.Color(Ansi.white).WordWrap(), false);
-            names = Extensions.GetNames(packet.Client.Room.Exits.ToArray());
+            names = Functions.GetNames(packet.Client.Room.Exits.ToArray());
             if (names != string.Empty) response = "Obvious Exits: " + names;
              else response = "Obvious Exits: ";
             packet.Client.Send(response.Color(Ansi.green).NewLine(), true);
@@ -83,7 +83,7 @@ namespace Mountain.classes.handlers {
                 }
                 if (names != string.Empty)
                     packet.Client.Send(names.Color(Ansi.cyan).WordWrap().NewLine(), true);
-                names = Extensions.GetNames(packet.Client.Room.Mobs.ToArray());
+                names = Functions.GetNames(packet.Client.Room.Mobs.ToArray());
                 if(names != string.Empty) packet.Client.Send(names.Color(Ansi.green).NewLine(), true);
                 // add items
             }

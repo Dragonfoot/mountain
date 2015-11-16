@@ -10,23 +10,13 @@ namespace Mountain.classes.handlers {
 
     public static class Extensions {
 
-        // hide/change before shifting to production
+        // hide&change before shifting to production
         private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
         private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
 
         #region arrays
 
-        public static string GetNames(Array list) {
-            string names = string.Empty;
-            int i = 1;
-            foreach (Identity item in list) {
-                names = names + item.Name;
-                if (i != list.Length) { names = names + ", "; }
-                if (i == list.Length) { names = names + "."; }
-                i++;
-            }
-            return names;
-        }
+ 
 
         #endregion
 
@@ -188,7 +178,7 @@ namespace Mountain.classes.handlers {
             return "\x1B[2J" + "\x1B[" + size.ToString() + "C" + "\x1B[H" + str;
         }
 
-        public static string WordWrap(this string sentence, int width = Global.pWidth) {  // takes a long string and formats to width
+        public static string WordWrap(this string sentence, int width = Global.pageWidth) {  // takes a long string and formats to width
             StringBuilder lines = new StringBuilder();
             string[] words = sentence.Split(' ');
             StringBuilder buildLine = new StringBuilder("");

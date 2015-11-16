@@ -72,6 +72,7 @@
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\Handlers\Combat.cs" />
     <Compile Include="classes\Handlers\Emote.cs" />
+    <Compile Include="classes\Handlers\Functions.cs" />
     <Compile Include="classes\Handlers\PlayerCommands.cs" />
     <Compile Include="classes\Handlers\RoomCommands.cs" />
     <Compile Include="classes\Tcp\Connection.cs" />
