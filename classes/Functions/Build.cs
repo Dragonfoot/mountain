@@ -1,7 +1,7 @@
 ﻿using Mountain.classes.Items;
 using Mountain.classes.dataobjects;
 
-namespace Mountain.classes.handlers {
+namespace Mountain.classes.functions {
 
     public static class Build {
 
@@ -22,11 +22,13 @@ namespace Mountain.classes.handlers {
                 "activities. To your left, a long line of guarded office doors, guard challenging and recording those wanting access. ";
             controlRoom = Room(name, description, settings);
             controlRoom.Tag = "ControlCenter";
+            controlRoom.roomType = roomType.indoor | roomType.administrator | roomType.underground;
 
             Room transitHub;
             name = "Central Transit Hub";
             description = "Administration Transit Hub Lobby";
             transitHub = Room(name, description, settings);
+            transitHub.roomType = roomType.indoor | roomType.administrator;
 
             ExitAttributes controlExitAttributes = new ExitAttributes() {
                 AdminOnly = true,
@@ -45,6 +47,7 @@ namespace Mountain.classes.handlers {
                 "endless, and as many other voidy spacy words there might be.. space..";
             theVoid = new classes.Room(name, description, settings);
             theVoid.Tag = "Void";
+            theVoid.roomType = roomType.space;
             ExitAttributes voidExitAttributes = new ExitAttributes() {
                 Label = "Known Place",
             };

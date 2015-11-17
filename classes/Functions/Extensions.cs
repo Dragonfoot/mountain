@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using Mountain.classes.dataobjects;
 
-namespace Mountain.classes.handlers {
+namespace Mountain.classes.functions {
 
     public static class Extensions {
 

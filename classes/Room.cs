@@ -5,7 +5,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Xml.Serialization;
-using Mountain.classes.handlers;
+using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
 using Mountain.classes.Items;
 using Mountain.classes.mobs;
@@ -23,6 +23,8 @@ namespace Mountain.classes {
         public List<Connection> Players { get; set; }
         [XmlIgnore]
         public RoomID RoomID;
+        public roomType roomType { get; set; }
+        public string Tag { get; set; }
         [XmlArray("Exits")]
         public List<Exit> Exits { get; set; }
         protected GeneralEventQueue Events;
@@ -30,8 +32,6 @@ namespace Mountain.classes {
         public PlayerEventQueue Messages;
         [XmlIgnore]
         public ApplicationSettings settings;
-        public roomType roomType { get; set; }
-        public string Tag { get; set; }
 
         public Room(ApplicationSettings appSettings) {
             InitializeRoom(appSettings);
@@ -58,6 +58,7 @@ namespace Mountain.classes {
             RoomID = new RoomID(ID, Name);
         }
 
+        [XmlIgnore]
         public string RoomName {
             get { return this.Name; }
             set { this.Name = value; }

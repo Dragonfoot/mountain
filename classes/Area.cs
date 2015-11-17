@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Mountain.classes.dataobjects;
 
 namespace Mountain.classes {
 
@@ -15,6 +16,7 @@ namespace Mountain.classes {
         public bool Active { get; set; }  // in memory or not, conserve resources?
 
         public Area() {
+            ClassType = classType.area;
             Name = "new area";
             Description = "new area";
             Active = true;
@@ -38,13 +40,6 @@ namespace Mountain.classes {
 
         public void Load() {
             throw new NotImplementedException("Area Load ()");
-        }
-
-        public string ToXml() {
-           // string result = base.ToXml(XmlHelper.ObjectToBasicXml(this));
-            string result = base.ToXml();
-            return result;
-           // throw new NotImplementedException("Area Save()");
         }
 
         public void Save(string filename) {

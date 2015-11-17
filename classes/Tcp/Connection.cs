@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Mountain.classes.dataobjects;
 using Mountain.classes.handlers;
+using Mountain.classes.functions;
 
 namespace Mountain.classes.tcp {
 
@@ -14,7 +15,7 @@ namespace Mountain.classes.tcp {
         public ApplicationSettings settings;
         private LoginHandler LoginHandler;   // login functions
         private PlayerHandler PlayerHandler; // player functions
-        private AdminHandler AdminHandler; // to-do admin functions
+     //   private AdminHandler AdminHandler; // to-do admin functions
         public CommandHandler Commands;
         public Account Account { get; set; }
         public Room Room { get; set; }

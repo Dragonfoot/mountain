@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 using Mountain.classes.collections;
 using Mountain.classes.dataobjects;
 
-namespace Mountain.classes.handlers {
+namespace Mountain.classes.functions {
 
     public static class XmlHelper { 
       

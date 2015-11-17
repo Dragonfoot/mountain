@@ -10,13 +10,13 @@ namespace Mountain.classes.dataobjects {
         fitsAll, tiny, small, medium, large, huge
     }
     public enum classType {
-        unknown, heart, player, client, room, mob, quest, timer, world,
+        unknown, heart, player, client, room, mob, quest, timer, world, area,
         system, script, action, exit, item, keyLock, comboLock, pinLock
     }
     [Flags]
     public enum roomType {
         unknown = 0, path = 1, street = 2, road = 4, sewer = 8, space = 16, water = 32, plains = 64,
-        forest = 128, mountain = 256, underground = 512, indoor = 1024, outdoor = 2048
+        forest = 128, mountain = 256, underground = 512, indoor = 1024, outdoor = 2048, administrator = 4096
     }
     public enum exitType {
     }
