@@ -113,7 +113,7 @@ namespace Mountain {
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
             string file = settings.BaseDirectory + "\\" + world.Name + "test.xml";
             TextWriter txtWriter = new StreamWriter(file);
-            //    XmlHelper.ObjectToXml(world.Areas, file, settings);
+            //XmlHelper.ObjectToXml(world.Areas, file, settings);
             try {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(World));
                 xmlSerializer.Serialize(txtWriter, world);
@@ -187,9 +187,15 @@ namespace Mountain {
                 roomsListBox.SelectedIndex = -1;
                 // NewRoomContextMenuItem_Click(...
             }
+        }
 
+        private void button1_Click(object sender, EventArgs e) {
+            string xml = SelectedArea.ToXml();
+            logRichTextBox.Clear();
+            logRichTextBox.AppendText(xml);
         }
     }
+
 }
         
     

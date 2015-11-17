@@ -30,7 +30,7 @@ namespace Mountain.classes.handlers {
         }
 
         // returns a string <boolean>true</boolean> if item passed is a boolean set to true, etc
-        public static string PrimaryXml(object item) {  
+        public static string ObjectToBasicXml(object item) {  
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
             var serializer = new XmlSerializer(item.GetType());
             var settings = new XmlWriterSettings();

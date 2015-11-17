@@ -17,14 +17,16 @@ namespace Mountain.classes.collections {
 
         public void Add(Connection player) {
             List.Add(player);
-            OnPlayerAdded(this, player);
+            if (OnPlayerAdded != null )
+                OnPlayerAdded(this, player);
         }
 
         public void Remove(string name) {
             int index = GetIndex(name);
             Connection loggingOut = List[index];
             List.RemoveAt(index);
-            OnPlayerRemoved(this, loggingOut);
+            if (OnPlayerRemoved != null )
+                OnPlayerRemoved(this, loggingOut);
         }
 
         public bool Exists(string name) {
@@ -42,10 +44,9 @@ namespace Mountain.classes.collections {
         public void Shutdown() { 
             List.ForEach(player => { player.Shutdown(); });  //send shutdown message, save, close connection
             List.RemoveRange(0, List.Count);
+            // https://github.com/Reddit-Mud/RMUD/blob/master/NetworkModule/Clients.cs
         }
 
-        public void Broadcast() {
-            // foreach player in players, send message
-        }
+      
     }
 }

@@ -20,7 +20,7 @@ namespace Mountain.classes.handlers {
             return names;
         }
 
-        public static Room CloneRoomEdit(Room room, ApplicationSettings settings) {
+        public static Room CloneRoomToEdit(Room room, ApplicationSettings settings) {
             Room copy = new Room(room.Name, room.Description, settings);
             copy.RoomID = room.RoomID;
             if (room.Exits.Count > 0) {

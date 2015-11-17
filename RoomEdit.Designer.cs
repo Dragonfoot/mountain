@@ -28,8 +28,11 @@ namespace Mountain {
             this.components = new System.ComponentModel.Container();
             this.roomEditMenuStrip = new System.Windows.Forms.MenuStrip();
             this.roomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,9 +45,6 @@ namespace Mountain {
             this.roomBindingSourceName = new System.Windows.Forms.BindingSource(this.components);
             this.OkButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.roomEditMenuStrip.SuspendLayout();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.roomBindingSourceDescription)).BeginInit();
@@ -74,6 +74,17 @@ namespace Mountain {
             this.roomToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.roomToolStripMenuItem.Text = "Room";
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(157, 22);
+            this.toolStripMenuItem2.Text = "Clear";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(154, 6);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -85,6 +96,11 @@ namespace Mountain {
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.loadToolStripMenuItem.Text = "Load Template";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(154, 6);
             // 
             // saveToTemplateToolStripMenuItem
             // 
@@ -111,9 +127,9 @@ namespace Mountain {
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(351, 21);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 13);
+            this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Mobile Generator";
+            this.label3.Text = "Mobiles Generator";
             // 
             // label1
             // 
@@ -130,7 +146,7 @@ namespace Mountain {
             this.mobsListBox.Location = new System.Drawing.Point(354, 39);
             this.mobsListBox.Name = "mobsListBox";
             this.mobsListBox.Size = new System.Drawing.Size(115, 147);
-            this.mobsListBox.TabIndex = 2;
+            this.mobsListBox.TabIndex = 4;
             // 
             // exitsListBox
             // 
@@ -138,7 +154,7 @@ namespace Mountain {
             this.exitsListBox.Location = new System.Drawing.Point(216, 39);
             this.exitsListBox.Name = "exitsListBox";
             this.exitsListBox.Size = new System.Drawing.Size(115, 147);
-            this.exitsListBox.TabIndex = 1;
+            this.exitsListBox.TabIndex = 3;
             // 
             // descriptionTextBox
             // 
@@ -147,14 +163,20 @@ namespace Mountain {
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.descriptionTextBox.Size = new System.Drawing.Size(164, 147);
-            this.descriptionTextBox.TabIndex = 5;
+            this.descriptionTextBox.TabIndex = 1;
+            this.descriptionTextBox.TextChanged += new System.EventHandler(this.descriptionTextBox_TextChanged);
+            this.descriptionTextBox.Leave += new System.EventHandler(this.descriptionTextBox_Leave);
             // 
             // roomNameTextBox
             // 
             this.roomNameTextBox.Location = new System.Drawing.Point(33, 18);
             this.roomNameTextBox.Name = "roomNameTextBox";
             this.roomNameTextBox.Size = new System.Drawing.Size(164, 20);
-            this.roomNameTextBox.TabIndex = 9;
+            this.roomNameTextBox.TabIndex = 0;
+            this.roomNameTextBox.TextChanged += new System.EventHandler(this.roomNameTextBox_TextChanged);
+            this.roomNameTextBox.Enter += new System.EventHandler(this.roomNameTextBox_Enter);
+            this.roomNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomNameTextBox_KeyPress);
+            this.roomNameTextBox.Leave += new System.EventHandler(this.roomNameTextBox_Leave);
             // 
             // OkButton
             // 
@@ -162,7 +184,7 @@ namespace Mountain {
             this.OkButton.Location = new System.Drawing.Point(351, 261);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(75, 23);
-            this.OkButton.TabIndex = 2;
+            this.OkButton.TabIndex = 5;
             this.OkButton.Text = "OK";
             this.OkButton.UseVisualStyleBackColor = true;
             // 
@@ -172,25 +194,9 @@ namespace Mountain {
             this.cancelButton.Location = new System.Drawing.Point(433, 261);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 3;
+            this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(157, 22);
-            this.toolStripMenuItem2.Text = "Clear";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(154, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(154, 6);
             // 
             // RoomEdit
             // 

@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 
 namespace Mountain.classes {
 
+    [XmlRoot]
     public class Area : Identity {
         private CancellationTokenSource cancellationTokenSource;
         [XmlArray("Rooms")]
@@ -39,8 +40,11 @@ namespace Mountain.classes {
             throw new NotImplementedException("Area Load ()");
         }
 
-        public void Save() {
-            throw new NotImplementedException("Area Save()");
+        public string ToXml() {
+           // string result = base.ToXml(XmlHelper.ObjectToBasicXml(this));
+            string result = base.ToXml();
+            return result;
+           // throw new NotImplementedException("Area Save()");
         }
 
         public void Save(string filename) {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Mountain.classes.dataobjects;
+using Mountain.classes.handlers;
 
 namespace Mountain.classes {
 
@@ -14,6 +15,11 @@ namespace Mountain.classes {
             this.ClassType = classType.unknown;
             this.ItemType = itemType.none;
             ID = Guid.NewGuid();
+        }
+        
+        public string ToXml() {
+            string result = XmlHelper.ObjectToBasicXml(this);
+            return result;
         }
 
     }
