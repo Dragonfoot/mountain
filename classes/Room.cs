@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml;
 using System.Text;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Xml.Serialization;
@@ -15,23 +16,17 @@ using Mountain.classes.tcp;
 namespace Mountain.classes {
 
     public class Room : Identity {
-        [XmlIgnore]
-        public ConcurrentBag<Mob> Mobs { get; set; }
-        [XmlIgnore]
-        public ConcurrentBag<Item> Items { get; set; }
-        [XmlIgnore]
-        public List<Connection> Players { get; set; }
-        [XmlIgnore]
-        public RoomID RoomID;
+        [XmlIgnore] public ConcurrentBag<Mob> Mobs { get; set; }
+        [XmlIgnore] public ConcurrentBag<Item> Items { get; set; }
+        [XmlIgnore] public Players Players { get; set; }
+        [XmlIgnore] public PlayerEventQueue Messages;
+        [XmlIgnore] public ApplicationSettings settings;
+        [XmlIgnore] public RoomID RoomID;
+
+        protected GeneralEventQueue Events;
         public roomType roomType { get; set; }
         public string Tag { get; set; }
-        [XmlArray("Exits")]
-        public List<Exit> Exits { get; set; }
-        protected GeneralEventQueue Events;
-        [XmlIgnore]
-        public PlayerEventQueue Messages;
-        [XmlIgnore]
-        public ApplicationSettings settings;
+        [XmlArray("Links")] public List<Exit> Exits { get; set; }
 
         public Room(ApplicationSettings appSettings) {
             InitializeRoom(appSettings);
@@ -39,6 +34,25 @@ namespace Mountain.classes {
             Description = "This is a newly created room";
             RoomID = new RoomID(ID, Name);
         }
+
+        private void Players_OnPlayerAdded(object myObject, Connection player) {
+            foreach(Connection client in Players) {
+                if(client != player) client.Send(player.Account.Name + "just arrived.");
+                 else SendCommand(player, "look");
+            }
+        }
+        private void SendCommand(Connection player, string command) {
+            Task HandleMessage = new Task(() => player.Commands(player, command));
+            HandleMessage.Start();
+        }
+        public string GetName() { return Name; }
+        public string GetDesciption() { return Description; }
+        public string GetExits() { return Functions.GetNames(Exits.ToArray()); }
+        public string GetMobs() { return Functions.GetNames(Mobs.ToArray()); }
+        public string GetPlayers() { return Functions.GetNames(Players.ToArray()); }
+        public string GetOtherPlayers(string name) { return Functions.GetOtherNames(Players.ToArray(), name); }
+        public string GetItems() { return Functions.GetNames(Items.ToArray()); }
+
         public Room(string name, ApplicationSettings appSettings) {
             InitializeRoom(appSettings);
             RoomID = new RoomID(ID, Name);
@@ -58,12 +72,6 @@ namespace Mountain.classes {
             RoomID = new RoomID(ID, Name);
         }
 
-        [XmlIgnore]
-        public string RoomName {
-            get { return this.Name; }
-            set { this.Name = value; }
-        }
-
         public void SetName(string name) {
             Name = name;
             this.RoomID.Name = name;
@@ -73,12 +81,13 @@ namespace Mountain.classes {
             ClassType = classType.room;
             settings = appSettings;
             Exits = new List<Exit>();
-            Players = new List<Connection>();
+            Players = new Players();
             Mobs = new ConcurrentBag<Mob>();
             Items = new ConcurrentBag<Item>();
             Events = new GeneralEventQueue();
             Messages = new PlayerEventQueue();            
             Messages.OnEventReceived += Messages_OnPlayerEventReceived;
+            this.Players.OnPlayerAdded += Players_OnPlayerAdded;
         }
 
         private void Messages_OnPlayerEventReceived(object myObject, Packet packet) {
@@ -88,6 +97,7 @@ namespace Mountain.classes {
         }        
         
         public void HeartBeat() {
+
             throw new NotImplementedException("Room beat");
         }
 
@@ -144,12 +154,6 @@ namespace Mountain.classes {
             return view.ToArray();
         }
 
-        public string GetName() { return Name; }
-        public string GetDesciption() { return Description; }
-        public string GetExits() { return Functions.GetNames(Exits.ToArray()); }
-        public string GetMobs() { return Functions.GetNames(Mobs.ToArray()); }
-        public string GetPlayers() { return Functions.GetNames(Players.ToArray()); }
-        public string GetItems() { return Functions.GetNames(Items.ToArray()); }
 
 
         protected void Save() {
@@ -159,7 +163,7 @@ namespace Mountain.classes {
             throw new NotImplementedException("Room load");
         }
 
-        public void ShowRoomTo(Connection client) {
+        public void ShowRoom(Connection client) {
         }
         
     }

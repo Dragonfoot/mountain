@@ -24,7 +24,7 @@ namespace Mountain.classes.handlers {
         }
         private void Welcome() {
             string welcome = "Welcome to the Mountain Foundation. ";
-            welcome += "The food is good, the drinks better. If you like road kill you'll love Greggor's ";
+            welcome += "The food is good, the drinks better. If you like road kill you'll love Gregor's ";
             welcome += "Frizzled Sizzle-Griller down by Flatstomp Road near Pancake Hill. ";
             welcome += "Do be prepared for unexpected and mostly friendly behavior from our many inhabitants. They ";
             welcome += "have all taken solemn oaths to do their very utmost for you. Good luck!";
@@ -35,7 +35,7 @@ namespace Mountain.classes.handlers {
 
         private void StartLogin() {
             action = login.name; // start with getting the users player name
-            Client.Send("User Name: ".Color(true, Ansi.green), true);
+            Client.Send("User Name: ".Color(true, Ansi.green));
         }
         public void OnMessageReceived(object myObject, string message) { // do stuff with message
             if (message.IsNullOrWhiteSpace()) {
@@ -55,7 +55,7 @@ namespace Mountain.classes.handlers {
                         case userStatus.available: // we know the name and it isn't currently logged on
                             Client.Send(message.Color(true, Ansi.yellow).NewLine(), false);
                             LoginClient.SetName(message);
-                            Client.Send("Password: ".Color(Ansi.green), true); // we need a password
+                            Client.Send("Password: ".Color(Ansi.green)); // we need a password
                             action = login.password; // channel for validate password
                             break;
                         case userStatus.nonExistent:  // name doesn't exist, ask if its a new account request                        
@@ -72,18 +72,18 @@ namespace Mountain.classes.handlers {
                     break;
                 case login.newUser:
                     if (message.IsYes()) {
-                        Client.Send("Please enter a password: ".Color(Ansi.green), true);
+                        Client.Send("Please enter a password: ".Color(Ansi.green));
                         action = login.newpassword;
                     }
                     else {
-                        Client.Send("User Name: ".Color(true, Ansi.green), true); // restart login
+                        Client.Send("User Name: ".Color(true, Ansi.green)); // restart login
                         action = login.name;
                     }
                     break;
                 case login.password:
                     if (LoginClient.CheckPassword(message)) {
                         Client.Send("".NewLine().NewLine().Color(Ansi.yellow), false);
-                        Client.Send("Welcome back ".Color(Ansi.white, Ansi.white) + LoginClient.Name + "!".NewLine().NewLine(), true);
+                        Client.Send("Welcome back ".Color(Ansi.white, Ansi.white) + LoginClient.Name + "!".NewLine().NewLine());
                         Client.Account = LoginClient;
                         Client.settings.SwapLoginForPlayer(Client); // swap out login for player handler
                         return;

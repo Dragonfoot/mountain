@@ -46,17 +46,17 @@ namespace Mountain.classes.handlers {
 
         private void Invent(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Health(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Equip(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
     }
 }

@@ -71,10 +71,10 @@ namespace Mountain.classes.tcp {
 
         public void StartPlayer() { // swap out login for player dispatcher handler
             Room = settings.TheVoid;
-            settings.TheVoid.AddPlayer(this);
             PlayerHandler = new PlayerHandler(this, settings);
             Commands = PlayerHandler.OnPlayerMessageReceived;
             LoginHandler = null;
+            settings.TheVoid.AddPlayer(this);
         }
 
         private void SetRoom(Room room) {
@@ -83,7 +83,7 @@ namespace Mountain.classes.tcp {
             Account.Room = room;
         }
 
-        public void Send(string data, bool indent) {
+        public void Send(string data, bool indent = true) {
             if (indent) { data = data.Indent(); }
             byte[] byteData = Encoding.ASCII.GetBytes(data);
             state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
@@ -101,6 +101,7 @@ namespace Mountain.classes.tcp {
 
         public void Shutdown() {
             Send("Shutting down now.".Color(Ansi.yellow), false);
+            Socket.Client.Shutdown(SocketShutdown.Both);
             Socket.Close();
             Save();
         }

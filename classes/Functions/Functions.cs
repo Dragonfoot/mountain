@@ -16,6 +16,22 @@ namespace Mountain.classes.functions {
             return names;
         }
 
+        public static string GetOtherNames(Array list, string name) {
+            string names = string.Empty;
+            int i = 1;
+            foreach (Identity item in list) {
+                if(item.Name == name) {
+                    i++;
+                    continue;
+                }
+                names = names + item.Name;
+                if (i != list.Length) { names = names + ", "; }
+                if (i == list.Length) { names = names + "."; }
+                i++;
+            }
+            return names;
+        }
+
         public static Room CloneRoomToEdit(Room room, ApplicationSettings settings) {
             Room copy = new Room(room.Name, room.Description, settings);
             copy.RoomID = room.RoomID;

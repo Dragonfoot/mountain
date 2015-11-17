@@ -21,9 +21,9 @@ namespace Mountain.classes.handlers {
             Packet packet = Parse(message, Client);
             if (!packet.known) {
                 string verb = packet.verb;
-                Client.Send("I don't know what to do with \"".Color(Ansi.yellow) + verb.Color(Ansi.white) + "\" just yet.".Color(Ansi.yellow).NewLine(), true);
+                Client.Send("I don't know what to do with \"".Color(Ansi.yellow) + verb.Color(Ansi.white) + "\" just yet.".Color(Ansi.yellow).NewLine());
                 if (Commands.IsCommand(verb)) {
-                    Client.Send("But, um.. I did a few minutes ago..\"scratch\"".Color(Ansi.yellow).NewLine(), true);
+                    Client.Send("But, um.. I did a few minutes ago..\"scratch\"".Color(Ansi.yellow).NewLine());
                 }
                 return;
             }

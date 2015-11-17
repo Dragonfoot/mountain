@@ -46,16 +46,16 @@ namespace Mountain.classes.handlers {
         private void Say(Packet packet) {
             try {
                 if (packet.parameter.IsNullOrWhiteSpace()) {
-                    packet.Client.Send("Say what?".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                    packet.Client.Send("Say what?".Color(Ansi.yellow, Ansi.white).NewLine());
                     return;
                 }
                 if (!packet.parameter.HasLastCharPunctuation()) { packet.parameter += "."; }
                 string message = "\"" + packet.parameter + "\"".NewLine().Color(Ansi.white);
                 foreach (Connection player in packet.Client.Room.Players) {
                     if (player.Account.Name == packet.Client.Account.Name) {
-                        player.Send("You say, ".Color(Ansi.white) + message.Color(Ansi.white), true);
+                        player.Send("You say, ".Color(Ansi.white) + message.Color(Ansi.white));
                     } else {
-                        player.Send(packet.Client.Account.Name + " says, ".Color(Ansi.white) + message.Color(Ansi.white), true);
+                        player.Send(packet.Client.Account.Name + " says, ".Color(Ansi.white) + message.Color(Ansi.white));
                     }
                 }
             } catch (Exception e) {
@@ -66,13 +66,13 @@ namespace Mountain.classes.handlers {
         private void Look(Packet packet) {
             string response = packet.Client.Room.GetName(), names = string.Empty;
             packet.Client.Send("".NewLine(), false);
-            packet.Client.Send(response.Color(Ansi.cyan).NewLine().NewLine(), true);
+            packet.Client.Send(response.Color(Ansi.cyan).NewLine().NewLine());
             response = packet.Client.Room.GetDesciption();
             packet.Client.Send(response.Color(Ansi.white).WordWrap(), false);
             names = Functions.GetNames(packet.Client.Room.Exits.ToArray());
             if (names != string.Empty) response = "Obvious Exits: " + names;
              else response = "Obvious Exits: ";
-            packet.Client.Send(response.Color(Ansi.green).NewLine(), true);
+            packet.Client.Send(response.Color(Ansi.green).NewLine());
             names = string.Empty;
             int count = packet.Client.Room.Players.Count, i = 0;
             foreach (Connection player in packet.Client.Room.Players) {
@@ -83,66 +83,66 @@ namespace Mountain.classes.handlers {
                     i++;
                 }
                 if (names != string.Empty)
-                    packet.Client.Send(names.Color(Ansi.cyan).WordWrap().NewLine(), true);
+                    packet.Client.Send(names.Color(Ansi.cyan).WordWrap().NewLine());
                 names = Functions.GetNames(packet.Client.Room.Mobs.ToArray());
-                if(names != string.Empty) packet.Client.Send(names.Color(Ansi.green).NewLine(), true);
+                if(names != string.Empty) packet.Client.Send(names.Color(Ansi.green).NewLine());
                 // add items
             }
         }
 
         private void Shout(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Tell(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Yell(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Talk(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Whisper(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) + 
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Get(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Hide(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void MoveTo(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Open(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Close(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
         private void Pick(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine(), true);
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
     }
 }

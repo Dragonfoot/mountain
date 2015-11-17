@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using Mountain.classes.tcp;
 
 namespace Mountain.classes.collections {
 
-    public class Players {
+    public class Players : IEnumerable<Connection> {
         private List<Connection> List;
         public delegate void AddHandler(object myObject, Connection player);
         public event AddHandler OnPlayerAdded;
+        public int Count { get { return List.Count; } }
 
         public delegate void RemoveHandler(object myObject, Connection player);
         public event RemoveHandler OnPlayerRemoved;
@@ -29,12 +31,12 @@ namespace Mountain.classes.collections {
                 OnPlayerRemoved(this, loggingOut);
         }
 
-        public bool Exists(string name) {
-            return List.Exists(player => player.Account.Name == name);
+        public Connection [] ToArray() {
+            return List.ToArray();
         }
 
-        public int Count() {
-            return List.Count;
+        public bool Exists(string name) {
+            return List.Exists(player => player.Account.Name == name);
         }
 
         private int GetIndex(string name) {
@@ -47,6 +49,13 @@ namespace Mountain.classes.collections {
             // https://github.com/Reddit-Mud/RMUD/blob/master/NetworkModule/Clients.cs
         }
 
-      
+
+        public IEnumerator<Connection> GetEnumerator() {
+            return List.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
     }
 }
