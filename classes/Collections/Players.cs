@@ -6,29 +6,28 @@ namespace Mountain.classes.collections {
 
     public class Players : IEnumerable<Connection> {
         private List<Connection> List;
-        public delegate void AddHandler(object myObject, Connection player);
+        public delegate void AddHandler(object myObject, Connection player, string message = "");
+        public delegate void RemoveHandler(object myObject, Connection player, string message = "");
         public event AddHandler OnPlayerAdded;
-        public int Count { get { return List.Count; } }
-
-        public delegate void RemoveHandler(object myObject, Connection player);
         public event RemoveHandler OnPlayerRemoved;
+        public int Count { get { return List.Count; } }
 
         public Players() {
             List = new List<Connection>();
         }
 
-        public void Add(Connection player) {
+        public void Add(Connection player, string message = "") {
             List.Add(player);
             if (OnPlayerAdded != null )
-                OnPlayerAdded(this, player);
+                OnPlayerAdded(this, player, message);
         }
 
-        public void Remove(string name) {
+        public void Remove(string name, string message = "") {
             int index = GetIndex(name);
-            Connection loggingOut = List[index];
+            Connection player = List[index];
             List.RemoveAt(index);
             if (OnPlayerRemoved != null )
-                OnPlayerRemoved(this, loggingOut);
+                OnPlayerRemoved(this, player, message);
         }
 
         public Connection [] ToArray() {

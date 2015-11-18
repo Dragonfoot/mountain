@@ -42,6 +42,7 @@ namespace Mountain.classes.tcp {
                 settings.SystemMessageQueue.Push("Connection closed: " + e.ToString());               
             }
         }
+
         public void ReceiveCallback(IAsyncResult ar) {
             try {
                 int read = state.Socket.Client.EndReceive(ar); // get number of bytes read in
@@ -116,7 +117,7 @@ namespace Mountain.classes.tcp {
         }
     }
 
-    // data container that's passed between threads to maintain state
+    // data container passed between threads
     public class StateObject {  
         private const int BUFFER_SIZE = 1024;
         public byte[] Buffer = new byte[BUFFER_SIZE];

@@ -59,7 +59,7 @@ namespace Mountain {
             this.room = room;
             this.roomNameTextBox.Text = room.Name;
             this.descriptionTextBox.Text = room.Description;
-            this.roomEdits = Functions.CloneRoomToEdit(room, settings);
+            this.roomEdits = Functions.CloneTheRoomToEdit(room, settings);
             exitsListBox.Items.AddRange(room.Exits.Select(exit => exit.Name).ToArray());
             this.settings = settings;
         }

@@ -4,16 +4,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Mountain.classes.dataobjects;
+using Mountain.classes.collections;
 
 namespace Mountain.classes {
 
     [XmlRoot]
     public class Area : Identity {
+        [XmlArray("Rooms")] public Rooms Rooms { get; private set; }
+        [XmlIgnore] public bool Active { get; set; } 
         private CancellationTokenSource cancellationTokenSource;
-        [XmlArray("Rooms")]
-        public List<Room> Rooms { get; private set; }
-        [XmlIgnore]
-        public bool Active { get; set; }  // in memory or not, conserve resources?
 
         public Area() {
             ClassType = classType.area;
@@ -21,7 +20,7 @@ namespace Mountain.classes {
             Description = "new area";
             Active = true;
             cancellationTokenSource = new CancellationTokenSource();
-            Rooms = new List<Room>();
+            Rooms = new Rooms(this);
         }
 
         public Area(string name, string description, Guid id) {
@@ -31,6 +30,7 @@ namespace Mountain.classes {
         }
 
         public void AddRoom(Room room) {
+            room.Area = this;
             Rooms.Add(room);
         }
 

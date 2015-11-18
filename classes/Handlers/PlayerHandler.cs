@@ -1,4 +1,6 @@
-﻿using Mountain.classes.tcp;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Mountain.classes.tcp;
 using Mountain.classes.dataobjects;
 using Mountain.classes.functions;
 
@@ -36,40 +38,44 @@ namespace Mountain.classes.handlers {
             Client.Account.Room = room;
         }
 
-        private Packet Parse(string str, Connection player) {
+        private Packet Parse(string message, Connection player) {
             Packet packet = new Packet(string.Empty, string.Empty, player);
-            str = str.TrimStart(' ');
-            str = str.StripExtraSpaces();
-            if (str.FirstChar() == '\'') {
-                str = str.Remove(0, 1).Insert(0, "say ").StripExtraSpaces();
+            message = message.TrimStart(' ');
+            message = message.StripExtraSpaces();
+
+            if (message.FirstChar() == '\'') {
+                message = message.Remove(0, 1).Insert(0, "say ").StripExtraSpaces();
                 packet.known = true;
             } else {
-                if (str.FirstWordIsSingleChar()) {
-                    char ch = str.FirstChar();
+                if (message.FirstWordIsSingleChar()) {
+                    char ch = message.FirstChar();
                     switch (ch) {
                         case 'l':
-                            str = str.Remove(0, 1).Insert(0, "look");
+                            message = message.Remove(0, 1).Insert(0, "look");
                             packet.known = true;
                             break;
                         case 'i':
-                            str = str.Remove(0, 1).Insert(0, "inventory");
+                            message = message.Remove(0, 1).Insert(0, "inventory");
                             packet.known = true;
                             break;
                         case '?':
-                            str = str.Remove(0, 1).Insert(0, "help");
+                            message = message.Remove(0, 1).Insert(0, "help");
                             packet.known = true;
                             break;
                     }
                 }
             }
-            if (!packet.known) {
-                // check for room exit names, see if player wants to go/moveTo
-                // if so, change verb to match moveTo
-            }
-            packet.verb = str.FirstWord();
-            packet.parameter = str.StripFirstWord();
+            packet.verb = message.FirstWord();
+            packet.parameter = message.StripFirstWord();
             if (Commands.IsCommand(packet.verb)) {
                 packet.known = true;
+            }
+            if (!packet.known) {
+                if(Functions.HasNameThatStartsWith(player.Room.Exits.ToArray(), packet.verb)) {
+                    packet.parameter = packet.verb;
+                    packet.verb = "goto";
+                    packet.known = true;
+                }
             }
             return packet;
         }

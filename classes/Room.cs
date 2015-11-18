@@ -22,6 +22,7 @@ namespace Mountain.classes {
         [XmlIgnore] public PlayerEventQueue Messages;
         [XmlIgnore] public ApplicationSettings settings;
         [XmlIgnore] public RoomID RoomID;
+        [XmlIgnore] public Area Area { get; set; }
 
         protected GeneralEventQueue Events;
         public roomType roomType { get; set; }
@@ -35,12 +36,21 @@ namespace Mountain.classes {
             RoomID = new RoomID(ID, Name);
         }
 
-        private void Players_OnPlayerAdded(object myObject, Connection player) {
+        private void Players_OnPlayerAdded(object myObject, Connection player, string message = "") {
+            string name = player.Account.Name;
+            if (message == "")
+                message = " just arrived.";
             foreach(Connection client in Players) {
-                if(client != player) client.Send(player.Account.Name + "just arrived.");
+                if(client != player) client.Send(player.Account.Name + message);
                  else SendCommand(player, "look");
             }
         }
+        private void Players_OnPlayerRemoved(object myObject, Connection player, string message = "") {
+            foreach (Connection Player in Players) {
+                Player.Send(player.Account.Name.Color(Ansi.yellow) + " leaves through the (" + message + ") exit.".NewLine());
+            }
+        }
+
         private void SendCommand(Connection player, string command) {
             Task HandleMessage = new Task(() => player.Commands(player, command));
             HandleMessage.Start();
@@ -88,7 +98,9 @@ namespace Mountain.classes {
             Messages = new PlayerEventQueue();            
             Messages.OnEventReceived += Messages_OnPlayerEventReceived;
             this.Players.OnPlayerAdded += Players_OnPlayerAdded;
+            this.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
         }
+
 
         private void Messages_OnPlayerEventReceived(object myObject, Packet packet) {
             Packet message = Messages.Pop(); 
@@ -97,19 +109,26 @@ namespace Mountain.classes {
         }        
         
         public void HeartBeat() {
-
             throw new NotImplementedException("Room beat");
         }
 
         public void AddExit(Exit exit) {
             this.Exits.Add(exit);
         }
+
         public void AddMob(Mob mob) {
             this.Mobs.Add(mob);
+            // a mob just arrived...
         }
-        public void AddPlayer(Connection client) {
-            this.Players.Add(client);
-            client.Account.RoomID = RoomID;
+
+        public void AddPlayer(Connection player) {
+            this.Players.Add(player);
+            player.Room = this;
+            player.Account.RoomID = RoomID;
+        }
+
+        public void RemovePlayer(Connection player, string exitName) {
+            Players.Remove(player.Account.Name, exitName);
         }
 
         public string SaveXML() { 
@@ -154,16 +173,11 @@ namespace Mountain.classes {
             return view.ToArray();
         }
 
-
-
         protected void Save() {
             throw new NotImplementedException("Room save");
         }
         protected void Load() {
             throw new NotImplementedException("Room load");
-        }
-
-        public void ShowRoom(Connection client) {
         }
         
     }

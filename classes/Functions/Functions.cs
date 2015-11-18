@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Mountain.classes.functions {
 
@@ -16,14 +17,19 @@ namespace Mountain.classes.functions {
             return names;
         }
 
+        public static int GetSameNameCount(Array list, string name) {
+            int i = 0;
+            foreach(Identity item in list) {
+                if (item.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase)) { i++; }
+            }
+            return i;
+        }
+
         public static string GetOtherNames(Array list, string name) {
             string names = string.Empty;
             int i = 1;
             foreach (Identity item in list) {
-                if(item.Name == name) {
-                    i++;
-                    continue;
-                }
+                if(item.Name == name) { i++; continue; }
                 names = names + item.Name;
                 if (i != list.Length) { names = names + ", "; }
                 if (i == list.Length) { names = names + "."; }
@@ -32,25 +38,34 @@ namespace Mountain.classes.functions {
             return names;
         }
 
-        public static Room CloneRoomToEdit(Room room, ApplicationSettings settings) {
-            Room copy = new Room(room.Name, room.Description, settings);
-            copy.RoomID = room.RoomID;
+        public static bool HasNameThatStartsWith(Array list, string name) {
+            foreach(Identity item in list) {
+                if (item.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
+        }
+
+        public static Room CloneTheRoomToEdit(Room room, ApplicationSettings settings) {
+            Room clone = new Room(room.Name, room.Description, settings);
+            clone.RoomID = room.RoomID;
             if (room.Exits.Count > 0) {
                 foreach (Exit exit in room.Exits) {
-                    Exit exitCopy = new Exit();
-                    exitCopy.ID = exit.ID;
-                    exitCopy.Name = exit.Name;
-                    exitCopy.Description = exit.Description;
-                    exitCopy.link = exit.link;
-                    exitCopy.LinkToRoomID = exit.LinkToRoomID;
-                    exitCopy.LinkToRoomName = exit.LinkToRoomName;
-                    exitCopy.Attributes = exit.Attributes;
-                    copy.Exits.Add(exitCopy);
+                    Exit clonedExit = new Exit();
+                    clonedExit.ID = exit.ID;
+                    clonedExit.Name = exit.Name;
+                    clonedExit.Description = exit.Description;
+                    clonedExit.link = exit.link;
+                    clonedExit.LinkToRoomID = exit.LinkToRoomID;
+                    clonedExit.LinkToRoomName = exit.LinkToRoomName;
+                    clonedExit.Attributes = exit.Attributes;
+                    clone.Exits.Add(clonedExit);
                 }
             }
-            return copy;
+            return clone;
         }
-        public static void SetRoomEdits(Room fromRoom, Room toRoom) {
+
+        public static void UpdateRoomEdits(Room fromRoom, Room toRoom) {
             toRoom.Name = fromRoom.Name;
             toRoom.Description = fromRoom.Description;
             if (toRoom.Exits.Count > 0) { toRoom.Exits.Clear(); }

@@ -49,6 +49,7 @@ namespace Mountain {
         }
 
         private void exitProgram_ToolStripMenuItem_Click(object sender, EventArgs e) {
+            world.Shutdown();
             Close();
             //this.world.Save(string.Empty);
         }
@@ -65,7 +66,7 @@ namespace Mountain {
         private void button6_Click(object sender, EventArgs e) { //stop server
             //    world.Shutdown();
             //   world = null;
-            Console.Items.Add("Shutdown not implemented yet"); // settings.players needs each player to disconnect/save
+            Console.Items.Add("Shutdown not implemented quite yet"); // settings.players needs each player to disconnect/save
         }
 
         private World BuildDefaultWorld() {
@@ -73,7 +74,7 @@ namespace Mountain {
             try {
                 world = new World(settings);
                 if (world.Areas.Count > 0) {
-                    world.settings.TheVoid = world.Areas[0].Rooms.Find(room => room.Tag == "Void");
+                    world.settings.TheVoid = world.Areas[0].Rooms.FindTag("Void");
                     areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                     areaListBox.SelectedIndex = 0;
                     if(SelectedArea.Rooms.Count > 0) {
@@ -92,7 +93,7 @@ namespace Mountain {
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 world.Areas.Add(areaForm.area);
-                world.settings.TheVoid = areaForm.area.Rooms.Find(room => room.Tag == "Void");
+                world.settings.TheVoid = areaForm.area.Rooms.FindTag("Void");
                 areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                 areaListBox.SelectedIndex = 0;
             } else {
@@ -147,7 +148,7 @@ namespace Mountain {
             var index = roomsListBox.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches) {
                 roomsListBox.SelectedIndex = index;
-                SelectedRoom = SelectedArea.Rooms.Find(room => room.Name == (string)roomsListBox.SelectedItem);
+                SelectedRoom = SelectedArea.Rooms.FindName((string)roomsListBox.SelectedItem);
                 for (int i = 0; i <= RoomContextMenu.Items.Count - 1; i++) {                    
                     RoomContextMenu.Items[i].Enabled = true;
                 }
@@ -166,7 +167,7 @@ namespace Mountain {
             RoomEdit roomEditForm = new RoomEdit(SelectedRoom, settings);
             DialogResult dialogresult = roomEditForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-                Functions.SetRoomEdits(roomEditForm.roomEdits, SelectedRoom);
+                Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
                 roomsListBox.Items.Clear();
                 roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
             } 
@@ -174,14 +175,14 @@ namespace Mountain {
         }
 
         private void roomsListBox_SelectedIndexChanged(object sender, EventArgs e) {
-            SelectedRoom = SelectedArea.Rooms.Find(room => room.Name == (string)roomsListBox.SelectedItem);
+            SelectedRoom = SelectedArea.Rooms.FindName((string)roomsListBox.SelectedItem);
         }
 
         private void roomsListBox_MouseDoubleClick(object sender, MouseEventArgs e) {
             var index = roomsListBox.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches) {
                 roomsListBox.SelectedIndex = index;
-                SelectedRoom = SelectedArea.Rooms.Find(room => room.Name == (string)roomsListBox.SelectedItem);
+                SelectedRoom = SelectedArea.Rooms.FindName((string)roomsListBox.SelectedItem);
                 EditRoomContextMenuItem_Click(sender, e);
             } else {
                 roomsListBox.SelectedIndex = -1;

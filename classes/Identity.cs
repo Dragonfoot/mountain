@@ -18,8 +18,7 @@ namespace Mountain.classes {
         }
         
         public string ToXml() {
-            string result = XmlHelper.ObjectToBasicXml(this);
-            return result;
+            return XmlHelper.ObjectToBasicXml(this);
         }
 
     }

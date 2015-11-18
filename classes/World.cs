@@ -51,11 +51,11 @@ namespace Mountain.classes {
             portListener.StartServer(port);
         }
 
-        void Players_OnPlayerRemoved(object myObject, Connection player) {
+        void Players_OnPlayerRemoved(object myObject, Connection player, string message = "") {
            // throw new NotImplementedException("Player removed");
         }
 
-        void Players_OnPlayerAdded(object myObject, Connection player) {
+        void Players_OnPlayerAdded(object myObject, Connection player, string message = "") {
            // throw new NotImplementedException("Player added");
         }
 
