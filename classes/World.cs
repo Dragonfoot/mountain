@@ -11,23 +11,19 @@ using Mountain.classes.functions;
 namespace Mountain.classes {
 
     public class World : Identity {
-        [XmlArray("Areas")]
-        public List<Area> Areas;
-        [XmlIgnore]
-        public ApplicationSettings settings;
+        [XmlArray("Areas")] public List<Area> Areas;
+        [XmlIgnore] public ApplicationSettings settings;
+        [XmlIgnore] public TcpServerListener portListener;
+        [XmlIgnore] public int Connections { get; private set; }
         protected ListBox Console;
-        [XmlIgnore]
-        public TcpServerListener portListener;
-        public int Port;
         private CancellationTokenSource cancellationTokenSource;
+        public int Port;
 
         public World(ApplicationSettings appSettings) {
-            ClassType = classType.world;
             InitializeSettings(appSettings);
             Areas = new List<Area>();
             portListener = new TcpServerListener(this, appSettings);
-            if (Port < 5000 || Port > 10000)
-                Port = 8090;
+            Port = 8090;
       //      portListener.StartServer(Port);
             string lastworld = settings.LastSavedWorld;
             if (lastworld.IsNullOrWhiteSpace()) {
@@ -42,12 +38,13 @@ namespace Mountain.classes {
         }
 
         private void InitializeSettings(ApplicationSettings appSettings) {
+            ClassType = classType.world;
             settings = appSettings;
             settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
             settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
         }
 
-        public void StartListen(int port) {
+        public void StartListen(int port = 8090) {
             portListener.StartServer(port);
         }
 

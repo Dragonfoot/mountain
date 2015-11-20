@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
+using System.Xml.Serialization;
 using Mountain.Properties;
 using Mountain.classes.collections;
 using Mountain.classes.dataobjects;
@@ -12,33 +13,36 @@ using Mountain.classes.functions;
 namespace Mountain.classes {
 
     public class ApplicationSettings {
-        public RegisteredUsers RegisteredUsers { get; set; }
-        public List<Connection> Logins { get; set; }
-        public World world;
-        public Players Players { get; set; }
-        public Room TheVoid { get; set; }
-        public string AppDirectory { get; private set; }
-        public string BaseDirectory { get { return AppDirectory + Settings.Default.WorldsDirectory; } }
-        public string RegisteredUsersAccounts { get { return Settings.Default.RegisteredAccounts; } }
-        public string LastSavedWorld { get { return Settings.Default.LastSavedWorld; } set { Settings.Default.LastSavedWorld = value; } }
-        public string LastLoadedWorld { get { return Settings.Default.LastLoadedWorld; } set { Settings.Default.LastLoadedWorld = value; } }
-        public string BuildDirectory { get { return AppDirectory + Settings.Default.BuildDirectory; } }
-        public string RoomBuildDirectory { get { return AppDirectory + Settings.Default.RoomBuildDirectory; } }
-        public string WorldBuildDirectory { get { return AppDirectory + Settings.Default.WorldBuildDirectory; } }
-        public string ItemBuildDirectory { get { return AppDirectory + Settings.Default.ItemBuildDirectory; } }
-        public string AreaBuildDirectory { get { return AppDirectory + Settings.Default.AreaBuildDirectory; } }
-        public string ExitBuildDirectory { get { return AppDirectory + Settings.Default.ExitBuildDirectory; } }
-        public string TemplateDirectory { get { return AppDirectory + Settings.Default.TemplateDirectory; } }
-        public string WorldTemplateDirectory { get { return AppDirectory + Settings.Default.WorldTemplateDirectory; } }
-        public string AreaTemplateDirectory { get { return AppDirectory + Settings.Default.AreaTemplateDirectory; } }
-        public string RoomTemplateDirectory { get { return AppDirectory + Settings.Default.RoomTemplateDirectory; } }
-        public string ExitTemplateDirectory { get { return AppDirectory + Settings.Default.ExitTemplateDirectory; } }
-        public string ItemTemplateDirectory { get { return AppDirectory + Settings.Default.ItemTemplateDirectory; } }
-        public MessageQueue SystemMessageQueue;
+        [XmlIgnore] public RegisteredUsers RegisteredUsers { get; set; }
+        [XmlIgnore] public List<Connection> Logins { get; set; }
+        [XmlIgnore] public World world;
+        [XmlIgnore] public Players Players { get; set; }
+        [XmlIgnore] public Room TheVoid { get; set; }
+        [XmlIgnore] public string AppDirectory { get; private set; }
+        [XmlIgnore] public string PlayersDirectory { get { return AppDirectory + Settings.Default.PlayersDirectory; } }
+        [XmlIgnore] public string BaseDirectory { get { return AppDirectory + Settings.Default.WorldsDirectory; } }
+        [XmlIgnore] public string RegisteredUsersAccounts { get { return Settings.Default.RegisteredAccounts; } }
+        [XmlIgnore] public string LastSavedWorld { get { return Settings.Default.LastSavedWorld; } set { Settings.Default.LastSavedWorld = value; } }
+        [XmlIgnore] public string LastLoadedWorld { get { return Settings.Default.LastLoadedWorld; } set { Settings.Default.LastLoadedWorld = value; } }
+        [XmlIgnore] public string BuildDirectory { get { return AppDirectory + Settings.Default.BuildDirectory; } }
+        [XmlIgnore] public string RoomBuildDirectory { get { return AppDirectory + Settings.Default.RoomBuildDirectory; } }
+        [XmlIgnore] public string WorldBuildDirectory { get { return AppDirectory + Settings.Default.WorldBuildDirectory; } }
+        [XmlIgnore] public string ItemBuildDirectory { get { return AppDirectory + Settings.Default.ItemBuildDirectory; } }
+        [XmlIgnore] public string AreaBuildDirectory { get { return AppDirectory + Settings.Default.AreaBuildDirectory; } }
+        [XmlIgnore] public string ExitBuildDirectory { get { return AppDirectory + Settings.Default.ExitBuildDirectory; } }
+        [XmlIgnore] public string TemplateDirectory { get { return AppDirectory + Settings.Default.TemplateDirectory; } }
+        [XmlIgnore] public string WorldTemplateDirectory { get { return AppDirectory + Settings.Default.WorldTemplateDirectory; } }
+        [XmlIgnore] public string AreaTemplateDirectory { get { return AppDirectory + Settings.Default.AreaTemplateDirectory; } }
+        [XmlIgnore] public string RoomTemplateDirectory { get { return AppDirectory + Settings.Default.RoomTemplateDirectory; } }
+        [XmlIgnore] public string ExitTemplateDirectory { get { return AppDirectory + Settings.Default.ExitTemplateDirectory; } }
+        [XmlIgnore] public string ItemTemplateDirectory { get { return AppDirectory + Settings.Default.ItemTemplateDirectory; } }
+        [XmlIgnore] public MessageQueue SystemMessageQueue;
+        [XmlIgnore] public SystemEventQueue SystemEventQueue;
 
-        public ApplicationSettings(MessageQueue systemQueue) {
+        public ApplicationSettings(MessageQueue messageQueue, SystemEventQueue eventQueue) {
             InitializeSettings();
-            if (systemQueue != null) SystemMessageQueue = systemQueue;
+            if (messageQueue != null) SystemMessageQueue = messageQueue;
+            this.SystemEventQueue = eventQueue;
             Logins = new List<Connection>();
             RegisteredUsers = new RegisteredUsers();
             Players = new Players();
@@ -84,6 +88,7 @@ namespace Mountain.classes {
             if (!Directory.Exists(RoomTemplateDirectory)) { Directory.CreateDirectory(RoomTemplateDirectory); }
             if (!Directory.Exists(ExitTemplateDirectory)) { Directory.CreateDirectory(ExitTemplateDirectory); }
             if (!Directory.Exists(ItemTemplateDirectory)) { Directory.CreateDirectory(ItemTemplateDirectory); }
+            if (!Directory.Exists(PlayersDirectory)) { Directory.CreateDirectory(PlayersDirectory); }
             string file = BaseDirectory + "\\" + RegisteredUsersAccounts;
          //   if (!File.Exists(file)) {
                 XmlHelper.ReCreateDefaultUserXmlFile(file, this);

@@ -1,36 +1,42 @@
 ﻿using System.Collections.Generic;
+using Mountain.classes.functions;
 
 namespace Mountain.classes.dataobjects {
 
     public class Stats {   // list of possible player attributes set at arbitrary level 1 defaults
-        protected int health = 18;
-        protected int maxHealth = 18;
-        protected int strength = 4;
-        protected int constitution = 4;
-        protected int dexterity = 3;
-        protected int intellegence = 3;
-        protected int stealth = 1;
-        protected int mana = 0;
-        protected int maxMana = 0;
-        protected int wisdom = 3;
-        protected int awareness = 4;
-        protected double luck = 0.01;
-        protected double intuition = 0.01;
-        protected int experience = 0;
-        protected int maxItemWeight = 18;
-        protected int coins = 5;
-        protected List<string> skills;
-        protected List<string> spells;
-        protected List<string> powers;
-        protected List<string> languages;
-        protected string charClass = "generic";
-        protected string weaponClass = "unknown";
+        public int health = 18;
+        public int level = 1;
+        public int strength = 4;
+        public int constitution = 4;
+        public int dexterity = 3;
+        public int intellegence = 3;
+        public int stealth = 1;
+        public int mana = 0;
+        public int wisdom = 3;
+        public int awareness = 4;
+        public double luck = 0.01;
+        public double intuition = 0.01;
+        public int experience = 0;
+        public int maxItemWeight = 18;
+        public int coins = 5;
+        public List<string> skills;
+        public List<string> spells;
+        public List<string> powers;
+        public List<string> languages;
+        protected charType CharType;
 
         public Stats() {
             this.skills = new List<string>();
             this.spells = new List<string>();
             this.powers = new List<string>();
             this.languages = new List<string>();
+        }
+
+        public string HealthPrompt() {
+            string prompt = "".NewLine() + "{".Color(Ansi.green) + "{0} HP - {1} IP".Color(Ansi.cyan) + "}".Color(Ansi.green).NewLine();
+            prompt = prompt.Replace("{0}", health.ToString());
+            prompt = prompt.Replace("{1}", mana.ToString());
+            return prompt;
         }
     }
 

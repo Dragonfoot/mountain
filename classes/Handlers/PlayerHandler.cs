@@ -23,13 +23,14 @@ namespace Mountain.classes.handlers {
             Packet packet = Parse(message, Client);
             if (!packet.known) {
                 string verb = packet.verb;
-                Client.Send("I don't know what to do with \"".Color(Ansi.yellow) + verb.Color(Ansi.white) + "\" just yet.".Color(Ansi.yellow).NewLine());
+                Commands.DontKnowHow(packet);
                 if (Commands.IsCommand(verb)) {
                     Client.Send("But, um.. I did a few minutes ago..\"scratch\"".Color(Ansi.yellow).NewLine());
                 }
                 return;
             }
             Commands.InvokeCommand(packet.verb, packet);
+            packet.Client.Send(Client.Stats.HealthPrompt());
         }
 
         private void SetRoom(Room room) {
@@ -73,7 +74,7 @@ namespace Mountain.classes.handlers {
             if (!packet.known) {
                 if(Functions.HasNameThatStartsWith(player.Room.Exits.ToArray(), packet.verb)) {
                     packet.parameter = packet.verb;
-                    packet.verb = "goto";
+                    packet.verb = "go";
                     packet.known = true;
                 }
             }

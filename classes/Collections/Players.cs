@@ -5,7 +5,7 @@ using Mountain.classes.tcp;
 namespace Mountain.classes.collections {
 
     public class Players : IEnumerable<Connection> {
-        private List<Connection> List;
+        public List<Connection> List;
         public delegate void AddHandler(object myObject, Connection player, string message = "");
         public delegate void RemoveHandler(object myObject, Connection player, string message = "");
         public event AddHandler OnPlayerAdded;
@@ -30,6 +30,14 @@ namespace Mountain.classes.collections {
                 OnPlayerRemoved(this, player, message);
         }
 
+        public Connection GetPlayer(string name) {
+            if (Exists(name)) {
+                int index = GetIndex(name);
+                return List[index];
+            }
+            return null;
+        }
+
         public Connection [] ToArray() {
             return List.ToArray();
         }
@@ -38,7 +46,7 @@ namespace Mountain.classes.collections {
             return List.Exists(player => player.Account.Name == name);
         }
 
-        private int GetIndex(string name) {
+        public int GetIndex(string name) {
             return List.FindIndex(player => player.Account.Name == name);
         }
 

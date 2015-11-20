@@ -172,5 +172,14 @@ namespace Mountain.Properties {
                 return ((string)(this["ExitTemplateDirectory"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("players")]
+        public string PlayersDirectory {
+            get {
+                return ((string)(this["PlayersDirectory"]));
+            }
+        }
     }
 }

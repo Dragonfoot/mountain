@@ -10,18 +10,20 @@ namespace Mountain.classes.handlers {
     public class RoomCommands {
 
         private Dictionary<string, Action<Packet>> List;
+        private StringResources Resource;
         ApplicationSettings settings;
         public List<string> Keys;
 
         public RoomCommands(ApplicationSettings appSettings) {
             settings = appSettings;
+            Resource = new StringResources();
             LoadRoomCommands();
         }
         private void LoadRoomCommands() {
             List = new Dictionary<string, Action<Packet>>(){
                 {"say", Say}, {"tell", Tell}, {"yell", Yell}, {"shout", Shout}, {"talk", Talk}, {"whisper", Whisper},
-                {"look", Look }, {"get", Get }, {"hide", Hide }, {"goto", MoveTo }, {"go", MoveTo }, {"open", Open },
-                {"close", Close }, {"pick", Pick},
+                {"look", Look }, {"get", Get }, {"hide", Hide }, {"go", MoveTo }, {"open", Open },
+                {"close", Close }, {"pick", Pick}, {"quit", Quit }
             };
             Keys = new List<string>(List.Keys);
         }
@@ -41,6 +43,11 @@ namespace Mountain.classes.handlers {
                 return true;
             }
             return false;
+        }
+
+
+        public void DontKnowYet(Packet packet) {
+            packet.Client.Send(Resource.DontKnowHow(packet.verb, packet.Client));
         }
 
         private void Say(Packet packet) {
@@ -91,37 +98,41 @@ namespace Mountain.classes.handlers {
             // add items
         }
 
-        private void DontKnow(Packet packet) {
-            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
+        private void Quit(Packet packet) {
+            settings.Players.Remove(packet.Client.Account.Name, "Player has quit.");
+            packet.Client.Send("See you again soon!".Color(Ansi.white).NewLine().NewLine());
+            packet.Client.Room.Players.Remove(packet.Client.Account.Name);
+            SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnected, packet.Client.Account.Name + " has quit.");
+            settings.SystemEventQueue.Push(eventPacket);
+            packet.Client.Shutdown();
+            packet.Client.Dispose();
         }
-
         private void Shout(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
 
         private void Tell(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
 
         private void Yell(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
 
         private void Talk(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
 
         private void Whisper(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
 
         private void Get(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
 
         private void Hide(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
 
         private void MoveTo(Packet packet) {
@@ -141,15 +152,15 @@ namespace Mountain.classes.handlers {
         }
 
         private void Open(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
 
         private void Close(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
 
         private void Pick(Packet packet) {
-            DontKnow(packet);
+            DontKnowYet(packet);
         }
     }
 }

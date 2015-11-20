@@ -70,6 +70,8 @@
       <DependentUpon>AreaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="classes\Area.cs" />
+    <Compile Include="classes\Collections\SystemEventQueue.cs" />
+    <Compile Include="classes\DataObjects\StringResources.cs" />
     <Compile Include="classes\Handlers\Combat.cs" />
     <Compile Include="classes\Handlers\Emote.cs" />
     <Compile Include="classes\Functions\Functions.cs" />

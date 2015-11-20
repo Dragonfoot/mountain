@@ -21,19 +21,28 @@
       - player set,  per player settings, lag commands, verbose, output types
       - main output class - output in plain or ascii mode dependent on player preference.
       - first iteration to be a server/client in one project
-(C)   - ANSI features.  create an ansi class to modify output to ansi
+(C)   - [[ANSI features.  create an ansi class to modify output to ansi]]
 (C/R) - room flags for "areaset" or "roomset" mobs lists
       - AI actions for mobs to have random action based on level/class ie: {thief}(minlevel}{maxlevel}{action}
       - more complex citizenry.  don't want 90% of the area empty with just spawn camping
         ie: {area}{mob}{levelmin}{levelmax}{random%}
       - need function opposite of "lag detect".  if 5 commands received in 5 second, agro mob can stop the player type function
+
 (C/R) - address the need to compile for simple things as new commands, emotes, etc.
         hard code base functions, grouping by command function.
+
 (R)		-addendum to last-
 		xml files containing verb sequences that, when loaded, will call hard coded functions, grouping the verbs like script actions
 		in the xml as building blocks from small functions grouped together to perform larger functions and so on.. 
 		say.. mob plugin to open a door IE: "initOpenDoor", "getRoomExitNames", "getRandomExitNameFromNames", "tryOpenDoor". 
 		grouped under <Door><Open><...></Open></Door> which could be in a section called leaveRoom which might be in a file called 
 		Wander.xml.	then, to use part of it differently, switching out the randomExit calls to those that gets a room closer
-		to a player for tracking.. 
+		to a player for tracking..
+
+(R)   - lag detect, idle detect, allow soft reconnect on lag event
+(R)   - base player equipment class (armor, items, weapons..) to allow derived classes to be passed and saved between multiple remote/local worlds
+(R)   - physically remote worlds need switch to allow/disallow player transfers from/to other remote worlds. to start: room has an exit to another world
+        going to exit saves current player, tests if other world is active and accepting, sends player saved xml to other world during connection handshake,
+        player is given ipAddress:port to use in his client for connecting there. later, create standalone socket-server to pass commands, routing to different 
+        ipAddress:port connections, would have connection management, different ports for different worlds?
 

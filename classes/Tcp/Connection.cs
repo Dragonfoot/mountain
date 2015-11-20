@@ -1,6 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using Mountain.classes.dataobjects;
@@ -9,32 +14,52 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.tcp {
 
-    public class Connection {
+    [XmlRoot("Player")] public class Connection : IDisposable {
         private StateObject state { get; set; }
-        public TcpClient Socket { get; set; }
-        public ApplicationSettings settings;
+        [XmlIgnore] public TcpClient Socket { get; set; }
+        [XmlIgnore] public IPAddress IPAddress;
+        [XmlIgnore] public int Port;
+        [XmlIgnore] public ApplicationSettings settings;
+        [XmlIgnore] public Stack<string> StringStack;
+        [XmlIgnore] public CommandHandler Commands;
+        [XmlIgnore] public Room Room { get; set; }
+        [XmlIgnore] public bool Connected { get {
+                bool read = Socket.Client.Poll(500, SelectMode.SelectRead);
+                bool status = (Socket.Client.Available == 0);
+                return !(read & status);
+            }
+        }
         private LoginHandler LoginHandler;   // login functions
         private PlayerHandler PlayerHandler; // player functions
-     //   private AdminHandler AdminHandler; // to-do admin functions
-        public CommandHandler Commands;
         public Account Account { get; set; }
-        public Room Room { get; set; }
+        public Stats Stats { get; set; }
+        public Equipment Equipment { get; set; }
         private readonly ManualResetEvent MessageReceivedDone;
         private readonly ManualResetEvent MessageSentDone;
         public delegate void CommandHandler(object myObject, string message);
 
         public Connection(TcpClient socket, ApplicationSettings appSettings) {
             Socket = socket;
+            this.IPAddress = ((IPEndPoint)socket.Client.RemoteEndPoint).Address;
+            this.Port = ((IPEndPoint)socket.Client.RemoteEndPoint).Port;
             settings = appSettings;
             Account = new Account();
+            Stats = new Stats();
+            Equipment = new Equipment();
+            StringStack = new Stack<string>();
             MessageReceivedDone = new ManualResetEvent(false);
             MessageSentDone = new ManualResetEvent(false);
             state = new StateObject((socket));
             LoginHandler = new LoginHandler(this, settings);
             StartReceiving();
         }
-
+        
+        public Connection() {
+            // for xml serialization only
+        }
         protected void StartReceiving() {
+            SystemEventPacket packet = new SystemEventPacket(EventType.connection, "New Connection begun from " + this.IPAddress.ToString(), this);
+            settings.SystemEventQueue.Push(packet);
             try {
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, SocketFlags.None, ReceiveCallback, state);
             }
@@ -45,14 +70,20 @@ namespace Mountain.classes.tcp {
 
         public void ReceiveCallback(IAsyncResult ar) {
             try {
-                int read = state.Socket.Client.EndReceive(ar); // get number of bytes read in
+                if (state.Socket.Client == null)
+                    return;
+                int read = state.Socket.Client.EndReceive(ar); 
                 if (read > 0) {
                     string incomingMessage = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
-                    Task HandleMessage = new Task(() => Commands(this, incomingMessage)); // setup thread for dispatcher
-                    HandleMessage.Start(); // start thread
-                    MessageReceivedDone.Set(); // tell calling thread we are now done here
+                    Task HandleMessage = new Task(() => Commands(this, incomingMessage)); // setup thread for dispatching incoming
+                    MessageReceivedDone.Set(); 
+                    HandleMessage.Start(); // start processing message - in thread
                 }
-                state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // wait for next
+                try {
+                    state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // wait for next
+                } catch (SocketException se) {
+                    return;
+                }
             }
             catch (SocketException e) {
                 settings.SystemMessageQueue.Push("CC0: " + e.ToString());
@@ -87,10 +118,18 @@ namespace Mountain.classes.tcp {
         public void Send(string data, bool indent = true) {
             if (indent) { data = data.Indent(); }
             byte[] byteData = Encoding.ASCII.GetBytes(data);
-            state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
+            try {
+                if (state.Socket.Client == null)
+                    return;
+                state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
+            } catch (SocketException se) {
+                return;
+            }
         }
 
-        private void SendCallback(IAsyncResult ar) { // delegate that runs once the send thread has finished
+        private void SendCallback(IAsyncResult ar) {
+            if (state.Socket.Client == null)
+                return;
             try {
                 int bytesSent = state.Socket.Client.EndSend(ar);
                 MessageSentDone.Set(); // tell parent thread we are good to go
@@ -101,20 +140,33 @@ namespace Mountain.classes.tcp {
         }
 
         public void Shutdown() {
-            Send("Shutting down now.".Color(Ansi.yellow), false);
+           // Send("Shutdown process... now.".Color(Ansi.yellow), false);
             Socket.Client.Shutdown(SocketShutdown.Both);
             Socket.Close();
             Save();
         }
-
+        public void Dispose() {
+            Socket.Close();
+            if(Socket.Client != null) Socket.Client.Dispose();
+        }
         protected void Save() {
-            //throw new NotImplementedException();
+            string file = settings.PlayersDirectory + "\\" + Account.Name + "_test.xml";
+            TextWriter txtWriter = new StreamWriter(file);
+            try {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Connection));
+                xmlSerializer.Serialize(txtWriter, this);
+            } catch (Exception ex) {
+                settings.SystemMessageQueue.Push(ex.ToString());
+            } finally {
+                txtWriter.Close();
+            }
         }
 
         protected bool Load() {
             //throw new NotImplementedException();            
             return false;
-        }
+        }    
+
     }
 
     // data container passed between threads

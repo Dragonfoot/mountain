@@ -50,5 +50,8 @@
     <Setting Name="ExitTemplateDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">templates/exit</Value>
     </Setting>
+    <Setting Name="PlayersDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">players</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

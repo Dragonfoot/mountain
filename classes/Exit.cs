@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Mountain.classes {
 
     public class Exit : Identity {
-        public Room link { get; set; }
+        [XmlIgnore] public Room link { get; set; }
         public string LinkToRoomName;
         public RoomID LinkToRoomID;
         public ExitAttributes Attributes { get; set; }

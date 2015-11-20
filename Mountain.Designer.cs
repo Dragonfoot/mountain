@@ -67,10 +67,16 @@
             this.RemoveContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.connectedListBox = new System.Windows.Forms.ListBox();
+            this.connectedLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.connectionPoller = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.RoomContextMenu.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -80,7 +86,7 @@
             this.commandsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1000, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1089, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -183,32 +189,33 @@
             // 
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.Console);
-            this.panel2.Location = new System.Drawing.Point(148, 39);
+            this.panel2.Location = new System.Drawing.Point(257, 290);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(446, 262);
+            this.panel2.Size = new System.Drawing.Size(446, 268);
             this.panel2.TabIndex = 2;
+            this.panel2.Visible = false;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(3, 233);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(590, 20);
+            this.textBox1.Size = new System.Drawing.Size(443, 20);
             this.textBox1.TabIndex = 1;
             // 
             // Console
             // 
             this.Console.FormattingEnabled = true;
             this.Console.HorizontalScrollbar = true;
-            this.Console.Location = new System.Drawing.Point(3, 15);
+            this.Console.Location = new System.Drawing.Point(3, 6);
             this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(443, 212);
+            this.Console.Size = new System.Drawing.Size(443, 225);
             this.Console.TabIndex = 0;
             // 
             // logRichTextBox
             // 
-            this.logRichTextBox.Location = new System.Drawing.Point(148, 310);
+            this.logRichTextBox.Location = new System.Drawing.Point(257, 58);
             this.logRichTextBox.Name = "logRichTextBox";
-            this.logRichTextBox.Size = new System.Drawing.Size(446, 242);
+            this.logRichTextBox.Size = new System.Drawing.Size(446, 232);
             this.logRichTextBox.TabIndex = 10;
             this.logRichTextBox.Text = "";
             // 
@@ -281,7 +288,7 @@
             // areaListBox
             // 
             this.areaListBox.FormattingEnabled = true;
-            this.areaListBox.Location = new System.Drawing.Point(616, 67);
+            this.areaListBox.Location = new System.Drawing.Point(709, 58);
             this.areaListBox.Name = "areaListBox";
             this.areaListBox.Size = new System.Drawing.Size(171, 485);
             this.areaListBox.TabIndex = 12;
@@ -290,7 +297,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(616, 48);
+            this.label1.Location = new System.Drawing.Point(709, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 13;
@@ -300,7 +307,7 @@
             // 
             this.roomsListBox.ContextMenuStrip = this.RoomContextMenu;
             this.roomsListBox.FormattingEnabled = true;
-            this.roomsListBox.Location = new System.Drawing.Point(793, 67);
+            this.roomsListBox.Location = new System.Drawing.Point(886, 58);
             this.roomsListBox.Name = "roomsListBox";
             this.roomsListBox.Size = new System.Drawing.Size(185, 485);
             this.roomsListBox.TabIndex = 14;
@@ -400,7 +407,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(793, 48);
+            this.label3.Location = new System.Drawing.Point(886, 39);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 15;
@@ -408,7 +415,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(22, 211);
+            this.button1.Location = new System.Drawing.Point(145, 79);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 16;
@@ -416,11 +423,55 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.connectedListBox);
+            this.groupBox2.Controls.Add(this.connectedLabel);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Location = new System.Drawing.Point(22, 186);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(214, 359);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Connections";
+            // 
+            // connectedListBox
+            // 
+            this.connectedListBox.FormattingEnabled = true;
+            this.connectedListBox.Location = new System.Drawing.Point(11, 40);
+            this.connectedListBox.Name = "connectedListBox";
+            this.connectedListBox.Size = new System.Drawing.Size(188, 303);
+            this.connectedListBox.TabIndex = 2;
+            // 
+            // connectedLabel
+            // 
+            this.connectedLabel.AutoSize = true;
+            this.connectedLabel.Location = new System.Drawing.Point(120, 19);
+            this.connectedLabel.Name = "connectedLabel";
+            this.connectedLabel.Size = new System.Drawing.Size(13, 13);
+            this.connectedLabel.TabIndex = 1;
+            this.connectedLabel.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(103, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Currently Connected";
+            // 
+            // connectionPoller
+            // 
+            this.connectionPoller.Interval = 5000;
+            this.connectionPoller.Tick += new System.EventHandler(this.connectionPoller_Tick);
+            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 570);
+            this.ClientSize = new System.Drawing.Size(1089, 570);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.roomsListBox);
@@ -441,6 +492,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.RoomContextMenu.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -490,6 +543,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label connectedLabel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox connectedListBox;
+        private System.Windows.Forms.Timer connectionPoller;
     }
     }
 

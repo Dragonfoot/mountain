@@ -2,40 +2,76 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using Mountain.classes;
 using System.IO;
 using System.Xml.Serialization;
 using Mountain.classes.collections;
 using Mountain.classes.functions;
+using Mountain.classes.dataobjects;
+using Mountain.classes.tcp;
 
 namespace Mountain {
 
     public partial class Mountain : Form {
         protected ApplicationSettings settings;
-        protected MessageQueue Messages;
+        protected MessageQueue MessageQueue;
+        protected SystemEventQueue SystemEventQueue;
         protected World world;
         protected Area SelectedArea;
         protected Room SelectedRoom;
+        protected int Connections;
 
         public Mountain() {
-            Messages = new MessageQueue(settings);
-            Messages.Tag = "System";
-            settings = new ApplicationSettings(Messages);
+            MessageQueue = new MessageQueue(settings);
+            SystemEventQueue = new SystemEventQueue();
+            MessageQueue.Tag = "System";
+            settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
             InitializeComponent();
-            Messages.OnMessageReceived += Messages_OnMessageReceived;
+            MessageQueue.OnMessageReceived += Messages_OnMessageReceived;
+            SystemEventQueue.OnEventReceived += Events_OnEventReceived;
             world = BuildDefaultWorld();
             world.StartListen(world.Port);
             if (world.portListener.Active()) {
                 listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
                 logRichTextBox.AppendText("Server has started\r\n");
             }
+            connectionPoller.Enabled = true;
+        }
+
+        private void Events_OnEventReceived(object myObject, SystemEventPacket eventPacket) {
+            try {
+                SystemEventPacket packet = this.SystemEventQueue.Pop();
+                if (packet == null)
+                    packet = eventPacket;
+                switch (packet.eventType) {
+                    case EventType.connection:
+                        Connections++;
+                        break;
+                    case EventType.disconnected:
+                        Connections--;
+                        break;
+                }
+
+                this.Invoke((MethodInvoker)delegate {
+                    connectedLabel.Text = Connections.ToString();
+                    logRichTextBox.AppendText(">>>" + packet.message + "\r\n");
+                    logRichTextBox.ScrollToCaret();
+                });
+            } catch (Exception e) {
+                this.Invoke((MethodInvoker)delegate {
+                    logRichTextBox.AppendText(">>>" + e.ToString() + "\r\n");
+                    logRichTextBox.ScrollToCaret();
+                });
+            }
         }
 
         private void Messages_OnMessageReceived(object myObject, string msg) {
             try {
-                string message = Messages.Pop();
+                string message = MessageQueue.Pop();
                 if (message == null)
                     message = msg;
+
                 this.Invoke((MethodInvoker)delegate {
                     logRichTextBox.AppendText(">>>" + message + "\r\n");
                     logRichTextBox.ScrollToCaret();
@@ -77,12 +113,12 @@ namespace Mountain {
                     world.settings.TheVoid = world.Areas[0].Rooms.FindTag("Void");
                     areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                     areaListBox.SelectedIndex = 0;
-                    if(SelectedArea.Rooms.Count > 0) {
-                        if(roomsListBox.Items.Count > 0) roomsListBox.SelectedIndex = 0;
+                    if (SelectedArea.Rooms.Count > 0) {
+                        if (roomsListBox.Items.Count > 0)
+                            roomsListBox.SelectedIndex = 0;
                     }
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 logRichTextBox.AppendText(">>> " + e.ToString());
             }
             return world;
@@ -132,7 +168,7 @@ namespace Mountain {
             try {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(World));
                 World loadWorld = new World(settings);
-                    loadWorld = (World)xmlSerializer.Deserialize(txtReader);
+                loadWorld = (World)xmlSerializer.Deserialize(txtReader);
                 loadWorld.portListener.StartServer(9080);
                 logRichTextBox.AppendText(world.Name + " Loaded.");
             } catch (Exception ex) {
@@ -149,13 +185,13 @@ namespace Mountain {
             if (index != ListBox.NoMatches) {
                 roomsListBox.SelectedIndex = index;
                 SelectedRoom = SelectedArea.Rooms.FindName((string)roomsListBox.SelectedItem);
-                for (int i = 0; i <= RoomContextMenu.Items.Count - 1; i++) {                    
+                for (int i = 0; i <= RoomContextMenu.Items.Count - 1; i++) {
                     RoomContextMenu.Items[i].Enabled = true;
                 }
                 RoomContextMenu.Show(Cursor.Position);
             } else {
                 roomsListBox.SelectedIndex = -1;
-                for(int i = 0; i<= RoomContextMenu.Items.Count - 1; i++) {
+                for (int i = 0; i <= RoomContextMenu.Items.Count - 1; i++) {
                     if (i == 0)
                         continue;
                     RoomContextMenu.Items[i].Enabled = false;
@@ -170,7 +206,7 @@ namespace Mountain {
                 Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
                 roomsListBox.Items.Clear();
                 roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
-            } 
+            }
             roomEditForm.Dispose();
         }
 
@@ -194,6 +230,27 @@ namespace Mountain {
             string xml = SelectedArea.ToXml();
             logRichTextBox.Clear();
             logRichTextBox.AppendText(xml);
+        }
+
+        private void connectionPoller_Tick(object sender, EventArgs e) {
+            CheckConnections();
+        }
+
+        private void CheckConnections() {
+            List<Connection> Gone = new List<Connection>();
+            foreach (Connection player in settings.Players) {
+                if (player.Connected)
+                    continue;
+                Gone.Add(player); 
+            }
+            foreach (Connection player in Gone) {
+                settings.Players.Remove(player.Account.Name, "Lost connection.");
+                player.Room.Players.Remove(player.Account.Name);
+                SystemEventPacket packet = new SystemEventPacket(EventType.disconnected, player.Account.Name + " lost connection.");
+                settings.SystemEventQueue.Push(packet);
+                player.Shutdown();
+                player.Dispose();
+            }
         }
     }
 

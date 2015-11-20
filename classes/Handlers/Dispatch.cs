@@ -34,6 +34,9 @@ namespace Mountain.classes.handlers {
                 PlayerCommands.InvokeCommand(verb, packet);
                 return;
             }
+        } 
+        public void DontKnowHow(Packet command) {
+            RoomCommands.DontKnowYet(command);
         }
 
         public bool IsCommand(string verb) {

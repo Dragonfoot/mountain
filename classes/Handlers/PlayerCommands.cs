@@ -14,13 +14,15 @@ namespace Mountain.classes.handlers {
 
         public PlayerCommands(ApplicationSettings appSettings) {
             settings = appSettings;
-            LoadRoomCommands();
+            LoadPlayerCommands();
         }
-        private void LoadRoomCommands() {
+        private void LoadPlayerCommands() {
             List = new Dictionary<string, Action<Packet>>(){
-                {"inventory", Invent},
+                {"inventory", Inventory},
                 {"health", Health},
-                {"equipment", Equip},
+                {"equipment", Equipment},
+                {"stats", Statistics},
+                {"skills", Skills}
             };
             Keys = new List<string>(List.Keys);
         }
@@ -42,9 +44,16 @@ namespace Mountain.classes.handlers {
             return false;
         }
 
+        private void Skills(Packet packet) {
+            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
+        }
 
-
-        private void Invent(Packet packet) {
+        private void Inventory(Packet packet) {
+            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
+                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
+        }
+        private void Statistics(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
                 " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
@@ -54,7 +63,7 @@ namespace Mountain.classes.handlers {
                 " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }
 
-        private void Equip(Packet packet) {
+        private void Equipment(Packet packet) {
             packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
                 " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
         }

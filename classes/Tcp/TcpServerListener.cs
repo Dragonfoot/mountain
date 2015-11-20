@@ -3,13 +3,13 @@ using System.Net;
 using System.Xml.Serialization;
 using System.Net.Sockets;
 using System.Threading;
+using Mountain.classes.functions;
 
 namespace Mountain.classes.tcp {
 
     // listen for and accept connection requests
     public class TcpServerListener {
         [XmlIgnore]
-        public int Connections { get; private set; }
         protected AutoResetEvent connectionWaitDone;
         public TcpListenerActive tcpListener;
         public int Port;
@@ -40,12 +40,18 @@ namespace Mountain.classes.tcp {
         }
 
         protected void HandleAsyncConnection(IAsyncResult result) {
-            TcpListenerActive listener = (TcpListenerActive)result.AsyncState;
-            TcpClient client = listener.EndAcceptTcpClient(result);     // new connection established 
-            connectionWaitDone.Set();
-            tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
-            Connection player = new Connection(client, settings);
-            player.StartLogin();
+            TcpClient client;
+            try {
+                TcpListenerActive listener = (TcpListenerActive)result.AsyncState;
+                client = listener.EndAcceptTcpClient(result);                
+                connectionWaitDone.Set();
+                tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
+
+                Connection clientConnection = new Connection(client, settings);
+                clientConnection.StartLogin();
+            } catch (Exception e) {
+                string msg = e.Message;
+            }
         }
 
         public void StopServer() {
@@ -54,6 +60,7 @@ namespace Mountain.classes.tcp {
                 tcpListener = null;
             }
         }
+
 
     }
 }
