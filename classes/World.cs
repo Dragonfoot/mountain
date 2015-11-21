@@ -38,7 +38,7 @@ namespace Mountain.classes {
         }
 
         private void InitializeSettings(ApplicationSettings appSettings) {
-            ClassType = classType.world;
+            ClassType = classObjectType.world;
             settings = appSettings;
             settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
             settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;

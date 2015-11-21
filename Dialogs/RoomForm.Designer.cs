@@ -26,7 +26,23 @@
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
             this.exitsGroupBox = new System.Windows.Forms.GroupBox();
+            this.linkToAreaComboBox = new System.Windows.Forms.ComboBox();
+            this.inkToRoomComboBox = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.linkTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.exitListBox = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.RestrictionsCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.directionTextBox = new System.Windows.Forms.TextBox();
+            this.directionalComboBox = new System.Windows.Forms.ComboBox();
+            this.lockTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.restrictionCheckBox = new System.Windows.Forms.CheckBox();
+            this.directionalCheckBox = new System.Windows.Forms.CheckBox();
+            this.hasLockCheckBox = new System.Windows.Forms.CheckBox();
+            this.doorCheckBox = new System.Windows.Forms.CheckBox();
+            this.openCheckBox = new System.Windows.Forms.CheckBox();
             this.hiddenCheckBox = new System.Windows.Forms.CheckBox();
             this.identityGroupBox = new System.Windows.Forms.GroupBox();
             this.areaLabel = new System.Windows.Forms.Label();
@@ -57,22 +73,6 @@
             this.toWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OKButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.openCheckBox = new System.Windows.Forms.CheckBox();
-            this.doorCheckBox = new System.Windows.Forms.CheckBox();
-            this.hasLockCheckBox = new System.Windows.Forms.CheckBox();
-            this.exitListBox = new System.Windows.Forms.ListBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.directionalCheckBox = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.restrictionCheckBox = new System.Windows.Forms.CheckBox();
-            this.lockTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.directionalComboBox = new System.Windows.Forms.ComboBox();
-            this.restrictionsComboBox = new System.Windows.Forms.ComboBox();
-            this.directionTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.exitsGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -92,10 +92,10 @@
             // 
             // exitsGroupBox
             // 
-            this.exitsGroupBox.Controls.Add(this.comboBox3);
-            this.exitsGroupBox.Controls.Add(this.comboBox2);
+            this.exitsGroupBox.Controls.Add(this.linkToAreaComboBox);
+            this.exitsGroupBox.Controls.Add(this.inkToRoomComboBox);
             this.exitsGroupBox.Controls.Add(this.label3);
-            this.exitsGroupBox.Controls.Add(this.comboBox1);
+            this.exitsGroupBox.Controls.Add(this.linkTypeComboBox);
             this.exitsGroupBox.Controls.Add(this.label5);
             this.exitsGroupBox.Controls.Add(this.label4);
             this.exitsGroupBox.Controls.Add(this.exitListBox);
@@ -107,10 +107,73 @@
             this.exitsGroupBox.TabStop = false;
             this.exitsGroupBox.Text = "Exits";
             // 
+            // linkToAreaComboBox
+            // 
+            this.linkToAreaComboBox.FormattingEnabled = true;
+            this.linkToAreaComboBox.Location = new System.Drawing.Point(237, 88);
+            this.linkToAreaComboBox.Name = "linkToAreaComboBox";
+            this.linkToAreaComboBox.Size = new System.Drawing.Size(121, 21);
+            this.linkToAreaComboBox.TabIndex = 12;
+            // 
+            // inkToRoomComboBox
+            // 
+            this.inkToRoomComboBox.FormattingEnabled = true;
+            this.inkToRoomComboBox.Location = new System.Drawing.Point(237, 58);
+            this.inkToRoomComboBox.Name = "inkToRoomComboBox";
+            this.inkToRoomComboBox.Size = new System.Drawing.Size(121, 21);
+            this.inkToRoomComboBox.TabIndex = 11;
+            this.inkToRoomComboBox.Text = "Link To";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(194, 62);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Room";
+            // 
+            // linkTypeComboBox
+            // 
+            this.linkTypeComboBox.FormattingEnabled = true;
+            this.linkTypeComboBox.Location = new System.Drawing.Point(237, 28);
+            this.linkTypeComboBox.Name = "linkTypeComboBox";
+            this.linkTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.linkTypeComboBox.TabIndex = 9;
+            this.linkTypeComboBox.Text = "Link Type";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(194, 91);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Area";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(194, 32);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Type";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // exitListBox
+            // 
+            this.exitListBox.FormattingEnabled = true;
+            this.exitListBox.Location = new System.Drawing.Point(23, 28);
+            this.exitListBox.Name = "exitListBox";
+            this.exitListBox.Size = new System.Drawing.Size(164, 82);
+            this.exitListBox.TabIndex = 3;
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.RestrictionsCheckedListBox);
             this.groupBox2.Controls.Add(this.directionTextBox);
-            this.groupBox2.Controls.Add(this.restrictionsComboBox);
             this.groupBox2.Controls.Add(this.directionalComboBox);
             this.groupBox2.Controls.Add(this.lockTypeComboBox);
             this.groupBox2.Controls.Add(this.restrictionCheckBox);
@@ -126,10 +189,103 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Attributes";
             // 
+            // RestrictionsCheckedListBox
+            // 
+            this.RestrictionsCheckedListBox.CheckOnClick = true;
+            this.RestrictionsCheckedListBox.FormattingEnabled = true;
+            this.RestrictionsCheckedListBox.Location = new System.Drawing.Point(90, 67);
+            this.RestrictionsCheckedListBox.Name = "RestrictionsCheckedListBox";
+            this.RestrictionsCheckedListBox.Size = new System.Drawing.Size(72, 79);
+            this.RestrictionsCheckedListBox.TabIndex = 20;
+            this.RestrictionsCheckedListBox.ThreeDCheckBoxes = true;
+            // 
+            // directionTextBox
+            // 
+            this.directionTextBox.Location = new System.Drawing.Point(150, 43);
+            this.directionTextBox.Name = "directionTextBox";
+            this.directionTextBox.Size = new System.Drawing.Size(173, 20);
+            this.directionTextBox.TabIndex = 19;
+            // 
+            // directionalComboBox
+            // 
+            this.directionalComboBox.FormattingEnabled = true;
+            this.directionalComboBox.Location = new System.Drawing.Point(163, 43);
+            this.directionalComboBox.Name = "directionalComboBox";
+            this.directionalComboBox.Size = new System.Drawing.Size(70, 21);
+            this.directionalComboBox.TabIndex = 17;
+            this.directionalComboBox.Text = "Direction";
+            this.directionalComboBox.Visible = false;
+            this.directionalComboBox.SelectedIndexChanged += new System.EventHandler(this.directionalComboBox_SelectedIndexChanged);
+            // 
+            // lockTypeComboBox
+            // 
+            this.lockTypeComboBox.FormattingEnabled = true;
+            this.lockTypeComboBox.Location = new System.Drawing.Point(205, 20);
+            this.lockTypeComboBox.Name = "lockTypeComboBox";
+            this.lockTypeComboBox.Size = new System.Drawing.Size(65, 21);
+            this.lockTypeComboBox.TabIndex = 16;
+            this.lockTypeComboBox.Text = "Lock Type";
+            this.lockTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.lockTypeComboBox_SelectedIndexChanged);
+            // 
+            // restrictionCheckBox
+            // 
+            this.restrictionCheckBox.AutoSize = true;
+            this.restrictionCheckBox.Location = new System.Drawing.Point(14, 67);
+            this.restrictionCheckBox.Name = "restrictionCheckBox";
+            this.restrictionCheckBox.Size = new System.Drawing.Size(85, 17);
+            this.restrictionCheckBox.TabIndex = 15;
+            this.restrictionCheckBox.Text = "Free Access";
+            this.restrictionCheckBox.UseVisualStyleBackColor = true;
+            this.restrictionCheckBox.CheckedChanged += new System.EventHandler(this.restrictionCheckBox_CheckedChanged);
+            // 
+            // directionalCheckBox
+            // 
+            this.directionalCheckBox.AutoSize = true;
+            this.directionalCheckBox.Location = new System.Drawing.Point(87, 44);
+            this.directionalCheckBox.Name = "directionalCheckBox";
+            this.directionalCheckBox.Size = new System.Drawing.Size(52, 17);
+            this.directionalCheckBox.TabIndex = 14;
+            this.directionalCheckBox.Text = "Label";
+            this.directionalCheckBox.UseVisualStyleBackColor = true;
+            this.directionalCheckBox.CheckedChanged += new System.EventHandler(this.directionalCheckBox_CheckedChanged);
+            // 
+            // hasLockCheckBox
+            // 
+            this.hasLockCheckBox.AutoSize = true;
+            this.hasLockCheckBox.Location = new System.Drawing.Point(150, 21);
+            this.hasLockCheckBox.Name = "hasLockCheckBox";
+            this.hasLockCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.hasLockCheckBox.TabIndex = 10;
+            this.hasLockCheckBox.Text = "No Lock";
+            this.hasLockCheckBox.UseVisualStyleBackColor = true;
+            this.hasLockCheckBox.CheckedChanged += new System.EventHandler(this.hasLockCheckBox_CheckedChanged);
+            // 
+            // doorCheckBox
+            // 
+            this.doorCheckBox.AutoSize = true;
+            this.doorCheckBox.Location = new System.Drawing.Point(14, 21);
+            this.doorCheckBox.Name = "doorCheckBox";
+            this.doorCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.doorCheckBox.TabIndex = 9;
+            this.doorCheckBox.Text = "Doorless";
+            this.doorCheckBox.UseVisualStyleBackColor = true;
+            this.doorCheckBox.CheckedChanged += new System.EventHandler(this.doorCheckBox_CheckedChanged);
+            // 
+            // openCheckBox
+            // 
+            this.openCheckBox.AutoSize = true;
+            this.openCheckBox.Location = new System.Drawing.Point(87, 21);
+            this.openCheckBox.Name = "openCheckBox";
+            this.openCheckBox.Size = new System.Drawing.Size(52, 17);
+            this.openCheckBox.TabIndex = 8;
+            this.openCheckBox.Text = "Open";
+            this.openCheckBox.UseVisualStyleBackColor = true;
+            this.openCheckBox.CheckedChanged += new System.EventHandler(this.openCheckBox_CheckedChanged);
+            // 
             // hiddenCheckBox
             // 
             this.hiddenCheckBox.AutoSize = true;
-            this.hiddenCheckBox.Location = new System.Drawing.Point(14, 113);
+            this.hiddenCheckBox.Location = new System.Drawing.Point(14, 44);
             this.hiddenCheckBox.Name = "hiddenCheckBox";
             this.hiddenCheckBox.Size = new System.Drawing.Size(56, 17);
             this.hiddenCheckBox.TabIndex = 6;
@@ -188,6 +344,7 @@
             this.descriptionTextBox.Location = new System.Drawing.Point(19, 80);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
+            this.descriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.descriptionTextBox.Size = new System.Drawing.Size(206, 163);
             this.descriptionTextBox.TabIndex = 2;
             // 
@@ -374,156 +531,6 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // openCheckBox
-            // 
-            this.openCheckBox.AutoSize = true;
-            this.openCheckBox.Location = new System.Drawing.Point(87, 21);
-            this.openCheckBox.Name = "openCheckBox";
-            this.openCheckBox.Size = new System.Drawing.Size(64, 17);
-            this.openCheckBox.TabIndex = 8;
-            this.openCheckBox.Text = "Opened";
-            this.openCheckBox.UseVisualStyleBackColor = true;
-            this.openCheckBox.CheckedChanged += new System.EventHandler(this.openCheckBox_CheckedChanged);
-            // 
-            // doorCheckBox
-            // 
-            this.doorCheckBox.AutoSize = true;
-            this.doorCheckBox.Location = new System.Drawing.Point(14, 21);
-            this.doorCheckBox.Name = "doorCheckBox";
-            this.doorCheckBox.Size = new System.Drawing.Size(66, 17);
-            this.doorCheckBox.TabIndex = 9;
-            this.doorCheckBox.Text = "No Door";
-            this.doorCheckBox.UseVisualStyleBackColor = true;
-            this.doorCheckBox.CheckedChanged += new System.EventHandler(this.doorCheckBox_CheckedChanged);
-            // 
-            // hasLockCheckBox
-            // 
-            this.hasLockCheckBox.AutoSize = true;
-            this.hasLockCheckBox.Location = new System.Drawing.Point(150, 21);
-            this.hasLockCheckBox.Name = "hasLockCheckBox";
-            this.hasLockCheckBox.Size = new System.Drawing.Size(67, 17);
-            this.hasLockCheckBox.TabIndex = 10;
-            this.hasLockCheckBox.Text = "No Lock";
-            this.hasLockCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // exitListBox
-            // 
-            this.exitListBox.FormattingEnabled = true;
-            this.exitListBox.Location = new System.Drawing.Point(23, 28);
-            this.exitListBox.Name = "exitListBox";
-            this.exitListBox.Size = new System.Drawing.Size(164, 82);
-            this.exitListBox.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(194, 32);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Type";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(194, 91);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Area";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // directionalCheckBox
-            // 
-            this.directionalCheckBox.AutoSize = true;
-            this.directionalCheckBox.Location = new System.Drawing.Point(14, 44);
-            this.directionalCheckBox.Name = "directionalCheckBox";
-            this.directionalCheckBox.Size = new System.Drawing.Size(115, 17);
-            this.directionalCheckBox.TabIndex = 14;
-            this.directionalCheckBox.Text = "Informational Label";
-            this.directionalCheckBox.UseVisualStyleBackColor = true;
-            this.directionalCheckBox.CheckedChanged += new System.EventHandler(this.directionalCheckBox_CheckedChanged);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(237, 28);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 9;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 62);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Room";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(237, 58);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 11;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(237, 88);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 12;
-            // 
-            // restrictionCheckBox
-            // 
-            this.restrictionCheckBox.AutoSize = true;
-            this.restrictionCheckBox.Location = new System.Drawing.Point(14, 69);
-            this.restrictionCheckBox.Name = "restrictionCheckBox";
-            this.restrictionCheckBox.Size = new System.Drawing.Size(98, 17);
-            this.restrictionCheckBox.TabIndex = 15;
-            this.restrictionCheckBox.Text = "No Restrictions";
-            this.restrictionCheckBox.UseVisualStyleBackColor = true;
-            this.restrictionCheckBox.CheckedChanged += new System.EventHandler(this.restrictionCheckBox_CheckedChanged);
-            // 
-            // lockTypeComboBox
-            // 
-            this.lockTypeComboBox.FormattingEnabled = true;
-            this.lockTypeComboBox.Location = new System.Drawing.Point(218, 19);
-            this.lockTypeComboBox.Name = "lockTypeComboBox";
-            this.lockTypeComboBox.Size = new System.Drawing.Size(105, 21);
-            this.lockTypeComboBox.TabIndex = 16;
-            this.lockTypeComboBox.Text = "Lock Type";
-            // 
-            // directionalComboBox
-            // 
-            this.directionalComboBox.FormattingEnabled = true;
-            this.directionalComboBox.Location = new System.Drawing.Point(218, 42);
-            this.directionalComboBox.Name = "directionalComboBox";
-            this.directionalComboBox.Size = new System.Drawing.Size(105, 21);
-            this.directionalComboBox.TabIndex = 17;
-            this.directionalComboBox.Text = "Direction";
-            this.directionalComboBox.Visible = false;
-            // 
-            // restrictionsComboBox
-            // 
-            this.restrictionsComboBox.FormattingEnabled = true;
-            this.restrictionsComboBox.Location = new System.Drawing.Point(218, 67);
-            this.restrictionsComboBox.Name = "restrictionsComboBox";
-            this.restrictionsComboBox.Size = new System.Drawing.Size(105, 21);
-            this.restrictionsComboBox.TabIndex = 18;
-            this.restrictionsComboBox.Text = "Restrictions";
-            // 
-            // directionTextBox
-            // 
-            this.directionTextBox.Location = new System.Drawing.Point(136, 42);
-            this.directionTextBox.Name = "directionTextBox";
-            this.directionTextBox.Size = new System.Drawing.Size(187, 20);
-            this.directionTextBox.TabIndex = 19;
-            // 
             // RoomForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -594,14 +601,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox exitListBox;
         private System.Windows.Forms.CheckBox directionalCheckBox;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox linkToAreaComboBox;
+        private System.Windows.Forms.ComboBox inkToRoomComboBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox linkTypeComboBox;
         private System.Windows.Forms.ComboBox lockTypeComboBox;
         private System.Windows.Forms.CheckBox restrictionCheckBox;
         private System.Windows.Forms.ComboBox directionalComboBox;
-        private System.Windows.Forms.ComboBox restrictionsComboBox;
         private System.Windows.Forms.TextBox directionTextBox;
+        private System.Windows.Forms.CheckedListBox RestrictionsCheckedListBox;
     }
 }

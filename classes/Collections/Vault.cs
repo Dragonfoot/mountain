@@ -13,7 +13,7 @@ namespace Mountain.classes.collections {
         protected ConcurrentBag<ItemContainer> containers;  //limit, additional might be had on quests/levels/etc
 
         public Vault() {
-            base.ClassType = classType.item;
+            base.ClassType = classObjectType.item;
             base.ItemType = itemType.container;
             items = new ConcurrentBag<Item>();
             containers = new ConcurrentBag<ItemContainer>();

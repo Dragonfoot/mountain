@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace Mountain.classes.functions {
 
@@ -17,6 +16,10 @@ namespace Mountain.classes.functions {
                 i++;
             }
             return names;
+        }
+
+        public static IEnumerable<T> GetValues<T>() { // loop through enums: var values = GetValues<Foos>();
+            return (T[])Enum.GetValues(typeof(T));
         }
 
         public static int GetSameNameCount(Array list, string name) {

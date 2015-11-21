@@ -13,7 +13,7 @@ namespace Mountain.classes.mobs {
         public int Level { get; set; }
 
         public Underling() {
-            ClassType = classType.mob;
+            ClassType = classObjectType.mob;
             Name = "Underling";
             Description = "This is a new underling";
             Inventory = new ConcurrentBag<Item>();

@@ -64,7 +64,7 @@ namespace Mountain.classes {
         }
 
         private void InitializeRoom(ApplicationSettings appSettings) {
-            ClassType = classType.room;
+            ClassType = classObjectType.room;
             settings = appSettings;
             Exits = new List<Exit>();
             Players = new Players();

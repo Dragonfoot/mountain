@@ -10,7 +10,7 @@ namespace Mountain.classes {
         public ExitAttributes Attributes { get; set; }
 
         public Exit() {
-            ClassType = classType.exit;
+            ClassType = classObjectType.exit;
         }
     }
 

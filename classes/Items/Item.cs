@@ -11,7 +11,7 @@ namespace Mountain.classes.Items {
         public int value { get; set; }
 
         public Item() {
-            ClassType = classType.item;
+            ClassType = classObjectType.item;
             Name = "new item";
             Description = "new generic unknown item";
         }       

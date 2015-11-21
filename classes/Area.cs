@@ -15,7 +15,7 @@ namespace Mountain.classes {
         private CancellationTokenSource cancellationTokenSource;
 
         public Area() {
-            ClassType = classType.area;
+            ClassType = classObjectType.area;
             Name = "new area";
             Description = "new area";
             Active = true;

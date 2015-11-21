@@ -31,9 +31,6 @@ namespace Mountain.classes.functions {
         #region generic
 
 
-        public static IEnumerable<T> GetValues<T>() { // loop through enums: var values = GetValues<Foos>();
-            return (T[])Enum.GetValues(typeof(T));
-        }
       
         public static T DeepClone<T>(this T input) where T : ISerializable {
             using (var stream = new MemoryStream()) {
