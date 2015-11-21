@@ -33,7 +33,7 @@ namespace Mountain.classes.dataobjects {
         }
 
         public string HealthPrompt() {
-            string prompt = "".NewLine() + "{".Color(Ansi.green) + "{0} HP - {1} IP".Color(Ansi.cyan) + "}".Color(Ansi.green).NewLine();
+            string prompt = "".NewLine() + "{".Ansi(Style.green) + "{0} HP - {1} IP".Ansi(Style.cyan) + "}".Ansi(Style.green).NewLine();
             prompt = prompt.Replace("{0}", health.ToString());
             prompt = prompt.Replace("{1}", mana.ToString());
             return prompt;

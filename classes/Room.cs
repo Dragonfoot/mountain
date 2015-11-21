@@ -84,14 +84,14 @@ namespace Mountain.classes {
                 message = " just arrived.";
             foreach (Connection client in Players) {
                 if (client != player)
-                    client.Send(player.Account.Name + message);
+                    client.Send(player.Account.Name.Ansi(Style.white) + message.Ansi(Style.white).NewLine());
                 else
                     SendCommand(player, "look");
             }
         }
         private void Players_OnPlayerRemoved(object myObject, Connection player, string message = "") {
             foreach (Connection Player in Players) {
-                Player.Send(player.Account.Name.Color(Ansi.yellow) + " leaves through the (" + message + ") exit.".NewLine());
+                Player.Send(player.Account.Name.Ansi(Style.white) + " goes to the " + message + ".".NewLine());
             }
         }
 

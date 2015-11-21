@@ -35,6 +35,7 @@ namespace Mountain.classes.dataobjects {
                     Area Area = settings.world.Areas.First(area => area.Name == player.Account.RoomID.Area);
                     player.Room = (Area.Rooms.FindName(player.Account.RoomID.Name));
                 };
+                fileStream.Close();
             }
         }
     }

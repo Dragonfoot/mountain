@@ -10,13 +10,13 @@ namespace Mountain.classes.handlers {
     public class RoomCommands {
 
         private Dictionary<string, Action<Packet>> List;
-        private StringResources Resource;
+        private StringResponses Resource;
         ApplicationSettings settings;
         public List<string> Keys;
 
         public RoomCommands(ApplicationSettings appSettings) {
             settings = appSettings;
-            Resource = new StringResources();
+            Resource = new StringResponses();
             LoadRoomCommands();
         }
         private void LoadRoomCommands() {
@@ -53,16 +53,16 @@ namespace Mountain.classes.handlers {
         private void Say(Packet packet) {
             try {
                 if (packet.parameter.IsNullOrWhiteSpace()) {
-                    packet.Client.Send("Say what?".Color(Ansi.yellow, Ansi.white).NewLine());
+                    packet.Client.Send("Say what?".Ansi(Style.yellow, Style.white).NewLine());
                     return;
                 }
                 if (!packet.parameter.HasLastCharPunctuation()) { packet.parameter += "."; }
-                string message = "\"" + packet.parameter + "\"".NewLine().Color(Ansi.white);
+                string message = "\"" + packet.parameter + "\"".NewLine().Ansi(Style.white);
                 foreach (Connection player in packet.Client.Room.Players) {
                     if (player.Account.Name == packet.Client.Account.Name) {
-                        player.Send("You say, ".Color(Ansi.white) + message.Color(Ansi.white));
+                        player.Send("You say, ".Ansi(Style.white) + message.Ansi(Style.white));
                     } else {
-                        player.Send(packet.Client.Account.Name + " says, ".Color(Ansi.white) + message.Color(Ansi.white));
+                        player.Send(packet.Client.Account.Name + " says, ".Ansi(Style.white) + message.Ansi(Style.white));
                     }
                 }
             } catch (Exception e) {
@@ -73,9 +73,9 @@ namespace Mountain.classes.handlers {
         private void Look(Packet packet) {
             string response = packet.Client.Room.GetName(), names = string.Empty;
             packet.Client.Send("".NewLine(), false);
-            packet.Client.Send(response.Color(Ansi.cyan).NewLine());
+            packet.Client.Send(response.Ansi(Style.cyan).NewLine());
             response = packet.Client.Room.GetDesciption();
-            packet.Client.Send(response.Color(Ansi.white).WordWrap(), false);
+            packet.Client.Send(response.Ansi(Style.white).WordWrap(), false);
 
             names = Functions.GetNames(packet.Client.Room.Exits.ToArray());
             if (names != string.Empty)
@@ -83,26 +83,26 @@ namespace Mountain.classes.handlers {
             else
                 response = "No obvious exits.";
 
-            packet.Client.Send(response.Color(Ansi.green).NewLine());
+            packet.Client.Send(response.Ansi(Style.green).NewLine());
 
             names = string.Empty;
             if (packet.Client.Room.Players.Count > 1) {
                 names = Functions.GetOtherNames(packet.Client.Room.Players.ToArray(), packet.Client.Account.Name);
                 if (names != string.Empty)
-                    packet.Client.Send("You see " + names.Color(false, Ansi.cyan, Ansi.bold).WordWrap().NewLine());
+                    packet.Client.Send("You see:" + names.Ansi(true, Style.cyan, Style.boldOn).WordWrap().NewLine());
             }
 
             names = Functions.GetNames(packet.Client.Room.Mobs.ToArray());
             if (names != string.Empty)
-                packet.Client.Send("You see " + names.Color(Ansi.green).NewLine());
+                packet.Client.Send("You see:" + names.Ansi(Style.green).NewLine());
             // add items
         }
 
         private void Quit(Packet packet) {
-            settings.Players.Remove(packet.Client.Account.Name, "Player has quit.");
-            packet.Client.Send("See you again soon!".Color(Ansi.white).NewLine().NewLine());
+            settings.Players.Remove(packet.Client.Account.Name, "Player has left.");
+            packet.Client.Send("See you again soon!".Ansi(Style.white).NewLine().NewLine());
             packet.Client.Room.Players.Remove(packet.Client.Account.Name);
-            SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnected, packet.Client.Account.Name + " has quit.", packet.Client);
+            SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnected, packet.Client.Account.Name + " has left.", packet.Client);
             settings.SystemEventQueue.Push(eventPacket);
             packet.Client.Shutdown();
             packet.Client.Dispose();
@@ -140,7 +140,7 @@ namespace Mountain.classes.handlers {
             // see if more than one exit starts with what was received
             int results = Functions.GetSameNameCount(packet.Client.Room.Exits.ToArray(), packet.parameter);            
             if (results > 1) {
-                packet.Client.Send("Too ambiguous.".Color(Ansi.yellow).NewLine());
+                packet.Client.Send("Too ambiguous.".Ansi(Style.yellow).NewLine());
                 return;
             }
 

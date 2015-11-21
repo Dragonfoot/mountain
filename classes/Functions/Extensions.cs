@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -11,21 +12,46 @@ using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
 
+    public static class ThreadSafeRandom {
+        [ThreadStatic]
+        private static Random Local;
+
+        public static Random ThisThreadsRandom {
+            get { return Local ?? (Local = new Random(unchecked(Environment.TickCount * 31 + Thread.CurrentThread.ManagedThreadId))); }
+        }
+    }
+
     public static class Extensions {
 
         // hide & change before shifting to production
         private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
         private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
 
-       
+
         #region generic
 
+
+        public static IEnumerable<T> GetValues<T>() { // loop through enums: var values = GetValues<Foos>();
+            return (T[])Enum.GetValues(typeof(T));
+        }
+      
         public static T DeepClone<T>(this T input) where T : ISerializable {
             using (var stream = new MemoryStream()) {
                 var formatter = new BinaryFormatter();
                 formatter.Serialize(stream, input);
                 stream.Position = 0;
                 return (T)formatter.Deserialize(stream);
+            }
+        }
+
+        public static void Shuffle<T>(this IList<T> list) {
+            int n = list.Count;
+            while (n > 1) {
+                n--;
+                int k = ThreadSafeRandom.ThisThreadsRandom.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
             }
         }
 
@@ -139,7 +165,23 @@ namespace Mountain.classes.functions {
             result = result.Trim();
             return result;
         }
-        
+        public static string WordWrap(this string sentence, int width = Global.pageWidth) {  // takes a long string and formats to width
+            StringBuilder lines = new StringBuilder();
+            string[] words = sentence.Split(' ');
+            StringBuilder buildLine = new StringBuilder("");
+            foreach (var word in words) {
+                if (word.Length + buildLine.Length + 1 > width) {    // check if have we exceeded line width
+                    lines.Append(buildLine.ToString().Indent().NewLine());
+                    buildLine.Clear();
+                }
+                buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);  // remove space at start of new line
+            }
+            if (buildLine.Length > 0) {
+                lines.Append(buildLine.ToString().Indent().NewLine());   // finish up, final words to append
+            }
+            return lines.ToString();
+        }
+
         private const int keysize = 256;
         public static string Encrypt(this string plainText) {
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
@@ -182,26 +224,7 @@ namespace Mountain.classes.functions {
 
         #region Ansi
 
-        public static string ClearScreenWithTab(this string str, int size) {
-            return "\x1B[2J" + "\x1B[" + size.ToString() + "C" + "\x1B[H" + str;
-        }
 
-        public static string WordWrap(this string sentence, int width = Global.pageWidth) {  // takes a long string and formats to width
-            StringBuilder lines = new StringBuilder();
-            string[] words = sentence.Split(' ');
-            StringBuilder buildLine = new StringBuilder("");
-            foreach (var word in words) {
-                if (word.Length + buildLine.Length + 1 > width) { // check if have we exceeded line width
-                    lines.Append(buildLine.ToString().Indent().NewLine());
-                    buildLine.Clear();
-                }
-                buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);  // remove space at start of new line
-            }
-            if (buildLine.Length > 0) { // finished loop, check for final words to include
-                lines.Append(buildLine.ToString().Indent().NewLine());
-            }
-            return lines.ToString();
-        }
 
         #endregion
     }

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Mountain.classes;
 using Mountain.classes.functions;
 
-namespace Mountain {
+namespace Mountain.Dialogs {
 
     public partial class AreaForm : Form {
         private ApplicationSettings settings;
@@ -102,5 +102,6 @@ namespace Mountain {
             CreateDefaultAdminArea();
             RefreshRooms();
         }
+        
     }
 }

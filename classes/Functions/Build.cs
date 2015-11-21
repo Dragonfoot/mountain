@@ -10,16 +10,17 @@ namespace Mountain.classes.functions {
 
             Area area = new Area();
             area.Name = "Administration Complex";
-            area.Description = "One of this worlds extraordinary wonders. It houses top minds from all the major worlds within our galaxy. " +
-               "As well it houses the most advanced technological and military equipment available. All this in order to make this world " +
-               "the leader in vital galactic government growth and management.";
+            area.Description = "One of this worlds most extraordinary wonders. Top minds from all the major centers reside here. " +
+               "Houses the most advanced technological and military equipment available rivaling even Mount Cascade Fortress on " + 
+               "Tavastazia's bloodless moon."; 
+              
 
             Room controlRoom;
             name = "Administration Control Center";
-            description = "You see the nerve center of world operations unfold around you. You see computer stations with white clad technicians " +
-                "murmuring into headsets as they adjust controls and issue commands, in a long line of cubicles fading into the distance to your " +
-                "right. Sensor arrays, routing maps and schedulers glowing quietly above them, monitoring every aspect of this worlds events and " +
-                "activities. To your left, a long line of guarded office doors, guard challenging and recording those wanting access. ";
+            description = "You see the nerve center of world operations unfold around you. Computer stations line most of the walks with white clad technicians " +
+                "murmuring with headsets, adjusting controls, issuing quiet command. Sensor arrays, blinking routing screens, schedulers dimly glowing " + 
+                "above them, monitoring every aspect of this worlds events and activities. Off to your left, a long line of office doors, " +
+                "uniformed guards challenging, filtering, and recording the movement of staff and visitors alike.";
 
             controlRoom = NewRoom(name, description, settings, area);
             controlRoom.Tag = "ControlCenter";

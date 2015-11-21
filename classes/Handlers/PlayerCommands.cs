@@ -45,27 +45,27 @@ namespace Mountain.classes.handlers {
         }
 
         private void Skills(Packet packet) {
-            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
+            packet.Client.Send("I don't know how to ".Ansi(Style.yellow) + packet.verb.Ansi(Style.white) +
+                " yet. But I hope to soon.".Ansi(Style.yellow, Style.white).NewLine());
         }
 
         private void Inventory(Packet packet) {
-            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
+            packet.Client.Send("I don't know how to ".Ansi(Style.yellow) + packet.verb.Ansi(Style.white) +
+                " yet. But I hope to soon.".Ansi(Style.yellow, Style.white).NewLine());
         }
         private void Statistics(Packet packet) {
-            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
+            packet.Client.Send("I don't know how to ".Ansi(Style.yellow) + packet.verb.Ansi(Style.white) +
+                " yet. But I hope to soon.".Ansi(Style.yellow, Style.white).NewLine());
         }
 
         private void Health(Packet packet) {
-            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
+            packet.Client.Send("I don't know how to ".Ansi(Style.yellow) + packet.verb.Ansi(Style.white) +
+                " yet. But I hope to soon.".Ansi(Style.yellow, Style.white).NewLine());
         }
 
         private void Equipment(Packet packet) {
-            packet.Client.Send("I don't know how to ".Color(Ansi.yellow) + packet.verb.Color(Ansi.white) +
-                " yet. But I hope to soon.".Color(Ansi.yellow, Ansi.white).NewLine());
+            packet.Client.Send("I don't know how to ".Ansi(Style.yellow) + packet.verb.Ansi(Style.white) +
+                " yet. But I hope to soon.".Ansi(Style.yellow, Style.white).NewLine());
         }
     }
 }

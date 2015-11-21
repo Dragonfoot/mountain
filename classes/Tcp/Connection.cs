@@ -20,7 +20,7 @@ namespace Mountain.classes.tcp {
         [XmlIgnore] public IPAddress IPAddress;
         [XmlIgnore] public int Port;
         [XmlIgnore] public ApplicationSettings settings;
-        [XmlIgnore] public Stack<string> StringStack;
+        [XmlIgnore] public Stack<string> ResponseStack;
         [XmlIgnore] public CommandHandler Commands;
         [XmlIgnore] public Room Room { get { return room; } set { SetRoom(value); } }
         [XmlIgnore] public ManualResetEvent MessageReceivedDone;
@@ -32,7 +32,7 @@ namespace Mountain.classes.tcp {
             }
         }
         private Room room;
-        protected LoginDispatcher LoginDispatcher;   // login functions
+        private LoginDispatcher LoginDispatcher;   // login functions
         private PlayerDispatcher PlayerDispatcher; // player functions
         public Account Account { get; set; }
         public Stats Stats { get; set; }
@@ -41,14 +41,13 @@ namespace Mountain.classes.tcp {
 
         public Connection(TcpClient socket, ApplicationSettings appSettings) {
             Socket = socket;
-            this.IPAddress = ((IPEndPoint)socket.Client.RemoteEndPoint).Address;
-            this.Port = ((IPEndPoint)socket.Client.RemoteEndPoint).Port;
+            IPAddress = ((IPEndPoint)socket.Client.RemoteEndPoint).Address;
+            Port = ((IPEndPoint)socket.Client.RemoteEndPoint).Port;
             settings = appSettings;
             Account = new Account();
-          //  Account.RoomID.Area = settings.world.Areas[0].Name;
             Stats = new Stats();
             Equipment = new Equipment();
-            StringStack = new Stack<string>();
+            ResponseStack = new Stack<string>();
             MessageReceivedDone = new ManualResetEvent(false);
             MessageSentDone = new ManualResetEvent(false);
             state = new StateObject((socket));
@@ -126,7 +125,7 @@ namespace Mountain.classes.tcp {
                 if (state.Socket.Client == null)
                     return;
                 state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
-            } catch (SocketException se) {
+            } catch (SocketException) {
                 return;
             }
         }
@@ -136,7 +135,7 @@ namespace Mountain.classes.tcp {
                 return;
             try {
                 int bytesSent = state.Socket.Client.EndSend(ar);
-                MessageSentDone.Set(); // tell parent thread we are good to go
+                MessageSentDone.Set(); // tell parent thread we're finished
             }
             catch (Exception e) {
                 settings.SystemMessageQueue.Push("CC3: " + e.ToString());
@@ -144,7 +143,7 @@ namespace Mountain.classes.tcp {
         }
 
         public void Shutdown() {
-           // Send("Shutdown process... now.".Color(Ansi.yellow), false);
+           // Send("Shutdown process... now.".Ansi(Ansi.yellow), false);
             Socket.Client.Shutdown(SocketShutdown.Both);
             Socket.Close();
             Save();
@@ -155,15 +154,16 @@ namespace Mountain.classes.tcp {
         }
         protected void Save() {
             string file = settings.PlayersDirectory + "\\" + Account.Name + "_test.xml";
-            TextWriter txtWriter = new StreamWriter(file);
+            TextWriter textWriter = new StreamWriter(file);
             try {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(Connection));
-                xmlSerializer.Serialize(txtWriter, this);
+                xmlSerializer.Serialize(textWriter, this);
             } catch (Exception ex) {
                 settings.SystemMessageQueue.Push(ex.ToString());
             } finally {
-                txtWriter.Close();
+                textWriter.Close();
             }
+            textWriter.Close();
         }
 
 

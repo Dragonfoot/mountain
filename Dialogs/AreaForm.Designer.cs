@@ -1,4 +1,5 @@
-﻿namespace Mountain {
+﻿namespace Mountain.Dialogs {
+
     partial class AreaForm {
         /// <summary>
         /// Required designer variable.
@@ -38,8 +39,13 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.templateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.worldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.templateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAreaFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.areaGroupBox.SuspendLayout();
@@ -174,8 +180,7 @@
             this.loadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.loadToolStripMenuItem1,
-            this.saveToolStripMenuItem,
-            this.saveAsTemplateToolStripMenuItem});
+            this.saveToolStripMenuItem});
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.loadToolStripMenuItem.Text = "Area";
@@ -183,28 +188,66 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem1
             // 
+            this.loadToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem1,
+            this.templateToolStripMenuItem1,
+            this.worldToolStripMenuItem});
             this.loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
-            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
+            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem1.Text = "Load";
+            // 
+            // fileToolStripMenuItem1
+            // 
+            this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.fileToolStripMenuItem1.Text = "From File";
+            // 
+            // templateToolStripMenuItem1
+            // 
+            this.templateToolStripMenuItem1.Name = "templateToolStripMenuItem1";
+            this.templateToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.templateToolStripMenuItem1.Text = "From Template";
+            // 
+            // worldToolStripMenuItem
+            // 
+            this.worldToolStripMenuItem.Name = "worldToolStripMenuItem";
+            this.worldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.worldToolStripMenuItem.Text = "From World";
             // 
             // saveToolStripMenuItem
             // 
+            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.templateToolStripMenuItem,
+            this.toWorldToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
-            // saveAsTemplateToolStripMenuItem
+            // fileToolStripMenuItem
             // 
-            this.saveAsTemplateToolStripMenuItem.Name = "saveAsTemplateToolStripMenuItem";
-            this.saveAsTemplateToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.saveAsTemplateToolStripMenuItem.Text = "Save toTemplate";
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fileToolStripMenuItem.Text = "To File";
+            // 
+            // templateToolStripMenuItem
+            // 
+            this.templateToolStripMenuItem.Name = "templateToolStripMenuItem";
+            this.templateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.templateToolStripMenuItem.Text = "As Template";
+            // 
+            // toWorldToolStripMenuItem
+            // 
+            this.toWorldToolStripMenuItem.Name = "toWorldToolStripMenuItem";
+            this.toWorldToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.toWorldToolStripMenuItem.Text = "To World";
             // 
             // saveAreaFileDialog
             // 
@@ -253,11 +296,15 @@
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsTemplateToolStripMenuItem;
         private System.Windows.Forms.TextBox areaNameTextBox;
         private System.Windows.Forms.Label areaDescriptionLabel;
         private System.Windows.Forms.TextBox areaDescriptionTextBox;
         private System.Windows.Forms.SaveFileDialog saveAreaFileDialog;
-
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem templateToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem worldToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem templateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toWorldToolStripMenuItem;
     }
 }

@@ -25,7 +25,7 @@ namespace Mountain.classes.handlers {
                 string verb = packet.verb;
                 Commands.DontKnowHow(packet);
                 if (Commands.IsCommand(verb)) {
-                    Client.Send("But, um.. I did a few minutes ago..\"scratch\"".Color(Ansi.yellow).NewLine());
+                    Client.Send("But, um.. I did a few minutes ago..\"scratch\"".Ansi(Style.yellow).NewLine());
                 }
                 return;
             }

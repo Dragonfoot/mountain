@@ -63,16 +63,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AreaForm.cs">
+    <Compile Include="Dialogs\AreaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AreaForm.Designer.cs">
+    <Compile Include="Dialogs\AreaForm.Designer.cs">
       <DependentUpon>AreaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\Collections\SystemEventQueue.cs" />
     <Compile Include="classes\DataObjects\Factory.cs" />
-    <Compile Include="classes\DataObjects\StringResources.cs" />
+    <Compile Include="classes\DataObjects\Responses.cs" />
     <Compile Include="classes\Handlers\Combat.cs" />
     <Compile Include="classes\Handlers\Emote.cs" />
     <Compile Include="classes\Functions\Functions.cs" />
@@ -84,7 +84,7 @@
     <Compile Include="classes\DataObjects\Account.cs" />
     <Compile Include="classes\DataObjects\Attribute.cs" />
     <Compile Include="classes\Functions\Build.cs" />
-    <Compile Include="classes\DataObjects\Colors.cs" />
+    <Compile Include="classes\DataObjects\Ansi.cs" />
     <Compile Include="classes\Handlers\Dispatch.cs" />
     <Compile Include="classes\Collections\EventQueue.cs" />
     <Compile Include="classes\Functions\Extensions.cs" />
@@ -112,6 +112,12 @@
     <Compile Include="classes\Mobs\Mob.cs" />
     <Compile Include="classes\Room.cs" />
     <Compile Include="classes\World.cs" />
+    <Compile Include="Dialogs\RoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RoomForm.Designer.cs">
+      <DependentUpon>RoomForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mountain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,15 +126,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoomEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RoomEdit.Designer.cs">
-      <DependentUpon>RoomEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="Settings.cs" />
-    <EmbeddedResource Include="AreaForm.resx">
+    <EmbeddedResource Include="Dialogs\AreaForm.resx">
       <DependentUpon>AreaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RoomForm.resx">
+      <DependentUpon>RoomForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mountain.resx">
       <DependentUpon>Mountain.cs</DependentUpon>
@@ -144,9 +147,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RoomEdit.resx">
-      <DependentUpon>RoomEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\DataSources\Mountain.classes.Room.datasource" />
     <None Include="Properties\DataSources\Mountain.classes.World.datasource" />
     <None Include="Properties\Settings.settings">

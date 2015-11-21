@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Mountain.classes;
 using System.IO;
 using System.Xml.Serialization;
+using Mountain.Dialogs;
 using Mountain.classes.collections;
 using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
@@ -212,12 +213,12 @@ namespace Mountain {
         }
 
         private void EditRoomContextMenuItem_Click(object sender, EventArgs e) {
-            RoomEdit roomEditForm = new RoomEdit(SelectedRoom, settings);
+            RoomForm roomEditForm = new RoomForm(SelectedRoom, settings);
             DialogResult dialogresult = roomEditForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-                Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
-                roomsListBox.Items.Clear();
-                roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
+               // Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
+              //  roomsListBox.Items.Clear();
+              //  roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
             }
             roomEditForm.Dispose();
         }

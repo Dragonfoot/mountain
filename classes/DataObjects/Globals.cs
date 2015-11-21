@@ -18,11 +18,17 @@ namespace Mountain.classes.dataobjects {
         forest = 128, mountain = 256, underground = 512, indoor = 1024, outdoor = 2048, administrator = 4096
     }
     [Flags] public enum charType {
-        none = 0, fighter = 1, ranger = 2, mage = 4, monk = 8, druid = 16, assassin = 32, thief = 64, psychic = 128,
+        barbarian = 0, fighter = 1, ranger = 2, mage = 4, monk = 8, druid = 16, assassin = 32, thief = 64, psychic = 128,
         paladin = 256, bard = 512, alcamist = 1024, cleric = 2048, diplomat = 4096
     }
     public enum exitType {
-        door, open, hidden, teleporter, trapped, directional
+        door, open, closed, hidden, visible, locked, unlocked, random, teleporter, trapped, directional
+    }
+    [Flags] public enum lockType {
+        combo, key, password, pin, owner, spell, trapped, questItem, pickable, restricted
+    }
+    [Flags] public enum restrictionType {
+        level, administration, race, character, size, magic, quest
     }
 
     public enum equipmentLocation {

@@ -7,14 +7,14 @@ using System.Collections.Generic;
  */
 namespace Mountain.classes.dataobjects {
 
-    public enum Ansi { reset, bold, dim, italic, ul, boldOff, italicOff, ulOff, black, red, green, yellow, blue, magenta, cyan, 
+    public enum Style { reset, boldOn, dim, italic, ul, boldOff, italicOff, ulOff, black, red, green, yellow, blue, magenta, cyan, 
                             white, blackBk, redBk, greenBK, yellowBk, blueBk, magentaBk, cyanBk, whiteBk, unknown, clearScreen };
     
-    public static class Colors {
+    public static class AnsiCode {
         private readonly static List<string> table = new List<string>();
         public const string Esc = "\x1B[";
 
-        static Colors() {
+        static AnsiCode() {
             table.Add(Esc + "0m");      // reset
             // Style Modifiers (on)
             table.Add(Esc + "1m");      // bold
@@ -48,23 +48,23 @@ namespace Mountain.classes.dataobjects {
             table.Add(Esc + "2J");      // clear screen
         }
         // no bold, returns string in passed color then resets color to default
-        public static string Color(this string str, Ansi index, Ansi reset) { 
+        public static string Ansi(this string str, Style index, Style reset) { 
             return table[(int)index] + str + table[(int)reset];
         }
         // allows for bold or no bold to be added to basic color and reset function 
-        public static string Color(this string str, bool bold, Ansi index, Ansi reset) {
-            string prefix = (bold) ? table[(int)Ansi.bold] : table[(int)Ansi.boldOff];
-            return prefix + str.Color(index, reset);
+        public static string Ansi(this string str, bool bold, Style index, Style reset) {
+            string prefix = (bold) ? table[(int)Style.boldOn] : table[(int)Style.boldOff];
+            return prefix + str.Ansi(index, reset);
         }
         // allows for bold or no bold, sets the string color, does not reset color
-        public static string Color(this string str, bool bold, Ansi index) {
-            string prefix = (bold) ? table[(int)Ansi.bold] : table[(int)Ansi.boldOff];
+        public static string Ansi(this string str, bool bold, Style index) {
+            string prefix = (bold) ? table[(int)Style.boldOn] : table[(int)Style.boldOff];
             string result = prefix + table[(int)index] + str;
             return result;
         }
         // sets string to bold and color only
-        public static string Color(this string str, Ansi index) {
-            return str.Color(true, index);
+        public static string Ansi(this string str, Style index) {
+            return str.Ansi(true, index);
         }
     }
 }
