@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Xml;
+using System.Linq;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,28 +14,29 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.tcp {
 
-    [XmlRoot("Player")] public class Connection : IDisposable {
-        private StateObject state { get; set; }
+    [XmlRoot("Player")] public class Connection : Identity, IDisposable {
+        [XmlIgnore] public StateObject state { get; set; }
         [XmlIgnore] public TcpClient Socket { get; set; }
         [XmlIgnore] public IPAddress IPAddress;
         [XmlIgnore] public int Port;
         [XmlIgnore] public ApplicationSettings settings;
         [XmlIgnore] public Stack<string> StringStack;
         [XmlIgnore] public CommandHandler Commands;
-        [XmlIgnore] public Room Room { get; set; }
+        [XmlIgnore] public Room Room { get { return room; } set { SetRoom(value); } }
+        [XmlIgnore] public ManualResetEvent MessageReceivedDone;
+        [XmlIgnore] public ManualResetEvent MessageSentDone;
         [XmlIgnore] public bool Connected { get {
                 bool read = Socket.Client.Poll(500, SelectMode.SelectRead);
                 bool status = (Socket.Client.Available == 0);
                 return !(read & status);
             }
         }
-        private LoginHandler LoginHandler;   // login functions
-        private PlayerHandler PlayerHandler; // player functions
+        private Room room;
+        protected LoginDispatcher LoginDispatcher;   // login functions
+        private PlayerDispatcher PlayerDispatcher; // player functions
         public Account Account { get; set; }
         public Stats Stats { get; set; }
         public Equipment Equipment { get; set; }
-        private readonly ManualResetEvent MessageReceivedDone;
-        private readonly ManualResetEvent MessageSentDone;
         public delegate void CommandHandler(object myObject, string message);
 
         public Connection(TcpClient socket, ApplicationSettings appSettings) {
@@ -44,13 +45,14 @@ namespace Mountain.classes.tcp {
             this.Port = ((IPEndPoint)socket.Client.RemoteEndPoint).Port;
             settings = appSettings;
             Account = new Account();
+          //  Account.RoomID.Area = settings.world.Areas[0].Name;
             Stats = new Stats();
             Equipment = new Equipment();
             StringStack = new Stack<string>();
             MessageReceivedDone = new ManualResetEvent(false);
             MessageSentDone = new ManualResetEvent(false);
             state = new StateObject((socket));
-            LoginHandler = new LoginHandler(this, settings);
+            LoginDispatcher = new LoginDispatcher(this, settings);
             StartReceiving();
         }
         
@@ -77,12 +79,12 @@ namespace Mountain.classes.tcp {
                     string incomingMessage = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
                     Task HandleMessage = new Task(() => Commands(this, incomingMessage)); // setup thread for dispatching incoming
                     MessageReceivedDone.Set(); 
-                    HandleMessage.Start(); // start processing message - in thread
+                    HandleMessage.Start(); // start processing message - (in separate thread)
                 }
                 try {
                     state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // wait for next
-                } catch (SocketException se) {
-                    return;
+                } catch (Exception ex) when (ex is SocketException || ex is NullReferenceException) {
+                    if(ex is NullReferenceException) return;
                 }
             }
             catch (SocketException e) {
@@ -97,20 +99,22 @@ namespace Mountain.classes.tcp {
         }
 
         public void StartLogin() {
-            Commands = LoginHandler.OnMessageReceived; // load the login dispatch handler
-            LoginHandler.Start(); //
+            Commands = LoginDispatcher.OnMessageReceived; 
+            LoginDispatcher.Start(); 
         }
 
-        public void StartPlayer() { // swap out login for player dispatcher handler
-            Room = settings.TheVoid;
-            PlayerHandler = new PlayerHandler(this, settings);
-            Commands = PlayerHandler.OnPlayerMessageReceived;
-            LoginHandler = null;
-            settings.TheVoid.AddPlayer(this);
+        public void StartPlayer() {
+            PlayerDispatcher = new PlayerDispatcher(this, settings);
+            LoginDispatcher = null;
+            Commands = PlayerDispatcher.OnPlayerMessageReceived;
+            SystemEventPacket packet = new SystemEventPacket(EventType.login, this.Account.Name + " has entered the world.", this);
+            settings.SystemEventQueue.Push(packet);
+            Room.AddPlayer(this);
+
         }
 
         private void SetRoom(Room room) {
-            Room = room;
+            this.room = room;
             Account.RoomID = room.RoomID;
             Account.Room = room;
         }
@@ -162,10 +166,6 @@ namespace Mountain.classes.tcp {
             }
         }
 
-        protected bool Load() {
-            //throw new NotImplementedException();            
-            return false;
-        }    
 
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
@@ -48,9 +49,9 @@ namespace Mountain.classes.functions {
         }
 
         public static Room CloneTheRoomToEdit(Room room, ApplicationSettings settings) {
-            Room clone = new Room(room.Name, room.Description, settings);
+            Room clone = new Room(room.Name, room.Description, settings, room.Area);
             clone.RoomID = room.RoomID;
-            if (room.Exits.Count > 0) {
+            if (room.Exits.Any()) {
                 foreach (Exit exit in room.Exits) {
                     Exit clonedExit = new Exit();
                     clonedExit.ID = exit.ID;
@@ -69,8 +70,8 @@ namespace Mountain.classes.functions {
         public static void UpdateRoomEdits(Room fromRoom, Room toRoom) {
             toRoom.Name = fromRoom.Name;
             toRoom.Description = fromRoom.Description;
-            if (toRoom.Exits.Count > 0) { toRoom.Exits.Clear(); }
-            if (fromRoom.Exits.Count > 0) {
+            if (toRoom.Exits.Any()) { toRoom.Exits.Clear(); }
+            if (fromRoom.Exits.Any()) {
                 foreach (Exit fromExit in fromRoom.Exits) {
                     Exit toExit = new Exit();
                     toExit.ID = fromExit.ID;

@@ -3,7 +3,7 @@
 namespace Mountain.classes.dataobjects {
 
     public enum PacketType { data, command, activity, callback, verb, system };
-    public enum EventType { unknown, connection, disconnected, idle }
+    public enum EventType { unknown, connection, disconnected, idle, login }
 
   
     public class Packet  {
@@ -30,6 +30,7 @@ namespace Mountain.classes.dataobjects {
             packetType = PacketType.system;
             this.eventType = eventType;
             this.message = message;
+            this.Client = client;
         }
     }
 

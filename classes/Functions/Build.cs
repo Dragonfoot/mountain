@@ -8,7 +8,7 @@ namespace Mountain.classes.functions {
         public static Area AdminArea(ApplicationSettings settings) {
             string name, description;
 
-            Area area = new classes.Area();
+            Area area = new Area();
             area.Name = "Administration Complex";
             area.Description = "One of this worlds extraordinary wonders. It houses top minds from all the major worlds within our galaxy. " +
                "As well it houses the most advanced technological and military equipment available. All this in order to make this world " +
@@ -20,14 +20,15 @@ namespace Mountain.classes.functions {
                 "murmuring into headsets as they adjust controls and issue commands, in a long line of cubicles fading into the distance to your " +
                 "right. Sensor arrays, routing maps and schedulers glowing quietly above them, monitoring every aspect of this worlds events and " +
                 "activities. To your left, a long line of guarded office doors, guard challenging and recording those wanting access. ";
-            controlRoom = Room(name, description, settings);
+
+            controlRoom = NewRoom(name, description, settings, area);
             controlRoom.Tag = "ControlCenter";
             controlRoom.roomType = roomType.indoor | roomType.administrator | roomType.underground;
 
-            Room transitHub;
+            Room transitHub;  // room used as exit hub from admin control room
             name = "Central Transit Hub";
             description = "Administration Transit Hub Lobby";
-            transitHub = Room(name, description, settings);
+            transitHub = NewRoom(name, description, settings, area);
             transitHub.roomType = roomType.indoor | roomType.administrator;
 
             ExitAttributes controlExitAttributes = new ExitAttributes() {
@@ -38,14 +39,18 @@ namespace Mountain.classes.functions {
                 AdminOnly = true,
                 Label = "Control Center",
                 Hidden = true,
-            };                      
+            };  
+                                
             LinkRooms(controlRoom, controlExitAttributes, transitHub, transitExitAttributes);
 
-            Room theVoid;
+            Room theVoid;  // no doorway in for players and one exit to arbitrary world room
             name = "The Unknown Place";
             description = "You find yourself weightlessly floating in some kind of silent, lonely, dark, " +
                 "endless, and as many other voidy spacy words there might be.. space..";
-            theVoid = new classes.Room(name, description, settings);
+
+            theVoid = NewRoom(name, description, settings, area);
+            settings.TheVoid = theVoid;
+            theVoid.Area = area;
             theVoid.Tag = "Void";
             theVoid.roomType = roomType.space;
             ExitAttributes voidExitAttributes = new ExitAttributes() {
@@ -63,12 +68,12 @@ namespace Mountain.classes.functions {
         }
 
         public static Area DefaultArea() { // stub
-            Area area = new classes.Area();
+            Area area = new Area();
             return area;
         }
 
         public static void LinkRooms(Room firstRoom, ExitAttributes first, Room secondRoom, ExitAttributes second) {
-            Exit firstExit = new classes.Exit();
+            Exit firstExit = new Exit();
             firstExit.Attributes = first;
             firstExit.Name = firstExit.Attributes.Label;
             firstExit.link = secondRoom;
@@ -76,8 +81,8 @@ namespace Mountain.classes.functions {
             firstExit.LinkToRoomID = secondRoom.RoomID;
             firstRoom.AddExit(firstExit);
 
-            Exit secondExit = new classes.Exit();
-            secondExit = new classes.Exit();
+            Exit secondExit = new Exit();
+            secondExit = new Exit();
             secondExit.Attributes = second;
             secondExit.Name = secondExit.Attributes.Label;
             secondExit.link = firstRoom;
@@ -90,12 +95,8 @@ namespace Mountain.classes.functions {
             return new classes.Area();
         }
 
-        public static Room TheVoid(ApplicationSettings settings) {  // stub
-            return new classes.Room(settings);
-        }
-
-        public static Room Room(string name, string description, ApplicationSettings settings) { // stub
-            return new classes.Room(name, description, settings);
+        public static Room NewRoom(string name, string description, ApplicationSettings settings, Area area) { // stub
+            return new Room(name, description, settings, area);
         }
 
         public static Exit Exit(ExitAttributes attributes) { 

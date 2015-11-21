@@ -4,10 +4,8 @@ using System.Linq;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.collections {
-
-    [XmlRoot ("World")]
-    public class RegisteredUsers : IEnumerable<Account> {
-        [XmlArray("Players")]
+    
+    public class RegisteredUsers : IEnumerable<Account> {        
         public List<Account> List { get; private set; }
 
         public RegisteredUsers() {
@@ -51,10 +49,7 @@ namespace Mountain.classes.collections {
             if (index >= 0)
                 List.RemoveAt(index);
         }
-         
-        public void Save() {
 
-        }
         public IEnumerator<Account> GetEnumerator() {
             return List.GetEnumerator();
         }
@@ -64,9 +59,3 @@ namespace Mountain.classes.collections {
         }
     }
 }
-/* 
-
-
-backup users
-save user
-*/

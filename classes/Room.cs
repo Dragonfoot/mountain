@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
@@ -22,64 +23,39 @@ namespace Mountain.classes {
         [XmlIgnore] public PlayerEventQueue Messages;
         [XmlIgnore] public ApplicationSettings settings;
         [XmlIgnore] public RoomID RoomID;
-        [XmlIgnore] public Area Area { get; set; }
-
+        [XmlIgnore] public Area Area { get { return area; } set { RoomID.Area = value.Name; area = value; } }
+        private Area area;
         protected GeneralEventQueue Events;
         public roomType roomType { get; set; }
         public string Tag { get; set; }
         [XmlArray("Links")] public List<Exit> Exits { get; set; }
 
-        public Room(ApplicationSettings appSettings) {
+        public Room(ApplicationSettings appSettings, Area area) {
             InitializeRoom(appSettings);
+            Area = area;
             Name = "New Room";
             Description = "This is a newly created room";
-            RoomID = new RoomID(ID, Name);
+            RoomID = new RoomID(ID, Name, area.Name);
         }
-
-        private void Players_OnPlayerAdded(object myObject, Connection player, string message = "") {
-            string name = player.Account.Name;
-            if (message == "")
-                message = " just arrived.";
-            foreach(Connection client in Players) {
-                if(client != player) client.Send(player.Account.Name + message);
-                 else SendCommand(player, "look");
-            }
-        }
-        private void Players_OnPlayerRemoved(object myObject, Connection player, string message = "") {
-            foreach (Connection Player in Players) {
-                Player.Send(player.Account.Name.Color(Ansi.yellow) + " leaves through the (" + message + ") exit.".NewLine());
-            }
-        }
-
-        private void SendCommand(Connection player, string command) {
-            Task HandleMessage = new Task(() => player.Commands(player, command));
-            HandleMessage.Start();
-        }
-        public string GetName() { return Name; }
-        public string GetDesciption() { return Description; }
-        public string GetExits() { return Functions.GetNames(Exits.ToArray()); }
-        public string GetMobs() { return Functions.GetNames(Mobs.ToArray()); }
-        public string GetPlayers() { return Functions.GetNames(Players.ToArray()); }
-        public string GetOtherPlayers(string name) { return Functions.GetOtherNames(Players.ToArray(), name); }
-        public string GetItems() { return Functions.GetNames(Items.ToArray()); }
-
-        public Room(string name, ApplicationSettings appSettings) {
+        public Room(string name, ApplicationSettings appSettings, Area area) {
             InitializeRoom(appSettings);
-            RoomID = new RoomID(ID, Name);
+            RoomID = new RoomID(ID, Name, area.Name);
+            Area = area;
             SetName(name);
             Description = Name + " is a newly created room";
         }
-        public Room(string name, string description, ApplicationSettings appSettings) {
+        public Room(string name, string description, ApplicationSettings appSettings, Area area) {
             InitializeRoom(appSettings);
-            RoomID = new RoomID(ID, name);
+            RoomID = new RoomID(ID, name, area.Name);
+            Area = area;
             SetName(name);
             Description = description;
         }
         public Room() {
-            ClassType = classType.room;
+          /*  ClassType = classType.room;
             Name = "New Room";
             Description = "This is a newly created room";
-            RoomID = new RoomID(ID, Name);
+            RoomID = new RoomID(ID, Name);*/
         }
 
         public void SetName(string name) {
@@ -100,6 +76,36 @@ namespace Mountain.classes {
             this.Players.OnPlayerAdded += Players_OnPlayerAdded;
             this.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
         }
+
+
+        private void Players_OnPlayerAdded(object myObject, Connection player, string message = "") {
+            string name = player.Account.Name;
+            if (message == "")
+                message = " just arrived.";
+            foreach (Connection client in Players) {
+                if (client != player)
+                    client.Send(player.Account.Name + message);
+                else
+                    SendCommand(player, "look");
+            }
+        }
+        private void Players_OnPlayerRemoved(object myObject, Connection player, string message = "") {
+            foreach (Connection Player in Players) {
+                Player.Send(player.Account.Name.Color(Ansi.yellow) + " leaves through the (" + message + ") exit.".NewLine());
+            }
+        }
+
+        private void SendCommand(Connection player, string command) {
+            Task HandleMessage = new Task(() => player.Commands(player, command));
+            HandleMessage.Start();
+        }
+        public string GetName() { return Name; }
+        public string GetDesciption() { return Description; }
+        public string GetExits() { return Functions.GetNames(Exits.ToArray()); }
+        public string GetMobs() { return Functions.GetNames(Mobs.ToArray()); }
+        public string GetPlayers() { return Functions.GetNames(Players.ToArray()); }
+        public string GetOtherPlayers(string name) { return Functions.GetOtherNames(Players.ToArray(), name); }
+        public string GetItems() { return Functions.GetNames(Items.ToArray()); }
 
 
         private void Messages_OnPlayerEventReceived(object myObject, Packet packet) {
@@ -151,22 +157,22 @@ namespace Mountain.classes {
             view.Add("");
             view.Add(Description);
             view.Add("");
-            if (Exits.Count > 0) { // add color coding's
+            if (Exits.Any()) { // add color coding's
                 stringBuilder.Append("Exits: " + Functions.GetNames(Exits.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
-            if (Mobs.Count > 0) {
+            if (Mobs.Any()) {
                 stringBuilder.Append("Mobs: " + Functions.GetNames(Mobs.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
-            if (Players.Count > 0) {
+            if (Players.Any()) {
                 stringBuilder.Append("Players: " + Functions.GetNames(Players.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
-            if (Items.Count > 0) {
+            if (Items.Any()) {
                 // items on floor; need to search for duplicates, pronouns, etc., and display them in friendly grammar form
                 // You see (an) orange, 23 pumpkin seed(s), (a) hungry cat, Toetag('s) nose.
             }

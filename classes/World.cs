@@ -126,6 +126,22 @@ namespace Mountain.classes {
                 cancellationTokenSource.Cancel();
             }
         }
+
+        public Room GetRoomByName(string name) {
+            foreach (Area area in Areas) {
+                foreach (Room room in area.Rooms) {
+                    if (room.Name == name) {
+                        return room;
+                    }
+                }
+            }
+            return null;
+        }
+        public string GetAreaNameByRoomName(string name) {
+            Room room = GetRoomByName(name);
+            if (room == null) return null;
+            return room.RoomID.Area;
+        }
     }
 }
 

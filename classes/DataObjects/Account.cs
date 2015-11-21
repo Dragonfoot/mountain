@@ -11,7 +11,7 @@ namespace Mountain.classes.dataobjects {
         public string Password { get; set; }
         public bool Administrator { get; set; }
         public string Email { get; set; }
-        [XmlIgnore] public Guid ID { get; set; }        
+        public Guid ID { get; set; }        
         [XmlIgnore] public Room Room { get; set; }
         [XmlIgnore] public Connection Client { get; set; }
         public RoomID RoomID;

@@ -1,22 +1,33 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
 
     public static class Extensions {
 
-        // hide&change before shifting to production
+        // hide & change before shifting to production
         private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
         private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
 
-        #region arrays
+       
+        #region generic
 
- 
+        public static T DeepClone<T>(this T input) where T : ISerializable {
+            using (var stream = new MemoryStream()) {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(stream, input);
+                stream.Position = 0;
+                return (T)formatter.Deserialize(stream);
+            }
+        }
 
         #endregion
 
@@ -25,32 +36,30 @@ namespace Mountain.classes.functions {
         public static string StripNewLine(this string str) {
             return Regex.Replace(str, @"\n|\r", "");
         }
-
         public static bool IsYes(this string str) { // we will just check the first char to see if the intent was Yes
             return (String.Equals(str.Substring(0, 1), "Y", StringComparison.OrdinalIgnoreCase));
         }
-
         public static string NewLine(this string str) {
             return str + Environment.NewLine;
         }
-
         public static string Indent(this string str) {
             for (int i = 0; i <= Global.indent; i++) {
                 str = " " + str;
             }
             return str;
         }
-
         public static string ToProper(this string str) { // make all words' first char uppercase
             TextInfo info = new CultureInfo("en-US", false).TextInfo;
             return info.ToTitleCase(str);
         }
-
         public static bool IsNumeric(this string value) {
             float result; // ignore output
             return float.TryParse(value, out result); // an error returns false
         }
-
+        public static bool IsValidEmailAddress(this string s) {
+            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            return regex.IsMatch(s);
+        }
         public static bool IsNumberOnly(this string value, bool floatPoint) { // string representation of a number?
             value = value.Trim();
             if (value.Length == 0)
@@ -130,7 +139,6 @@ namespace Mountain.classes.functions {
             result = result.Trim();
             return result;
         }
-
         
         private const int keysize = 256;
         public static string Encrypt(this string plainText) {

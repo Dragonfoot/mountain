@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using Mountain.classes;
 using Mountain.classes.functions;
@@ -24,7 +25,7 @@ namespace Mountain {
 
         private void RefreshRooms() {
             RoomListBox.Items.Clear();
-            if (area.Rooms.Count > 0) {
+            if (area.Rooms.Any()) {
                 foreach (Room room in area.Rooms) {
                     RoomListBox.Items.Add(room.Name);
                 }
@@ -38,17 +39,6 @@ namespace Mountain {
             area = Build.AdminArea(settings);
             DisplayArea();
             RefreshRooms();
-        }
-
-        private Room BuildRoom(string name, string description) { // stub - move to static builder class in helpers
-            Room room = new Room(name, settings);
-            room.Description = description;
-            return room;
-        }
-
-        private Exit BuildExit() { // stub - move to static builder class in helpers
-            Exit exit = new Exit();
-            return exit;
         }
 
         private void ok_Button_Click(object sender, EventArgs e) {

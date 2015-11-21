@@ -38,21 +38,24 @@ namespace Mountain.classes {
         [XmlIgnore] public string ItemTemplateDirectory { get { return AppDirectory + Settings.Default.ItemTemplateDirectory; } }
         [XmlIgnore] public MessageQueue SystemMessageQueue;
         [XmlIgnore] public SystemEventQueue SystemEventQueue;
+        protected Factory factory;
 
         public ApplicationSettings(MessageQueue messageQueue, SystemEventQueue eventQueue) {
             InitializeSettings();
-            if (messageQueue != null) SystemMessageQueue = messageQueue;
-            this.SystemEventQueue = eventQueue;
+            factory = new Factory();
+            SystemMessageQueue = messageQueue;
+            SystemEventQueue = eventQueue;
             Logins = new List<Connection>();
             RegisteredUsers = new RegisteredUsers();
             Players = new Players();
-            LoadAllUserAccounts();
+            LoadRegistryAccounts();
         }
 
-        private void LoadAllUserAccounts() {
+        private void LoadRegistryAccounts() {
             var doc = XDocument.Load(BaseDirectory + "\\" + RegisteredUsersAccounts);
             var users = from item in doc.Descendants("Account")
                         select new {
+                            id = item.Element("ID").Value,
                             name = item.Element("Name").Value,
                             password = item.Element("Password").Value,
                             email = item.Element("Email").Value,
@@ -60,6 +63,7 @@ namespace Mountain.classes {
                         };
             foreach (var user in users) {
                 Account account = new Account();
+                account.ID = Guid.Parse(user.id);
                 account.Name = user.name;
                 account.Password = user.password;
                 account.Email = user.email;
@@ -69,6 +73,11 @@ namespace Mountain.classes {
         }
 
         public void SwapLoginForPlayer(Connection connection) {
+            connection.Name = connection.Account.Name;
+            connection.Account.Room = TheVoid;
+            connection.Account.RoomID = new RoomID(TheVoid.RoomID.ID, TheVoid.Name, TheVoid.Area.Name);
+            string file = PlayersDirectory + "\\" + connection.Account.Name + "_test.xml";
+            factory.LoadPlayerFromFile(connection, connection.Account.Name, file, this);
             Players.Add(connection);
             Logins.Remove(connection);
             connection.StartPlayer();
@@ -91,7 +100,7 @@ namespace Mountain.classes {
             if (!Directory.Exists(PlayersDirectory)) { Directory.CreateDirectory(PlayersDirectory); }
             string file = BaseDirectory + "\\" + RegisteredUsersAccounts;
          //   if (!File.Exists(file)) {
-                XmlHelper.ReCreateDefaultUserXmlFile(file, this);
+                XmlHelper.ReCreateRegistryAccounts(file, this);
           //  }
         }
     }

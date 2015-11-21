@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using Mountain.classes.tcp;
@@ -34,7 +35,7 @@ namespace Mountain.classes.dataobjects {
                 "Alright.. %%.. sure.. let me find my magic what's-it-wand first though.",
                 "I'm just not gonna do %% for you. Nope, no way.. well.. OK, maybe after the moon's turned green a bit more..",
                 "%% - Now that's just plain silly. Stop messing with me!..go away even!!..*sigh*.. OK, just let me put something on first.",
-                "%% - Maybe, if you started treating me like the god I am, I'll find a way to actually do this weird request you ask.",
+                "%% - Maybe, if you started treating me like the god I am, I'd find a way to actually do this weird request.",
                 "%% - Humph.. I see typing isn't one of your strong suits.",
                 "%% - Drinking again are we?",
                 "%% - Give me a break. And put some cloths on before typing anything else!",
@@ -55,7 +56,7 @@ namespace Mountain.classes.dataobjects {
 
         public string DontKnowHow(string value, Connection player) {
             string response = string.Empty;
-            if (player.StringStack.Count == 0) {
+            if (!player.StringStack.Any()) {
                 Responses.Shuffle();
                 foreach (string item in Responses) {
                     player.StringStack.Push(item);

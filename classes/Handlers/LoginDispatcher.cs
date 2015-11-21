@@ -8,13 +8,13 @@ namespace Mountain.classes.handlers {
     public enum login { error, name, newUser, password, newpassword, confirmPassword, raceType, stats }
     public enum userStatus { loggedIn, nonExistent, laggedOut, available}
 
-    public class LoginHandler {
+    public class LoginDispatcher {
         protected login action;
         public Account LoginClient;
         Connection Client;
         ApplicationSettings settings;
 
-        public LoginHandler(Connection client, ApplicationSettings appSettings) {
+        public LoginDispatcher(Connection client, ApplicationSettings appSettings) {
             Client = client;
             settings = appSettings;
             LoginClient = new Account();
@@ -121,6 +121,7 @@ namespace Mountain.classes.handlers {
                     LoginClient.Password = user.Password;
                     LoginClient.Email = user.Email;
                     LoginClient.Administrator = user.Administrator;
+                    LoginClient.ID = user.ID;
                     if (settings.Players.Exists(user.Name))
                         return userStatus.loggedIn;  // name is already logged in.. timed out?
                     return userStatus.available; // name is registered user

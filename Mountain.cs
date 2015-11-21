@@ -26,11 +26,13 @@ namespace Mountain {
             MessageQueue = new MessageQueue(settings);
             SystemEventQueue = new SystemEventQueue();
             MessageQueue.Tag = "System";
-            settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
             InitializeComponent();
             MessageQueue.OnMessageReceived += Messages_OnMessageReceived;
             SystemEventQueue.OnEventReceived += Events_OnEventReceived;
+            settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
             world = BuildDefaultWorld();
+            world.settings = settings;
+            settings.world = world;
             world.StartListen(world.Port);
             if (world.portListener.Active()) {
                 listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
@@ -49,7 +51,17 @@ namespace Mountain {
                         Connections++;
                         break;
                     case EventType.disconnected:
+                        int index = connectedListBox.FindString(packet.Client.Account.Name);
+                        Invoke((MethodInvoker)delegate {
+                            connectedListBox.Items.RemoveAt(index);
+                        });
                         Connections--;
+                        break;
+                    case EventType.login:
+                        string newPlayer = packet.Client.Account.Name + " : " + packet.Client.IPAddress.ToString() + ":" + packet.Client.Port.ToString();
+                        Invoke((MethodInvoker)delegate {
+                            connectedListBox.Items.Add(newPlayer);
+                        });
                         break;
                 }
 
@@ -109,11 +121,11 @@ namespace Mountain {
             if (world != null) { world = null; }
             try {
                 world = new World(settings);
-                if (world.Areas.Count > 0) {
-                    world.settings.TheVoid = world.Areas[0].Rooms.FindTag("Void");
+                world.Areas.Add(Build.AdminArea(settings));
+                if (world.Areas.Any()) {
                     areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                     areaListBox.SelectedIndex = 0;
-                    if (SelectedArea.Rooms.Count > 0) {
+                    if (SelectedArea.Rooms.Any()) {
                         if (roomsListBox.Items.Count > 0)
                             roomsListBox.SelectedIndex = 0;
                     }

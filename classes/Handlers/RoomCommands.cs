@@ -102,7 +102,7 @@ namespace Mountain.classes.handlers {
             settings.Players.Remove(packet.Client.Account.Name, "Player has quit.");
             packet.Client.Send("See you again soon!".Color(Ansi.white).NewLine().NewLine());
             packet.Client.Room.Players.Remove(packet.Client.Account.Name);
-            SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnected, packet.Client.Account.Name + " has quit.");
+            SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnected, packet.Client.Account.Name + " has quit.", packet.Client);
             settings.SystemEventQueue.Push(eventPacket);
             packet.Client.Shutdown();
             packet.Client.Dispose();

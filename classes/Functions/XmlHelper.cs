@@ -43,27 +43,27 @@ namespace Mountain.classes.functions {
             }
         }
 
-        public static void ReCreateDefaultUserXmlFile(string path, ApplicationSettings appSettings) {
+        public static void ReCreateRegistryAccounts(string path, ApplicationSettings appSettings) {
             RegisteredUsers users = new RegisteredUsers();
 
             Account toetag = new Account(Guid.NewGuid());
             toetag.SetName("Toetag");
             toetag.SetPassword("toetag");
-            toetag.Email = "Toetag@thisserver.com";
+            toetag.Email = "Toetag@thisServer.com";
             toetag.Administrator = true;
             users.List.Add(toetag);
 
             Account haystack = new Account(Guid.NewGuid());
             haystack.SetName("Haystack");
             haystack.SetPassword("haystack");
-            haystack.Email = "haystack@thisserver.com";
+            haystack.Email = "haystack@thisServer.com";
             haystack.Administrator = true;
             users.List.Add(haystack);
 
             Account bucky = new Account(Guid.NewGuid());
             bucky.SetName("Bucky");
             bucky.SetPassword("bucky");
-            bucky.Email = "bucky@thisserver.com";
+            bucky.Email = "bucky@thisServer.com";
             bucky.Administrator = false;
             users.List.Add(bucky);
 

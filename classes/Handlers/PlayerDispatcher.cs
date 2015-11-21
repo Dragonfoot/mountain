@@ -6,12 +6,12 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.handlers {
 
-    public class PlayerHandler {
+    public class PlayerDispatcher {
         Connection Client;
         ApplicationSettings settings;
         protected Dispatch Commands { get; set; }
 
-        public PlayerHandler(Connection client, ApplicationSettings appSettings) {
+        public PlayerDispatcher(Connection client, ApplicationSettings appSettings) {
             Client = client;
             settings = appSettings;
             Commands = new Dispatch(Client, settings);
@@ -37,6 +37,7 @@ namespace Mountain.classes.handlers {
             Client.Room = room;
             Client.Account.RoomID = room.RoomID;
             Client.Account.Room = room;
+            Client.Account.RoomID.Area = room.Area.Name;
         }
 
         private Packet Parse(string message, Connection player) {
