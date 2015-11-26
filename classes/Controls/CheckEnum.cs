@@ -11,97 +11,61 @@ using System.Windows.Forms;
 namespace Mountain.classes.controls {
 
     public partial class CheckEnum : CheckedListBox {
-        private static Filter filter = null;
+        private static MessageHook Hook = null;
 
         public CheckEnum() {
             InitializeComponent();
-            if (filter == null) {
-                filter = new Filter();
-                Application.AddMessageFilter(filter);
+            if (Hook == null) {
+                Hook = new MessageHook();
+                Application.AddMessageFilter(Hook);
             }
-            filter.MouseDown += new Filter.LeftButtonDown(filter_MouseDown);
-            filter.KeyUp += new Filter.KeyPressUp(filter_KeyUp);
+            Hook.MouseDown += new MessageHook.LeftButtonDown(Hook_MouseDown);
+            Hook.KeyUp += new MessageHook.KeyPressUp(Hook_KeyUp);
         }
 
-        private void filter_KeyUp(IntPtr target) {
-            if (!target.Equals(IntPtr.Zero)) {
-                if (PanelVisible) {
-                    if (!IsTargetMine(target)) {
-                        ToggleVisibility();
-                    }
-                }
+        private void Hook_KeyUp(IntPtr focusedControl) {
+            if (!focusedControl.Equals(IntPtr.Zero)) {
+                if (Visible) if (!IsSelf(focusedControl)) Visible = false;
             }
         }
 
-        private bool IsTargetMine(IntPtr target) {
-            return IsTargetMine(this, target);
+        private bool IsSelf(IntPtr clickedControl) {
+            return IsSelf(this, clickedControl);
         }
 
-        private bool IsTargetMine(Control ctl, IntPtr target) {
-            foreach (Control child in ctl.Controls) {
-                if (child.Handle.Equals(target)) {
-                    return true;
-                } else if (child.HasChildren) {
-                    bool result = IsTargetMine(child, target);
-                    if (result) {
-                        return true;
-                    }
+        private bool IsSelf(Control control, IntPtr clickedControl) {
+            foreach (Control childControl in control.Controls) {    // overkill for now, no child controls at this point
+                if (childControl.Handle.Equals(clickedControl)) return true;
+                else if (childControl.HasChildren) {                // recursive drill
+                    bool result = IsSelf(childControl, clickedControl);
+                    if (result) return true;                    
                 }
             }
             return false;
         }
 
-        private bool PanelVisible {
-            get { return Visible; }
-        }
-
-        private void filter_MouseDown() {
-            if (PanelVisible) {
-                if (!RectangleToScreen(ClientRectangle).Contains(Cursor.Position)) { 
-                    ToggleVisibility();
-                }
-            }             
-        }       
-
-        private void ToggleVisibility() {
-            if (PanelVisible) {
-                Visible = false;
-            } else {
-                Visible = true;
-            }
+        private void Hook_MouseDown() {
+            if (Visible) if (!RectangleToScreen(ClientRectangle).Contains(Cursor.Position)) Visible = false;
         }
 
         public new void Dispose() {
-            Application.RemoveMessageFilter(filter);
+            Application.RemoveMessageFilter(Hook);
             base.Dispose();
         }
 
-        private class Filter : IMessageFilter {
+        private class MessageHook : IMessageFilter {
+            private const int WM_LBUTTONDOWN = 0x201;
+            private const int WM_KEYUP = 0x101;
 
             public delegate void LeftButtonDown();
-            public event LeftButtonDown MouseDown;
-
             public delegate void KeyPressUp(IntPtr target);
+            public event LeftButtonDown MouseDown;
             public event KeyPressUp KeyUp;
 
-            private const int WM_KEYUP = 0x101;
-            private const int WM_LBUTTONDOWN = 0x201;
-
-            bool IMessageFilter.PreFilterMessage(ref Message m) {
-                switch (m.Msg) {
-                    // raise our KeyUp() event whenever a key is released in our app
-                    case WM_KEYUP:
-                        if (KeyUp != null) {
-                            KeyUp(m.HWnd);
-                        }
-                        break;
-
-                    // raise our MouseDown() event whenever the mouse is left clicked somewhere in our app
-                    case WM_LBUTTONDOWN:
-                        if (MouseDown != null) {
-                            MouseDown();
-                        }
-                        break;
+            bool IMessageFilter.PreFilterMessage(ref Message message) {
+                switch (message.Msg) {
+                    case WM_KEYUP: if (KeyUp != null)  KeyUp(message.HWnd); break;
+                    case WM_LBUTTONDOWN: if (MouseDown != null) MouseDown(); break;
                 }
                 return false;
             }
