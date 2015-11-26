@@ -45,14 +45,13 @@ namespace Mountain.Dialogs {
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            this.ok_Button_Click(this, e);
+            ok_Button_Click(this, e);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
             saveAreaFileDialog.InitialDirectory = settings.BaseDirectory;
-            if (saveAreaFileDialog.ShowDialog() == DialogResult.OK) {
-                XmlHelper.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName, settings);
-            }
+            if (saveAreaFileDialog.ShowDialog() == DialogResult.OK) 
+                XmlHelper.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName, settings);            
         }
 
         private void areaNameTextBox_KeyPress(object sender, KeyPressEventArgs e) {
@@ -93,15 +92,12 @@ namespace Mountain.Dialogs {
         }
 
         private void areaDescriptionTextBox_KeyPress(object sender, KeyPressEventArgs e) {
-            if (e.KeyChar == (char)13) {
-                areaDescriptionTextBox_Lost_Focus(sender, new EventArgs());
-            }
+            if (e.KeyChar == (char)13) areaDescriptionTextBox_Lost_Focus(sender, new EventArgs());            
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {
             CreateDefaultAdminArea();
             RefreshRooms();
-        }
-        
+        }        
     }
 }

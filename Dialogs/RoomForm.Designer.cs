@@ -403,7 +403,6 @@ namespace Mountain.Dialogs {
             this.roomTypeTextBox.TabIndex = 20;
             this.roomTypeTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.roomTypeTextBox_KeyDown);
             this.roomTypeTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomTypeTextBox_KeyPress);
-            this.roomTypeTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.roomTypeTextBox_MouseDown);
             // 
             // shortDescriptonTextBox
             // 

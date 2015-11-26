@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Mountain.classes.tcp;
 
 namespace Mountain.classes.collections {
@@ -18,16 +17,14 @@ namespace Mountain.classes.collections {
 
         public void Add(Connection player, string message = "") {
             List.Add(player);
-            if (OnPlayerAdded != null )
-                OnPlayerAdded(this, player, message);
+            if (OnPlayerAdded != null ) OnPlayerAdded(this, player, message);
         }
 
         public void Remove(string name, string message = "") {
             int index = GetIndex(name);
             Connection player = List[index];
             List.RemoveAt(index);
-            if (OnPlayerRemoved != null )
-                OnPlayerRemoved(this, player, message);
+            if (OnPlayerRemoved != null) OnPlayerRemoved(this, player, message);
         }
 
         public Connection GetPlayer(string name) {
@@ -55,7 +52,6 @@ namespace Mountain.classes.collections {
             List.RemoveRange(0, List.Count);
             // https://github.com/Reddit-Mud/RMUD/blob/master/NetworkModule/Clients.cs
         }
-
 
         public IEnumerator<Connection> GetEnumerator() {
             return List.GetEnumerator();

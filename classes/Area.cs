@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -8,7 +7,7 @@ using Mountain.classes.collections;
 
 namespace Mountain.classes {
 
-    [Serializable()]
+    [Serializable]
     [XmlRoot]
     public class Area : Identity {
         [XmlArray("Rooms")] public Rooms Rooms { get; private set; }
@@ -52,7 +51,7 @@ namespace Mountain.classes {
         }
 
         public void StartHeart() {
-            this.cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = this.cancellationTokenSource.Token;
             var task = Task.Factory.StartNew(() => {
                 while (true) {

@@ -21,6 +21,7 @@ namespace Mountain.classes.handlers {
         }
         public void Start() {
             Welcome();
+            StartLogin();
         }
         private void Welcome() {
             string welcome = "Welcome to the Mountain Foundation. ";
@@ -30,7 +31,6 @@ namespace Mountain.classes.handlers {
             welcome += "have all taken solemn oaths to do their very utmost for you. Good luck!";
             Client.Send("".Ansi(Style.clearScreen).NewLine().NewLine(), false);
             Client.Send(welcome.WordWrap().Ansi(true, Style.yellow).NewLine(), false);
-            StartLogin();
         }
 
         private void StartLogin() {

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-using System.Linq.Expressions;
 using Mountain.classes.functions;
 
 namespace Mountain.classes.collections {
@@ -27,8 +25,7 @@ namespace Mountain.classes.collections {
         }
 
         public Room FindName(string name) {
-            if (name.IsNullOrWhiteSpace())
-                return null;
+            if (name.IsNullOrWhiteSpace()) return null;
             return List.Find(room => room.Name.StartsWith(name));
         }
 

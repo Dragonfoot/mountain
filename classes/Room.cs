@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Xml.Serialization;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
 using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
 using Mountain.classes.Items;
@@ -32,7 +30,6 @@ namespace Mountain.classes {
         public roomRestrictionType roomRestrictons { get; set; }
         public roomConditionType roomConditions { get; set; }
         public string Tag { get; set; }
-        protected GeneralEventQueue Events;
         [XmlArray("Links")] public List<Exit> Exits { get; set; }
 
         public Room(ApplicationSettings appSettings, Area area) {
@@ -56,11 +53,7 @@ namespace Mountain.classes {
             SetName(name);
             Description = description;
         }
-        public Room() {
-          /*  ClassType = classType.room;
-            Name = "New Room";
-            Description = "This is a newly created room";
-            RoomID = new RoomID(ID, Name);*/
+        public Room() { // for serializer
         }
 
         public void SetName(string name) {
@@ -75,7 +68,6 @@ namespace Mountain.classes {
             Players = new Players();
             Mobs = new ConcurrentBag<Mob>();
             Items = new ConcurrentBag<Item>();
-            Events = new GeneralEventQueue();
             Messages = new PlayerEventQueue();            
             Messages.OnEventReceived += Messages_OnPlayerEventReceived;
             this.Players.OnPlayerAdded += Players_OnPlayerAdded;
@@ -85,13 +77,10 @@ namespace Mountain.classes {
 
         private void Players_OnPlayerAdded(object myObject, Connection player, string message = "") {
             string name = player.Account.Name;
-            if (message == "")
-                message = " just arrived.";
+            if (message == "") message = " just arrived.";
             foreach (Connection client in Players) {
-                if (client != player)
-                    client.Send(player.Account.Name.Ansi(Style.white) + message.Ansi(Style.white).NewLine());
-                else
-                    SendCommand(player, "look");
+                if (client != player) client.Send(player.Account.Name.Ansi(Style.white) + message.Ansi(Style.white).NewLine());
+                else SendCommand(player, "look");
             }
         }
         private void Players_OnPlayerRemoved(object myObject, Connection player, string message = "") {
@@ -111,7 +100,6 @@ namespace Mountain.classes {
         public string GetPlayers() { return Functions.GetNames(Players.ToArray()); }
         public string GetOtherPlayers(string name) { return Functions.GetOtherNames(Players.ToArray(), name); }
         public string GetItems() { return Functions.GetNames(Items.ToArray()); }
-
 
         private void Messages_OnPlayerEventReceived(object myObject, Packet packet) {
             Packet message = Messages.Pop(); 

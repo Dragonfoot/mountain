@@ -26,11 +26,8 @@ namespace Mountain.classes {
             Port = 8090;
       //      portListener.StartServer(Port);
             string lastworld = settings.LastSavedWorld;
-            if (lastworld.IsNullOrWhiteSpace()) {
-                Load(null);
-            } else {
-                Load(null);
-            }
+            if (lastworld.IsNullOrWhiteSpace()) Load(null);
+            else Load(null);           
          //   StartHeart(); // activate world
         }
 
@@ -79,8 +76,8 @@ namespace Mountain.classes {
 
         public void CreateDefaultWorld() {
             Name = "Mountain";
-            base.ID = Guid.NewGuid();
-            base.Description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
+            ID = Guid.NewGuid();
+            Description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
                 "Keep your new world growing with us. \r\n" +
                 "Invest in Toetag Corporation's Life Insurance Policies and help make our gaming addition goals a viable solution. " +
                 "Become a gold member of our growing centers of excellence, do the right thing, " +
@@ -88,11 +85,11 @@ namespace Mountain.classes {
                 "Join today. (Please sign our body donor card and be entered in our annual Grisly Corpse Competition Awards ceremony. " +
                 "You could win a place on the top shelf of our Achievements of Horror vault that houses the very best souls of our society's " +
                 "most fascinating players.)\r\n";
-            this.CreateDefaultAdminArea();
+            CreateDefaultAdminArea();
         }
 
         private void CreateDefaultAdminArea() {
-            this.Areas.Add(Build.AdminArea(settings));
+            Areas.Add(Build.AdminArea(settings));
         }
 
         public void Save(string filename) {
@@ -108,12 +105,10 @@ namespace Mountain.classes {
             var task = Task.Factory.StartNew(() => {
                 while (true) {
                     cancellationToken.ThrowIfCancellationRequested();
-                    // do event ticks, 
-                    // do schedule checks, 
+                    // event ticks, 
+                    // schedule checks, 
                     // update time,
-                    // update weather
-                    // other stuff
-                    // possibly sleep(30) to give functions time to complete. 
+                    // update weather.. 
                 }
             }, cancellationToken);
             foreach (Area area in Areas) {
@@ -130,9 +125,7 @@ namespace Mountain.classes {
         public Room GetRoomByName(string name) {
             foreach (Area area in Areas) {
                 foreach (Room room in area.Rooms) {
-                    if (room.Name == name) {
-                        return room;
-                    }
+                    if (room.Name == name) return room;                    
                 }
             }
             return null;

@@ -4,7 +4,7 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes {
 
-    [Serializable()]
+    [Serializable]
     public class Identity {
         public string Name { get; set; }
         public string Description { get; set; }

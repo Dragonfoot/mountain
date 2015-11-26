@@ -38,14 +38,9 @@ namespace Mountain.classes.handlers {
         }
 
         public bool IsCommand(string verb) {
-            if (RoomCommands.Keys.Any(key => key.StartsWith(verb))) {
-                return true;
-            }
-            if (PlayerCommands.Keys.Any(key => key.StartsWith(verb))) {
-                return true;
-            }
+            if (RoomCommands.Keys.Any(key => key.StartsWith(verb))) return true;            
+            if (PlayerCommands.Keys.Any(key => key.StartsWith(verb))) return true;            
             return false;
         }
-
     } 
 }

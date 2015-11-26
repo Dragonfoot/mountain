@@ -14,7 +14,7 @@ namespace Mountain.classes.dataobjects {
             Name = name;
             Area = area;
         }
-        public RoomID() { // for xml serialization only
+        public RoomID() { // for serialization
         }
     }
 
@@ -26,10 +26,7 @@ namespace Mountain.classes.dataobjects {
 
         public LinkToID(string name, string linkDoorLabel, string area, Room room) : base(room.ID, name, area) {
             Room = room;
-            if (Name.IsNullOrWhiteSpace()){
-                if (name.IsNullOrWhiteSpace())
-                    Name = linkDoorLabel;
-            }
+            if (Name.IsNullOrWhiteSpace()) if (name.IsNullOrWhiteSpace()) Name = linkDoorLabel;            
             LinkDoorLabel = (!linkDoorLabel.IsNullOrWhiteSpace()) ? linkDoorLabel : name;
         }
 

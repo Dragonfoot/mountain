@@ -57,8 +57,7 @@ namespace Mountain.classes.functions {
 
         public static bool HasNameThatStartsWith(Array list, string name) {
             foreach(Identity item in list) {
-                if (item.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase))
-                    return true;
+                if (item.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase)) return true;
             }
             return false;
         }
@@ -108,7 +107,6 @@ namespace Mountain.classes.functions {
                     toRoom.AddExit(toExit);
                 }
             }
-        }        
-
+        }
     }
 }

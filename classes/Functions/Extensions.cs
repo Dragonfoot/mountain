@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using System.Linq;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
@@ -82,7 +81,7 @@ namespace Mountain.classes.functions {
             }
         }
 
-        #endregion genaric
+        #endregion generic
 
         #region strings
 
@@ -118,8 +117,7 @@ namespace Mountain.classes.functions {
             if (str.Length == 0) return false;
             foreach (char chr in str) {
                 if (!char.IsDigit(chr)) {
-                    if (floatPoint && (chr == '.'))
-                        continue;
+                    if (floatPoint && (chr == '.')) continue;
                     return false;
                 }
             }
@@ -129,8 +127,7 @@ namespace Mountain.classes.functions {
             return string.IsNullOrWhiteSpace(str);
         }
         public static bool HasValue(this string str) {
-            if (str.IsNullOrWhiteSpace())
-                return false;
+            if (str.IsNullOrWhiteSpace()) return false;
             return true;
         }
         public static string Camelize(this string str) { // return camel-case words in string ie: "joe moe" = "JoeMoe"
@@ -138,9 +135,7 @@ namespace Mountain.classes.functions {
         }
         public static string FirstWord(this string str) { // gets the first word of a sentence
             str = str.TrimStart(' ');
-            if (str.WordCount() > 1) {
-                return str.Substring(0, str.IndexOf(" "));
-            }
+            if (str.WordCount() > 1) return str.Substring(0, str.IndexOf(" "));            
             return str;
         }
         public static char FirstChar(this string str) { // get the first char of string
@@ -148,10 +143,7 @@ namespace Mountain.classes.functions {
         }
         public static bool FirstWordIsSingleChar(this string str) {  // as in is the first word i for inventory, ' for say.. 
             if (str.Length == 1) return true;
-            if (str.Length > 1) {
-                if (str[1] == ' ')
-                    return true;
-            }
+            if (str.Length > 1) if (str[1] == ' ') return true;            
             return false;
         }
         public static string StripFirstChar(this string str) {
@@ -164,9 +156,7 @@ namespace Mountain.classes.functions {
             return Char.IsPunctuation(str[str.Length - 1]);
         }
         public static string StripFirstWord(this string str) { // returns all but the first word
-            if (str.WordCount() > 1) {
-                return str.Substring(str.FirstWordLength()).Trim();
-            }
+            if (str.WordCount() > 1) return str.Substring(str.FirstWordLength()).Trim();            
             return "";
         }
         public static int WordCount(this string str) {
@@ -205,9 +195,7 @@ namespace Mountain.classes.functions {
                 }
                 buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);  // remove space at start of new line
             }
-            if (buildLine.Length > 0) {
-                lines.Append(buildLine.ToString().Indent().NewLine());   // finish up, final words to append
-            }
+            if (buildLine.Length > 0) lines.Append(buildLine.ToString().Indent().NewLine());   // finish up, final words to append            
             return lines.ToString();
         }
 

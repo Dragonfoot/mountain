@@ -4,7 +4,6 @@ namespace Mountain.classes.dataobjects {
 
     public enum PacketType { data, command, activity, callback, verb, system };
     public enum EventType { unknown, connection, disconnected, idle, login }
-
   
     public class Packet  {
         public PacketType packetType;
@@ -12,6 +11,7 @@ namespace Mountain.classes.dataobjects {
         public string parameter;
         public bool known;
         public Connection Client;
+
         public Packet(string verb, string parameter, Connection client) {
             packetType = PacketType.verb;
             this.verb = verb;
@@ -30,7 +30,7 @@ namespace Mountain.classes.dataobjects {
             packetType = PacketType.system;
             this.eventType = eventType;
             this.message = message;
-            this.Client = client;
+            Client = client;
         }
     }
 

@@ -21,9 +21,5 @@ namespace Mountain.classes.collections {
             Packet packet;
             return (queue.TryDequeue(out packet)) ? packet : null;
         }
-
-    }
-
-    public class GeneralEventQueue {
     }
 }

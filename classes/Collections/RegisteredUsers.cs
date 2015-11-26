@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Serialization;
 using System.Linq;
 using Mountain.classes.dataobjects;
 
@@ -46,8 +45,7 @@ namespace Mountain.classes.collections {
 
         public void Remove(string name) {
             int index = List.FindIndex(player => player.Name == name);
-            if (index >= 0)
-                List.RemoveAt(index);
+            if (index >= 0) List.RemoveAt(index);
         }
 
         public IEnumerator<Account> GetEnumerator() {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Drawing;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Mountain.classes;
@@ -21,10 +20,6 @@ namespace Mountain.Dialogs {
         string name, description;
 
         public RoomForm(Room room, ApplicationSettings settings) {
-        //    GlobalMouseHandler gmh = new GlobalMouseHandler();
-        //    gmh.TheMouseMoved += new MouseMovedEvent(gmh_TheMouseMoved);
-        //    Application.AddMessageFilter(gmh);
-
             InitializeComponent();
 
             roomCheckBoxList = new List<CheckBox>();
@@ -76,11 +71,8 @@ namespace Mountain.Dialogs {
         }
 
         private void PopulateExitListBox(List<Exit> list) {
-            foreach (Exit exit in list) {
-                exitListBox.Items.Add(exit.Name);
-            }
-            if (list.Count > 0)
-                exitListBox.SelectedIndex = 0;
+            foreach (Exit exit in list) exitListBox.Items.Add(exit.Name);            
+            if (list.Count > 0) exitListBox.SelectedIndex = 0;
         }
 
         private string GetRoomTypeFlaggedList(roomItem roomItem) {
@@ -156,10 +148,8 @@ namespace Mountain.Dialogs {
                 Exit exit = room.Exits.Find(e => e.Name == exitName);
                 string areaName = exit.LinkID.Room.Area.Name;
                 int index = exitLinkToAreaComboBox.Items.IndexOf(areaName);
-                if (index > -1)
-                    exitLinkToAreaComboBox.SelectedIndex = index;
-                else
-                    exitLinkToAreaComboBox.SelectedIndex = 0;
+                if (index > -1) exitLinkToAreaComboBox.SelectedIndex = index;
+                else exitLinkToAreaComboBox.SelectedIndex = 0;
             }
         }
         private void PopulateRoomComboBox() {
@@ -187,12 +177,9 @@ namespace Mountain.Dialogs {
                     return;
                 }
                 int index = exitLinkToRoomComboBox.Items.IndexOf(SelectedExit.parent.Name);  
-                if (index > -1)
-                    exitLinkToRoomComboBox.SelectedIndex = index;
-                else
-                    exitLinkToRoomComboBox.SelectedIndex = 0;
+                if (index > -1) exitLinkToRoomComboBox.SelectedIndex = index;
+                else exitLinkToRoomComboBox.SelectedIndex = 0;
             }
-
         }
 
         private void directionalCheckBox_CheckedChanged(object sender, EventArgs e) {
@@ -252,14 +239,12 @@ namespace Mountain.Dialogs {
 
         }
 
-
         private void exitListBox_SelectedIndexChanged(object sender, EventArgs e) {
             SelectedExit = room.Exits.Find((room => room.Name == (string)exitListBox.SelectedItem));
         }
 
         private void exitListBox_MouseDown(object sender, MouseEventArgs e) {
-            if (e.Button != MouseButtons.Right)
-                return;
+            if (e.Button != MouseButtons.Right) return;
             var index = exitListBox.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches) {
                 exitListBox.SelectedIndex = index;
@@ -311,13 +296,8 @@ namespace Mountain.Dialogs {
             if (descriptionTextBox.Text != description && descriptionChanged != true)
                 descriptionChanged = true;
         }
-
-        
-    
-
        
-        // RoomType CheckEnum events
-    
+        // RoomType CheckEnum events    
 
         private void roomTypeTextBox_KeyDown(object sender, KeyEventArgs e) {
             e.Handled = !e.Alt && !(e.KeyCode == Keys.Tab) &&
@@ -333,9 +313,6 @@ namespace Mountain.Dialogs {
             base.OnKeyPress(e);
         }
 
-        private void roomTypeTextBox_MouseDown(object sender, MouseEventArgs e) {
-        }
-
         private void PressCheckBox(roomItem item) {
             foreach (CheckBox control in roomCheckBoxList) {
                 if (((roomItem)control.Tag) == item)
@@ -348,7 +325,6 @@ namespace Mountain.Dialogs {
         private void roomTypeCheckBox_CheckedChanged(object sender, EventArgs e) {
             if (roomTypeCheckBox.Checked) {
                 PressCheckBox(roomItem.roomType);
-
                 if (roomTypeCheckEnum.Visible) {
                     roomTypeCheckEnum.Visible = false;
                     GetRoomTypeFlaggedList(roomItem.roomType);
@@ -363,16 +339,13 @@ namespace Mountain.Dialogs {
                 foreach (int key in dictionary.Keys) {
                     string name = dictionary[key];
                     roomTypeCheckEnum.Items.Add(name);
-                    if (room.roomType.HasFlag((roomType)key)) {
-                        roomTypeCheckEnum.SetItemChecked(i, true);
-                    }
+                    if (room.roomType.HasFlag((roomType)key)) roomTypeCheckEnum.SetItemChecked(i, true);                    
                     i++;
                 }
 
                 GetRoomTypeFlaggedList(roomItem.roomType);
 
-                if (roomTypeCheckEnum.Items.Count > 1)
-                    roomTypeCheckEnum.SetItemChecked(0, false);
+                if (roomTypeCheckEnum.Items.Count > 1) roomTypeCheckEnum.SetItemChecked(0, false);
                 roomTypeCheckEnum.Height = roomTypeCheckEnum.Items.Count * 16 + 2;
                 roomTypeCheckEnum.Location = showAt;
                 roomTypeCheckEnum.Visible = true;
@@ -380,13 +353,11 @@ namespace Mountain.Dialogs {
         }
 
         private void roomLimitCheckBox_CheckedChanged(object sender, EventArgs e) {
-            if (roomLimitCheckBox.Checked)
-                PressCheckBox(roomItem.roomLimits);
+            if (roomLimitCheckBox.Checked) PressCheckBox(roomItem.roomLimits);
         }
 
         private void roomTraitsCheckBox_CheckedChanged(object sender, EventArgs e) {
-            if (roomTraitsCheckBox.Checked)
-                PressCheckBox(roomItem.roomTraits);
+            if (roomTraitsCheckBox.Checked) PressCheckBox(roomItem.roomTraits);
         }
 
         // end ***********************************
@@ -413,45 +384,13 @@ namespace Mountain.Dialogs {
         }
 
         private void openExitDoorCheckBox_CheckedChanged(object sender, EventArgs e) {
-            if (openCheckBox.Checked)
-                openCheckBox.Text = "Closed";
-            else
-                openCheckBox.Text = "Open";
+            if (openCheckBox.Checked) openCheckBox.Text = "Closed";
+            else openCheckBox.Text = "Open";
         }
 
         private void hiddenExitDoorCheckBox_CheckedChanged(object sender, EventArgs e) {
-            if (exitHiddenDoorCheckBox.Checked)
-                exitHiddenDoorCheckBox.Text = "Hidden";
-            else
-                exitHiddenDoorCheckBox.Text = "Visible";
+            if (exitHiddenDoorCheckBox.Checked) exitHiddenDoorCheckBox.Text = "Hidden";
+            else exitHiddenDoorCheckBox.Text = "Visible";
         }
-    //    void gmh_TheMouseMoved() {
-    //        Point cur_pos = System.Windows.Forms.Cursor.Position;
-    //        Debug.WriteLine(cur_pos);
-    //    }
-
-
-    }
-    public delegate void MouseMovedEvent();
-
-    public class GlobalMouseHandler : IMessageFilter {
-        private const int WM_MOUSEMOVE = 0x0200;
-        private const int WM_MOUSEACTIVATE = 0x21;
-
-        public event MouseMovedEvent TheMouseMoved;
-
-        #region IMessageFilter Members
-
-        public bool PreFilterMessage(ref Message m) {
-            if (m.Msg == WM_MOUSEACTIVATE) {
-                if (TheMouseMoved != null) {
-                    TheMouseMoved();
-                }
-            }
-            // Always allow message to continue to the next filter control
-            return false;
-        }
-
-        #endregion
     }
 }

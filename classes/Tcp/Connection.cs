@@ -55,8 +55,7 @@ namespace Mountain.classes.tcp {
             StartReceiving();
         }
         
-        public Connection() {
-            // for xml serialization only
+        public Connection() { // for xml serialization only
         }
         protected void StartReceiving() {
             SystemEventPacket packet = new SystemEventPacket(EventType.connection, "New Connection begun from " + this.IPAddress.ToString(), this);
@@ -119,11 +118,10 @@ namespace Mountain.classes.tcp {
         }
 
         public void Send(string data, bool indent = true) {
-            if (indent) { data = data.Indent(); }
+            if (indent) data = data.Indent(); 
             byte[] byteData = Encoding.ASCII.GetBytes(data);
             try {
-                if (state.Socket.Client == null)
-                    return;
+                if (state.Socket.Client == null) return;
                 state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
             } catch (SocketException) {
                 return;
@@ -131,8 +129,7 @@ namespace Mountain.classes.tcp {
         }
 
         private void SendCallback(IAsyncResult ar) {
-            if (state.Socket.Client == null)
-                return;
+            if (state.Socket.Client == null) return;
             try {
                 int bytesSent = state.Socket.Client.EndSend(ar);
                 MessageSentDone.Set(); // tell parent thread we're finished
@@ -143,7 +140,6 @@ namespace Mountain.classes.tcp {
         }
 
         public void Shutdown() {
-           // Send("Shutdown process... now.".Ansi(Ansi.yellow), false);
             Socket.Client.Shutdown(SocketShutdown.Both);
             Socket.Close();
             Save();
@@ -168,8 +164,7 @@ namespace Mountain.classes.tcp {
 
 
     }
-
-    // data container passed between threads
+    
     public class StateObject {  
         private const int BUFFER_SIZE = 1024;
         public byte[] Buffer = new byte[BUFFER_SIZE];

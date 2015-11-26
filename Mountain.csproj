@@ -90,7 +90,6 @@
     <Compile Include="classes\Handlers\AdminHandler.cs" />
     <Compile Include="classes\DataObjects\Equipment.cs" />
     <Compile Include="classes\DataObjects\Account.cs" />
-    <Compile Include="classes\DataObjects\Attribute.cs" />
     <Compile Include="classes\Functions\Build.cs" />
     <Compile Include="classes\DataObjects\Ansi.cs" />
     <Compile Include="classes\Handlers\Dispatch.cs" />

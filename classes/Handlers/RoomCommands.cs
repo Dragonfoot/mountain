@@ -78,23 +78,19 @@ namespace Mountain.classes.handlers {
             packet.Client.Send(response.Ansi(Style.white).WordWrap(), false);
 
             names = Functions.GetNames(packet.Client.Room.Exits.ToArray());
-            if (names != string.Empty)
-                response = "Obvious exits: " + names;
-            else
-                response = "No obvious exits.";
+            if (names != string.Empty) response = "Obvious exits: " + names;
+            else response = "No obvious exits.";
 
             packet.Client.Send(response.Ansi(Style.green).NewLine());
 
             names = string.Empty;
             if (packet.Client.Room.Players.Count > 1) {
                 names = Functions.GetOtherNames(packet.Client.Room.Players.ToArray(), packet.Client.Account.Name);
-                if (names != string.Empty)
-                    packet.Client.Send("You see:" + names.Ansi(true, Style.cyan, Style.boldOn).WordWrap().NewLine());
+                if (names != string.Empty) packet.Client.Send("You see:" + names.Ansi(true, Style.cyan, Style.boldOn).WordWrap().NewLine());
             }
 
             names = Functions.GetNames(packet.Client.Room.Mobs.ToArray());
-            if (names != string.Empty)
-                packet.Client.Send("You see:" + names.Ansi(Style.green).NewLine());
+            if (names != string.Empty) packet.Client.Send("You see:" + names.Ansi(Style.green).NewLine());
             // add items
         }
 

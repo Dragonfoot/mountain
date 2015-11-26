@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Net;
-using System.Xml.Serialization;
 using System.Net.Sockets;
 using System.Threading;
-using Mountain.classes.functions;
 
 namespace Mountain.classes.tcp {
-
-    // listen for and accept connection requests
+    
     public class TcpServerListener {
-        [XmlIgnore]
         protected AutoResetEvent connectionWaitDone;
         public TcpListenerActive tcpListener;
         public int Port;
-        [XmlIgnore]
         World world;
-        [XmlIgnore]
         ApplicationSettings settings;
 
         public TcpServerListener(World world, ApplicationSettings appSettings) {
@@ -60,7 +54,5 @@ namespace Mountain.classes.tcp {
                 tcpListener = null;
             }
         }
-
-
     }
 }
