@@ -35,6 +35,7 @@ namespace Mountain.classes.dataobjects {
                 "You don't remember what happened the last time you wanted to %%?",
                 "Alright.. %%.. sure.. let me find my magic what's-it-wonder-wand first though, OK?",
                 "I'm just not gonna do %% for you. Nope, no way.",
+                "%% should really come with a warning label.",
                 "%% - Now that's just plain silly. Stop messing with me!..go away even!!..*sigh*...let me put something on first then.",
                 "%% - Maybe, if you started treating me like the god I am, I'd find a way to actually do this really weird request.",
                 "%% - Humph.. I see typing isn't one of our strong suits.",
@@ -60,6 +61,7 @@ namespace Mountain.classes.dataobjects {
                 "%% - You did say you went to school right? School of lazy fingered typists?",
                 "%% - I wish I could put some people on mute.",
                 "%% - How about never? Is never good for you?",
+                "%% - Was that a fart? It made no scents to me.",
                 "%% - You are validating my inherent mistrust of strangers with that.",
                 "%% - Yeah, sometimes I talk to myself too, but usually only when I need expert advice.",
                 "%% - Now that word there reminds me.. you know.. about.. a push up bra is like a bag of chips, you open it and it's half empty. Yeah, I see you scratch your head over it too."};

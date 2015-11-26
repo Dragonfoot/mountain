@@ -8,6 +8,7 @@ using Mountain.classes.collections;
 
 namespace Mountain.classes {
 
+    [Serializable()]
     [XmlRoot]
     public class Area : Identity {
         [XmlArray("Rooms")] public Rooms Rooms { get; private set; }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
 using Mountain.classes.Items;
@@ -25,9 +27,12 @@ namespace Mountain.classes {
         [XmlIgnore] public RoomID RoomID;
         [XmlIgnore] public Area Area { get { return area; } set { RoomID.Area = value.Name; area = value; } }
         private Area area;
-        protected GeneralEventQueue Events;
+        public string shortDescription { get; set; }
         public roomType roomType { get; set; }
+        public roomRestrictionType roomRestrictons { get; set; }
+        public roomConditionType roomConditions { get; set; }
         public string Tag { get; set; }
+        protected GeneralEventQueue Events;
         [XmlArray("Links")] public List<Exit> Exits { get; set; }
 
         public Room(ApplicationSettings appSettings, Area area) {
@@ -119,16 +124,17 @@ namespace Mountain.classes {
         }
 
         public void AddExit(Exit exit) {
-            this.Exits.Add(exit);
+            exit.parent = this;
+            Exits.Add(exit);
         }
 
         public void AddMob(Mob mob) {
-            this.Mobs.Add(mob);
+            Mobs.Add(mob);
             // a mob just arrived...
         }
 
         public void AddPlayer(Connection player) {
-            this.Players.Add(player);
+            Players.Add(player);
             player.Room = this;
             player.Account.RoomID = RoomID;
         }

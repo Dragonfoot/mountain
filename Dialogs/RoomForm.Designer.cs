@@ -1,4 +1,7 @@
-﻿namespace Mountain.Dialogs {
+﻿using Mountain.classes.controls;
+
+
+namespace Mountain.Dialogs {
 
     partial class RoomForm {
         /// <summary>
@@ -24,29 +27,38 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.exitsGroupBox = new System.Windows.Forms.GroupBox();
-            this.linkToAreaComboBox = new System.Windows.Forms.ComboBox();
-            this.inkToRoomComboBox = new System.Windows.Forms.ComboBox();
+            this.exitLinkToAreaComboBox = new System.Windows.Forms.ComboBox();
+            this.exitLinkToRoomComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.linkTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.exitLinkTypeComboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.exitListBox = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.RestrictionsCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.directionTextBox = new System.Windows.Forms.TextBox();
-            this.directionalComboBox = new System.Windows.Forms.ComboBox();
-            this.lockTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.restrictionCheckBox = new System.Windows.Forms.CheckBox();
-            this.directionalCheckBox = new System.Windows.Forms.CheckBox();
-            this.hasLockCheckBox = new System.Windows.Forms.CheckBox();
-            this.doorCheckBox = new System.Windows.Forms.CheckBox();
+            this.exitDoorDirectionTextBox = new System.Windows.Forms.TextBox();
+            this.exitDoorDirectionalComboBox = new System.Windows.Forms.ComboBox();
+            this.exitDoorLockTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.exitDoorRestrictionCheckBox = new System.Windows.Forms.CheckBox();
+            this.exitDoorDirectionalCheckBox = new System.Windows.Forms.CheckBox();
+            this.exitDoorHasLockCheckBox = new System.Windows.Forms.CheckBox();
+            this.exitDoorCheckBox = new System.Windows.Forms.CheckBox();
             this.openCheckBox = new System.Windows.Forms.CheckBox();
-            this.hiddenCheckBox = new System.Windows.Forms.CheckBox();
+            this.exitHiddenDoorCheckBox = new System.Windows.Forms.CheckBox();
             this.identityGroupBox = new System.Windows.Forms.GroupBox();
+            this.roomTraitsCheckBox = new System.Windows.Forms.CheckBox();
+            this.roomLimitCheckBox = new System.Windows.Forms.CheckBox();
+            this.roomTypeCheckBox = new System.Windows.Forms.CheckBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.roomLimitsTextBox = new System.Windows.Forms.TextBox();
+            this.roomTypeTextBox = new System.Windows.Forms.TextBox();
+            this.shortDescriptonTextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tagTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.areaLabel = new System.Windows.Forms.Label();
-            this.guidLabel = new System.Windows.Forms.Label();
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -73,11 +85,20 @@
             this.toWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OKButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.exitContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.templateToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.roomTypeCheckEnum = new CheckEnum();
             this.panel1.SuspendLayout();
             this.exitsGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.identityGroupBox.SuspendLayout();
             this.buildMenuStrip.SuspendLayout();
+            this.exitContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -87,252 +108,351 @@
             this.panel1.Controls.Add(this.identityGroupBox);
             this.panel1.Location = new System.Drawing.Point(24, 43);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(692, 342);
+            this.panel1.Size = new System.Drawing.Size(871, 395);
             this.panel1.TabIndex = 0;
             // 
             // exitsGroupBox
             // 
-            this.exitsGroupBox.Controls.Add(this.linkToAreaComboBox);
-            this.exitsGroupBox.Controls.Add(this.inkToRoomComboBox);
+            this.exitsGroupBox.Controls.Add(this.exitLinkToAreaComboBox);
+            this.exitsGroupBox.Controls.Add(this.exitLinkToRoomComboBox);
             this.exitsGroupBox.Controls.Add(this.label3);
-            this.exitsGroupBox.Controls.Add(this.linkTypeComboBox);
+            this.exitsGroupBox.Controls.Add(this.exitLinkTypeComboBox);
             this.exitsGroupBox.Controls.Add(this.label5);
             this.exitsGroupBox.Controls.Add(this.label4);
             this.exitsGroupBox.Controls.Add(this.exitListBox);
             this.exitsGroupBox.Controls.Add(this.groupBox2);
-            this.exitsGroupBox.Location = new System.Drawing.Point(288, 16);
+            this.exitsGroupBox.Location = new System.Drawing.Point(427, 16);
             this.exitsGroupBox.Name = "exitsGroupBox";
-            this.exitsGroupBox.Size = new System.Drawing.Size(379, 305);
+            this.exitsGroupBox.Size = new System.Drawing.Size(422, 360);
             this.exitsGroupBox.TabIndex = 1;
             this.exitsGroupBox.TabStop = false;
             this.exitsGroupBox.Text = "Exits";
             // 
-            // linkToAreaComboBox
+            // exitLinkToAreaComboBox
             // 
-            this.linkToAreaComboBox.FormattingEnabled = true;
-            this.linkToAreaComboBox.Location = new System.Drawing.Point(237, 88);
-            this.linkToAreaComboBox.Name = "linkToAreaComboBox";
-            this.linkToAreaComboBox.Size = new System.Drawing.Size(121, 21);
-            this.linkToAreaComboBox.TabIndex = 12;
+            this.exitLinkToAreaComboBox.FormattingEnabled = true;
+            this.exitLinkToAreaComboBox.Location = new System.Drawing.Point(243, 59);
+            this.exitLinkToAreaComboBox.Name = "exitLinkToAreaComboBox";
+            this.exitLinkToAreaComboBox.Size = new System.Drawing.Size(161, 21);
+            this.exitLinkToAreaComboBox.TabIndex = 12;
             // 
-            // inkToRoomComboBox
+            // exitLinkToRoomComboBox
             // 
-            this.inkToRoomComboBox.FormattingEnabled = true;
-            this.inkToRoomComboBox.Location = new System.Drawing.Point(237, 58);
-            this.inkToRoomComboBox.Name = "inkToRoomComboBox";
-            this.inkToRoomComboBox.Size = new System.Drawing.Size(121, 21);
-            this.inkToRoomComboBox.TabIndex = 11;
-            this.inkToRoomComboBox.Text = "Link To";
+            this.exitLinkToRoomComboBox.FormattingEnabled = true;
+            this.exitLinkToRoomComboBox.Location = new System.Drawing.Point(243, 89);
+            this.exitLinkToRoomComboBox.Name = "exitLinkToRoomComboBox";
+            this.exitLinkToRoomComboBox.Size = new System.Drawing.Size(161, 21);
+            this.exitLinkToRoomComboBox.TabIndex = 11;
+            this.exitLinkToRoomComboBox.SelectedIndexChanged += new System.EventHandler(this.exitLinkToRoomComboBox_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 62);
+            this.label3.Location = new System.Drawing.Point(186, 93);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Room";
+            this.label3.Text = "To Room";
             // 
-            // linkTypeComboBox
+            // exitLinkTypeComboBox
             // 
-            this.linkTypeComboBox.FormattingEnabled = true;
-            this.linkTypeComboBox.Location = new System.Drawing.Point(237, 28);
-            this.linkTypeComboBox.Name = "linkTypeComboBox";
-            this.linkTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.linkTypeComboBox.TabIndex = 9;
-            this.linkTypeComboBox.Text = "Link Type";
+            this.exitLinkTypeComboBox.FormattingEnabled = true;
+            this.exitLinkTypeComboBox.Location = new System.Drawing.Point(243, 29);
+            this.exitLinkTypeComboBox.Name = "exitLinkTypeComboBox";
+            this.exitLinkTypeComboBox.Size = new System.Drawing.Size(161, 21);
+            this.exitLinkTypeComboBox.TabIndex = 9;
+            this.exitLinkTypeComboBox.Text = "Exit Type";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(194, 91);
+            this.label5.Location = new System.Drawing.Point(186, 63);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 7;
-            this.label5.Text = "Area";
+            this.label5.Text = "Link Area";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(194, 32);
+            this.label4.Location = new System.Drawing.Point(186, 33);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.Size = new System.Drawing.Size(51, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Type";
+            this.label4.Text = "Exit Type";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // exitListBox
             // 
             this.exitListBox.FormattingEnabled = true;
-            this.exitListBox.Location = new System.Drawing.Point(23, 28);
+            this.exitListBox.Location = new System.Drawing.Point(17, 28);
             this.exitListBox.Name = "exitListBox";
             this.exitListBox.Size = new System.Drawing.Size(164, 82);
             this.exitListBox.TabIndex = 3;
+            this.exitListBox.SelectedIndexChanged += new System.EventHandler(this.exitListBox_SelectedIndexChanged);
+            this.exitListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.exitListBox_MouseDown);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.RestrictionsCheckedListBox);
-            this.groupBox2.Controls.Add(this.directionTextBox);
-            this.groupBox2.Controls.Add(this.directionalComboBox);
-            this.groupBox2.Controls.Add(this.lockTypeComboBox);
-            this.groupBox2.Controls.Add(this.restrictionCheckBox);
-            this.groupBox2.Controls.Add(this.directionalCheckBox);
-            this.groupBox2.Controls.Add(this.hasLockCheckBox);
-            this.groupBox2.Controls.Add(this.doorCheckBox);
+            this.groupBox2.Controls.Add(this.exitDoorDirectionTextBox);
+            this.groupBox2.Controls.Add(this.exitDoorDirectionalComboBox);
+            this.groupBox2.Controls.Add(this.exitDoorLockTypeComboBox);
+            this.groupBox2.Controls.Add(this.exitDoorRestrictionCheckBox);
+            this.groupBox2.Controls.Add(this.exitDoorDirectionalCheckBox);
+            this.groupBox2.Controls.Add(this.exitDoorHasLockCheckBox);
+            this.groupBox2.Controls.Add(this.exitDoorCheckBox);
             this.groupBox2.Controls.Add(this.openCheckBox);
-            this.groupBox2.Controls.Add(this.hiddenCheckBox);
-            this.groupBox2.Location = new System.Drawing.Point(23, 136);
+            this.groupBox2.Controls.Add(this.exitHiddenDoorCheckBox);
+            this.groupBox2.Location = new System.Drawing.Point(17, 128);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(335, 154);
+            this.groupBox2.Size = new System.Drawing.Size(387, 219);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Attributes";
             // 
-            // RestrictionsCheckedListBox
+            // exitDoorDirectionTextBox
             // 
-            this.RestrictionsCheckedListBox.CheckOnClick = true;
-            this.RestrictionsCheckedListBox.FormattingEnabled = true;
-            this.RestrictionsCheckedListBox.Location = new System.Drawing.Point(90, 67);
-            this.RestrictionsCheckedListBox.Name = "RestrictionsCheckedListBox";
-            this.RestrictionsCheckedListBox.Size = new System.Drawing.Size(72, 79);
-            this.RestrictionsCheckedListBox.TabIndex = 20;
-            this.RestrictionsCheckedListBox.ThreeDCheckBoxes = true;
+            this.exitDoorDirectionTextBox.Location = new System.Drawing.Point(142, 43);
+            this.exitDoorDirectionTextBox.Name = "exitDoorDirectionTextBox";
+            this.exitDoorDirectionTextBox.Size = new System.Drawing.Size(117, 20);
+            this.exitDoorDirectionTextBox.TabIndex = 19;
             // 
-            // directionTextBox
+            // exitDoorDirectionalComboBox
             // 
-            this.directionTextBox.Location = new System.Drawing.Point(150, 43);
-            this.directionTextBox.Name = "directionTextBox";
-            this.directionTextBox.Size = new System.Drawing.Size(173, 20);
-            this.directionTextBox.TabIndex = 19;
+            this.exitDoorDirectionalComboBox.FormattingEnabled = true;
+            this.exitDoorDirectionalComboBox.Location = new System.Drawing.Point(163, 43);
+            this.exitDoorDirectionalComboBox.Name = "exitDoorDirectionalComboBox";
+            this.exitDoorDirectionalComboBox.Size = new System.Drawing.Size(70, 21);
+            this.exitDoorDirectionalComboBox.TabIndex = 17;
+            this.exitDoorDirectionalComboBox.Text = "Direction";
+            this.exitDoorDirectionalComboBox.Visible = false;
+            this.exitDoorDirectionalComboBox.SelectedIndexChanged += new System.EventHandler(this.directionalComboBox_SelectedIndexChanged);
             // 
-            // directionalComboBox
+            // exitDoorLockTypeComboBox
             // 
-            this.directionalComboBox.FormattingEnabled = true;
-            this.directionalComboBox.Location = new System.Drawing.Point(163, 43);
-            this.directionalComboBox.Name = "directionalComboBox";
-            this.directionalComboBox.Size = new System.Drawing.Size(70, 21);
-            this.directionalComboBox.TabIndex = 17;
-            this.directionalComboBox.Text = "Direction";
-            this.directionalComboBox.Visible = false;
-            this.directionalComboBox.SelectedIndexChanged += new System.EventHandler(this.directionalComboBox_SelectedIndexChanged);
+            this.exitDoorLockTypeComboBox.FormattingEnabled = true;
+            this.exitDoorLockTypeComboBox.Location = new System.Drawing.Point(194, 22);
+            this.exitDoorLockTypeComboBox.Name = "exitDoorLockTypeComboBox";
+            this.exitDoorLockTypeComboBox.Size = new System.Drawing.Size(65, 21);
+            this.exitDoorLockTypeComboBox.TabIndex = 16;
+            this.exitDoorLockTypeComboBox.Text = "Lock Type";
+            this.exitDoorLockTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.lockTypeComboBox_SelectedIndexChanged);
             // 
-            // lockTypeComboBox
+            // exitDoorRestrictionCheckBox
             // 
-            this.lockTypeComboBox.FormattingEnabled = true;
-            this.lockTypeComboBox.Location = new System.Drawing.Point(205, 20);
-            this.lockTypeComboBox.Name = "lockTypeComboBox";
-            this.lockTypeComboBox.Size = new System.Drawing.Size(65, 21);
-            this.lockTypeComboBox.TabIndex = 16;
-            this.lockTypeComboBox.Text = "Lock Type";
-            this.lockTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.lockTypeComboBox_SelectedIndexChanged);
+            this.exitDoorRestrictionCheckBox.AutoSize = true;
+            this.exitDoorRestrictionCheckBox.Location = new System.Drawing.Point(14, 67);
+            this.exitDoorRestrictionCheckBox.Name = "exitDoorRestrictionCheckBox";
+            this.exitDoorRestrictionCheckBox.Size = new System.Drawing.Size(121, 17);
+            this.exitDoorRestrictionCheckBox.TabIndex = 15;
+            this.exitDoorRestrictionCheckBox.Text = "Unrestricted Access";
+            this.exitDoorRestrictionCheckBox.UseVisualStyleBackColor = true;
+            this.exitDoorRestrictionCheckBox.CheckedChanged += new System.EventHandler(this.restrictionCheckBox_CheckedChanged);
             // 
-            // restrictionCheckBox
+            // exitDoorDirectionalCheckBox
             // 
-            this.restrictionCheckBox.AutoSize = true;
-            this.restrictionCheckBox.Location = new System.Drawing.Point(14, 67);
-            this.restrictionCheckBox.Name = "restrictionCheckBox";
-            this.restrictionCheckBox.Size = new System.Drawing.Size(85, 17);
-            this.restrictionCheckBox.TabIndex = 15;
-            this.restrictionCheckBox.Text = "Free Access";
-            this.restrictionCheckBox.UseVisualStyleBackColor = true;
-            this.restrictionCheckBox.CheckedChanged += new System.EventHandler(this.restrictionCheckBox_CheckedChanged);
+            this.exitDoorDirectionalCheckBox.AutoSize = true;
+            this.exitDoorDirectionalCheckBox.Location = new System.Drawing.Point(84, 46);
+            this.exitDoorDirectionalCheckBox.Name = "exitDoorDirectionalCheckBox";
+            this.exitDoorDirectionalCheckBox.Size = new System.Drawing.Size(52, 17);
+            this.exitDoorDirectionalCheckBox.TabIndex = 14;
+            this.exitDoorDirectionalCheckBox.Text = "Label";
+            this.exitDoorDirectionalCheckBox.UseVisualStyleBackColor = true;
+            this.exitDoorDirectionalCheckBox.CheckedChanged += new System.EventHandler(this.directionalCheckBox_CheckedChanged);
             // 
-            // directionalCheckBox
+            // exitDoorHasLockCheckBox
             // 
-            this.directionalCheckBox.AutoSize = true;
-            this.directionalCheckBox.Location = new System.Drawing.Point(87, 44);
-            this.directionalCheckBox.Name = "directionalCheckBox";
-            this.directionalCheckBox.Size = new System.Drawing.Size(52, 17);
-            this.directionalCheckBox.TabIndex = 14;
-            this.directionalCheckBox.Text = "Label";
-            this.directionalCheckBox.UseVisualStyleBackColor = true;
-            this.directionalCheckBox.CheckedChanged += new System.EventHandler(this.directionalCheckBox_CheckedChanged);
+            this.exitDoorHasLockCheckBox.AutoSize = true;
+            this.exitDoorHasLockCheckBox.Location = new System.Drawing.Point(143, 24);
+            this.exitDoorHasLockCheckBox.Name = "exitDoorHasLockCheckBox";
+            this.exitDoorHasLockCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.exitDoorHasLockCheckBox.TabIndex = 10;
+            this.exitDoorHasLockCheckBox.Text = "No Lock";
+            this.exitDoorHasLockCheckBox.UseVisualStyleBackColor = true;
+            this.exitDoorHasLockCheckBox.CheckedChanged += new System.EventHandler(this.hasLockCheckBox_CheckedChanged);
             // 
-            // hasLockCheckBox
+            // exitDoorCheckBox
             // 
-            this.hasLockCheckBox.AutoSize = true;
-            this.hasLockCheckBox.Location = new System.Drawing.Point(150, 21);
-            this.hasLockCheckBox.Name = "hasLockCheckBox";
-            this.hasLockCheckBox.Size = new System.Drawing.Size(67, 17);
-            this.hasLockCheckBox.TabIndex = 10;
-            this.hasLockCheckBox.Text = "No Lock";
-            this.hasLockCheckBox.UseVisualStyleBackColor = true;
-            this.hasLockCheckBox.CheckedChanged += new System.EventHandler(this.hasLockCheckBox_CheckedChanged);
-            // 
-            // doorCheckBox
-            // 
-            this.doorCheckBox.AutoSize = true;
-            this.doorCheckBox.Location = new System.Drawing.Point(14, 21);
-            this.doorCheckBox.Name = "doorCheckBox";
-            this.doorCheckBox.Size = new System.Drawing.Size(67, 17);
-            this.doorCheckBox.TabIndex = 9;
-            this.doorCheckBox.Text = "Doorless";
-            this.doorCheckBox.UseVisualStyleBackColor = true;
-            this.doorCheckBox.CheckedChanged += new System.EventHandler(this.doorCheckBox_CheckedChanged);
+            this.exitDoorCheckBox.AutoSize = true;
+            this.exitDoorCheckBox.Location = new System.Drawing.Point(14, 21);
+            this.exitDoorCheckBox.Name = "exitDoorCheckBox";
+            this.exitDoorCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.exitDoorCheckBox.TabIndex = 9;
+            this.exitDoorCheckBox.Text = "Doorless";
+            this.exitDoorCheckBox.UseVisualStyleBackColor = true;
+            this.exitDoorCheckBox.CheckedChanged += new System.EventHandler(this.doorCheckBox_CheckedChanged);
             // 
             // openCheckBox
             // 
             this.openCheckBox.AutoSize = true;
-            this.openCheckBox.Location = new System.Drawing.Point(87, 21);
+            this.openCheckBox.Location = new System.Drawing.Point(84, 23);
             this.openCheckBox.Name = "openCheckBox";
             this.openCheckBox.Size = new System.Drawing.Size(52, 17);
             this.openCheckBox.TabIndex = 8;
             this.openCheckBox.Text = "Open";
             this.openCheckBox.UseVisualStyleBackColor = true;
-            this.openCheckBox.CheckedChanged += new System.EventHandler(this.openCheckBox_CheckedChanged);
+            this.openCheckBox.CheckedChanged += new System.EventHandler(this.openExitDoorCheckBox_CheckedChanged);
             // 
-            // hiddenCheckBox
+            // exitHiddenDoorCheckBox
             // 
-            this.hiddenCheckBox.AutoSize = true;
-            this.hiddenCheckBox.Location = new System.Drawing.Point(14, 44);
-            this.hiddenCheckBox.Name = "hiddenCheckBox";
-            this.hiddenCheckBox.Size = new System.Drawing.Size(56, 17);
-            this.hiddenCheckBox.TabIndex = 6;
-            this.hiddenCheckBox.Text = "Visible";
-            this.hiddenCheckBox.UseVisualStyleBackColor = true;
-            this.hiddenCheckBox.CheckedChanged += new System.EventHandler(this.hiddenCheckBox_CheckedChanged);
+            this.exitHiddenDoorCheckBox.AutoSize = true;
+            this.exitHiddenDoorCheckBox.Location = new System.Drawing.Point(14, 44);
+            this.exitHiddenDoorCheckBox.Name = "exitHiddenDoorCheckBox";
+            this.exitHiddenDoorCheckBox.Size = new System.Drawing.Size(56, 17);
+            this.exitHiddenDoorCheckBox.TabIndex = 6;
+            this.exitHiddenDoorCheckBox.Text = "Visible";
+            this.exitHiddenDoorCheckBox.UseVisualStyleBackColor = true;
+            this.exitHiddenDoorCheckBox.CheckedChanged += new System.EventHandler(this.hiddenExitDoorCheckBox_CheckedChanged);
             // 
             // identityGroupBox
             // 
+            this.identityGroupBox.Controls.Add(this.roomTraitsCheckBox);
+            this.identityGroupBox.Controls.Add(this.roomLimitCheckBox);
+            this.identityGroupBox.Controls.Add(this.roomTypeCheckBox);
+            this.identityGroupBox.Controls.Add(this.roomTypeCheckEnum);
+            this.identityGroupBox.Controls.Add(this.textBox2);
+            this.identityGroupBox.Controls.Add(this.roomLimitsTextBox);
+            this.identityGroupBox.Controls.Add(this.roomTypeTextBox);
+            this.identityGroupBox.Controls.Add(this.shortDescriptonTextBox);
+            this.identityGroupBox.Controls.Add(this.label9);
+            this.identityGroupBox.Controls.Add(this.tagTextBox);
+            this.identityGroupBox.Controls.Add(this.label2);
             this.identityGroupBox.Controls.Add(this.areaLabel);
-            this.identityGroupBox.Controls.Add(this.guidLabel);
             this.identityGroupBox.Controls.Add(this.descriptionLabel);
             this.identityGroupBox.Controls.Add(this.descriptionTextBox);
             this.identityGroupBox.Controls.Add(this.label1);
             this.identityGroupBox.Controls.Add(this.nameTextBox);
             this.identityGroupBox.Location = new System.Drawing.Point(17, 16);
             this.identityGroupBox.Name = "identityGroupBox";
-            this.identityGroupBox.Size = new System.Drawing.Size(249, 305);
+            this.identityGroupBox.Size = new System.Drawing.Size(395, 360);
             this.identityGroupBox.TabIndex = 0;
             this.identityGroupBox.TabStop = false;
             this.identityGroupBox.Text = "Identity";
             // 
+            // roomTraitsCheckBox
+            // 
+            this.roomTraitsCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.roomTraitsCheckBox.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.roomTraitsCheckBox.FlatAppearance.BorderSize = 2;
+            this.roomTraitsCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.roomTraitsCheckBox.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.roomTraitsCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.roomTraitsCheckBox.Location = new System.Drawing.Point(221, 140);
+            this.roomTraitsCheckBox.Name = "roomTraitsCheckBox";
+            this.roomTraitsCheckBox.Size = new System.Drawing.Size(41, 24);
+            this.roomTraitsCheckBox.TabIndex = 25;
+            this.roomTraitsCheckBox.Text = "Traits";
+            this.roomTraitsCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.roomTraitsCheckBox.UseVisualStyleBackColor = false;
+            this.roomTraitsCheckBox.CheckedChanged += new System.EventHandler(this.roomTraitsCheckBox_CheckedChanged);
+            // 
+            // roomLimitCheckBox
+            // 
+            this.roomLimitCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.roomLimitCheckBox.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.roomLimitCheckBox.FlatAppearance.BorderSize = 2;
+            this.roomLimitCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.roomLimitCheckBox.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.roomLimitCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.roomLimitCheckBox.Location = new System.Drawing.Point(221, 115);
+            this.roomLimitCheckBox.Name = "roomLimitCheckBox";
+            this.roomLimitCheckBox.Size = new System.Drawing.Size(41, 24);
+            this.roomLimitCheckBox.TabIndex = 20;
+            this.roomLimitCheckBox.Text = "Limits";
+            this.roomLimitCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.roomLimitCheckBox.UseVisualStyleBackColor = false;
+            this.roomLimitCheckBox.CheckedChanged += new System.EventHandler(this.roomLimitCheckBox_CheckedChanged);
+            // 
+            // roomTypeCheckBox
+            // 
+            this.roomTypeCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.roomTypeCheckBox.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.roomTypeCheckBox.FlatAppearance.BorderSize = 2;
+            this.roomTypeCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.roomTypeCheckBox.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.roomTypeCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.roomTypeCheckBox.Location = new System.Drawing.Point(221, 90);
+            this.roomTypeCheckBox.Name = "roomTypeCheckBox";
+            this.roomTypeCheckBox.Size = new System.Drawing.Size(41, 24);
+            this.roomTypeCheckBox.TabIndex = 20;
+            this.roomTypeCheckBox.Text = "Type";
+            this.roomTypeCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.roomTypeCheckBox.UseVisualStyleBackColor = false;
+            this.roomTypeCheckBox.CheckedChanged += new System.EventHandler(this.roomTypeCheckBox_CheckedChanged);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(266, 142);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(108, 20);
+            this.textBox2.TabIndex = 22;
+            // 
+            // roomLimitsTextBox
+            // 
+            this.roomLimitsTextBox.Location = new System.Drawing.Point(266, 117);
+            this.roomLimitsTextBox.Name = "roomLimitsTextBox";
+            this.roomLimitsTextBox.Size = new System.Drawing.Size(108, 20);
+            this.roomLimitsTextBox.TabIndex = 21;
+            // 
+            // roomTypeTextBox
+            // 
+            this.roomTypeTextBox.Location = new System.Drawing.Point(266, 92);
+            this.roomTypeTextBox.Name = "roomTypeTextBox";
+            this.roomTypeTextBox.Size = new System.Drawing.Size(108, 20);
+            this.roomTypeTextBox.TabIndex = 20;
+            this.roomTypeTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.roomTypeTextBox_KeyDown);
+            this.roomTypeTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomTypeTextBox_KeyPress);
+            this.roomTypeTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.roomTypeTextBox_MouseDown);
+            // 
+            // shortDescriptonTextBox
+            // 
+            this.shortDescriptonTextBox.Location = new System.Drawing.Point(14, 257);
+            this.shortDescriptonTextBox.Multiline = true;
+            this.shortDescriptonTextBox.Name = "shortDescriptonTextBox";
+            this.shortDescriptonTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.shortDescriptonTextBox.Size = new System.Drawing.Size(188, 52);
+            this.shortDescriptonTextBox.TabIndex = 18;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(20, 243);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(88, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Short Description";
+            // 
+            // tagTextBox
+            // 
+            this.tagTextBox.Location = new System.Drawing.Point(14, 327);
+            this.tagTextBox.Name = "tagTextBox";
+            this.tagTextBox.Size = new System.Drawing.Size(188, 20);
+            this.tagTextBox.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 312);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Tag";
+            // 
             // areaLabel
             // 
-            this.areaLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.areaLabel.Location = new System.Drawing.Point(3, 256);
+            this.areaLabel.AutoSize = true;
+            this.areaLabel.Location = new System.Drawing.Point(17, 17);
             this.areaLabel.Name = "areaLabel";
-            this.areaLabel.Size = new System.Drawing.Size(243, 23);
+            this.areaLabel.Size = new System.Drawing.Size(60, 13);
             this.areaLabel.TabIndex = 8;
             this.areaLabel.Text = "Area Name";
             this.areaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // guidLabel
-            // 
-            this.guidLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.guidLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guidLabel.Location = new System.Drawing.Point(3, 279);
-            this.guidLabel.Name = "guidLabel";
-            this.guidLabel.Size = new System.Drawing.Size(243, 23);
-            this.guidLabel.TabIndex = 6;
-            this.guidLabel.Text = "Guid";
-            this.guidLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // descriptionLabel
             // 
             this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(22, 63);
+            this.descriptionLabel.Location = new System.Drawing.Point(17, 74);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.Size = new System.Drawing.Size(60, 13);
             this.descriptionLabel.TabIndex = 3;
@@ -341,17 +461,19 @@
             // descriptionTextBox
             // 
             this.descriptionTextBox.AcceptsReturn = true;
-            this.descriptionTextBox.Location = new System.Drawing.Point(19, 80);
+            this.descriptionTextBox.Location = new System.Drawing.Point(14, 88);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.descriptionTextBox.Size = new System.Drawing.Size(206, 163);
+            this.descriptionTextBox.Size = new System.Drawing.Size(188, 150);
             this.descriptionTextBox.TabIndex = 2;
+            this.descriptionTextBox.TextChanged += new System.EventHandler(this.descriptionTextBox_TextChanged);
+            this.descriptionTextBox.Leave += new System.EventHandler(this.roomDescriptionTextBox_Leave);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 20);
+            this.label1.Location = new System.Drawing.Point(17, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
@@ -359,10 +481,14 @@
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(19, 36);
+            this.nameTextBox.Location = new System.Drawing.Point(14, 50);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(206, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(188, 20);
             this.nameTextBox.TabIndex = 0;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
+            this.nameTextBox.Enter += new System.EventHandler(this.nameTextBox_Enter);
+            this.nameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nameTextBox_KeyPress);
+            this.nameTextBox.Leave += new System.EventHandler(this.nameTextBox_Leave);
             // 
             // buildMenuStrip
             // 
@@ -371,7 +497,7 @@
             this.buildToolStripMenuItem});
             this.buildMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.buildMenuStrip.Name = "buildMenuStrip";
-            this.buildMenuStrip.Size = new System.Drawing.Size(742, 24);
+            this.buildMenuStrip.Size = new System.Drawing.Size(922, 24);
             this.buildMenuStrip.TabIndex = 1;
             this.buildMenuStrip.Text = "menuStrip1";
             // 
@@ -514,7 +640,7 @@
             // OKButton
             // 
             this.OKButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKButton.Location = new System.Drawing.Point(537, 395);
+            this.OKButton.Location = new System.Drawing.Point(726, 449);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(75, 23);
             this.OKButton.TabIndex = 2;
@@ -524,19 +650,80 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(618, 395);
+            this.cancelButton.Location = new System.Drawing.Point(807, 449);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 3;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
+            // exitContextMenu
+            // 
+            this.exitContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.toolStripSeparator1,
+            this.saveToolStripMenuItem1});
+            this.exitContextMenu.Name = "exitContextMenu";
+            this.exitContextMenu.Size = new System.Drawing.Size(114, 76);
+            this.exitContextMenu.Text = "Exit";
+            // 
+            // newToolStripMenuItem1
+            // 
+            this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
+            this.newToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.newToolStripMenuItem1.Text = "New";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem2.Text = "Remove";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(110, 6);
+            // 
+            // saveToolStripMenuItem1
+            // 
+            this.saveToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem2,
+            this.templateToolStripMenuItem2});
+            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.saveToolStripMenuItem1.Text = "Save";
+            // 
+            // fileToolStripMenuItem2
+            // 
+            this.fileToolStripMenuItem2.Name = "fileToolStripMenuItem2";
+            this.fileToolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
+            this.fileToolStripMenuItem2.Text = "To File";
+            // 
+            // templateToolStripMenuItem2
+            // 
+            this.templateToolStripMenuItem2.Name = "templateToolStripMenuItem2";
+            this.templateToolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
+            this.templateToolStripMenuItem2.Text = "As Template";
+            // 
+            // roomTypeCheckEnum
+            // 
+            this.roomTypeCheckEnum.CheckOnClick = true;
+            this.roomTypeCheckEnum.FormattingEnabled = true;
+            this.roomTypeCheckEnum.Location = new System.Drawing.Point(266, 243);
+            this.roomTypeCheckEnum.Name = "roomTypeCheckEnum";
+            this.roomTypeCheckEnum.Size = new System.Drawing.Size(108, 94);
+            this.roomTypeCheckEnum.TabIndex = 24;
+            this.roomTypeCheckEnum.ThreeDCheckBoxes = true;
+            this.roomTypeCheckEnum.Visible = false;
+            this.roomTypeCheckEnum.VisibleChanged += new System.EventHandler(this.roomTypeCheckEnum_VisibleChanged);
+            // 
             // RoomForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(742, 424);
+            this.ClientSize = new System.Drawing.Size(922, 479);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.panel1);
@@ -554,6 +741,7 @@
             this.identityGroupBox.PerformLayout();
             this.buildMenuStrip.ResumeLayout(false);
             this.buildMenuStrip.PerformLayout();
+            this.exitContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -587,28 +775,44 @@
         private System.Windows.Forms.GroupBox exitsGroupBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox identityGroupBox;
-        private System.Windows.Forms.Label guidLabel;
         private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label areaLabel;
-        private System.Windows.Forms.CheckBox hiddenCheckBox;
+        private System.Windows.Forms.CheckBox exitHiddenDoorCheckBox;
         private System.Windows.Forms.CheckBox openCheckBox;
-        private System.Windows.Forms.CheckBox doorCheckBox;
-        private System.Windows.Forms.CheckBox hasLockCheckBox;
+        private System.Windows.Forms.CheckBox exitDoorCheckBox;
+        private System.Windows.Forms.CheckBox exitDoorHasLockCheckBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox exitListBox;
-        private System.Windows.Forms.CheckBox directionalCheckBox;
-        private System.Windows.Forms.ComboBox linkToAreaComboBox;
-        private System.Windows.Forms.ComboBox inkToRoomComboBox;
+        private System.Windows.Forms.CheckBox exitDoorDirectionalCheckBox;
+        private System.Windows.Forms.ComboBox exitLinkToAreaComboBox;
+        private System.Windows.Forms.ComboBox exitLinkToRoomComboBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox linkTypeComboBox;
-        private System.Windows.Forms.ComboBox lockTypeComboBox;
-        private System.Windows.Forms.CheckBox restrictionCheckBox;
-        private System.Windows.Forms.ComboBox directionalComboBox;
-        private System.Windows.Forms.TextBox directionTextBox;
-        private System.Windows.Forms.CheckedListBox RestrictionsCheckedListBox;
+        private System.Windows.Forms.ComboBox exitLinkTypeComboBox;
+        private System.Windows.Forms.ComboBox exitDoorLockTypeComboBox;
+        private System.Windows.Forms.CheckBox exitDoorRestrictionCheckBox;
+        private System.Windows.Forms.ComboBox exitDoorDirectionalComboBox;
+        private System.Windows.Forms.TextBox exitDoorDirectionTextBox;
+        private System.Windows.Forms.ContextMenuStrip exitContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem templateToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.TextBox tagTextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox shortDescriptonTextBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox roomTypeTextBox;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox roomLimitsTextBox;
+        private CheckEnum roomTypeCheckEnum;
+        private System.Windows.Forms.CheckBox roomTraitsCheckBox;
+        private System.Windows.Forms.CheckBox roomLimitCheckBox;
+        private System.Windows.Forms.CheckBox roomTypeCheckBox;
     }
 }

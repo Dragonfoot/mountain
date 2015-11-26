@@ -138,6 +138,8 @@ namespace Mountain.classes.handlers {
         private void MoveTo(Packet packet) {
             // check room exit name is direction or specific, set up room message for either. ToDo
             // see if more than one exit starts with what was received
+
+            // make sure we have a room first, before attempting to actually go there
             int results = Functions.GetSameNameCount(packet.Client.Room.Exits.ToArray(), packet.parameter);            
             if (results > 1) {
                 packet.Client.Send("Too ambiguous.".Ansi(Style.yellow).NewLine());
@@ -145,7 +147,10 @@ namespace Mountain.classes.handlers {
             }
 
             Exit exit = packet.Client.Room.Exits.Find(e => (e.Name.StartsWith(packet.parameter, StringComparison.OrdinalIgnoreCase)));
-            if (exit == null) { throw new Exception("Room exit wasn't found in RoomCommands:MoveTo"); }
+            if (exit == null) {
+                DontKnowYet(packet);
+                return;
+            }
             Room nextRoom = exit.link;
             packet.Client.Room.RemovePlayer(packet.Client, exit.Name);
             nextRoom.AddPlayer(packet.Client);

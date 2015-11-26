@@ -6,10 +6,7 @@ using System.Collections.Generic;
  * http://ascii-table.com/ansi-escape-sequences.php
  */
 namespace Mountain.classes.dataobjects {
-
-    public enum Style { reset, boldOn, dim, italic, ul, boldOff, italicOff, ulOff, black, red, green, yellow, blue, magenta, cyan, 
-                            white, blackBk, redBk, greenBK, yellowBk, blueBk, magentaBk, cyanBk, whiteBk, unknown, clearScreen };
-    
+   
     public static class AnsiCode {
         private readonly static List<string> table = new List<string>();
         public const string Esc = "\x1B[";
@@ -43,7 +40,6 @@ namespace Mountain.classes.dataobjects {
             table.Add(Esc + "45m");     // magenta bg
             table.Add(Esc + "46m");     // cyan bg
             table.Add(Esc + "47m");     // white bg
-            table.Add(Esc + "150m");    // unknown
             // screen
             table.Add(Esc + "2J");      // clear screen
         }

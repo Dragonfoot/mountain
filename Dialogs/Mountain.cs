@@ -12,7 +12,7 @@ using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
 using Mountain.classes.tcp;
 
-namespace Mountain {
+namespace Mountain.Dialogs {
 
     public partial class Mountain : Form {
         protected ApplicationSettings settings;
@@ -122,7 +122,6 @@ namespace Mountain {
             if (world != null) { world = null; }
             try {
                 world = new World(settings);
-                world.Areas.Add(Build.AdminArea(settings));
                 if (world.Areas.Any()) {
                     areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                     areaListBox.SelectedIndex = 0;
@@ -216,9 +215,9 @@ namespace Mountain {
             RoomForm roomEditForm = new RoomForm(SelectedRoom, settings);
             DialogResult dialogresult = roomEditForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-               // Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
-              //  roomsListBox.Items.Clear();
-              //  roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
+                Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
+                roomsListBox.Items.Clear();
+                roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
             }
             roomEditForm.Dispose();
         }

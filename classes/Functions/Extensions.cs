@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Linq;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
@@ -12,10 +13,8 @@ using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
 
-    public static class ThreadSafeRandom {
-        [ThreadStatic]
-        private static Random Local;
-
+    public static class ThreadSafeRandom {  // random function called from multiple threads (used for Shuffling an IList<T>)
+        [ThreadStatic] private static Random Local;
         public static Random ThisThreadsRandom {
             get { return Local ?? (Local = new Random(unchecked(Environment.TickCount * 31 + Thread.CurrentThread.ManagedThreadId))); }
         }
@@ -23,16 +22,48 @@ namespace Mountain.classes.functions {
 
     public static class Extensions {
 
-        // hide & change before shifting to production
-        private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
-        private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
-
 
         #region generic
 
+        #region enums
 
-      
-        public static T DeepClone<T>(this T input) where T : ISerializable {
+        // FruitType myBasket = FruitType.Grapes | FruitType.Oranges;
+
+        public static bool Has<T>(this Enum enumType, T flag) { // bool hasGrapes = myBasket.Has(FruitType.Grapes); = true
+            try {
+                return (((int)(object)enumType & (int)(object)flag) == (int)(object)flag);
+            } catch {
+                return false;
+            }
+        }
+        public static bool Is<T>(this Enum enumType, T flag) {  // bool isGrapes = myBasket.Is(FruitType.Grapes); = true
+            try {
+                return (int)(object)enumType == (int)(object)flag;
+            } catch {
+                return false;
+            }
+        }
+        public static T Add<T>(this Enum enumType, T flag) {           // myBasket = myBasket.Add(FruitType.Apples);
+            try {
+                return (T)(object)(((int)(object)enumType | (int)(object)flag));
+            } catch (Exception ex) {
+                throw new ArgumentException("Can't add flag from enum type " + typeof(T).Name + ".", ex);
+            }
+        }
+        public static T Remove<T>(this Enum enumType, T flag) {            // myBasket = myBasket.Remove(FruitType.Grapes);
+            try {
+                return (T)(object)(((int)(object)enumType & ~(int)(object)flag));
+            } catch (Exception ex) {
+                throw new ArgumentException("Can't remove flag from enum type " + typeof(T).Name, ex);
+            }
+        }
+        public static bool IsEmpty<T>(this Enum flags) {
+            return Convert.ToUInt32(flags) == 0;
+        }
+
+        #endregion enums
+
+        public static T DeepClone<T>(this T input) where T : ISerializable { // true copy, so no references
             using (var stream = new MemoryStream()) {
                 var formatter = new BinaryFormatter();
                 formatter.Serialize(stream, input);
@@ -40,8 +71,7 @@ namespace Mountain.classes.functions {
                 return (T)formatter.Deserialize(stream);
             }
         }
-
-        public static void Shuffle<T>(this IList<T> list) {
+        public static void Shuffle<T>(this IList<T> list) { // randomize an interface list of <T>
             int n = list.Count;
             while (n > 1) {
                 n--;
@@ -52,9 +82,9 @@ namespace Mountain.classes.functions {
             }
         }
 
-        #endregion
+        #endregion genaric
 
-        #region string extensions
+        #region strings
 
         public static string StripNewLine(this string str) {
             return Regex.Replace(str, @"\n|\r", "");
@@ -75,19 +105,18 @@ namespace Mountain.classes.functions {
             TextInfo info = new CultureInfo("en-US", false).TextInfo;
             return info.ToTitleCase(str);
         }
-        public static bool IsNumeric(this string value) {
+        public static bool IsNumeric(this string str) {
             float result; // ignore output
-            return float.TryParse(value, out result); // an error returns false
+            return float.TryParse(str, out result); // a parse error here returns false
         }
-        public static bool IsValidEmailAddress(this string s) {
+        public static bool IsValidEmailAddress(this string str) {
             Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-            return regex.IsMatch(s);
+            return regex.IsMatch(str);
         }
-        public static bool IsNumberOnly(this string value, bool floatPoint) { // string representation of a number?
-            value = value.Trim();
-            if (value.Length == 0)
-                return false;
-            foreach (char chr in value) {
+        public static bool IsNumberOnly(this string str, bool floatPoint) { // is it a string representation of a number
+            str = str.Trim();
+            if (str.Length == 0) return false;
+            foreach (char chr in str) {
                 if (!char.IsDigit(chr)) {
                     if (floatPoint && (chr == '.'))
                         continue;
@@ -96,8 +125,13 @@ namespace Mountain.classes.functions {
             }
             return true;
         }
-        public static bool IsNullOrWhiteSpace(this string value) { // better string.empty test
-            return String.IsNullOrWhiteSpace(value);
+        public static bool IsNullOrWhiteSpace(this string str) { // better string.empty test
+            return string.IsNullOrWhiteSpace(str);
+        }
+        public static bool HasValue(this string str) {
+            if (str.IsNullOrWhiteSpace())
+                return false;
+            return true;
         }
         public static string Camelize(this string str) { // return camel-case words in string ie: "joe moe" = "JoeMoe"
             return str.ToProper().Replace(" ", string.Empty);
@@ -109,13 +143,12 @@ namespace Mountain.classes.functions {
             }
             return str;
         }
-        public static char FirstChar(this string str) {
+        public static char FirstChar(this string str) { // get the first char of string
             return str[0];
         }
-        public static bool FirstWordIsSingleChar(this string str) {
-            if (str.Length == 1)
-                return true;
-            if(str.Length > 1) {
+        public static bool FirstWordIsSingleChar(this string str) {  // as in is the first word i for inventory, ' for say.. 
+            if (str.Length == 1) return true;
+            if (str.Length > 1) {
                 if (str[1] == ' ')
                     return true;
             }
@@ -124,11 +157,10 @@ namespace Mountain.classes.functions {
         public static string StripFirstChar(this string str) {
             return str.Substring(1);
         }
-        public static bool HasLastCharPunctuation(this string str) {
-            if (str.IsNullOrWhiteSpace())
-                return true;
-            if (str.Length == 1)
-                return Char.IsPunctuation(str[0]);
+        // revise this to check for a specific set of punctuations ?
+        public static bool HasLastCharPunctuation(this string str) { // returns true if it ends with 'any' punctuation char, including comma..
+            if (str.IsNullOrWhiteSpace()) return true; // have caller ignore empty string
+            if (str.Length == 1) return Char.IsPunctuation(str[0]);
             return Char.IsPunctuation(str[str.Length - 1]);
         }
         public static string StripFirstWord(this string str) { // returns all but the first word
@@ -162,9 +194,9 @@ namespace Mountain.classes.functions {
             result = result.Trim();
             return result;
         }
-        public static string WordWrap(this string sentence, int width = Global.pageWidth) {  // takes a long string and formats to width
+        public static string WordWrap(this string longString, int width = Global.pageWidth) {  // takes a long string and formats to width
             StringBuilder lines = new StringBuilder();
-            string[] words = sentence.Split(' ');
+            string[] words = longString.Split(' ');
             StringBuilder buildLine = new StringBuilder("");
             foreach (var word in words) {
                 if (word.Length + buildLine.Length + 1 > width) {    // check if have we exceeded line width
@@ -178,6 +210,12 @@ namespace Mountain.classes.functions {
             }
             return lines.ToString();
         }
+
+        #region cryption
+
+        // hide & change before shifting to production
+        private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
+        private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
 
         private const int keysize = 256;
         public static string Encrypt(this string plainText) {
@@ -217,12 +255,9 @@ namespace Mountain.classes.functions {
                 }
             }
         }
-        #endregion
 
-        #region Ansi
+        #endregion cryption
 
-
-
-        #endregion
+        #endregion strings
     }
 }

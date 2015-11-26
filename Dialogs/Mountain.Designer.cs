@@ -1,4 +1,4 @@
-﻿namespace Mountain {
+﻿namespace Mountain.Dialogs {
     partial class Mountain {
         /// <summary>
         /// Required designer variable.

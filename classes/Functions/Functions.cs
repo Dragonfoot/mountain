@@ -1,10 +1,22 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
 
     public static class Functions {
+
+        public static string FormatStringArray(Array list) {
+            string names = string.Empty;
+            int i = 0;
+            foreach (string item in list) {
+                names += item;
+                if (i != list.Length) { names += ", "; }
+                if (i == list.Length) { names += "."; }
+            }
+            return names;
+        }
 
         public static string GetNames(Array list) {
             string names = string.Empty;
@@ -51,9 +63,12 @@ namespace Mountain.classes.functions {
             return false;
         }
 
-        public static Room CloneTheRoomToEdit(Room room, ApplicationSettings settings) {
+        public static Room CloneRoomToEdit(Room room, ApplicationSettings settings) {  // switch to extension.deepclone?
             Room clone = new Room(room.Name, room.Description, settings, room.Area);
             clone.RoomID = room.RoomID;
+            clone.roomType = room.roomType;
+            clone.Tag = room.Tag;
+            clone.ID = room.ID;
             if (room.Exits.Any()) {
                 foreach (Exit exit in room.Exits) {
                     Exit clonedExit = new Exit();
@@ -61,10 +76,17 @@ namespace Mountain.classes.functions {
                     clonedExit.Name = exit.Name;
                     clonedExit.Description = exit.Description;
                     clonedExit.link = exit.link;
-                    clonedExit.LinkToRoomID = exit.LinkToRoomID;
-                    clonedExit.LinkToRoomName = exit.LinkToRoomName;
-                    clonedExit.Attributes = exit.Attributes;
-                    clone.Exits.Add(clonedExit);
+                    clonedExit.parent = exit.parent;
+                    clonedExit.LinkID = new LinkToID(exit.LinkID.Name, exit.LinkID.LinkDoorLabel, exit.LinkID.Area, exit.LinkID.Room);
+                    clonedExit.Open = exit.Open;
+                    clonedExit.Lockable = exit.Lockable;
+                    clonedExit.Visible = exit.Visible;
+                    clonedExit.Repairable = exit.Repairable;
+                    clonedExit.ExitType = exit.ExitType;
+                    clonedExit.LockType = exit.LockType;
+                    clonedExit.DoorType = exit.DoorType;
+                    clonedExit.Restrictions = exit.Restrictions;
+                    clone.AddExit(clonedExit);
                 }
             }
             return clone;
@@ -81,15 +103,12 @@ namespace Mountain.classes.functions {
                     toExit.Name = fromExit.Name;
                     toExit.Description = fromExit.Description;
                     toExit.link = fromExit.link;
-                    toExit.LinkToRoomID = fromExit.LinkToRoomID;
-                    toExit.LinkToRoomName = fromExit.LinkToRoomName;
-                    toExit.Attributes = fromExit.Attributes;
-                    toRoom.Exits.Add(toExit);
+                    toExit.parent = fromExit.parent;
+                    toExit.LinkID = fromExit.LinkID;
+                    toRoom.AddExit(toExit);
                 }
             }
-        }
-
-        
+        }        
 
     }
 }
