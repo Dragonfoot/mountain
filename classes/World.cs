@@ -10,7 +10,7 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes {
 
-    public class World : Identity {
+    [Serializable] public class World : Identity {
         [XmlArray("Areas")] public List<Area> Areas;
         [XmlIgnore] public ApplicationSettings settings;
         [XmlIgnore] public TcpServerListener portListener;
@@ -133,7 +133,7 @@ namespace Mountain.classes {
         public string GetAreaNameByRoomName(string name) {
             Room room = GetRoomByName(name);
             if (room == null) return null;
-            return room.RoomID.Area;
+            return room.Linkage.Area.Name;
         }
     }
 }

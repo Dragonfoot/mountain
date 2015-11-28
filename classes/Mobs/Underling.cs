@@ -1,11 +1,12 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using Mountain.classes.dataobjects;
 using Mountain.classes.Items;
 
 namespace Mountain.classes.mobs {
 
-    public class Underling : Identity { // mob precursor
-        public RoomID roomID { get; set; } 
+    [Serializable] public class Underling : Identity { // mob precursor
+        public Linkage Location { get; set; } 
         public ConcurrentBag<Item> Inventory { get; set; }
         public delegate void CommandHandler(object myObject, string message); // function caller
         public CommandHandler Commands;         // functions hook

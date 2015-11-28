@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using Mountain.classes.tcp;
 using Mountain.classes.dataobjects;
 using Mountain.classes.functions;
 
 namespace Mountain.classes.handlers {
 
-    public class PlayerDispatcher {
+    [Serializable] public class PlayerDispatcher {
         Connection Client;
         ApplicationSettings settings;
         protected Dispatch Commands { get; set; }
@@ -34,10 +33,8 @@ namespace Mountain.classes.handlers {
         }
 
         private void SetRoom(Room room) {
-            Client.Room = room;
-            Client.Account.RoomID = room.RoomID;
-            Client.Account.Room = room;
-            Client.Account.RoomID.Area = room.Area.Name;
+            Client.Location.Room = room;
+            Client.Account.Location = new Linkage(room.Name, room.Linkage.Area, room);
         }
 
         private Packet Parse(string message, Connection player) {
@@ -73,7 +70,7 @@ namespace Mountain.classes.handlers {
                 packet.known = true;
             }
             if (!packet.known) {
-                if(Functions.HasNameThatStartsWith(player.Room.Exits.ToArray(), packet.verb)) {
+                if(Functions.HasNameThatStartsWith(player.Location.Room.Exits.ToArray(), packet.verb)) {
                     packet.parameter = packet.verb;
                     packet.verb = "go";
                     packet.known = true;

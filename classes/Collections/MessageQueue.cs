@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 
 namespace Mountain.classes.collections {
 
-    public class MessageQueue {
+    [Serializable] public class MessageQueue {
         private ConcurrentQueue<string> queue;
         public string Tag { get; set; }
         public delegate void MessageHandler(object myObject, string msg);

@@ -199,14 +199,14 @@ namespace Mountain.Dialogs {
         }
 
         private void EditRoomContextMenuItem_Click(object sender, EventArgs e) {
-            RoomForm roomEditForm = new RoomForm(SelectedRoom, settings);
-            DialogResult dialogresult = roomEditForm.ShowDialog();
+            RoomEditor roomEdit = new RoomEditor(SelectedRoom, settings);
+            DialogResult dialogresult = roomEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-                Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
-                roomsListBox.Items.Clear();
-                roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
+            //    Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
+            //    roomsListBox.Items.Clear();
+            //    roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
             }
-            roomEditForm.Dispose();
+            roomEdit.Dispose();
         }
 
         private void roomsListBox_SelectedIndexChanged(object sender, EventArgs e) {
@@ -243,7 +243,7 @@ namespace Mountain.Dialogs {
             }
             foreach (Connection player in RemoveList) {
                 settings.Players.Remove(player.Account.Name, "Lost connection.");
-                player.Room.Players.Remove(player.Account.Name);
+                player.Location.Room.Players.Remove(player.Account.Name);
                 SystemEventPacket packet = new SystemEventPacket(EventType.disconnected, player.Account.Name + " lost connection.");
                 settings.SystemEventQueue.Push(packet);
                 player.Shutdown();

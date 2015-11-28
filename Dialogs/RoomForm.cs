@@ -11,9 +11,8 @@ namespace Mountain.Dialogs {
 
     public partial class RoomForm : Form {
         private ApplicationSettings settings;
-        public Room roomEdits, roomEdit2;
+        public Room roomEdits;
         private Area area;
-        private Room room;
         private Exit SelectedExit;
         private List<CheckBox> roomCheckBoxList;
         bool nameChanged, descriptionChanged;
@@ -22,6 +21,7 @@ namespace Mountain.Dialogs {
         public RoomForm(Room room, ApplicationSettings settings) {
             InitializeComponent();
 
+            roomEdits = Functions.CloneRoomToEdit(room, settings);
             roomCheckBoxList = new List<CheckBox>();
             roomCheckBoxList.Add(roomTypeCheckBox);
             roomCheckBoxList.Add(roomLimitCheckBox);
@@ -30,18 +30,15 @@ namespace Mountain.Dialogs {
             roomTypeCheckBox.Tag = roomItem.roomType;
             roomLimitCheckBox.Tag = roomItem.roomLimits;
             roomTraitsCheckBox.Tag = roomItem.roomTraits;
-
-            this.room = room;
+            
             this.settings = settings;
             roomTypeTextBox.Text = GetRoomTypeFlaggedList(roomItem.roomType);
 
             name = nameTextBox.Text = room.Name;
-            area = room.Area;
-            areaLabel.Text = room.Area.Name;
+            area = room.Linkage.Area;
+            areaLabel.Text = room.Linkage.Area.Name;
             description = descriptionTextBox.Text = room.Description;
             tagTextBox.Text = room.Tag;
-
-            roomEdits = Functions.CloneRoomToEdit(room, settings);
 
             PopulateExitRestrictedCheckedComboBox(Enum.GetNames(typeof(exitRestrictionType)));
             PopulateExitListBox(room.Exits);
@@ -84,7 +81,7 @@ namespace Mountain.Dialogs {
                     int i = 0;
                     foreach (int key in dictionary.Keys) {
                         string name = dictionary[key];
-                        if (room.roomType.HasFlag((roomType)key)) {
+                        if (roomEdits.roomType.HasFlag((roomType)key)) {
                             if (dictionary.Count > 1 && i == 0) {
                                 i++;
                                 continue;
@@ -145,8 +142,8 @@ namespace Mountain.Dialogs {
             }
             if (exitListBox.SelectedIndex > -1) {
                 string exitName = exitListBox.Items[exitListBox.SelectedIndex].ToString();
-                Exit exit = room.Exits.Find(e => e.Name == exitName);
-                string areaName = exit.LinkID.Room.Area.Name;
+                Exit exit = roomEdits.Exits.Find(e => e.Name == exitName);
+                string areaName = exit.Linkage.Area.Name;
                 int index = exitLinkToAreaComboBox.Items.IndexOf(areaName);
                 if (index > -1) exitLinkToAreaComboBox.SelectedIndex = index;
                 else exitLinkToAreaComboBox.SelectedIndex = 0;
@@ -176,7 +173,7 @@ namespace Mountain.Dialogs {
                     exitLinkToAreaComboBox.SelectedIndex = 0;
                     return;
                 }
-                int index = exitLinkToRoomComboBox.Items.IndexOf(SelectedExit.parent.Name);  
+                int index = exitLinkToRoomComboBox.Items.IndexOf(SelectedExit.Owner.Name);  
                 if (index > -1) exitLinkToRoomComboBox.SelectedIndex = index;
                 else exitLinkToRoomComboBox.SelectedIndex = 0;
             }
@@ -240,7 +237,7 @@ namespace Mountain.Dialogs {
         }
 
         private void exitListBox_SelectedIndexChanged(object sender, EventArgs e) {
-            SelectedExit = room.Exits.Find((room => room.Name == (string)exitListBox.SelectedItem));
+            SelectedExit = roomEdits.Exits.Find((room => room.Name == (string)exitListBox.SelectedItem));
         }
 
         private void exitListBox_MouseDown(object sender, MouseEventArgs e) {
@@ -248,7 +245,7 @@ namespace Mountain.Dialogs {
             var index = exitListBox.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches) {
                 exitListBox.SelectedIndex = index;
-                SelectedExit = room.Exits.Find((room => room.Name == (string)exitListBox.SelectedItem));
+                SelectedExit = roomEdits.Exits.Find((room => room.Name == (string)exitListBox.SelectedItem));
                 for (int i = 0; i <= exitContextMenu.Items.Count - 1; i++) {
                     exitContextMenu.Items[i].Enabled = true;
                 }
@@ -270,7 +267,7 @@ namespace Mountain.Dialogs {
                     descriptionTextBox.Focus();
                     break;
                 case (char)Keys.Escape:
-                    nameTextBox.Text = room.Name;
+                    nameTextBox.Text = roomEdits.Name;
                     nameTextBox.SelectAll();
                     break;
             }
@@ -339,7 +336,7 @@ namespace Mountain.Dialogs {
                 foreach (int key in dictionary.Keys) {
                     string name = dictionary[key];
                     roomTypeCheckEnum.Items.Add(name);
-                    if (room.roomType.HasFlag((roomType)key)) roomTypeCheckEnum.SetItemChecked(i, true);                    
+                    if (roomEdits.roomType.HasFlag((roomType)key)) roomTypeCheckEnum.SetItemChecked(i, true);                    
                     i++;
                 }
 
@@ -371,16 +368,27 @@ namespace Mountain.Dialogs {
         }
 
         private void exitLinkToRoomComboBox_SelectedIndexChanged(object sender, EventArgs e) {
-            string newlink = exitLinkToRoomComboBox.SelectedItem.ToString();
-            Room room = area.Rooms.First(r => r.Name == newlink);
-            SelectedExit.LinkID.Room = room;
-            SelectedExit.link = room;
-            SelectedExit.LinkID.Name = room.Name;
-            SelectedExit.LinkID.LinkDoorLabel = newlink;
+            Exit exit;
+            string newRoomName = exitLinkToRoomComboBox.SelectedItem.ToString();
+            if (newRoomName == "None") {
+                SelectedExit.Linkage = new Linkage(newRoomName, null, null);
+            } else {
+                Room room = area.Rooms.First(r => r.Name == newRoomName);
+                if (room != null)
+                    SelectedExit.Linkage = new Linkage(room.Linkage.DoorLabel, room.Linkage.Area, room);
+                else
+                    SelectedExit.Linkage = new Linkage(newRoomName, null, null);
+            }
+            exit = roomEdits.Exits.Find(n => n.Name == SelectedExit.Name);
+            exit.Linkage = new Linkage(SelectedExit.Linkage.DoorLabel, SelectedExit.Linkage.Area, SelectedExit.Linkage.Room);
         }
 
         private void roomTypeCheckEnum_VisibleChanged(object sender, EventArgs e) {
             if (!roomTypeCheckEnum.Visible) roomTypeCheckBox.Checked = false;
+        }
+
+        private void exitLinkToRoomComboBox_SelectionChangeCommitted(object sender, EventArgs e) {
+
         }
 
         private void openExitDoorCheckBox_CheckedChanged(object sender, EventArgs e) {

@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Diagnostics;
-using Mountain.classes.functions;
+
 namespace Mountain.classes.dataobjects {
 
-    public class ExitData {
+    [Serializable] public class ExitData {
         public exitType? ExitType = null;  // door, window, random, teleport, openSpace
         public lockType? LockType = null;
         public doorType? DoorType = null;
         public exitRestrictionType? Restrictions = null;
-        public LinkToID LinkToRoomID = null;
+        public Linkage Linkage = null;
         public string Name = null;
         public string Description = null;
         public Guid? ID = null;

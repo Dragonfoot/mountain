@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Mountain.classes.tcp;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.handlers {
 
-    public class Dispatch {
+    [Serializable] public class Dispatch {
         private Connection Client;
         //  private Dictionary<string, Action<Packet>> areaCommands;
         //  private Dictionary<string, Action<Packet>> worldCommands;

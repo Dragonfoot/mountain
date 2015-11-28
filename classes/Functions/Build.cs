@@ -76,8 +76,7 @@ namespace Mountain.classes.functions {
 
         public static void LinkRoomTo(Room startRoom, ExitData data, Room toRoom) {
             Exit exit = new Exit();
-            data.LinkToRoomID = new LinkToID(toRoom.Name, null, toRoom.Area.Name, toRoom);
-            exit.link = toRoom;
+            data.Linkage = new Linkage(toRoom.Name, toRoom.Linkage.Area, toRoom);
             exit.Update(data);
             startRoom.AddExit(exit);
         }

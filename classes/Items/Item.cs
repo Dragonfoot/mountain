@@ -1,9 +1,10 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.Items {
 
-    public class Item : Identity {
+    [Serializable] public class Item : Identity {
         public bool magical { get; set; }
         public bool holdable { get; set; }
         public bool breakable { get; set; }

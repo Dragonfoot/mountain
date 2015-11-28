@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mountain.classes.tcp;
 
 namespace Mountain.classes.mobs {
 
-    public class Mob : Underling {
+    [Serializable] public class Mob : Underling {
         protected List<Connection> fightingPlayers;
         protected List<Connection> friendPlayers;
         protected List<Mob> mobBuddies;

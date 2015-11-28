@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.collections {
     
-    public class RegisteredUsers : IEnumerable<Account> {        
+    [Serializable] public class RegisteredUsers : IEnumerable<Account> {        
         public List<Account> List { get; private set; }
 
         public RegisteredUsers() {

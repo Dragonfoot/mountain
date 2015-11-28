@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mountain.classes.functions;
 
 namespace Mountain.classes.dataobjects {
 
-    public class Stats {   // list of possible player attributes set at arbitrary level 1 defaults
+    [Serializable] public class Stats {   // list of possible player attributes set at arbitrary level 1 defaults
         public int health = 18;
         public int level = 1;
         public int strength = 4;

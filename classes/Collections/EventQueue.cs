@@ -1,9 +1,10 @@
 ﻿using System.Collections.Concurrent;
+using System;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.collections {
 
-    public class PlayerEventQueue {
+    [Serializable] public class PlayerEventQueue {
         public string Tag { get; set; }
         private ConcurrentQueue<Packet> queue;
         public delegate void EventHandler(object myObject, Packet packet);

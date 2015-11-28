@@ -6,15 +6,14 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.dataobjects {
 
-    public class Account {
+    [Serializable] public class Account {
         public string Name { get; set; }
         public string Password { get; set; }
         public bool Administrator { get; set; }
         public string Email { get; set; }
-        public Guid ID { get; set; }        
-        [XmlIgnore] public Room Room { get; set; }
+        public Guid ID { get; set; }
         [XmlIgnore] public Connection Client { get; set; }
-        public RoomID RoomID;
+        public Linkage Location; 
 
         public Account(Guid id) {
             ID = id;

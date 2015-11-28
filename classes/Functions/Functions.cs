@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
@@ -63,8 +66,8 @@ namespace Mountain.classes.functions {
         }
 
         public static Room CloneRoomToEdit(Room room, ApplicationSettings settings) {  // switch to extension.deepclone?
-            Room clone = new Room(room.Name, room.Description, settings, room.Area);
-            clone.RoomID = room.RoomID;
+            Room clone = new Room(room.Name, room.Description, settings, room.Linkage.Area);
+            clone.Linkage = new Linkage(room.Name, room.Linkage.Area, room);
             clone.roomType = room.roomType;
             clone.Tag = room.Tag;
             clone.ID = room.ID;
@@ -74,9 +77,8 @@ namespace Mountain.classes.functions {
                     clonedExit.ID = exit.ID;
                     clonedExit.Name = exit.Name;
                     clonedExit.Description = exit.Description;
-                    clonedExit.link = exit.link;
-                    clonedExit.parent = exit.parent;
-                    clonedExit.LinkID = new LinkToID(exit.LinkID.Name, exit.LinkID.LinkDoorLabel, exit.LinkID.Area, exit.LinkID.Room);
+                    clonedExit.Owner = exit.Owner;
+                    clonedExit.Linkage = new Linkage(exit.DoorLabel, exit.LinkArea, exit.Owner);
                     clonedExit.Open = exit.Open;
                     clonedExit.Lockable = exit.Lockable;
                     clonedExit.Visible = exit.Visible;
@@ -101,9 +103,8 @@ namespace Mountain.classes.functions {
                     toExit.ID = fromExit.ID;
                     toExit.Name = fromExit.Name;
                     toExit.Description = fromExit.Description;
-                    toExit.link = fromExit.link;
-                    toExit.parent = fromExit.parent;
-                    toExit.LinkID = fromExit.LinkID;
+                    toExit.Owner = fromExit.Owner;
+                    toExit.Linkage = new Linkage(fromExit.Linkage.DoorLabel, fromExit.Linkage.Area, fromExit.Linkage.Room);
                     toRoom.AddExit(toExit);
                 }
             }

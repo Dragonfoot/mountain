@@ -51,6 +51,7 @@ namespace Mountain.Dialogs {
             this.roomTraitsCheckBox = new System.Windows.Forms.CheckBox();
             this.roomLimitCheckBox = new System.Windows.Forms.CheckBox();
             this.roomTypeCheckBox = new System.Windows.Forms.CheckBox();
+            this.roomTypeCheckEnum = new CheckEnum();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.roomLimitsTextBox = new System.Windows.Forms.TextBox();
             this.roomTypeTextBox = new System.Windows.Forms.TextBox();
@@ -92,7 +93,6 @@ namespace Mountain.Dialogs {
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.templateToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.roomTypeCheckEnum = new CheckEnum();
             this.panel1.SuspendLayout();
             this.exitsGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -144,6 +144,7 @@ namespace Mountain.Dialogs {
             this.exitLinkToRoomComboBox.Size = new System.Drawing.Size(161, 21);
             this.exitLinkToRoomComboBox.TabIndex = 11;
             this.exitLinkToRoomComboBox.SelectedIndexChanged += new System.EventHandler(this.exitLinkToRoomComboBox_SelectedIndexChanged);
+            this.exitLinkToRoomComboBox.SelectionChangeCommitted += new System.EventHandler(this.exitLinkToRoomComboBox_SelectionChangeCommitted);
             // 
             // label3
             // 
@@ -380,6 +381,18 @@ namespace Mountain.Dialogs {
             this.roomTypeCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.roomTypeCheckBox.UseVisualStyleBackColor = false;
             this.roomTypeCheckBox.CheckedChanged += new System.EventHandler(this.roomTypeCheckBox_CheckedChanged);
+            // 
+            // roomTypeCheckEnum
+            // 
+            this.roomTypeCheckEnum.CheckOnClick = true;
+            this.roomTypeCheckEnum.FormattingEnabled = true;
+            this.roomTypeCheckEnum.Location = new System.Drawing.Point(266, 243);
+            this.roomTypeCheckEnum.Name = "roomTypeCheckEnum";
+            this.roomTypeCheckEnum.Size = new System.Drawing.Size(108, 94);
+            this.roomTypeCheckEnum.TabIndex = 24;
+            this.roomTypeCheckEnum.ThreeDCheckBoxes = true;
+            this.roomTypeCheckEnum.Visible = false;
+            this.roomTypeCheckEnum.VisibleChanged += new System.EventHandler(this.roomTypeCheckEnum_VisibleChanged);
             // 
             // textBox2
             // 
@@ -704,18 +717,6 @@ namespace Mountain.Dialogs {
             this.templateToolStripMenuItem2.Name = "templateToolStripMenuItem2";
             this.templateToolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
             this.templateToolStripMenuItem2.Text = "As Template";
-            // 
-            // roomTypeCheckEnum
-            // 
-            this.roomTypeCheckEnum.CheckOnClick = true;
-            this.roomTypeCheckEnum.FormattingEnabled = true;
-            this.roomTypeCheckEnum.Location = new System.Drawing.Point(266, 243);
-            this.roomTypeCheckEnum.Name = "roomTypeCheckEnum";
-            this.roomTypeCheckEnum.Size = new System.Drawing.Size(108, 94);
-            this.roomTypeCheckEnum.TabIndex = 24;
-            this.roomTypeCheckEnum.ThreeDCheckBoxes = true;
-            this.roomTypeCheckEnum.Visible = false;
-            this.roomTypeCheckEnum.VisibleChanged += new System.EventHandler(this.roomTypeCheckEnum_VisibleChanged);
             // 
             // RoomForm
             // 

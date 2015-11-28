@@ -12,7 +12,7 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes {
 
-    public class ApplicationSettings {
+    [Serializable] public class ApplicationSettings {
         [XmlIgnore] public RegisteredUsers RegisteredUsers { get; set; }
         [XmlIgnore] public List<Connection> Logins { get; set; }
         [XmlIgnore] public World world;
@@ -74,8 +74,7 @@ namespace Mountain.classes {
 
         public void SwapLoginForPlayer(Connection connection) {
             connection.Name = connection.Account.Name;
-            connection.Account.Room = TheVoid;
-            connection.Account.RoomID = new RoomID(TheVoid.RoomID.ID, TheVoid.Name, TheVoid.Area.Name);
+            connection.Account.Location = new Linkage(TheVoid.Name, TheVoid.Linkage.Area, TheVoid);
             string file = PlayersDirectory + "\\" + connection.Account.Name + "_test.xml";
             factory.LoadPlayerFromFile(connection, connection.Account.Name, file, this);
             Players.Add(connection);

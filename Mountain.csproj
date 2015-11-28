@@ -100,7 +100,7 @@
     <Compile Include="classes\Collections\MessageQueue.cs" />
     <Compile Include="classes\DataObjects\Packet.cs" />
     <Compile Include="classes\Handlers\PlayerDispatcher.cs" />
-    <Compile Include="classes\DataObjects\RoomID.cs" />
+    <Compile Include="classes\DataObjects\Linkage.cs" />
     <Compile Include="classes\DataObjects\Stats.cs" />
     <Compile Include="classes\Functions\XmlHelper.cs" />
     <Compile Include="classes\Collections\Players.cs" />
@@ -119,11 +119,11 @@
     <Compile Include="classes\Mobs\Mob.cs" />
     <Compile Include="classes\Room.cs" />
     <Compile Include="classes\World.cs" />
-    <Compile Include="Dialogs\RoomForm.cs">
+    <Compile Include="Dialogs\RoomEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\RoomForm.Designer.cs">
-      <DependentUpon>RoomForm.cs</DependentUpon>
+    <Compile Include="Dialogs\RoomEditor.Designer.cs">
+      <DependentUpon>RoomEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Mountain.cs">
       <SubType>Form</SubType>
@@ -142,8 +142,8 @@
     <EmbeddedResource Include="Dialogs\AreaForm.resx">
       <DependentUpon>AreaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RoomForm.resx">
-      <DependentUpon>RoomForm.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RoomEditor.resx">
+      <DependentUpon>RoomEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Mountain.resx">
       <DependentUpon>Mountain.cs</DependentUpon>

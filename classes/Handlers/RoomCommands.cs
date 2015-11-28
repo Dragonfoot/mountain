@@ -7,8 +7,7 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.handlers {
 
-    public class RoomCommands {
-
+    [Serializable] public class RoomCommands {
         private Dictionary<string, Action<Packet>> List;
         private StringResponses Resource;
         ApplicationSettings settings;
@@ -58,7 +57,7 @@ namespace Mountain.classes.handlers {
                 }
                 if (!packet.parameter.HasLastCharPunctuation()) { packet.parameter += "."; }
                 string message = "\"" + packet.parameter + "\"".NewLine().Ansi(Style.white);
-                foreach (Connection player in packet.Client.Room.Players) {
+                foreach (Connection player in packet.Client.Location.Room.Players) {
                     if (player.Account.Name == packet.Client.Account.Name) {
                         player.Send("You say, ".Ansi(Style.white) + message.Ansi(Style.white));
                     } else {
@@ -71,25 +70,25 @@ namespace Mountain.classes.handlers {
         }
 
         private void Look(Packet packet) {
-            string response = packet.Client.Room.GetName(), names = string.Empty;
+            string response = packet.Client.Location.Room.GetName(), names = string.Empty;
             packet.Client.Send("".NewLine(), false);
             packet.Client.Send(response.Ansi(Style.cyan).NewLine());
-            response = packet.Client.Room.GetDesciption();
+            response = packet.Client.Location.Room.GetDesciption();
             packet.Client.Send(response.Ansi(Style.white).WordWrap(), false);
 
-            names = Functions.GetNames(packet.Client.Room.Exits.ToArray());
+            names = Functions.GetNames(packet.Client.Location.Room.Exits.ToArray());
             if (names != string.Empty) response = "Obvious exits: " + names;
             else response = "No obvious exits.";
 
             packet.Client.Send(response.Ansi(Style.green).NewLine());
 
             names = string.Empty;
-            if (packet.Client.Room.Players.Count > 1) {
-                names = Functions.GetOtherNames(packet.Client.Room.Players.ToArray(), packet.Client.Account.Name);
+            if (packet.Client.Location.Room.Players.Count > 1) {
+                names = Functions.GetOtherNames(packet.Client.Location.Room.Players.ToArray(), packet.Client.Account.Name);
                 if (names != string.Empty) packet.Client.Send("You see:" + names.Ansi(true, Style.cyan, Style.boldOn).WordWrap().NewLine());
             }
 
-            names = Functions.GetNames(packet.Client.Room.Mobs.ToArray());
+            names = Functions.GetNames(packet.Client.Location.Room.Mobs.ToArray());
             if (names != string.Empty) packet.Client.Send("You see:" + names.Ansi(Style.green).NewLine());
             // add items
         }
@@ -97,7 +96,7 @@ namespace Mountain.classes.handlers {
         private void Quit(Packet packet) {
             settings.Players.Remove(packet.Client.Account.Name, "Player has left.");
             packet.Client.Send("See you again soon!".Ansi(Style.white).NewLine().NewLine());
-            packet.Client.Room.Players.Remove(packet.Client.Account.Name);
+            packet.Client.Location.Room.Players.Remove(packet.Client.Account.Name);
             SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnected, packet.Client.Account.Name + " has left.", packet.Client);
             settings.SystemEventQueue.Push(eventPacket);
             packet.Client.Shutdown();
@@ -136,19 +135,19 @@ namespace Mountain.classes.handlers {
             // see if more than one exit starts with what was received
 
             // make sure we have a room first, before attempting to actually go there
-            int results = Functions.GetSameNameCount(packet.Client.Room.Exits.ToArray(), packet.parameter);            
+            int results = Functions.GetSameNameCount(packet.Client.Location.Room.Exits.ToArray(), packet.parameter);            
             if (results > 1) {
                 packet.Client.Send("Too ambiguous.".Ansi(Style.yellow).NewLine());
                 return;
             }
 
-            Exit exit = packet.Client.Room.Exits.Find(e => (e.Name.StartsWith(packet.parameter, StringComparison.OrdinalIgnoreCase)));
+            Exit exit = packet.Client.Location.Room.Exits.Find(e => (e.Name.StartsWith(packet.parameter, StringComparison.OrdinalIgnoreCase)));
             if (exit == null) {
                 DontKnowYet(packet);
                 return;
             }
-            Room nextRoom = exit.link;
-            packet.Client.Room.RemovePlayer(packet.Client, exit.Name);
+            Room nextRoom = exit.Linkage.Room;
+            packet.Client.Location.Room.RemovePlayer(packet.Client, exit.Name);
             nextRoom.AddPlayer(packet.Client);
         }
 

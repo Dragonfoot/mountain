@@ -6,8 +6,7 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.handlers {
 
-    public class PlayerCommands {
-
+    [Serializable] public class PlayerCommands {
         private Dictionary<string, Action<Packet>> List;
         ApplicationSettings settings;
         public List<string> Keys;

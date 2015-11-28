@@ -8,7 +8,7 @@ namespace Mountain.classes.handlers {
     public enum login { error, name, newUser, password, newpassword, confirmPassword, raceType, stats }
     public enum userStatus { loggedIn, nonExistent, laggedOut, available}
 
-    public class LoginDispatcher {
+    [Serializable] public class LoginDispatcher {
         protected login action;
         public Account LoginClient;
         Connection Client;

@@ -26,6 +26,16 @@ namespace Mountain.classes.functions {
 
         #region enums
 
+
+        public static Room DeepCopy<Room>(this Room input) {
+            using (MemoryStream stream = new MemoryStream()) {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, input);
+                stream.Position = 0;
+                return (Room)formatter.Deserialize(stream);
+            }
+        }
+
         // FruitType myBasket = FruitType.Grapes | FruitType.Oranges;
 
         public static bool Has<T>(this Enum enumType, T flag) { // bool hasGrapes = myBasket.Has(FruitType.Grapes); = true
@@ -61,10 +71,9 @@ namespace Mountain.classes.functions {
         }
 
         #endregion enums
-
         public static T DeepClone<T>(this T input) where T : ISerializable { // true copy, so no references
             using (var stream = new MemoryStream()) {
-                var formatter = new BinaryFormatter();
+                BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(stream, input);
                 stream.Position = 0;
                 return (T)formatter.Deserialize(stream);

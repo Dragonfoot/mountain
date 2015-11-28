@@ -7,9 +7,7 @@ using Mountain.classes.collections;
 
 namespace Mountain.classes {
 
-    [Serializable]
-    [XmlRoot]
-    public class Area : Identity {
+    [Serializable][XmlRoot] public class Area : Identity {
         [XmlArray("Rooms")] public Rooms Rooms { get; private set; }
         [XmlIgnore] public bool Active { get; set; } 
         private CancellationTokenSource cancellationTokenSource;
@@ -30,8 +28,12 @@ namespace Mountain.classes {
         }
 
         public void AddRoom(Room room) {
-            room.Area = this;
+            room.Linkage.Area = this;
             Rooms.Add(room);
+        }
+
+        public override string ToString() {
+            return Name;
         }
 
         public void Load(string filename) {

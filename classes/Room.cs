@@ -16,15 +16,14 @@ using Mountain.classes.tcp;
 
 namespace Mountain.classes {
 
+    [Serializable]
     public class Room : Identity {
         [XmlIgnore] public ConcurrentBag<Mob> Mobs { get; set; }
         [XmlIgnore] public ConcurrentBag<Item> Items { get; set; }
-        [XmlIgnore] public Players Players { get; set; }
+        [XmlIgnore][NonSerialized()] public Players Players;
         [XmlIgnore] public PlayerEventQueue Messages;
         [XmlIgnore] public ApplicationSettings settings;
-        [XmlIgnore] public RoomID RoomID;
-        [XmlIgnore] public Area Area { get { return area; } set { RoomID.Area = value.Name; area = value; } }
-        private Area area;
+        [XmlIgnore] public Linkage Linkage { get; set; }
         public string shortDescription { get; set; }
         public roomType roomType { get; set; }
         public roomRestrictionType roomRestrictons { get; set; }
@@ -34,31 +33,27 @@ namespace Mountain.classes {
 
         public Room(ApplicationSettings appSettings, Area area) {
             InitializeRoom(appSettings);
-            Area = area;
-            Name = "New Room";
+            Name = "New Room";;
             Description = "This is a newly created room";
-            RoomID = new RoomID(ID, Name, area.Name);
+            Linkage = new Linkage(Name, area, this);
         }
         public Room(string name, ApplicationSettings appSettings, Area area) {
             InitializeRoom(appSettings);
-            RoomID = new RoomID(ID, Name, area.Name);
-            Area = area;
-            SetName(name);
+            Name = name;
             Description = Name + " is a newly created room";
+            Linkage = new Linkage(Name, area, this);
         }
         public Room(string name, string description, ApplicationSettings appSettings, Area area) {
             InitializeRoom(appSettings);
-            RoomID = new RoomID(ID, name, area.Name);
-            Area = area;
-            SetName(name);
+            Name = name;
             Description = description;
+            Linkage = new Linkage(Name, area, this);
         }
         public Room() { // for serializer
         }
 
-        public void SetName(string name) {
-            Name = name;
-            this.RoomID.Name = name;
+        public override string ToString() {
+            return Name;
         }
 
         private void InitializeRoom(ApplicationSettings appSettings) {
@@ -70,10 +65,9 @@ namespace Mountain.classes {
             Items = new ConcurrentBag<Item>();
             Messages = new PlayerEventQueue();            
             Messages.OnEventReceived += Messages_OnPlayerEventReceived;
-            this.Players.OnPlayerAdded += Players_OnPlayerAdded;
-            this.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
+            Players.OnPlayerAdded += Players_OnPlayerAdded;
+            Players.OnPlayerRemoved += Players_OnPlayerRemoved;
         }
-
 
         private void Players_OnPlayerAdded(object myObject, Connection player, string message = "") {
             string name = player.Account.Name;
@@ -83,6 +77,7 @@ namespace Mountain.classes {
                 else SendCommand(player, "look");
             }
         }
+
         private void Players_OnPlayerRemoved(object myObject, Connection player, string message = "") {
             foreach (Connection Player in Players) {
                 Player.Send(player.Account.Name.Ansi(Style.white) + " goes to the " + message + ".".NewLine());
@@ -93,6 +88,7 @@ namespace Mountain.classes {
             Task HandleMessage = new Task(() => player.Commands(player, command));
             HandleMessage.Start();
         }
+
         public string GetName() { return Name; }
         public string GetDesciption() { return Description; }
         public string GetExits() { return Functions.GetNames(Exits.ToArray()); }
@@ -112,7 +108,7 @@ namespace Mountain.classes {
         }
 
         public void AddExit(Exit exit) {
-            exit.parent = this;
+            exit.Owner = this;
             Exits.Add(exit);
         }
 
@@ -123,12 +119,12 @@ namespace Mountain.classes {
 
         public void AddPlayer(Connection player) {
             Players.Add(player);
-            player.Room = this;
-            player.Account.RoomID = RoomID;
+            player.Location.Room = this;
+            player.Account.Location = new Linkage(Linkage.DoorLabel, Linkage.Area, Linkage.Room);
         }
 
-        public void RemovePlayer(Connection player, string exitName) {
-            Players.Remove(player.Account.Name, exitName);
+        public void RemovePlayer(Connection player, string message) {
+            Players.Remove(player.Account.Name, message);
         }
 
         public string SaveXML() { 

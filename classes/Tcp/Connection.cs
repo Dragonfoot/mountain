@@ -3,7 +3,6 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Linq;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,29 +13,29 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.tcp {
 
-    [XmlRoot("Player")] public class Connection : Identity, IDisposable {
-        [XmlIgnore] public StateObject state { get; set; }
-        [XmlIgnore] public TcpClient Socket { get; set; }
-        [XmlIgnore] public IPAddress IPAddress;
-        [XmlIgnore] public int Port;
-        [XmlIgnore] public ApplicationSettings settings;
-        [XmlIgnore] public Stack<string> ResponseStack;
-        [XmlIgnore] public CommandHandler Commands;
-        [XmlIgnore] public Room Room { get { return room; } set { SetRoom(value); } }
-        [XmlIgnore] public ManualResetEvent MessageReceivedDone;
-        [XmlIgnore] public ManualResetEvent MessageSentDone;
+    [XmlRoot("Player")][Serializable] public class Connection : Identity, IDisposable {
+        [XmlIgnore][NonSerialized()] public TcpClient Socket;
+        [XmlIgnore][NonSerialized()] public ApplicationSettings settings;
+        [XmlIgnore][NonSerialized()] public Stack<string> ResponseStack;
+        [XmlIgnore][NonSerialized()] public CommandHandler Commands;
+        [XmlIgnore][NonSerialized()] public ManualResetEvent MessageReceivedDone;
+        [XmlIgnore][NonSerialized()] public ManualResetEvent MessageSentDone;
+        [XmlIgnore][NonSerialized()] public StateObject state;
+        [XmlIgnore][NonSerialized()] public IPAddress IPAddress;
+        [XmlIgnore][NonSerialized()] public int Port;
+        [NonSerialized()] private LoginDispatcher LoginDispatcher;   // login functions
+        [NonSerialized()] private PlayerDispatcher PlayerDispatcher; // player functions
         [XmlIgnore] public bool Connected { get {
                 bool read = Socket.Client.Poll(500, SelectMode.SelectRead);
                 bool status = (Socket.Client.Available == 0);
                 return !(read & status);
             }
         }
-        private Room room;
-        private LoginDispatcher LoginDispatcher;   // login functions
-        private PlayerDispatcher PlayerDispatcher; // player functions
+        public Linkage Location { get { return location; } set { SetRoom(value.Room); } }
         public Account Account { get; set; }
         public Stats Stats { get; set; }
         public Equipment Equipment { get; set; }
+        private Linkage location;
         public delegate void CommandHandler(object myObject, string message);
 
         public Connection(TcpClient socket, ApplicationSettings appSettings) {
@@ -55,8 +54,9 @@ namespace Mountain.classes.tcp {
             StartReceiving();
         }
         
-        public Connection() { // for xml serialization only
+        public Connection() { // empty, for xml serialization
         }
+
         protected void StartReceiving() {
             SystemEventPacket packet = new SystemEventPacket(EventType.connection, "New Connection begun from " + this.IPAddress.ToString(), this);
             settings.SystemEventQueue.Push(packet);
@@ -107,14 +107,12 @@ namespace Mountain.classes.tcp {
             Commands = PlayerDispatcher.OnPlayerMessageReceived;
             SystemEventPacket packet = new SystemEventPacket(EventType.login, this.Account.Name + " has entered the world.", this);
             settings.SystemEventQueue.Push(packet);
-            Room.AddPlayer(this);
+            Location.Room.AddPlayer(this);
 
         }
 
         private void SetRoom(Room room) {
-            this.room = room;
-            Account.RoomID = room.RoomID;
-            Account.Room = room;
+            Account.Location = location = new Linkage(room.Name, room.Linkage.Area, room);
         }
 
         public void Send(string data, bool indent = true) {
