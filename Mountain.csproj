@@ -119,6 +119,12 @@
     <Compile Include="classes\Mobs\Mob.cs" />
     <Compile Include="classes\Room.cs" />
     <Compile Include="classes\World.cs" />
+    <Compile Include="Dialogs\ExitEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ExitEditor.Designer.cs">
+      <DependentUpon>ExitEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\RoomEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="Dialogs\AreaForm.resx">
       <DependentUpon>AreaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ExitEditor.resx">
+      <DependentUpon>ExitEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RoomEditor.resx">
       <DependentUpon>RoomEditor.cs</DependentUpon>

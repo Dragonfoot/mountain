@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -44,14 +45,18 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.fixtureListBox = new System.Windows.Forms.ListBox();
             this.settingsButton = new System.Windows.Forms.Button();
+            this.exitContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.exitContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -64,7 +69,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(616, 385);
+            this.panel1.Size = new System.Drawing.Size(612, 385);
             this.panel1.TabIndex = 0;
             // 
             // descriptionTextBox
@@ -72,7 +77,7 @@
             this.descriptionTextBox.Location = new System.Drawing.Point(16, 63);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(193, 149);
+            this.descriptionTextBox.Size = new System.Drawing.Size(193, 168);
             this.descriptionTextBox.TabIndex = 15;
             // 
             // label7
@@ -98,7 +103,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.exitListBox);
-            this.panel2.Location = new System.Drawing.Point(263, 18);
+            this.panel2.Location = new System.Drawing.Point(263, 16);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(161, 121);
             this.panel2.TabIndex = 12;
@@ -114,6 +119,7 @@
             // 
             // exitListBox
             // 
+            this.exitListBox.ContextMenuStrip = this.exitContextMenuStrip;
             this.exitListBox.FormattingEnabled = true;
             this.exitListBox.Location = new System.Drawing.Point(12, 21);
             this.exitListBox.Name = "exitListBox";
@@ -131,7 +137,7 @@
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(450, 403);
+            this.button1.Location = new System.Drawing.Point(454, 403);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -141,7 +147,7 @@
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(532, 403);
+            this.button2.Location = new System.Drawing.Point(536, 403);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -153,7 +159,7 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.permListBox);
-            this.panel3.Location = new System.Drawing.Point(263, 146);
+            this.panel3.Location = new System.Drawing.Point(263, 144);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(161, 121);
             this.panel3.TabIndex = 16;
@@ -180,7 +186,7 @@
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.mobListBox);
-            this.panel4.Location = new System.Drawing.Point(432, 146);
+            this.panel4.Location = new System.Drawing.Point(432, 144);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(161, 121);
             this.panel4.TabIndex = 17;
@@ -205,7 +211,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 223);
+            this.label3.Location = new System.Drawing.Point(19, 237);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 18;
@@ -213,7 +219,7 @@
             // 
             // shortTextBox
             // 
-            this.shortTextBox.Location = new System.Drawing.Point(16, 238);
+            this.shortTextBox.Location = new System.Drawing.Point(16, 252);
             this.shortTextBox.Multiline = true;
             this.shortTextBox.Name = "shortTextBox";
             this.shortTextBox.Size = new System.Drawing.Size(193, 54);
@@ -229,17 +235,17 @@
             this.panel5.Controls.Add(this.label7);
             this.panel5.Controls.Add(this.roomNameTextBox);
             this.panel5.Controls.Add(this.label3);
-            this.panel5.Location = new System.Drawing.Point(16, 18);
+            this.panel5.Location = new System.Drawing.Point(16, 16);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(232, 346);
+            this.panel5.Size = new System.Drawing.Size(232, 352);
             this.panel5.TabIndex = 20;
             // 
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel6.Controls.Add(this.label4);
-            this.panel6.Controls.Add(this.listBox1);
-            this.panel6.Location = new System.Drawing.Point(432, 18);
+            this.panel6.Controls.Add(this.fixtureListBox);
+            this.panel6.Location = new System.Drawing.Point(432, 16);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(161, 121);
             this.panel6.TabIndex = 21;
@@ -249,26 +255,46 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(14, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Items";
+            this.label4.Text = "Fixtures";
             // 
-            // listBox1
+            // fixtureListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 21);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(131, 82);
-            this.listBox1.TabIndex = 2;
+            this.fixtureListBox.FormattingEnabled = true;
+            this.fixtureListBox.Location = new System.Drawing.Point(12, 21);
+            this.fixtureListBox.Name = "fixtureListBox";
+            this.fixtureListBox.Size = new System.Drawing.Size(131, 82);
+            this.fixtureListBox.TabIndex = 2;
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(76, 305);
+            this.settingsButton.Location = new System.Drawing.Point(76, 315);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(75, 23);
             this.settingsButton.TabIndex = 20;
             this.settingsButton.Text = "Settings";
             this.settingsButton.UseVisualStyleBackColor = true;
+            // 
+            // exitContextMenuStrip
+            // 
+            this.exitContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem,
+            this.removeToolStripMenuItem});
+            this.exitContextMenuStrip.Name = "exitContextMenuStrip";
+            this.exitContextMenuStrip.Size = new System.Drawing.Size(114, 48);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.addToolStripMenuItem.Text = "Add";
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.removeToolStripMenuItem.Text = "Remove";
             // 
             // RoomEditor
             // 
@@ -276,7 +302,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button2;
-            this.ClientSize = new System.Drawing.Size(644, 430);
+            this.ClientSize = new System.Drawing.Size(637, 430);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
@@ -294,6 +320,7 @@
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.exitContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -312,7 +339,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox fixtureListBox;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox mobListBox;
@@ -323,5 +350,8 @@
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.TextBox shortTextBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ContextMenuStrip exitContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
     }
 }

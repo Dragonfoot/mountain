@@ -35,7 +35,7 @@ namespace Mountain.classes {
         }
 
         public Exit ShallowCopy() {
-            Exit other = (Exit) this.MemberwiseClone();
+            Exit other = (Exit)MemberwiseClone();
             return other;
         }
 
