@@ -112,7 +112,7 @@ namespace Mountain.classes.tcp {
         }
 
         private void SetRoom(Room room) {
-            Account.Location = location = new Linkage(room.Name, room.Linkage.Area, room);
+            Account.Location = location = new Linkage(room.Name, room.Location.Area, room);
         }
 
         public void Send(string data, bool indent = true) {

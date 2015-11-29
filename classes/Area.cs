@@ -28,7 +28,7 @@ namespace Mountain.classes {
         }
 
         public void AddRoom(Room room) {
-            room.Linkage.Area = this;
+            room.Location.Area = this;
             Rooms.Add(room);
         }
 

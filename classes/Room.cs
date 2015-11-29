@@ -20,10 +20,10 @@ namespace Mountain.classes {
     public class Room : Identity {
         [XmlIgnore] public ConcurrentBag<Mob> Mobs { get; set; }
         [XmlIgnore] public ConcurrentBag<Item> Items { get; set; }
-        [XmlIgnore][NonSerialized()] public Players Players;
+        [XmlIgnore] public Players Players { get; set; }
         [XmlIgnore] public PlayerEventQueue Messages;
         [XmlIgnore] public ApplicationSettings settings;
-        [XmlIgnore] public Linkage Linkage { get; set; }
+        [XmlIgnore] public Linkage Location { get; set; }
         public string shortDescription { get; set; }
         public roomType roomType { get; set; }
         public roomRestrictionType roomRestrictons { get; set; }
@@ -35,21 +35,21 @@ namespace Mountain.classes {
             InitializeRoom(appSettings);
             Name = "New Room";;
             Description = "This is a newly created room";
-            Linkage = new Linkage(Name, area, this);
+            Location = new Linkage(Name, area, this);
         }
         public Room(string name, ApplicationSettings appSettings, Area area) {
             InitializeRoom(appSettings);
             Name = name;
             Description = Name + " is a newly created room";
-            Linkage = new Linkage(Name, area, this);
+            Location = new Linkage(Name, area, this);
         }
         public Room(string name, string description, ApplicationSettings appSettings, Area area) {
             InitializeRoom(appSettings);
             Name = name;
             Description = description;
-            Linkage = new Linkage(Name, area, this);
+            Location = new Linkage(Name, area, this);
         }
-        public Room() { // for serializer
+        public Room() { // for xml-serializer
         }
 
         public override string ToString() {
@@ -120,7 +120,7 @@ namespace Mountain.classes {
         public void AddPlayer(Connection player) {
             Players.Add(player);
             player.Location.Room = this;
-            player.Account.Location = new Linkage(Linkage.DoorLabel, Linkage.Area, Linkage.Room);
+            player.Account.Location = new Linkage(Location.DoorLabel, Location.Area, Location.Room);
         }
 
         public void RemovePlayer(Connection player, string message) {
@@ -167,14 +167,23 @@ namespace Mountain.classes {
                 // You see (an) orange, 23 pumpkin seed(s), (a) hungry cat, Toetag('s) nose.
             }
             return view.ToArray();
-        }
-
+        }   
+             
         protected void Save() {
             throw new NotImplementedException("Room save");
         }
+
         protected void Load() {
             throw new NotImplementedException("Room load");
         }
-        
+
+        public Room ShallowCopy() {
+            Room roomCopy = (Room) MemberwiseClone();
+            Array exitsCopy = Exits.ToArray();
+            roomCopy.Exits.Clear();
+            if (exitsCopy.Length > 0) foreach(Exit exitCopy in exitsCopy) roomCopy.Exits.Add(exitCopy.ShallowCopy());
+            roomCopy.Location = Location.ShallowCopy();  
+            return roomCopy;
+        }
     }
 }

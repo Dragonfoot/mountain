@@ -79,7 +79,7 @@
     </Compile>
     <Compile Include="classes\Area.cs" />
     <Compile Include="classes\Collections\SystemEventQueue.cs" />
-    <Compile Include="classes\DataObjects\Factory.cs" />
+    <Compile Include="classes\Functions\Factory.cs" />
     <Compile Include="classes\DataObjects\Responses.cs" />
     <Compile Include="classes\Handlers\Combat.cs" />
     <Compile Include="classes\Handlers\Emote.cs" />

@@ -1,17 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
-using System.Threading;
 using System.Xml.Serialization;
-using Mountain.classes.functions;
+using Mountain.classes.dataobjects;
 using Mountain.classes.tcp;
-namespace Mountain.classes.dataobjects {
+namespace Mountain.classes.functions {
 
     [Serializable] public class Factory {
         public void LoadPlayerFromFile(Connection player, string name, string file, ApplicationSettings settings) {
             if (!File.Exists(file)) {
-                player.Account.Location = new Linkage(settings.TheVoid.Name, settings.TheVoid.Linkage.Area, settings.TheVoid);
+                player.Account.Location = new Linkage(settings.TheVoid.Name, settings.TheVoid.Location.Area, settings.TheVoid);
                 return;
             } else {
                 XmlSerializer serializer = new XmlSerializer(typeof(Connection));

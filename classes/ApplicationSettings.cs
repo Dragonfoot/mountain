@@ -74,7 +74,7 @@ namespace Mountain.classes {
 
         public void SwapLoginForPlayer(Connection connection) {
             connection.Name = connection.Account.Name;
-            connection.Account.Location = new Linkage(TheVoid.Name, TheVoid.Linkage.Area, TheVoid);
+            connection.Account.Location = new Linkage(TheVoid.Name, TheVoid.Location.Area, TheVoid);
             string file = PlayersDirectory + "\\" + connection.Account.Name + "_test.xml";
             factory.LoadPlayerFromFile(connection, connection.Account.Name, file, this);
             Players.Add(connection);

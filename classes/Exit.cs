@@ -33,9 +33,16 @@ namespace Mountain.classes {
             ClassType = classObjectType.exit;
             Name = null;
         }
+
+        public Exit ShallowCopy() {
+            Exit other = (Exit) this.MemberwiseClone();
+            return other;
+        }
+
         public override string ToString() {
             return Name;
         }
+
         public void Update(ExitData data) {
             Name = data.Name;
             Description = data.Description;

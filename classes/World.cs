@@ -133,7 +133,7 @@ namespace Mountain.classes {
         public string GetAreaNameByRoomName(string name) {
             Room room = GetRoomByName(name);
             if (room == null) return null;
-            return room.Linkage.Area.Name;
+            return room.Location.Area.Name;
         }
     }
 }

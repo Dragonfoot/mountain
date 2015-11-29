@@ -16,6 +16,10 @@ namespace Mountain.classes.dataobjects {
             DoorLabel = doorLabel;
         }
 
+        public Linkage ShallowCopy() {
+            return (Linkage)MemberwiseClone();
+        }
+
         public Linkage() {
         }
     }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
@@ -65,33 +62,6 @@ namespace Mountain.classes.functions {
             return false;
         }
 
-        public static Room CloneRoomToEdit(Room room, ApplicationSettings settings) {  // switch to extension.deepclone?
-            Room clone = new Room(room.Name, room.Description, settings, room.Linkage.Area);
-            clone.Linkage = new Linkage(room.Name, room.Linkage.Area, room);
-            clone.roomType = room.roomType;
-            clone.Tag = room.Tag;
-            clone.ID = room.ID;
-            if (room.Exits.Any()) {
-                foreach (Exit exit in room.Exits) {
-                    Exit clonedExit = new Exit();
-                    clonedExit.ID = exit.ID;
-                    clonedExit.Name = exit.Name;
-                    clonedExit.Description = exit.Description;
-                    clonedExit.Owner = exit.Owner;
-                    clonedExit.Linkage = new Linkage(exit.DoorLabel, exit.LinkArea, exit.Owner);
-                    clonedExit.Open = exit.Open;
-                    clonedExit.Lockable = exit.Lockable;
-                    clonedExit.Visible = exit.Visible;
-                    clonedExit.Repairable = exit.Repairable;
-                    clonedExit.ExitType = exit.ExitType;
-                    clonedExit.LockType = exit.LockType;
-                    clonedExit.DoorType = exit.DoorType;
-                    clonedExit.Restrictions = exit.Restrictions;
-                    clone.AddExit(clonedExit);
-                }
-            }
-            return clone;
-        }
 
         public static void UpdateRoomEdits(Room fromRoom, Room toRoom) {
             toRoom.Name = fromRoom.Name;
