@@ -360,7 +360,7 @@ namespace Mountain.Dialogs {
         // end ***********************************
 
 
-        private void roomDescriptionTextBox_Leave(object sender, EventArgs e) {
+        private void descriptionTextBox_Leave(object sender, EventArgs e) {
             if (descriptionChanged) {
                 roomEdits.Description = descriptionTextBox.Text;
                 descriptionChanged = false;

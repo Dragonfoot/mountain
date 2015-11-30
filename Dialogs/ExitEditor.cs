@@ -7,11 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Mountain.classes;
 
 namespace Mountain.Dialogs {
+
     public partial class ExitEditor : Form {
-        public ExitEditor() {
+        Exit Exit;
+        ApplicationSettings settings;
+        public ExitEditor(Exit exit, ApplicationSettings appSettings) {
             InitializeComponent();
+            Exit = exit;
+            settings = appSettings;
         }
     }
 }

@@ -25,38 +25,38 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.descriptionTextBox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.exitListBox = new System.Windows.Forms.ListBox();
-            this.roomNameTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.permListBox = new System.Windows.Forms.ListBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.mobListBox = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.shortTextBox = new System.Windows.Forms.TextBox();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.fixtureListBox = new System.Windows.Forms.ListBox();
-            this.settingsButton = new System.Windows.Forms.Button();
-            this.exitContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.mobListBox = new System.Windows.Forms.ListBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.permListBox = new System.Windows.Forms.ListBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.shortTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.descriptionTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.roomNameTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.exitListBox = new System.Windows.Forms.ListBox();
+            this.exitContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.exitContextMenuStrip.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.exitContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -72,13 +72,134 @@
             this.panel1.Size = new System.Drawing.Size(612, 385);
             this.panel1.TabIndex = 0;
             // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.label4);
+            this.panel6.Controls.Add(this.fixtureListBox);
+            this.panel6.Enabled = false;
+            this.panel6.Location = new System.Drawing.Point(432, 16);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(161, 121);
+            this.panel6.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Fixtures";
+            // 
+            // fixtureListBox
+            // 
+            this.fixtureListBox.Enabled = false;
+            this.fixtureListBox.FormattingEnabled = true;
+            this.fixtureListBox.Location = new System.Drawing.Point(12, 21);
+            this.fixtureListBox.Name = "fixtureListBox";
+            this.fixtureListBox.Size = new System.Drawing.Size(131, 82);
+            this.fixtureListBox.TabIndex = 2;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Controls.Add(this.mobListBox);
+            this.panel4.Enabled = false;
+            this.panel4.Location = new System.Drawing.Point(432, 144);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(161, 121);
+            this.panel4.TabIndex = 17;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Mobs";
+            // 
+            // mobListBox
+            // 
+            this.mobListBox.Enabled = false;
+            this.mobListBox.FormattingEnabled = true;
+            this.mobListBox.Location = new System.Drawing.Point(12, 21);
+            this.mobListBox.Name = "mobListBox";
+            this.mobListBox.Size = new System.Drawing.Size(131, 82);
+            this.mobListBox.TabIndex = 2;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.permListBox);
+            this.panel3.Enabled = false;
+            this.panel3.Location = new System.Drawing.Point(263, 144);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(161, 121);
+            this.panel3.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Perms";
+            // 
+            // permListBox
+            // 
+            this.permListBox.Enabled = false;
+            this.permListBox.FormattingEnabled = true;
+            this.permListBox.Location = new System.Drawing.Point(12, 21);
+            this.permListBox.Name = "permListBox";
+            this.permListBox.Size = new System.Drawing.Size(131, 82);
+            this.permListBox.TabIndex = 2;
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.shortTextBox);
+            this.panel5.Controls.Add(this.label6);
+            this.panel5.Controls.Add(this.descriptionTextBox);
+            this.panel5.Controls.Add(this.label7);
+            this.panel5.Controls.Add(this.roomNameTextBox);
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Location = new System.Drawing.Point(16, 16);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(232, 303);
+            this.panel5.TabIndex = 20;
+            // 
+            // shortTextBox
+            // 
+            this.shortTextBox.Enabled = false;
+            this.shortTextBox.Location = new System.Drawing.Point(16, 235);
+            this.shortTextBox.Multiline = true;
+            this.shortTextBox.Name = "shortTextBox";
+            this.shortTextBox.Size = new System.Drawing.Size(193, 46);
+            this.shortTextBox.TabIndex = 19;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(19, 6);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Name";
+            // 
             // descriptionTextBox
             // 
             this.descriptionTextBox.Location = new System.Drawing.Point(16, 63);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(193, 168);
+            this.descriptionTextBox.Size = new System.Drawing.Size(193, 149);
             this.descriptionTextBox.TabIndex = 15;
+            this.descriptionTextBox.TextChanged += new System.EventHandler(this.descriptionTextBox_TextChanged);
+            this.descriptionTextBox.Leave += new System.EventHandler(this.descriptionTextBox_Leave);
             // 
             // label7
             // 
@@ -89,14 +210,26 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Description";
             // 
-            // label6
+            // roomNameTextBox
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 6);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Name";
+            this.roomNameTextBox.Location = new System.Drawing.Point(16, 20);
+            this.roomNameTextBox.Name = "roomNameTextBox";
+            this.roomNameTextBox.Size = new System.Drawing.Size(193, 20);
+            this.roomNameTextBox.TabIndex = 1;
+            this.roomNameTextBox.TextChanged += new System.EventHandler(this.roomNameTextBox_TextChanged);
+            this.roomNameTextBox.Enter += new System.EventHandler(this.roomNameTextBox_Enter);
+            this.roomNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomNameTextBox_KeyPress);
+            this.roomNameTextBox.Leave += new System.EventHandler(this.roomNameTextBox_Leave);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Enabled = false;
+            this.label3.Location = new System.Drawing.Point(19, 220);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(86, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Short Descripton";
             // 
             // panel2
             // 
@@ -119,20 +252,44 @@
             // 
             // exitListBox
             // 
-            this.exitListBox.ContextMenuStrip = this.exitContextMenuStrip;
+            this.exitListBox.ContextMenuStrip = this.exitContextMenu;
             this.exitListBox.FormattingEnabled = true;
             this.exitListBox.Location = new System.Drawing.Point(12, 21);
             this.exitListBox.Name = "exitListBox";
             this.exitListBox.Size = new System.Drawing.Size(131, 82);
             this.exitListBox.TabIndex = 2;
             this.exitListBox.SelectedIndexChanged += new System.EventHandler(this.exitListBox_SelectedIndexChanged);
+            this.exitListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.exitListBox_MouseDoubleClick);
+            this.exitListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.exitListBox_MouseDown);
             // 
-            // roomNameTextBox
+            // exitContextMenu
             // 
-            this.roomNameTextBox.Location = new System.Drawing.Point(16, 20);
-            this.roomNameTextBox.Name = "roomNameTextBox";
-            this.roomNameTextBox.Size = new System.Drawing.Size(193, 20);
-            this.roomNameTextBox.TabIndex = 1;
+            this.exitContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.removeToolStripMenuItem});
+            this.exitContextMenu.Name = "exitContextMenuStrip";
+            this.exitContextMenu.Size = new System.Drawing.Size(153, 92);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addToolStripMenuItem.Text = "Add";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.removeToolStripMenuItem.Text = "Remove";
             // 
             // button1
             // 
@@ -154,148 +311,6 @@
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.permListBox);
-            this.panel3.Location = new System.Drawing.Point(263, 144);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(161, 121);
-            this.panel3.TabIndex = 16;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Perms";
-            // 
-            // permListBox
-            // 
-            this.permListBox.FormattingEnabled = true;
-            this.permListBox.Location = new System.Drawing.Point(12, 21);
-            this.permListBox.Name = "permListBox";
-            this.permListBox.Size = new System.Drawing.Size(131, 82);
-            this.permListBox.TabIndex = 2;
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.mobListBox);
-            this.panel4.Location = new System.Drawing.Point(432, 144);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(161, 121);
-            this.panel4.TabIndex = 17;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Mobs";
-            // 
-            // mobListBox
-            // 
-            this.mobListBox.FormattingEnabled = true;
-            this.mobListBox.Location = new System.Drawing.Point(12, 21);
-            this.mobListBox.Name = "mobListBox";
-            this.mobListBox.Size = new System.Drawing.Size(131, 82);
-            this.mobListBox.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 237);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Short Descripton";
-            // 
-            // shortTextBox
-            // 
-            this.shortTextBox.Location = new System.Drawing.Point(16, 252);
-            this.shortTextBox.Multiline = true;
-            this.shortTextBox.Name = "shortTextBox";
-            this.shortTextBox.Size = new System.Drawing.Size(193, 54);
-            this.shortTextBox.TabIndex = 19;
-            // 
-            // panel5
-            // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.settingsButton);
-            this.panel5.Controls.Add(this.shortTextBox);
-            this.panel5.Controls.Add(this.label6);
-            this.panel5.Controls.Add(this.descriptionTextBox);
-            this.panel5.Controls.Add(this.label7);
-            this.panel5.Controls.Add(this.roomNameTextBox);
-            this.panel5.Controls.Add(this.label3);
-            this.panel5.Location = new System.Drawing.Point(16, 16);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(232, 352);
-            this.panel5.TabIndex = 20;
-            // 
-            // panel6
-            // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel6.Controls.Add(this.label4);
-            this.panel6.Controls.Add(this.fixtureListBox);
-            this.panel6.Location = new System.Drawing.Point(432, 16);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(161, 121);
-            this.panel6.TabIndex = 21;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 7);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Fixtures";
-            // 
-            // fixtureListBox
-            // 
-            this.fixtureListBox.FormattingEnabled = true;
-            this.fixtureListBox.Location = new System.Drawing.Point(12, 21);
-            this.fixtureListBox.Name = "fixtureListBox";
-            this.fixtureListBox.Size = new System.Drawing.Size(131, 82);
-            this.fixtureListBox.TabIndex = 2;
-            // 
-            // settingsButton
-            // 
-            this.settingsButton.Location = new System.Drawing.Point(76, 315);
-            this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(75, 23);
-            this.settingsButton.TabIndex = 20;
-            this.settingsButton.Text = "Settings";
-            this.settingsButton.UseVisualStyleBackColor = true;
-            // 
-            // exitContextMenuStrip
-            // 
-            this.exitContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.removeToolStripMenuItem});
-            this.exitContextMenuStrip.Name = "exitContextMenuStrip";
-            this.exitContextMenuStrip.Size = new System.Drawing.Size(114, 48);
-            // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.addToolStripMenuItem.Text = "Add";
-            // 
-            // removeToolStripMenuItem
-            // 
-            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.removeToolStripMenuItem.Text = "Remove";
-            // 
             // RoomEditor
             // 
             this.AcceptButton = this.button1;
@@ -310,17 +325,17 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "RoomEdit";
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.exitContextMenuStrip.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.exitContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -347,11 +362,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox permListBox;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.TextBox shortTextBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ContextMenuStrip exitContextMenuStrip;
+        private System.Windows.Forms.ContextMenuStrip exitContextMenu;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     }
 }

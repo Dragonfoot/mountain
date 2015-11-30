@@ -99,7 +99,7 @@ namespace Mountain.Dialogs {
                 listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
                 Console.Items.Add("Server is already running");
             } else listenerCheckBox.BackColor = System.Drawing.Color.Red;
-            
+
         }
 
         private void button6_Click(object sender, EventArgs e) { //stop server
@@ -202,9 +202,9 @@ namespace Mountain.Dialogs {
             RoomEditor roomEdit = new RoomEditor(SelectedRoom, settings);
             DialogResult dialogresult = roomEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-            //    Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
-            //    roomsListBox.Items.Clear();
-            //    roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
+                //    Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
+                //    roomsListBox.Items.Clear();
+                //    roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
             }
             roomEdit.Dispose();
         }
@@ -239,7 +239,7 @@ namespace Mountain.Dialogs {
             List<Connection> RemoveList = new List<Connection>();
             foreach (Connection player in settings.Players) {
                 if (player.Connected) continue;
-                RemoveList.Add(player); 
+                RemoveList.Add(player);
             }
             foreach (Connection player in RemoveList) {
                 settings.Players.Remove(player.Account.Name, "Lost connection.");
@@ -250,8 +250,21 @@ namespace Mountain.Dialogs {
                 player.Dispose();
             }
         }
-    }
 
+        private void NewContextMenuItem_Click(object sender, EventArgs e) {
+            Room newRoom = new Room("New Room", "This is the new room description", settings, SelectedArea);
+            RoomEditor roomEdit = new RoomEditor(newRoom, settings);
+            DialogResult dialogresult = roomEdit.ShowDialog();
+            if (dialogresult == DialogResult.OK) {
+                Functions.UpdateRoomEdits(roomEdit.Room, newRoom);
+                SelectedArea.Rooms.Add(newRoom);
+                roomsListBox.Items.Clear();
+                roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
+            }
+            roomEdit.Dispose();
+        }
+
+    }
 }
         
     

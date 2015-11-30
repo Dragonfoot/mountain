@@ -331,13 +331,14 @@
             this.MoveToAreaContextMenuItem,
             this.RemoveContextMenuItem});
             this.RoomContextMenu.Name = "NewRoom";
-            this.RoomContextMenu.Size = new System.Drawing.Size(155, 236);
+            this.RoomContextMenu.Size = new System.Drawing.Size(155, 258);
             // 
             // NewContextMenuItem
             // 
             this.NewContextMenuItem.Name = "NewContextMenuItem";
             this.NewContextMenuItem.Size = new System.Drawing.Size(154, 22);
             this.NewContextMenuItem.Text = "New";
+            this.NewContextMenuItem.Click += new System.EventHandler(this.NewContextMenuItem_Click);
             // 
             // EditContextMenuItem
             // 

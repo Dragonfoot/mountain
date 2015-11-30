@@ -73,7 +73,7 @@
             // returnLinkCheckBox
             // 
             this.returnLinkCheckBox.AutoSize = true;
-            this.returnLinkCheckBox.Location = new System.Drawing.Point(168, 19);
+            this.returnLinkCheckBox.Location = new System.Drawing.Point(169, 19);
             this.returnLinkCheckBox.Name = "returnLinkCheckBox";
             this.returnLinkCheckBox.Size = new System.Drawing.Size(81, 17);
             this.returnLinkCheckBox.TabIndex = 3;
@@ -208,6 +208,7 @@
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.panel2);
             this.Name = "ExitEditor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Exit Editor";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
