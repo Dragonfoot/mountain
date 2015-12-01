@@ -35,7 +35,7 @@ namespace Mountain.Dialogs {
         }
 
         private void exitListBox_SelectedIndexChanged(object sender, System.EventArgs e) {
-            Exit exit = (Exit)exitListBox.SelectedItem;         
+            SelectedExit = (Exit)exitListBox.SelectedItem;         
         }
         private void exitListBox_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button != MouseButtons.Right) return;
@@ -73,6 +73,10 @@ namespace Mountain.Dialogs {
         #region Exit Context Menu
 
         private void editToolStripMenuItem_Click(object sender, System.EventArgs e) {
+            if (nameChanged) {
+                Room.Name = roomNameTextBox.Text;
+                nameChanged = false;
+            }
             ExitEditor exitEdit = new ExitEditor(SelectedExit, settings);
             DialogResult dialogresult = exitEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
@@ -83,9 +87,14 @@ namespace Mountain.Dialogs {
             exitEdit.Dispose();
         }
         private void addToolStripMenuItem_Click(object sender, System.EventArgs e) {
+            if (nameChanged) {
+                Room.Name = roomNameTextBox.Text;
+                nameChanged = false;
+            }
             Exit exit = new Exit();
             exit.LinkArea = Room.Location.Area;
             exit.Owner = Room;
+            exit.DoorLabel = Room.Name;
             ExitEditor exitEdit = new ExitEditor(exit, settings);
             DialogResult dialogresult = exitEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
@@ -112,11 +121,16 @@ namespace Mountain.Dialogs {
         private void roomNameTextBox_KeyPress(object sender, KeyPressEventArgs e) {
             switch (e.KeyChar) {
                 case (char)Keys.Return:
+                    nameChanged = true;
                     descriptionTextBox.Focus();
                     break;
                 case (char)Keys.Escape:
+                    nameChanged = false;
                     roomNameTextBox.Text = Room.Name;
                     roomNameTextBox.SelectAll();
+                    break;
+                default:
+                    nameChanged = true;
                     break;
             }
         }

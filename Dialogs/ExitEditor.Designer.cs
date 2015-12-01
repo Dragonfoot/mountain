@@ -69,6 +69,7 @@
             this.areaComboBox.Name = "areaComboBox";
             this.areaComboBox.Size = new System.Drawing.Size(121, 21);
             this.areaComboBox.TabIndex = 2;
+            this.areaComboBox.SelectedIndexChanged += new System.EventHandler(this.areaComboBox_SelectedIndexChanged);
             // 
             // returnLinkCheckBox
             // 
