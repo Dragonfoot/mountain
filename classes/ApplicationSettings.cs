@@ -76,7 +76,7 @@ namespace Mountain.classes {
             connection.Name = connection.Account.Name;
             connection.Account.Location = new Linkage(TheVoid.Name, TheVoid.Location.Area, TheVoid);
             string file = PlayersDirectory + "\\" + connection.Account.Name + "_test.xml";
-            factory.LoadPlayerFromFile(connection, connection.Account.Name, file, this);
+            factory.LoadPlayerFromFile(connection, connection.Account.Name, file);
             Players.Add(connection);
             Logins.Remove(connection);
             connection.StartPlayer();
@@ -99,7 +99,7 @@ namespace Mountain.classes {
             if (!Directory.Exists(PlayersDirectory)) { Directory.CreateDirectory(PlayersDirectory); }
             string file = BaseDirectory + "\\" + RegisteredUsersAccounts;
          //   if (!File.Exists(file)) {
-                XmlHelper.ReCreateRegistryAccounts(file, this);
+                XmlHelper.ReCreateRegistryAccounts(file);
           //  }
         }
     }

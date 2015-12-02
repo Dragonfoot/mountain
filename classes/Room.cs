@@ -22,7 +22,6 @@ namespace Mountain.classes {
         [XmlIgnore] public ConcurrentBag<Item> Items { get; set; }
         [XmlIgnore] public Players Players { get; set; }
         [XmlIgnore] public PlayerEventQueue Messages;
-        [XmlIgnore] public ApplicationSettings settings;
         [XmlIgnore] public Linkage Location { get; set; }
         public string shortDescription { get; set; }
         public roomType roomType { get; set; }
@@ -31,34 +30,34 @@ namespace Mountain.classes {
         public string Tag { get; set; }
         [XmlArray("Links")] public List<Exit> Exits { get; set; }
 
-        public Room(ApplicationSettings appSettings, Area area) {
-            InitializeRoom(appSettings);
+        public Room( Area area) {
+            InitializeRoom();
             Name = "New Room";;
             Description = "This is a newly created room";
             Location = new Linkage(Name, area, this);
         }
-        public Room(string name, ApplicationSettings appSettings, Area area) {
-            InitializeRoom(appSettings);
+        public Room(string name, Area area) {
+            InitializeRoom();
             Name = name;
             Description = Name + " is a newly created room";
             Location = new Linkage(Name, area, this);
         }
-        public Room(string name, string description, ApplicationSettings appSettings, Area area) {
-            InitializeRoom(appSettings);
+        public Room(string name, string description, Area area) {
+            InitializeRoom();
             Name = name;
             Description = description;
             Location = new Linkage(Name, area, this);
         }
         public Room() { // for xml-serializer
+            Location = new Linkage();
         }
 
         public override string ToString() {
             return Name;
         }
 
-        private void InitializeRoom(ApplicationSettings appSettings) {
+        private void InitializeRoom() {
             ClassType = classObjectType.room;
-            settings = appSettings;
             Exits = new List<Exit>();
             Players = new Players();
             Mobs = new ConcurrentBag<Mob>();
@@ -100,7 +99,7 @@ namespace Mountain.classes {
         private void Messages_OnPlayerEventReceived(object myObject, Packet packet) {
             Packet message = Messages.Pop(); 
             if (message == null) message = packet;
-            settings.SystemMessageQueue.Push("Room received: " + message);
+            Global.Settings.SystemMessageQueue.Push("Room received: " + message);
         }        
         
         public void HeartBeat() {
@@ -134,7 +133,7 @@ namespace Mountain.classes {
             try {
                 serializer.Serialize(writer, this, emptyNamepsaces);
             } catch (Exception e) {
-                settings.SystemMessageQueue.Push(e.ToString());
+                Global.Settings.SystemMessageQueue.Push(e.ToString());
                 return e.ToString();
             }             
             return writer.ToString();

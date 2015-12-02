@@ -7,13 +7,11 @@ namespace Mountain.classes.handlers {
 
     [Serializable] public class PlayerDispatcher {
         Connection Client;
-        ApplicationSettings settings;
         protected Dispatch Commands { get; set; }
 
-        public PlayerDispatcher(Connection client, ApplicationSettings appSettings) {
+        public PlayerDispatcher(Connection client) {
             Client = client;
-            settings = appSettings;
-            Commands = new Dispatch(Client, settings);
+            Commands = new Dispatch(Client);
         }
 
         public void OnPlayerMessageReceived(object myObject, string message) {

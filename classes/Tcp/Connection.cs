@@ -15,7 +15,6 @@ namespace Mountain.classes.tcp {
 
     [XmlRoot("Player")][Serializable] public class Connection : Identity, IDisposable {
         [XmlIgnore][NonSerialized()] public TcpClient Socket;
-        [XmlIgnore][NonSerialized()] public ApplicationSettings settings;
         [XmlIgnore][NonSerialized()] public Stack<string> ResponseStack;
         [XmlIgnore][NonSerialized()] public CommandHandler Commands;
         [XmlIgnore][NonSerialized()] public ManualResetEvent MessageReceivedDone;
@@ -38,11 +37,10 @@ namespace Mountain.classes.tcp {
         private Linkage location;
         public delegate void CommandHandler(object myObject, string message);
 
-        public Connection(TcpClient socket, ApplicationSettings appSettings) {
+        public Connection(TcpClient socket) {
             Socket = socket;
             IPAddress = ((IPEndPoint)socket.Client.RemoteEndPoint).Address;
             Port = ((IPEndPoint)socket.Client.RemoteEndPoint).Port;
-            settings = appSettings;
             Account = new Account();
             Stats = new Stats();
             Equipment = new Equipment();
@@ -50,7 +48,7 @@ namespace Mountain.classes.tcp {
             MessageReceivedDone = new ManualResetEvent(false);
             MessageSentDone = new ManualResetEvent(false);
             state = new StateObject((socket));
-            LoginDispatcher = new LoginDispatcher(this, settings);
+            LoginDispatcher = new LoginDispatcher(this);
             StartReceiving();
         }
         
@@ -59,12 +57,12 @@ namespace Mountain.classes.tcp {
 
         protected void StartReceiving() {
             SystemEventPacket packet = new SystemEventPacket(EventType.connection, "New Connection begun from " + this.IPAddress.ToString(), this);
-            settings.SystemEventQueue.Push(packet);
+            Global.Settings.SystemEventQueue.Push(packet);
             try {
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, SocketFlags.None, ReceiveCallback, state);
             }
             catch (Exception e) {
-                settings.SystemMessageQueue.Push("Connection closed: " + e.ToString());               
+                Global.Settings.SystemMessageQueue.Push("Connection closed: " + e.ToString());               
             }
         }
 
@@ -86,13 +84,13 @@ namespace Mountain.classes.tcp {
                 }
             }
             catch (SocketException e) {
-                settings.SystemMessageQueue.Push("CC0: " + e.ToString());
+                Global.Settings.SystemMessageQueue.Push("CC0: " + e.ToString());
             }
             catch (ObjectDisposedException e) {
-                settings.SystemMessageQueue.Push("CC1: " + e.ToString());
+                Global.Settings.SystemMessageQueue.Push("CC1: " + e.ToString());
             }
             catch (Exception e) {
-                settings.SystemMessageQueue.Push("CC2: " + e.ToString());
+                Global.Settings.SystemMessageQueue.Push("CC2: " + e.ToString());
             }
         }
 
@@ -102,11 +100,11 @@ namespace Mountain.classes.tcp {
         }
 
         public void StartPlayer() {
-            PlayerDispatcher = new PlayerDispatcher(this, settings);
+            PlayerDispatcher = new PlayerDispatcher(this);
             LoginDispatcher = null;
             Commands = PlayerDispatcher.OnPlayerMessageReceived;
             SystemEventPacket packet = new SystemEventPacket(EventType.login, this.Account.Name + " has entered the world.", this);
-            settings.SystemEventQueue.Push(packet);
+            Global.Settings.SystemEventQueue.Push(packet);
             Location.Room.AddPlayer(this);
 
         }
@@ -133,7 +131,7 @@ namespace Mountain.classes.tcp {
                 MessageSentDone.Set(); // tell parent thread we're finished
             }
             catch (Exception e) {
-                settings.SystemMessageQueue.Push("CC3: " + e.ToString());
+                Global.Settings.SystemMessageQueue.Push("CC3: " + e.ToString());
             }
         }
 
@@ -147,13 +145,13 @@ namespace Mountain.classes.tcp {
             if(Socket.Client != null) Socket.Client.Dispose();
         }
         protected void Save() {
-            string file = settings.PlayersDirectory + "\\" + Account.Name + "_test.xml";
+            string file = Global.Settings.PlayersDirectory + "\\" + Account.Name + "_test.xml";
             TextWriter textWriter = new StreamWriter(file);
             try {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(Connection));
                 xmlSerializer.Serialize(textWriter, this);
             } catch (Exception ex) {
-                settings.SystemMessageQueue.Push(ex.ToString());
+                Global.Settings.SystemMessageQueue.Push(ex.ToString());
             } finally {
                 textWriter.Close();
             }

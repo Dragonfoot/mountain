@@ -5,16 +5,14 @@ namespace Mountain.Dialogs {
 
     public partial class RoomEditor : Form {
         public Room Room;
-        public ApplicationSettings settings;
         public Exit SelectedExit;
         private bool nameChanged, descriptionChanged;
         private string name, description;
 
         #region Constructor
-        public RoomEditor(Room roomToEdit, ApplicationSettings appSettings) {
+        public RoomEditor(Room roomToEdit) {
             InitializeComponent();
             Room = roomToEdit.ShallowCopy();  // copy the room to edit so we can back out without corrupting original 
-            settings = appSettings;
             name = roomNameTextBox.Text = Room.Name;
             description = descriptionTextBox.Text = Room.Description;
             shortTextBox.Text = Room.shortDescription;
@@ -77,7 +75,7 @@ namespace Mountain.Dialogs {
                 Room.Name = roomNameTextBox.Text;
                 nameChanged = false;
             }
-            ExitEditor exitEdit = new ExitEditor(SelectedExit, settings);
+            ExitEditor exitEdit = new ExitEditor(SelectedExit);
             DialogResult dialogresult = exitEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 //    Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
@@ -95,7 +93,7 @@ namespace Mountain.Dialogs {
             exit.LinkArea = Room.Location.Area;
             exit.Owner = Room;
             exit.DoorLabel = Room.Name;
-            ExitEditor exitEdit = new ExitEditor(exit, settings);
+            ExitEditor exitEdit = new ExitEditor(exit);
             DialogResult dialogresult = exitEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 //    Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);

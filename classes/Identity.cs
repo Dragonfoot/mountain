@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Serialization;
 using Mountain.classes.dataobjects;
 using Mountain.classes.functions;
 
@@ -8,9 +9,9 @@ namespace Mountain.classes {
     public class Identity {
         public string Name { get; set; }
         public string Description { get; set; }
-        public Guid ID { get; set; }
-        public itemType ItemType { get; set; }
-        public classObjectType ClassType { get; set; }
+        [XmlIgnore] public Guid ID { get; set; }
+        [XmlIgnore] public itemType ItemType { get; set; }
+        [XmlIgnore] public classObjectType ClassType { get; set; }
 
         public Identity() {
             this.ClassType = classObjectType.unknown;
@@ -21,6 +22,5 @@ namespace Mountain.classes {
         public string ToXml() {
             return XmlHelper.ObjectToBasicXml(this);
         }
-
     }
 }

@@ -11,17 +11,15 @@ namespace Mountain.classes.handlers {
         //  private Dictionary<string, Action<Packet>> worldCommands;
         private RoomCommands RoomCommands;
         private PlayerCommands PlayerCommands;
-        private ApplicationSettings settings;
 
-        public Dispatch(Connection client, ApplicationSettings appSettings) {
-            this.settings = appSettings;
-            this.Client = client;
+        public Dispatch(Connection client) {
+            Client = client;
             LoadCommands();
         }
 
         private void LoadCommands() {
-            RoomCommands = new RoomCommands(settings);
-            PlayerCommands = new PlayerCommands(settings);
+            RoomCommands = new RoomCommands();
+            PlayerCommands = new PlayerCommands();
         }
 
         public void InvokeCommand(string verb, Packet packet) {

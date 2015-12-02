@@ -14,7 +14,6 @@ using Mountain.classes.dataobjects;
 namespace Mountain.Dialogs {
 
     public partial class Mountain : Form {
-        protected ApplicationSettings settings;
         protected MessageQueue MessageQueue;
         protected SystemEventQueue SystemEventQueue;
         protected World world;
@@ -23,16 +22,15 @@ namespace Mountain.Dialogs {
         protected int Connections;
 
         public Mountain() {
-            MessageQueue = new MessageQueue(settings);
+            Global.Settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
+            MessageQueue = new MessageQueue();
             SystemEventQueue = new SystemEventQueue();
             MessageQueue.Tag = "System";
             InitializeComponent();
             MessageQueue.OnMessageReceived += Messages_OnMessageReceived;
             SystemEventQueue.OnEventReceived += Events_OnEventReceived;
-            settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
             world = BuildDefaultWorld();
-            world.settings = settings;
-            settings.world = world;
+            Global.Settings.world = world;
             world.StartListen(world.Port);
             if (world.portListener.Active()) {
                 listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
@@ -111,7 +109,7 @@ namespace Mountain.Dialogs {
         private World BuildDefaultWorld() {
             if (world != null) { world = null; }
             try {
-                world = new World(settings);
+                world = new World();
                 if (world.Areas.Any()) {
                     areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                     areaListBox.SelectedIndex = 0;
@@ -126,11 +124,11 @@ namespace Mountain.Dialogs {
         }
 
         private void areaForm_Button_Click(object sender, EventArgs e) {
-            AreaForm areaForm = new AreaForm(new Area(), settings);
+            AreaForm areaForm = new AreaForm(new Area());
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 world.Areas.Add(areaForm.area);
-                world.settings.TheVoid = areaForm.area.Rooms.FindTag("Void");
+                Global.Settings.TheVoid = areaForm.area.Rooms.FindTag("Void");
                 areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                 areaListBox.SelectedIndex = 0;
             } else {
@@ -149,7 +147,7 @@ namespace Mountain.Dialogs {
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-            string file = settings.BaseDirectory + "\\" + world.Name + "test.xml";
+            string file = Global.Settings.BaseDirectory + "\\" + world.Name + "test.xml";
             TextWriter txtWriter = new StreamWriter(file);
             //XmlHelper.ObjectToXml(world.Areas, file, settings);
             try {
@@ -157,23 +155,25 @@ namespace Mountain.Dialogs {
                 xmlSerializer.Serialize(txtWriter, world);
                 logRichTextBox.AppendText(world.Name + " Saved.");
             } catch (Exception ex) {
-                settings.SystemMessageQueue.Push(ex.ToString());
+                Global.Settings.SystemMessageQueue.Push(ex.ToString());
             } finally {
                 txtWriter.Close();
             }
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
-            string file = settings.BaseDirectory + "\\" + world.Name + "test.xml";
+            string name = "mountain";
+            string file = Global.Settings.BaseDirectory + "\\" + name + "test.xml";
             TextReader txtReader = new StreamReader(file);
             try {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(World));
-                World loadWorld = new World(settings);
-                loadWorld = (World)xmlSerializer.Deserialize(txtReader);
-                loadWorld.portListener.StartServer(9080);
+                // World loadWorld = new World(settings);
+                world.Areas.Clear();
+                world = (World)xmlSerializer.Deserialize(txtReader);
+                world.portListener.StartServer(9080);
                 logRichTextBox.AppendText(world.Name + " Loaded.");
             } catch (Exception ex) {
-                settings.SystemMessageQueue.Push(ex.ToString());
+                Global.Settings.SystemMessageQueue.Push(ex.ToString());
             } finally {
                 txtReader.Close();
             }
@@ -199,7 +199,7 @@ namespace Mountain.Dialogs {
         }
 
         private void EditRoomContextMenuItem_Click(object sender, EventArgs e) {
-            RoomEditor roomEdit = new RoomEditor(SelectedRoom, settings);
+            RoomEditor roomEdit = new RoomEditor(SelectedRoom);
             DialogResult dialogresult = roomEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 //    Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
@@ -237,23 +237,23 @@ namespace Mountain.Dialogs {
 
         private void CheckConnections() {
             List<Connection> RemoveList = new List<Connection>();
-            foreach (Connection player in settings.Players) {
+            foreach (Connection player in Global.Settings.Players) {
                 if (player.Connected) continue;
                 RemoveList.Add(player);
             }
             foreach (Connection player in RemoveList) {
-                settings.Players.Remove(player.Account.Name, "Lost connection.");
+                Global.Settings.Players.Remove(player.Account.Name, "Lost connection.");
                 player.Location.Room.Players.Remove(player.Account.Name);
                 SystemEventPacket packet = new SystemEventPacket(EventType.disconnected, player.Account.Name + " lost connection.");
-                settings.SystemEventQueue.Push(packet);
+                Global.Settings.SystemEventQueue.Push(packet);
                 player.Shutdown();
                 player.Dispose();
             }
         }
 
         private void NewContextMenuItem_Click(object sender, EventArgs e) {
-            Room newRoom = new Room("New Room", "This is the new room description", settings, SelectedArea);
-            RoomEditor roomEdit = new RoomEditor(newRoom, settings);
+            Room newRoom = new Room("New Room", "This is the new room description", SelectedArea);
+            RoomEditor roomEdit = new RoomEditor(newRoom);
             DialogResult dialogresult = roomEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 Functions.UpdateRoomEdits(roomEdit.Room, newRoom);

@@ -11,34 +11,29 @@ using Mountain.classes.functions;
 namespace Mountain.classes {
 
     [Serializable] public class World : Identity {
+        public int Port;
         [XmlArray("Areas")] public List<Area> Areas;
-        [XmlIgnore] public ApplicationSettings settings;
         [XmlIgnore] public TcpServerListener portListener;
         [XmlIgnore] public int Connections { get; private set; }
         protected ListBox Console;
         private CancellationTokenSource cancellationTokenSource;
-        public int Port;
-
-        public World(ApplicationSettings appSettings) {
-            InitializeSettings(appSettings);
-            Areas = new List<Area>();
-            portListener = new TcpServerListener(this, appSettings);
-            Port = 8090;
-      //      portListener.StartServer(Port);
-            string lastworld = settings.LastSavedWorld;
-            if (lastworld.IsNullOrWhiteSpace()) Load(null);
-            else Load(null);           
-         //   StartHeart(); // activate world
-        }
 
         public World() {
-        }
+            InitializeSettings();
+            Areas = new List<Area>();
+            portListener = new TcpServerListener(this);
+            Port = 8090;
+      /*      portListener.StartServer(Port);
+            string lastworld = Global.Settings.LastSavedWorld;
+            if (lastworld.IsNullOrWhiteSpace()) Load(null);
+            else Load(null); */          
+         //   StartHeart(); // activate world
+        }        
 
-        private void InitializeSettings(ApplicationSettings appSettings) {
+        private void InitializeSettings() {
             ClassType = classObjectType.world;
-            settings = appSettings;
-            settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
-            settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
+            Global.Settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
+            Global.Settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
         }
 
         public void StartListen(int port = 8090) {
@@ -62,7 +57,7 @@ namespace Mountain.classes {
         }
 
         public void Shutdown() {
-            settings.Players.Shutdown();
+            Global.Settings.Players.Shutdown();
             StopHeart();
             portListener.StopServer();
         }
@@ -89,7 +84,7 @@ namespace Mountain.classes {
         }
 
         private void CreateDefaultAdminArea() {
-            Areas.Add(Build.AdminArea(settings));
+            Areas.Add(Build.AdminArea());
         }
 
         public void Save(string filename) {
@@ -130,6 +125,7 @@ namespace Mountain.classes {
             }
             return null;
         }
+
         public string GetAreaNameByRoomName(string name) {
             Room room = GetRoomByName(name);
             if (room == null) return null;

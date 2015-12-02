@@ -8,11 +8,9 @@ namespace Mountain.classes.handlers {
 
     [Serializable] public class PlayerCommands {
         private Dictionary<string, Action<Packet>> List;
-        ApplicationSettings settings;
         public List<string> Keys;
 
-        public PlayerCommands(ApplicationSettings appSettings) {
-            settings = appSettings;
+        public PlayerCommands() {
             LoadPlayerCommands();
         }
         private void LoadPlayerCommands() {

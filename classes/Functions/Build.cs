@@ -5,7 +5,7 @@ namespace Mountain.classes.functions {
 
     public static class Build {
 
-        public static Area AdminArea(ApplicationSettings settings) {
+        public static Area AdminArea() {
             string name, description;
 
             Area area = new Area();
@@ -21,7 +21,7 @@ namespace Mountain.classes.functions {
                 "above them, monitoring every aspect of this worlds events and activities. Off to your left, a long line of office doors, " +
                 "uniformed guards challenging, filtering, and recording the movement of staff and visitors alike.";
 
-            controlROOM = NewROOM(name, description, settings, area);
+            controlROOM = NewROOM(name, description, area);
             controlROOM.Tag = "Administration";
             controlROOM.roomType = roomType.admin | roomType.healing;
             controlROOM.roomRestrictons = roomRestrictionType.fighting | roomRestrictionType.taunting;
@@ -31,7 +31,7 @@ namespace Mountain.classes.functions {
             name = "Transit Hub";
             description = "Administration Transit Hub Main Entrance";
 
-            transitROOM = NewROOM(name, description, settings, area);
+            transitROOM = NewROOM(name, description, area);
             transitROOM.Tag = "Administration";
             transitROOM.roomType = roomType.path | roomType.shop | roomType.leveling;
             transitROOM.roomRestrictons = roomRestrictionType.magic | roomRestrictionType.mindpower | roomRestrictionType.fighting;
@@ -43,8 +43,8 @@ namespace Mountain.classes.functions {
             description = "You find yourself weightlessly floating in some kind of silent, lonely, dark, " +
                 "endless, - and as many other voidy spacy words there might be.. - space.";
 
-            theVoidROOM = NewROOM(name, description, settings, area);
-            settings.TheVoid = theVoidROOM;
+            theVoidROOM = NewROOM(name, description, area);
+            Global.Settings.TheVoid = theVoidROOM;
             theVoidROOM.Tag = "Void";
             theVoidROOM.roomType = roomType.outdoor;
             theVoidROOM.roomRestrictons = roomRestrictionType.fighting | roomRestrictionType.magic | roomRestrictionType.mindpower | roomRestrictionType.stealing;
@@ -76,8 +76,8 @@ namespace Mountain.classes.functions {
             return new Area();
         }
 
-        public static Room NewROOM(string name, string description, ApplicationSettings settings, Area area) { // stub
-            return new Room(name, description, settings, area);
+        public static Room NewROOM(string name, string description, Area area) { // stub
+            return new Room(name, description, area);
         }        
 
         public static Item Item() {  // stub

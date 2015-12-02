@@ -2,18 +2,17 @@
 using System.Linq;
 using System.Windows.Forms;
 using Mountain.classes;
+using Mountain.classes.dataobjects;
 using Mountain.classes.functions;
 
 namespace Mountain.Dialogs {
 
     public partial class AreaForm : Form {
-        private ApplicationSettings settings;
         public Area area;
 
-        public AreaForm(Area area, ApplicationSettings appSettings) {
+        public AreaForm(Area area) {
             this.area = area;
             InitializeComponent();
-            settings = appSettings;
             DisplayArea();
             RefreshRooms();
         }
@@ -36,7 +35,7 @@ namespace Mountain.Dialogs {
             // if (File.Exists("path to area template folder.adminTemplate.xml"){
             //    area.Load("adminTemplate.xml");
             //} else {
-            area = Build.AdminArea(settings);
+            area = Build.AdminArea();
             DisplayArea();
             RefreshRooms();
         }
@@ -49,9 +48,9 @@ namespace Mountain.Dialogs {
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-            saveAreaFileDialog.InitialDirectory = settings.BaseDirectory;
+            saveAreaFileDialog.InitialDirectory = Global.Settings.BaseDirectory;
             if (saveAreaFileDialog.ShowDialog() == DialogResult.OK) 
-                XmlHelper.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName, settings);            
+                XmlHelper.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName);            
         }
 
         private void areaNameTextBox_KeyPress(object sender, KeyPressEventArgs e) {

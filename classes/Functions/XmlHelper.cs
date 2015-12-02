@@ -10,7 +10,7 @@ namespace Mountain.classes.functions {
     public static class XmlHelper { 
       
         //saves class to xml file without namespace
-        public static void ObjectToXml(object item, string path, ApplicationSettings settings) {
+        public static void ObjectToXml(object item, string path) {
             try {
                 var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
                 var serializer = new XmlSerializer(item.GetType());
@@ -25,7 +25,7 @@ namespace Mountain.classes.functions {
                     xmlDocument.Save(path);
                 }
             } catch (Exception e) {
-                settings.SystemMessageQueue.Push(e.ToString());
+                Global.Settings.SystemMessageQueue.Push(e.ToString());
             }
         }
 
@@ -43,7 +43,7 @@ namespace Mountain.classes.functions {
             }
         }
 
-        public static void ReCreateRegistryAccounts(string path, ApplicationSettings appSettings) {
+        public static void ReCreateRegistryAccounts(string path) {
             RegisteredUsers users = new RegisteredUsers();
 
             Account toetag = new Account(Guid.NewGuid());
@@ -67,7 +67,7 @@ namespace Mountain.classes.functions {
             bucky.Administrator = false;
             users.List.Add(bucky);
 
-            XmlHelper.ObjectToXml(users, path, appSettings);
+            XmlHelper.ObjectToXml(users, path);
         }
     }
 }

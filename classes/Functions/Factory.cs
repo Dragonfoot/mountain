@@ -4,12 +4,13 @@ using System.Linq;
 using System.Xml.Serialization;
 using Mountain.classes.dataobjects;
 using Mountain.classes.tcp;
+
 namespace Mountain.classes.functions {
 
     [Serializable] public class Factory {
-        public void LoadPlayerFromFile(Connection player, string name, string file, ApplicationSettings settings) {
+        public void LoadPlayerFromFile(Connection player, string name, string file) {
             if (!File.Exists(file)) {
-                player.Account.Location = new Linkage(settings.TheVoid.Name, settings.TheVoid.Location.Area, settings.TheVoid);
+                player.Account.Location = new Linkage(Global.Settings.TheVoid.Name, Global.Settings.TheVoid.Location.Area, Global.Settings.TheVoid);
                 return;
             } else {
                 XmlSerializer serializer = new XmlSerializer(typeof(Connection));
@@ -26,7 +27,7 @@ namespace Mountain.classes.functions {
          //           player.Account.Location.Area = settings.world.GetAreaNameByRoomName(player.Account.Location.RoomName);
                 }
                 if (player.Location.Room == null) {
-                    Area Area = settings.world.Areas.First(area => area.Name == player.Account.Location.AreaName);
+                    Area Area = Global.Settings.world.Areas.First(area => area.Name == player.Account.Location.AreaName);
                     player.Location.Room = (Area.Rooms.FindName(player.Account.Location.RoomName));
                 };
                 fileStream.Close();

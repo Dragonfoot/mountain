@@ -10,12 +10,10 @@ namespace Mountain.classes.tcp {
         public TcpListenerActive tcpListener;
         public int Port;
         World world;
-        ApplicationSettings settings;
 
-        public TcpServerListener(World world, ApplicationSettings appSettings) {
+        public TcpServerListener(World world = null) {
             this.world = world;
             connectionWaitDone = new AutoResetEvent(false);
-            this.settings = appSettings;
         }
 
         public void StartServer(int port) {
@@ -41,7 +39,7 @@ namespace Mountain.classes.tcp {
                 connectionWaitDone.Set();
                 tcpListener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
 
-                Connection clientConnection = new Connection(client, settings);
+                Connection clientConnection = new Connection(client);
                 clientConnection.StartLogin();
             } catch (Exception e) {
                 string msg = e.Message;

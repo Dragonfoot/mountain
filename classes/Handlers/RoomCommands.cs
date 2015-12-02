@@ -10,11 +10,9 @@ namespace Mountain.classes.handlers {
     [Serializable] public class RoomCommands {
         private Dictionary<string, Action<Packet>> List;
         private StringResponses Resource;
-        ApplicationSettings settings;
         public List<string> Keys;
 
-        public RoomCommands(ApplicationSettings appSettings) {
-            settings = appSettings;
+        public RoomCommands() {
             Resource = new StringResponses();
             LoadRoomCommands();
         }
@@ -65,7 +63,7 @@ namespace Mountain.classes.handlers {
                     }
                 }
             } catch (Exception e) {
-                settings.SystemMessageQueue.Push(e.ToString());
+                Global.Settings.SystemMessageQueue.Push(e.ToString());
             }
         }
 
@@ -94,11 +92,11 @@ namespace Mountain.classes.handlers {
         }
 
         private void Quit(Packet packet) {
-            settings.Players.Remove(packet.Client.Account.Name, "Player has left.");
+            Global.Settings.Players.Remove(packet.Client.Account.Name, "Player has left.");
             packet.Client.Send("See you again soon!".Ansi(Style.white).NewLine().NewLine());
             packet.Client.Location.Room.Players.Remove(packet.Client.Account.Name);
             SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnected, packet.Client.Account.Name + " has left.", packet.Client);
-            settings.SystemEventQueue.Push(eventPacket);
+            Global.Settings.SystemEventQueue.Push(eventPacket);
             packet.Client.Shutdown();
             packet.Client.Dispose();
         }

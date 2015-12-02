@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.collections {
 
@@ -8,10 +9,8 @@ namespace Mountain.classes.collections {
         public string Tag { get; set; }
         public delegate void MessageHandler(object myObject, string msg);
         public event MessageHandler OnMessageReceived;
-        public ApplicationSettings settings;
 
-        public MessageQueue(ApplicationSettings appSettings) {
-            settings = appSettings;
+        public MessageQueue() {
             queue = new ConcurrentQueue<string>();
         }
 
@@ -20,7 +19,7 @@ namespace Mountain.classes.collections {
             try {
                 OnMessageReceived(this, message);
             } catch (Exception e) {
-                settings.SystemMessageQueue.Push(Tag + ": " + e.ToString());
+                Global.Settings.SystemMessageQueue.Push(Tag + ": " + e.ToString());
             }
         }
 
