@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
+using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes {
@@ -8,12 +10,14 @@ namespace Mountain.classes {
         [XmlIgnore] public Room Owner { get; set; }
         [XmlIgnore] public Room Link { get; set; }
         [XmlIgnore] public Area LinkArea;
-        public Linkage Linkage {
-            get { return new Linkage(DoorLabel, LinkArea, Owner); }
+        public Location Linkage {
+            get { return new Location(DoorLabel, Owner); }
             set {
                 Name = DoorLabel = value.DoorLabel;
-                LinkArea = value.Area;
-                Link = value.Room;
+                if (value.Room != null) {
+                    LinkArea = value.Room.Location.Area;
+                    Link = value.Room;
+                }
             }
         }
         public string DoorLabel { get; set; }
@@ -29,7 +33,7 @@ namespace Mountain.classes {
         public exitRestrictionType Restrictions;  //http://geekswithblogs.net/BlackRabbitCoder/archive/2010/07/22/c-fundamentals-combining-enum-values-with-bit-flags.aspx
         
         public Exit() {
-            Linkage = new Linkage();
+            Linkage = new Location();
             ClassType = classObjectType.exit;
             Name = null;
         }
@@ -61,6 +65,15 @@ namespace Mountain.classes {
             if(data.Breakable.HasValue) Breakable = (bool)data.Breakable;
             if(data.Repairable.HasValue) Repairable = (bool)data.Repairable;
         }
-    }
 
+        public XmlTextWriter SaveXml(XmlTextWriter writer) {
+            writer.WriteStartElement("Exit");
+            XmlHelper.createNode("Name", Name, writer);
+            XmlHelper.createNode("Description", Description, writer);
+            XmlHelper.createNode("DoorLabel", DoorLabel, writer);
+            writer = Linkage.SaveXml(writer);
+            writer.WriteEndElement();
+            return writer;
+        }
+    }
 }

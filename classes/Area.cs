@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Xml;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
 using Mountain.classes.collections;
 
@@ -46,6 +48,21 @@ namespace Mountain.classes {
 
         public void Save(string filename) {
             throw new NotImplementedException("Area Save(filename)");
+        }
+
+        public XmlTextWriter SaveXml(XmlTextWriter writer) {
+            writer.WriteStartElement("Area");
+            XmlHelper.createNode("Name", Name, writer);
+            XmlHelper.createNode("Description", Description, writer);
+            if (Rooms.Count > 0) {
+                writer.WriteStartElement("Rooms");
+                foreach (Room room in Rooms) {
+                    writer = room.SaveXml(writer);
+                }
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+            return writer;
         }
 
         public void StopHeart() {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -90,7 +91,23 @@ namespace Mountain.classes {
         public void Save(string filename) {
             throw new NotImplementedException("World Save");
         }
-       
+
+        public XmlTextWriter SaveXml(XmlTextWriter writer) {
+            writer.WriteStartElement("World");
+            XmlHelper.createNode("World", Name, writer);
+            XmlHelper.createNode("Description", Description, writer);
+            XmlHelper.createNode("Port", Port.ToString(), writer);
+            if (Areas.Count > 0) {
+                writer.WriteStartElement("Areas");
+                foreach (Area area in Areas) {
+                    writer = area.SaveXml(writer);
+                }
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+            return writer;
+        }      
+
         private void StartHeart() {
             cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = cancellationTokenSource.Token;

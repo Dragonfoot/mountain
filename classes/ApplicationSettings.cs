@@ -15,7 +15,7 @@ namespace Mountain.classes {
     [Serializable] public class ApplicationSettings {
         [XmlIgnore] public RegisteredUsers RegisteredUsers { get; set; }
         [XmlIgnore] public List<Connection> Logins { get; set; }
-        [XmlIgnore] public World world;
+        [XmlIgnore] public World World;
         [XmlIgnore] public Players Players { get; set; }
         [XmlIgnore] public Room TheVoid { get; set; }
         [XmlIgnore] public string AppDirectory { get; private set; }
@@ -74,7 +74,7 @@ namespace Mountain.classes {
 
         public void SwapLoginForPlayer(Connection connection) {
             connection.Name = connection.Account.Name;
-            connection.Account.Location = new Linkage(TheVoid.Name, TheVoid.Location.Area, TheVoid);
+            connection.Account.Location = new Location(TheVoid.Name, TheVoid);
             string file = PlayersDirectory + "\\" + connection.Account.Name + "_test.xml";
             factory.LoadPlayerFromFile(connection, connection.Account.Name, file);
             Players.Add(connection);

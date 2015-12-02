@@ -63,7 +63,7 @@ namespace Mountain.classes.functions {
 
         public static void LinkRoomTo(Room fromRoom, Room toRoom) {
             Exit exit = new Exit();
-            exit.Linkage = new Linkage(toRoom.Name, toRoom.Location.Area, toRoom);
+            exit.Linkage = new Location(toRoom.Name, toRoom);
             fromRoom.AddExit(exit);
         }
 

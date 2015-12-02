@@ -30,11 +30,11 @@ namespace Mountain.classes.tcp {
                 return !(read & status);
             }
         }
-        public Linkage Location { get { return location; } set { SetRoom(value.Room); } }
+        public Location Location { get { return location; } set { SetRoom(value.Room); } }
         public Account Account { get; set; }
         public Stats Stats { get; set; }
         public Equipment Equipment { get; set; }
-        private Linkage location;
+        private Location location;
         public delegate void CommandHandler(object myObject, string message);
 
         public Connection(TcpClient socket) {
@@ -110,7 +110,7 @@ namespace Mountain.classes.tcp {
         }
 
         private void SetRoom(Room room) {
-            Account.Location = location = new Linkage(room.Name, room.Location.Area, room);
+            Account.Location = location = new Location(room.Name, room);
         }
 
         public void Send(string data, bool indent = true) {

@@ -72,6 +72,8 @@
             this.connectedLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.connectionPoller = new System.Windows.Forms.Timer(this.components);
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -331,7 +333,7 @@
             this.MoveToAreaContextMenuItem,
             this.RemoveContextMenuItem});
             this.RoomContextMenu.Name = "NewRoom";
-            this.RoomContextMenu.Size = new System.Drawing.Size(155, 258);
+            this.RoomContextMenu.Size = new System.Drawing.Size(155, 236);
             // 
             // NewContextMenuItem
             // 
@@ -416,7 +418,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(145, 79);
+            this.button1.Location = new System.Drawing.Point(146, 39);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 16;
@@ -467,11 +469,32 @@
             this.connectionPoller.Interval = 5000;
             this.connectionPoller.Tick += new System.EventHandler(this.connectionPoller_Tick);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(145, 69);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "Exit Save";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(145, 99);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 19;
+            this.button3.Text = "Exit Load";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1089, 570);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
@@ -549,6 +572,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox connectedListBox;
         private System.Windows.Forms.Timer connectionPoller;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
     }
 

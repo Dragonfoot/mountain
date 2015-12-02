@@ -30,7 +30,7 @@ namespace Mountain.Dialogs {
             MessageQueue.OnMessageReceived += Messages_OnMessageReceived;
             SystemEventQueue.OnEventReceived += Events_OnEventReceived;
             world = BuildDefaultWorld();
-            Global.Settings.world = world;
+            Global.Settings.World = world;
             world.StartListen(world.Port);
             if (world.portListener.Active()) {
                 listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
@@ -264,6 +264,26 @@ namespace Mountain.Dialogs {
             roomEdit.Dispose();
         }
 
+        private void button2_Click(object sender, EventArgs e) {
+            Area area = new Area();
+            Room room = new Room("New Test Room", "Testing room", area);
+            Exit exit = new Exit();
+            room.AddExit(exit);
+            area.AddRoom(room);
+
+            string file = Global.Settings.RoomBuildDirectory + "\\" + "testRoom" + "test.xml";
+            TextWriter txtWriter = new StreamWriter(file);
+            //XmlHelper.ObjectToXml(world.Areas, file, settings);
+            try {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(World));
+                xmlSerializer.Serialize(txtWriter, world);
+                logRichTextBox.AppendText(world.Name + " Saved.");
+            } catch (Exception ex) {
+                Global.Settings.SystemMessageQueue.Push(ex.ToString());
+            } finally {
+                txtWriter.Close();
+            }
+        }
     }
 }
         

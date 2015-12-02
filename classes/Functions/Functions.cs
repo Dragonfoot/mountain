@@ -61,8 +61,7 @@ namespace Mountain.classes.functions {
             }
             return false;
         }
-
-
+        
         public static void UpdateRoomEdits(Room fromRoom, Room toRoom) {
             toRoom.Name = fromRoom.Name;
             toRoom.Description = fromRoom.Description;
@@ -74,7 +73,7 @@ namespace Mountain.classes.functions {
                     toExit.Name = fromExit.Name;
                     toExit.Description = fromExit.Description;
                     toExit.Owner = fromExit.Owner;
-                    toExit.Linkage = new Linkage(fromExit.Linkage.DoorLabel, fromExit.Linkage.Area, fromExit.Linkage.Room);
+                    toExit.Linkage = new Location(fromExit.Linkage.DoorLabel, fromExit.Linkage.Room);
                     toRoom.AddExit(toExit);
                 }
             }

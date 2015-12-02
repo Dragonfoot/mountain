@@ -13,7 +13,7 @@ namespace Mountain.classes.dataobjects {
         public string Email { get; set; }
         public Guid ID { get; set; }
         [XmlIgnore] public Connection Client { get; set; }
-        public Linkage Location; 
+        public Location Location; 
 
         public Account(Guid id) {
             ID = id;

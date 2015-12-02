@@ -6,7 +6,7 @@ using Mountain.classes.Items;
 namespace Mountain.classes.mobs {
 
     [Serializable] public class Underling : Identity { // mob precursor
-        public Linkage Location { get; set; } 
+        public Location Location { get; set; } 
         public ConcurrentBag<Item> Inventory { get; set; }
         public delegate void CommandHandler(object myObject, string message); // function caller
         public CommandHandler Commands;         // functions hook

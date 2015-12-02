@@ -22,7 +22,7 @@ namespace Mountain.classes {
         [XmlIgnore] public ConcurrentBag<Item> Items { get; set; }
         [XmlIgnore] public Players Players { get; set; }
         [XmlIgnore] public PlayerEventQueue Messages;
-        [XmlIgnore] public Linkage Location { get; set; }
+        public Location Location { get; set; }
         public string shortDescription { get; set; }
         public roomType roomType { get; set; }
         public roomRestrictionType roomRestrictons { get; set; }
@@ -34,22 +34,22 @@ namespace Mountain.classes {
             InitializeRoom();
             Name = "New Room";;
             Description = "This is a newly created room";
-            Location = new Linkage(Name, area, this);
+            Location = new Location(Name, this);
         }
         public Room(string name, Area area) {
             InitializeRoom();
             Name = name;
             Description = Name + " is a newly created room";
-            Location = new Linkage(Name, area, this);
+            Location = new Location(Name, this);
         }
         public Room(string name, string description, Area area) {
             InitializeRoom();
             Name = name;
             Description = description;
-            Location = new Linkage(Name, area, this);
+            Location = new Location(Name, this);
         }
         public Room() { // for xml-serializer
-            Location = new Linkage();
+            Location = new Location();
         }
 
         public override string ToString() {
@@ -119,14 +119,14 @@ namespace Mountain.classes {
         public void AddPlayer(Connection player) {
             Players.Add(player);
             player.Location.Room = this;
-            player.Account.Location = new Linkage(Location.DoorLabel, Location.Area, Location.Room);
+            player.Account.Location = new Location(Location.DoorLabel, Location.Room);
         }
 
         public void RemovePlayer(Connection player, string message) {
             Players.Remove(player.Account.Name, message);
         }
 
-        public string SaveXML() { 
+        public string SerializeXML() { 
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
             XmlSerializer serializer = new XmlSerializer(typeof(Room));
             TextWriter writer = new StringWriter();
@@ -137,6 +137,24 @@ namespace Mountain.classes {
                 return e.ToString();
             }             
             return writer.ToString();
+        }
+
+        public XmlTextWriter SaveXml(XmlTextWriter writer) {
+            writer.WriteStartElement("Room");
+            XmlHelper.createNode("Name", Name, writer);
+            XmlHelper.createNode("Description", Description, writer);
+            XmlHelper.createNode("ShortDescription", shortDescription, writer);
+            XmlHelper.createNode("Tag", Tag, writer);
+            writer = Location.SaveXml(writer);
+            if(Exits.Count > 0) {
+                writer.WriteStartElement("Exits");
+                foreach(Exit exit in Exits) {
+                    writer = exit.SaveXml(writer);
+                }
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+            return writer;
         }
 
         public string[] View() {
