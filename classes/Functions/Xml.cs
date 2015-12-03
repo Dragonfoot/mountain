@@ -7,7 +7,7 @@ using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
 
-    public static class XmlHelper {
+    public static class Xml {
 
         //saves class to xml file without namespace
         public static void ObjectToXml(object item, string path) {
@@ -67,7 +67,7 @@ namespace Mountain.classes.functions {
             bucky.Administrator = false;
             users.List.Add(bucky);
 
-            XmlHelper.ObjectToXml(users, path);
+            Xml.ObjectToXml(users, path);
         }
         public static void createNode(string Label, string value, XmlTextWriter writer) {
             writer.WriteStartElement(Label);

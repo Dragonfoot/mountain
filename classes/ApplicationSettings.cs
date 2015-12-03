@@ -74,7 +74,7 @@ namespace Mountain.classes {
 
         public void SwapLoginForPlayer(Connection connection) {
             connection.Name = connection.Account.Name;
-            connection.Account.Location = new Location(TheVoid.Name, TheVoid);
+            connection.Account.Location = new Location(TheVoid);
             string file = PlayersDirectory + "\\" + connection.Account.Name + "_test.xml";
             factory.LoadPlayerFromFile(connection, connection.Account.Name, file);
             Players.Add(connection);
@@ -99,7 +99,7 @@ namespace Mountain.classes {
             if (!Directory.Exists(PlayersDirectory)) { Directory.CreateDirectory(PlayersDirectory); }
             string file = BaseDirectory + "\\" + RegisteredUsersAccounts;
          //   if (!File.Exists(file)) {
-                XmlHelper.ReCreateRegistryAccounts(file);
+                Xml.ReCreateRegistryAccounts(file);
           //  }
         }
     }

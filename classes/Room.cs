@@ -25,28 +25,34 @@ namespace Mountain.classes {
         public Location Location { get; set; }
         public string shortDescription { get; set; }
         public roomType roomType { get; set; }
-        public roomRestrictionType roomRestrictons { get; set; }
-        public roomConditionType roomConditions { get; set; }
+        public roomRestrictions roomRestrictons { get; set; }
+        public roomConditions roomConditions { get; set; }
         public string Tag { get; set; }
         [XmlArray("Links")] public List<Exit> Exits { get; set; }
 
-        public Room( Area area) {
+        public Room(Area area) {
             InitializeRoom();
-            Name = "New Room";;
+            Name = "New Room";
             Description = "This is a newly created room";
-            Location = new Location(Name, this);
+            Location = new Location();
+            Location.Area = area;
+            Location.Room = this;
         }
         public Room(string name, Area area) {
             InitializeRoom();
             Name = name;
             Description = Name + " is a newly created room";
-            Location = new Location(Name, this);
+            Location = new Location();
+            Location.Area = area;
+            Location.Room = this;
         }
         public Room(string name, string description, Area area) {
             InitializeRoom();
             Name = name;
             Description = description;
-            Location = new Location(Name, this);
+            Location = new Location();
+            Location.Area = area;
+            Location.Room = this;
         }
         public Room() { // for xml-serializer
             Location = new Location();
@@ -108,7 +114,18 @@ namespace Mountain.classes {
 
         public void AddExit(Exit exit) {
             exit.Owner = this;
+            if (exit.Name == null) exit.Name = exit.DoorLabel;
             Exits.Add(exit);
+        }
+
+        public void CreateExit() {
+            Exit exit = new Exit();
+            exit.Name = this.Name + " Exit";
+            exit.Description = Name + " exit is not yet linked to another room";
+            exit.DoorLabel = Name + " Exit (unassigned)";
+            exit.Open = false;
+            exit.DoorType = doorType.none;
+            AddExit(exit);
         }
 
         public void AddMob(Mob mob) {
@@ -119,7 +136,7 @@ namespace Mountain.classes {
         public void AddPlayer(Connection player) {
             Players.Add(player);
             player.Location.Room = this;
-            player.Account.Location = new Location(Location.DoorLabel, Location.Room);
+            player.Account.Location = new Location(Location.Room);
         }
 
         public void RemovePlayer(Connection player, string message) {
@@ -141,10 +158,10 @@ namespace Mountain.classes {
 
         public XmlTextWriter SaveXml(XmlTextWriter writer) {
             writer.WriteStartElement("Room");
-            XmlHelper.createNode("Name", Name, writer);
-            XmlHelper.createNode("Description", Description, writer);
-            XmlHelper.createNode("ShortDescription", shortDescription, writer);
-            XmlHelper.createNode("Tag", Tag, writer);
+            Xml.createNode("Name", Name, writer);
+            Xml.createNode("Description", Description, writer);
+            Xml.createNode("ShortDescription", shortDescription, writer);
+            Xml.createNode("Tag", Tag, writer);
             writer = Location.SaveXml(writer);
             if(Exits.Count > 0) {
                 writer.WriteStartElement("Exits");

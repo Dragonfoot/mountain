@@ -16,6 +16,7 @@ namespace Mountain.classes {
         [XmlArray("Areas")] public List<Area> Areas;
         [XmlIgnore] public TcpServerListener portListener;
         [XmlIgnore] public int Connections { get; private set; }
+        [XmlIgnore] public Area Administration;
         protected ListBox Console;
         private CancellationTokenSource cancellationTokenSource;
 
@@ -35,6 +36,7 @@ namespace Mountain.classes {
             ClassType = classObjectType.world;
             Global.Settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
             Global.Settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
+            CreateAdminSection();
         }
 
         public void StartListen(int port = 8090) {
@@ -66,11 +68,10 @@ namespace Mountain.classes {
         public void Load(string world) { 
             if (!world.IsNullOrWhiteSpace()) {
             } else {
-                CreateDefaultWorld();
             }
         }
 
-        public void CreateDefaultWorld() {
+        public void CreateAdminSection() {
             Name = "Mountain";
             ID = Guid.NewGuid();
             Description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
@@ -81,22 +82,70 @@ namespace Mountain.classes {
                 "Join today. (Please sign our body donor card and be entered in our annual Grisly Corpse Competition Awards ceremony. " +
                 "You could win a place on the top shelf of our Achievements of Horror vault that houses the very best souls of our society's " +
                 "most fascinating players.)\r\n";
-            CreateDefaultAdminArea();
-        }
 
-        private void CreateDefaultAdminArea() {
-            Areas.Add(Build.AdminArea());
-        }
+            Administration = new Area();
+            Administration.Name = "Administration Complex";
+            Administration.Description = "One of this worlds most extraordinary wonders. Top minds from all the major centers reside here. " +
+               "Houses the most advanced technological and military equipment available rivaling even Mount Cascade Fortress on " +
+               "Tavastazia's bloodless moon.";
+
+            Room control;
+            string name = "Control Center";
+            string description = "You see the nerve center of world operations unfold around you. Computer stations line most of the walks with white clad technicians " +
+                "murmuring with headsets, adjusting controls, issuing quiet command. Sensor arrays, blinking routing screens, schedulers dimly glowing " +
+                "above them, monitoring every aspect of this worlds events and activities. Off to your left, a long line of office doors, " +
+                "uniformed guards challenging, filtering, and recording the movement of staff and visitors alike.";
+
+            control = Build.NewRoom(name, description, Administration);
+            control.Tag = "Administration";
+            control.roomType = roomType.admin | roomType.healing;
+            control.roomRestrictons = roomRestrictions.fighting | roomRestrictions.taunting;
+            control.roomConditions = roomConditions.magic | roomConditions.lawful;
+
+            Room transit; 
+            name = "Transit Hub";
+            description = "Administration Transit Hub Main Entrance";
+
+            transit = Build.NewRoom(name, description, Administration);
+            transit.Tag = "Administration";
+            transit.roomType = roomType.path | roomType.shop | roomType.leveling;
+            transit.roomRestrictons = roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.fighting;
+            transit.roomConditions = roomConditions.magic;
+
+            Room Void;
+            name = "The Void";
+            description = "You find yourself weightlessly floating in some kind of silent, lonely, dark, " +
+                "endless, - and as many other voidy spacy words there might be.. - space.";
+            Void = Build.NewRoom(name, description, Administration);
+            Global.Settings.TheVoid = Void;
+            Void.Tag = "Void";
+            Void.roomType = roomType.outdoor;
+            Void.roomRestrictons = roomRestrictions.fighting | roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.stealing;
+
+            Build.LinkTwoRooms(Void, transit);
+            Build.LinkTwoRooms(transit, control);
+            Build.LinkTwoRooms(control, Void);
+
+            Administration.Rooms.Add(control);
+            Administration.Rooms.Add(Void);
+            Administration.Rooms.Add(transit);
+        }       
 
         public void Save(string filename) {
             throw new NotImplementedException("World Save");
         }
 
-        public XmlTextWriter SaveXml(XmlTextWriter writer) {
+        public void SaveXml(string filename) {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            XmlTextWriter writer = new XmlTextWriter(path + filename, System.Text.Encoding.UTF8);
+            writer.WriteStartDocument(true);
+            writer.Formatting = Formatting.Indented;
+            writer.Indentation = 2;
             writer.WriteStartElement("World");
-            XmlHelper.createNode("World", Name, writer);
-            XmlHelper.createNode("Description", Description, writer);
-            XmlHelper.createNode("Port", Port.ToString(), writer);
+            Xml.createNode("World", Name, writer);
+            Xml.createNode("Description", Description, writer);
+            Xml.createNode("Port", Port.ToString(), writer);
+            writer = Administration.SaveXml(writer);
             if (Areas.Count > 0) {
                 writer.WriteStartElement("Areas");
                 foreach (Area area in Areas) {
@@ -105,7 +154,8 @@ namespace Mountain.classes {
                 writer.WriteEndElement();
             }
             writer.WriteEndElement();
-            return writer;
+            writer.WriteEndDocument();
+            writer.Close();
         }      
 
         private void StartHeart() {

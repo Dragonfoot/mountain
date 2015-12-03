@@ -21,21 +21,21 @@ namespace Mountain.classes.functions {
                 "above them, monitoring every aspect of this worlds events and activities. Off to your left, a long line of office doors, " +
                 "uniformed guards challenging, filtering, and recording the movement of staff and visitors alike.";
 
-            controlROOM = NewROOM(name, description, area);
+            controlROOM = NewRoom(name, description, area);
             controlROOM.Tag = "Administration";
             controlROOM.roomType = roomType.admin | roomType.healing;
-            controlROOM.roomRestrictons = roomRestrictionType.fighting | roomRestrictionType.taunting;
-            controlROOM.roomConditions = roomConditionType.magic | roomConditionType.lawful;  
+            controlROOM.roomRestrictons = roomRestrictions.fighting | roomRestrictions.taunting;
+            controlROOM.roomConditions = roomConditions.magic | roomConditions.lawful;  
 
             Room transitROOM;  // room used as exit hub from admin control room
             name = "Transit Hub";
             description = "Administration Transit Hub Main Entrance";
 
-            transitROOM = NewROOM(name, description, area);
+            transitROOM = NewRoom(name, description, area);
             transitROOM.Tag = "Administration";
             transitROOM.roomType = roomType.path | roomType.shop | roomType.leveling;
-            transitROOM.roomRestrictons = roomRestrictionType.magic | roomRestrictionType.mindpower | roomRestrictionType.fighting;
-            transitROOM.roomConditions = roomConditionType.magic;
+            transitROOM.roomRestrictons = roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.fighting;
+            transitROOM.roomConditions = roomConditions.magic;
 
 
             Room theVoidROOM;  // no doorway in for players and at least one exit to world room(s)
@@ -43,11 +43,11 @@ namespace Mountain.classes.functions {
             description = "You find yourself weightlessly floating in some kind of silent, lonely, dark, " +
                 "endless, - and as many other voidy spacy words there might be.. - space.";
 
-            theVoidROOM = NewROOM(name, description, area);
+            theVoidROOM = NewRoom(name, description, area);
             Global.Settings.TheVoid = theVoidROOM;
             theVoidROOM.Tag = "Void";
             theVoidROOM.roomType = roomType.outdoor;
-            theVoidROOM.roomRestrictons = roomRestrictionType.fighting | roomRestrictionType.magic | roomRestrictionType.mindpower | roomRestrictionType.stealing;
+            theVoidROOM.roomRestrictons = roomRestrictions.fighting | roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.stealing;
  
 
             LinkTwoRooms(theVoidROOM, transitROOM);
@@ -63,7 +63,10 @@ namespace Mountain.classes.functions {
 
         public static void LinkRoomTo(Room fromRoom, Room toRoom) {
             Exit exit = new Exit();
-            exit.Linkage = new Location(toRoom.Name, toRoom);
+            exit.Name = fromRoom.Name + " exit";
+            exit.Description = exit.Name + " description";
+            exit.DoorLabel = toRoom.Name;
+            exit.Linkage = new Location(toRoom);
             fromRoom.AddExit(exit);
         }
 
@@ -76,7 +79,7 @@ namespace Mountain.classes.functions {
             return new Area();
         }
 
-        public static Room NewROOM(string name, string description, Area area) { // stub
+        public static Room NewRoom(string name, string description, Area area) { // stub
             return new Room(name, description, area);
         }        
 

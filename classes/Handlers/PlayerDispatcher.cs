@@ -32,7 +32,7 @@ namespace Mountain.classes.handlers {
 
         private void SetRoom(Room room) {
             Client.Location.Room = room;
-            Client.Account.Location = new Location(room.Name, room);
+            Client.Account.Location = new Location(room);
         }
 
         private Packet Parse(string message, Connection player) {

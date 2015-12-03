@@ -73,7 +73,7 @@ namespace Mountain.classes.functions {
                     toExit.Name = fromExit.Name;
                     toExit.Description = fromExit.Description;
                     toExit.Owner = fromExit.Owner;
-                    toExit.Linkage = new Location(fromExit.Linkage.DoorLabel, fromExit.Linkage.Room);
+                    toExit.Linkage = new Location(fromExit.Linkage.Room);
                     toRoom.AddExit(toExit);
                 }
             }

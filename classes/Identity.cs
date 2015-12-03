@@ -20,7 +20,7 @@ namespace Mountain.classes {
         }
         
         public string ToXml() {
-            return XmlHelper.ObjectToBasicXml(this);
+            return Xml.ObjectToBasicXml(this);
         }
     }
 }

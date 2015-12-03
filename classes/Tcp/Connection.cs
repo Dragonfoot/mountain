@@ -110,7 +110,7 @@ namespace Mountain.classes.tcp {
         }
 
         private void SetRoom(Room room) {
-            Account.Location = location = new Location(room.Name, room);
+            Account.Location = location = new Location(room);
         }
 
         public void Send(string data, bool indent = true) {

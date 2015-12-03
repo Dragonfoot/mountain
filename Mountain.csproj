@@ -102,7 +102,7 @@
     <Compile Include="classes\Handlers\PlayerDispatcher.cs" />
     <Compile Include="classes\DataObjects\Location.cs" />
     <Compile Include="classes\DataObjects\Stats.cs" />
-    <Compile Include="classes\Functions\XmlHelper.cs" />
+    <Compile Include="classes\Functions\Xml.cs" />
     <Compile Include="classes\Collections\Players.cs" />
     <Compile Include="classes\Collections\Rooms.cs" />
     <Compile Include="classes\Collections\RegisteredUsers.cs" />

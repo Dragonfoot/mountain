@@ -52,8 +52,8 @@ namespace Mountain.classes {
 
         public XmlTextWriter SaveXml(XmlTextWriter writer) {
             writer.WriteStartElement("Area");
-            XmlHelper.createNode("Name", Name, writer);
-            XmlHelper.createNode("Description", Description, writer);
+            Xml.createNode("Name", Name, writer);
+            Xml.createNode("Description", Description, writer);
             if (Rooms.Count > 0) {
                 writer.WriteStartElement("Rooms");
                 foreach (Room room in Rooms) {

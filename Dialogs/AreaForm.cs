@@ -50,7 +50,7 @@ namespace Mountain.Dialogs {
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
             saveAreaFileDialog.InitialDirectory = Global.Settings.BaseDirectory;
             if (saveAreaFileDialog.ShowDialog() == DialogResult.OK) 
-                XmlHelper.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName);            
+                Xml.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName);            
         }
 
         private void areaNameTextBox_KeyPress(object sender, KeyPressEventArgs e) {

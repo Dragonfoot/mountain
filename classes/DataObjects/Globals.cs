@@ -6,11 +6,11 @@ namespace Mountain.classes.dataobjects {
         none = 0, path = 1, street = 2, road = 4, sewer = 8, outdoor = 16, admin = 32, home = 64, vault = 128,
         leveling = 256, cave = 512, shop = 1024, pawn = 2048, healing = 4096
     }
-    [Flags] public enum roomConditionType {
+    [Flags] public enum roomConditions {
         none = 0, dark = 1, foul = 2, water = 4, space = 8, magic = 16, lawful = 32, draining = 64, poisonous = 128
     }
     [Flags]
-    public enum roomRestrictionType {
+    public enum roomRestrictions {
         none = 0, fighting = 1, stealing = 2, magic = 4, mindpower = 8, taunting = 16, vocalizing = 32
     }
     [Flags] public enum charType {
@@ -20,7 +20,7 @@ namespace Mountain.classes.dataobjects {
     [Flags] public enum doorType {
         none = 0, open = 1, visible = 2, hasLock = 4, 
     }
-    [Flags] public enum exitRestrictionType {
+    [Flags] public enum exitRestrictions {
         none = 0, level = 1, administration = 2, race = 4, character = 8, size = 16, magic = 32, quest = 64, health = 128
     }
     [Flags] public enum consciousState {
