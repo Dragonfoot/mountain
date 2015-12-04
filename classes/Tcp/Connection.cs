@@ -110,6 +110,7 @@ namespace Mountain.classes.tcp {
         }
 
         private void SetRoom(Room room) {
+            if (room == null) room = Global.Settings.TheVoid;
             Account.Location = location = new Location(room);
         }
 

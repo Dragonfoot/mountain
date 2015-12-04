@@ -22,16 +22,17 @@ namespace Mountain.Dialogs {
         protected int Connections;
 
         public Mountain() {
-            Global.Settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
             MessageQueue = new MessageQueue();
             SystemEventQueue = new SystemEventQueue();
+            Global.Settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
             MessageQueue.Tag = "System";
             InitializeComponent();
             MessageQueue.OnMessageReceived += Messages_OnMessageReceived;
             SystemEventQueue.OnEventReceived += Events_OnEventReceived;
-            world = BuildDefaultWorld();
+            world = BuildWorldAdminSection();
             Global.Settings.World = world;
-            world.StartListen(world.Port);
+            // todo: load last saved world else load default world, if no default, build basic default area
+            world.AcceptConnections(world.Port);
             if (world.portListener.Active()) {
                 listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
                 logRichTextBox.AppendText("Server has started\r\n");
@@ -106,17 +107,17 @@ namespace Mountain.Dialogs {
             Console.Items.Add("Shutdown not implemented quite yet"); // settings.players needs each player to disconnect/save
         }
 
-        private World BuildDefaultWorld() {
+        private World BuildWorldAdminSection() {
             if (world != null) { world = null; }
             try {
                 world = new World();
-                if (world.Areas.Any()) {
-                    areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
-                    areaListBox.SelectedIndex = 0;
-                    if (SelectedArea.Rooms.Any()) {
-                        if (roomsListBox.Items.Count > 0) roomsListBox.SelectedIndex = 0;
-                    }
+              //  areaListBox.Items.Add(world.Administration);
+                if(world.Areas.Any()) areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
+                areaListBox.SelectedIndex = 0;
+                if (SelectedArea.Rooms.Any()) {
+                    if (roomsListBox.Items.Count > 0) roomsListBox.SelectedIndex = 0;
                 }
+
             } catch (Exception e) {
                 logRichTextBox.AppendText(">>> " + e.ToString());
             }

@@ -10,8 +10,9 @@ namespace Mountain.classes {
         [XmlIgnore] public Room Owner { get; set; }
         [XmlIgnore] public Room Link { get; set; }
         [XmlIgnore] public Area LinkArea;
+        public Location linkage; 
         public Location Linkage {
-            get { return new Location(Owner); }
+            get { return linkage; }
             set {
                 if (value.Room != null) {
                     LinkArea = value.Room.Location.Area;
@@ -32,7 +33,7 @@ namespace Mountain.classes {
         public exitRestrictions Restrictions;  //http://geekswithblogs.net/BlackRabbitCoder/archive/2010/07/22/c-fundamentals-combining-enum-values-with-bit-flags.aspx
         
         public Exit() {
-            Linkage = new Location();
+            linkage = new Location();
             ClassType = classObjectType.exit;
             Name = null;
         }

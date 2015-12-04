@@ -68,13 +68,19 @@ namespace Mountain.classes.handlers {
         }
 
         private void Look(Packet packet) {
-            string response = packet.Client.Location.Room.GetName(), names = string.Empty;
+            string response = packet.Client.Location.Room.GetName(), names = string.Empty, name = string.Empty;
             packet.Client.Send("".NewLine(), false);
             packet.Client.Send(response.Ansi(Style.cyan).NewLine());
             response = packet.Client.Location.Room.GetDesciption();
             packet.Client.Send(response.Ansi(Style.white).WordWrap(), false);
-
-            names = Functions.GetNames(packet.Client.Location.Room.Exits.ToArray());
+            
+            int i = 0, count = packet.Client.Location.Room.Exits.Count;
+            foreach(Exit exit in packet.Client.Location.Room.Exits) {
+                names = names + exit.DoorLabel;
+                if (i != count) { names = names + ", "; }
+                if (i == count) { names = names + "."; }
+                i++;
+            }
             if (names != string.Empty) response = "Obvious exits: " + names;
             else response = "No obvious exits.";
 
@@ -129,6 +135,7 @@ namespace Mountain.classes.handlers {
         }
 
         private void MoveTo(Packet packet) {
+            string names = string.Empty;
             // check room exit name is direction or specific, set up room message for either. ToDo
             // see if more than one exit starts with what was received
 
@@ -139,7 +146,7 @@ namespace Mountain.classes.handlers {
                 return;
             }
 
-            Exit exit = packet.Client.Location.Room.Exits.Find(e => (e.Name.StartsWith(packet.parameter, StringComparison.OrdinalIgnoreCase)));
+            Exit exit = packet.Client.Location.Room.Exits.Find(e => (e.DoorLabel.StartsWith(packet.parameter, StringComparison.OrdinalIgnoreCase)));
             if (exit == null) {
                 DontKnowYet(packet);
                 return;

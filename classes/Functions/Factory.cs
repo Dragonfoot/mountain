@@ -17,6 +17,7 @@ namespace Mountain.classes.functions {
                 FileStream fileStream = new FileStream(file, FileMode.Open);
                 Connection client = (Connection)serializer.Deserialize(fileStream);
                 // get area from client.areaname, get room in area from client.roomname
+                if (client.Account.Location.Room == null) client.Account.Location.Room = Global.Settings.TheVoid;
                 player.Account.Location = new Location(client.Account.Location.Room);
                 
                 if (player.Account.Location.Area == null) {
@@ -25,6 +26,9 @@ namespace Mountain.classes.functions {
                 //player.Account.RoomID.ID = settings.TheVoid.ID;
                //     }
          //           player.Account.Location.Area = settings.world.GetAreaNameByRoomName(player.Account.Location.RoomName);
+                }
+                if (player.Location == null) {
+                    player.Location = player.Account.Location;
                 }
                 if (player.Location.Room == null) {
                     Area Area = Global.Settings.World.Areas.First(area => area.Name == player.Account.Location.AreaName);

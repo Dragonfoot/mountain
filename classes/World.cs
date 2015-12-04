@@ -16,15 +16,12 @@ namespace Mountain.classes {
         [XmlArray("Areas")] public List<Area> Areas;
         [XmlIgnore] public TcpServerListener portListener;
         [XmlIgnore] public int Connections { get; private set; }
-        [XmlIgnore] public Area Administration;
+   //     [XmlIgnore] public Area Administration;
         protected ListBox Console;
         private CancellationTokenSource cancellationTokenSource;
 
         public World() {
             InitializeSettings();
-            Areas = new List<Area>();
-            portListener = new TcpServerListener(this);
-            Port = 8090;
       /*      portListener.StartServer(Port);
             string lastworld = Global.Settings.LastSavedWorld;
             if (lastworld.IsNullOrWhiteSpace()) Load(null);
@@ -36,10 +33,13 @@ namespace Mountain.classes {
             ClassType = classObjectType.world;
             Global.Settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
             Global.Settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
+            portListener = new TcpServerListener(this);
+            Port = 8090;
+            Areas = new List<Area>();
             CreateAdminSection();
         }
 
-        public void StartListen(int port = 8090) {
+        public void AcceptConnections(int port = 8090) {
             portListener.StartServer(port);
         }
 
@@ -83,7 +83,7 @@ namespace Mountain.classes {
                 "You could win a place on the top shelf of our Achievements of Horror vault that houses the very best souls of our society's " +
                 "most fascinating players.)\r\n";
 
-            Administration = new Area();
+            Area Administration = new Area();
             Administration.Name = "Administration Complex";
             Administration.Description = "One of this worlds most extraordinary wonders. Top minds from all the major centers reside here. " +
                "Houses the most advanced technological and military equipment available rivaling even Mount Cascade Fortress on " +
@@ -129,6 +129,7 @@ namespace Mountain.classes {
             Administration.Rooms.Add(control);
             Administration.Rooms.Add(Void);
             Administration.Rooms.Add(transit);
+            Areas.Add(Administration);
         }       
 
         public void Save(string filename) {
@@ -145,7 +146,6 @@ namespace Mountain.classes {
             Xml.createNode("World", Name, writer);
             Xml.createNode("Description", Description, writer);
             Xml.createNode("Port", Port.ToString(), writer);
-            writer = Administration.SaveXml(writer);
             if (Areas.Count > 0) {
                 writer.WriteStartElement("Areas");
                 foreach (Area area in Areas) {
