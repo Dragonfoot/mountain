@@ -47,12 +47,12 @@ namespace Mountain.Dialogs {
                 switch (packet.eventType) {
                     case EventType.connection: Connections++; break;
                     case EventType.disconnected:
-                        int index = connectedListBox.FindString(packet.Client.Account.Name);
+                        int index = connectedListBox.FindString(packet.Client.Name);
                         Invoke((MethodInvoker)delegate { connectedListBox.Items.RemoveAt(index); });
                         Connections--;
                         break;
                     case EventType.login:
-                        string newPlayer = packet.Client.Account.Name + " : " + packet.Client.IPAddress.ToString() + ":" + packet.Client.Port.ToString();
+                        string newPlayer = packet.Client.Name + " : " + packet.Client.IPAddress.ToString() + ":" + packet.Client.Port.ToString();
                         Invoke((MethodInvoker)delegate { connectedListBox.Items.Add(newPlayer); });
                         break;
                 }
@@ -243,9 +243,9 @@ namespace Mountain.Dialogs {
                 RemoveList.Add(player);
             }
             foreach (Connection player in RemoveList) {
-                GBL.Settings.Players.Remove(player.Account.Name, "Lost connection.");
-                player.Location.Room.Players.Remove(player.Account.Name);
-                SystemEventPacket packet = new SystemEventPacket(EventType.disconnected, player.Account.Name + " lost connection.");
+                GBL.Settings.Players.Remove(player.Name, "Lost connection.");
+                player.Location.Room.Players.Remove(player.Name);
+                SystemEventPacket packet = new SystemEventPacket(EventType.disconnected, player.Name + " lost connection.");
                 GBL.Settings.SystemEventQueue.Push(packet);
                 player.Shutdown();
                 player.Dispose();

@@ -12,7 +12,7 @@ namespace Mountain.classes.dataobjects {
         public bool Administrator { get; set; }
         public string Email { get; set; }
         public Guid ID { get; set; }
-        [XmlIgnore] public Connection Client { get; set; }
+   //     [XmlIgnore] public Connection Client { get; set; }
         public Location Location; 
 
         public Account(Guid id) {

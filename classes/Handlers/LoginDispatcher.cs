@@ -82,7 +82,10 @@ namespace Mountain.classes.handlers {
                     if (LoginClient.CheckPassword(message)) {
                         Client.Send("".NewLine().NewLine().Ansi(Style.yellow), false);
                         Client.Send("Welcome back ".Ansi(Style.white, Style.white) + LoginClient.Name + "!".NewLine().NewLine());
-                        Client.Account = LoginClient;
+                        Client.Password = LoginClient.Password;
+                        Client.Name = LoginClient.Name;
+                        Client.Administrator = LoginClient.Administrator;
+                        Client.Email = LoginClient.Email;
                         GBL.Settings.SwapLoginForPlayer(Client); // swap out login for player handler
                         return;
                     }
@@ -94,7 +97,10 @@ namespace Mountain.classes.handlers {
                     break;
                 case login.confirmPassword:
                     if (NewUser()) {
-                        Client.Account = LoginClient;
+                        Client.Password = LoginClient.Password;
+                        Client.Name = LoginClient.Name;
+                        Client.Administrator = LoginClient.Administrator;
+                        Client.Email = LoginClient.Email;
                         GBL.Settings.SwapLoginForPlayer(Client); // swap out login for player handler
                         return;
                     }

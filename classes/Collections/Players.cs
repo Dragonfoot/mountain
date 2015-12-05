@@ -42,11 +42,11 @@ namespace Mountain.classes.collections {
         }
 
         public bool Exists(string name) {
-            return List.Exists(player => player.Account.Name == name);
+            return List.Exists(player => player.Name == name);
         }
 
         public int GetIndex(string name) {
-            return List.FindIndex(player => player.Account.Name == name);
+            return List.FindIndex(player => player.Name == name);
         }
 
         public void Shutdown() { 

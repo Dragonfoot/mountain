@@ -31,8 +31,8 @@ namespace Mountain.classes.handlers {
         }
 
         private void SetRoom(Room room) {
-            Client.Location.Room = room;
-            Client.Account.Location = new Location(room);
+            //Client.Location.Room = room;
+            Client.Location = new Location(room);
         }
 
         private Packet Parse(string message, Connection player) {
@@ -68,7 +68,7 @@ namespace Mountain.classes.handlers {
                 packet.known = true;
             }
             if (!packet.known) {
-                if(FUNC.HasNameThatStartsWith(player.Location.Room.Exits.ToArray(), packet.verb)) {
+                if(FUNC.HasNameThatStartsWith(player.Room.Exits.ToArray(), packet.verb)) {
                     packet.parameter = packet.verb;
                     packet.verb = "go";
                     packet.known = true;

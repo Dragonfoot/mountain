@@ -10,7 +10,7 @@ namespace Mountain.classes.functions {
     [Serializable]
     public class FCT {
         public void LoadPlayerFromFile(Connection player, string name, string file) {
-            player.Account.Location = player.Location = new Location(GBL.Settings.TheVoid);
+            player.Location = new Location(GBL.Settings.TheVoid);
             return;
             /*   if (!File.Exists(file)) {
                    player.Account.Location = new Location(Glb.Settings.TheVoid);

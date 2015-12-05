@@ -73,10 +73,9 @@ namespace Mountain.classes {
         }
 
         public void SwapLoginForPlayer(Connection connection) {
-            connection.Name = connection.Account.Name;
-            connection.Account.Location = new Location(TheVoid);
-            string file = PlayersDirectory + "\\" + connection.Account.Name + "_test.xml";
-            factory.LoadPlayerFromFile(connection, connection.Account.Name, file);
+            connection.Location = new Location(TheVoid);
+            string file = PlayersDirectory + "\\" + connection.Name + "_test.xml";
+            factory.LoadPlayerFromFile(connection, connection.Name, file);
             Players.Add(connection);
             Logins.Remove(connection);
             connection.StartPlayer();

@@ -75,17 +75,17 @@ namespace Mountain.classes {
         }
 
         private void Players_OnPlayerAdded(object myObject, Connection player, string message = "") {
-            string name = player.Account.Name;
+            string name = player.Name;
             if (message == "") message = " just arrived.";
             foreach (Connection client in Players) {
-                if (client != player) client.Send(player.Account.Name.Ansi(Style.white) + message.Ansi(Style.white).NewLine());
+                if (client != player) client.Send(player.Name.Ansi(Style.white) + message.Ansi(Style.white).NewLine());
                 else SendCommand(player, "look");
             }
         }
 
         private void Players_OnPlayerRemoved(object myObject, Connection player, string message = "") {
             foreach (Connection Player in Players) {
-                Player.Send(player.Account.Name.Ansi(Style.white) + " goes to the " + message + ".".NewLine());
+                Player.Send(player.Name.Ansi(Style.white) + " goes to the " + message + ".".NewLine());
             }
         }
 
@@ -135,12 +135,12 @@ namespace Mountain.classes {
 
         public void AddPlayer(Connection player) {
             Players.Add(player);
-            player.Location.Room = this;
-            player.Account.Location = new Location(Location.Room);
+            player.Room = this;
+            player.Location = new Location(Location.Room);
         }
 
         public void RemovePlayer(Connection player, string message) {
-            Players.Remove(player.Account.Name, message);
+            Players.Remove(player.Name, message);
         }
 
         public string SerializeXML() { 

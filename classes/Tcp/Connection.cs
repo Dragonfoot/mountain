@@ -22,6 +22,11 @@ namespace Mountain.classes.tcp {
         [XmlIgnore][NonSerialized()] public StateObject state;
         [XmlIgnore][NonSerialized()] public IPAddress IPAddress;
         [XmlIgnore][NonSerialized()] public int Port;
+        [XmlIgnore][NonSerialized()] public Room Room;
+        [XmlIgnore][NonSerialized()] public Area Area;
+        [XmlIgnore][NonSerialized()] public string Password;
+        [XmlIgnore][NonSerialized()] public string Email;
+        [XmlIgnore][NonSerialized()] public bool Administrator;
         [NonSerialized()] private LoginDispatcher LoginDispatcher;   // login functions
         [NonSerialized()] private PlayerDispatcher PlayerDispatcher; // player functions
         [XmlIgnore] public bool Connected { get {
@@ -31,7 +36,6 @@ namespace Mountain.classes.tcp {
             }
         }
         public Location Location { get { return location; } set { SetRoom(value.Room); } }
-        public Account Account { get; set; }
         public Stats Stats { get; set; }
         public Equipment Equipment { get; set; }
         private Location location;
@@ -41,7 +45,6 @@ namespace Mountain.classes.tcp {
             Socket = socket;
             IPAddress = ((IPEndPoint)socket.Client.RemoteEndPoint).Address;
             Port = ((IPEndPoint)socket.Client.RemoteEndPoint).Port;
-            Account = new Account();
             Stats = new Stats();
             Equipment = new Equipment();
             ResponseStack = new Stack<string>();
@@ -103,7 +106,7 @@ namespace Mountain.classes.tcp {
             PlayerDispatcher = new PlayerDispatcher(this);
             LoginDispatcher = null;
             Commands = PlayerDispatcher.OnPlayerMessageReceived;
-            SystemEventPacket packet = new SystemEventPacket(EventType.login, this.Account.Name + " has entered the world.", this);
+            SystemEventPacket packet = new SystemEventPacket(EventType.login, this.Name + " has entered the world.", this);
             GBL.Settings.SystemEventQueue.Push(packet);
             Location.Room.AddPlayer(this);
 
@@ -111,7 +114,7 @@ namespace Mountain.classes.tcp {
 
         private void SetRoom(Room room) {
             if (room == null) room = GBL.Settings.TheVoid;
-            Account.Location = location = new Location(room);
+            location = new Location(room);
         }
 
         public void Send(string data, bool indent = true) {
@@ -147,18 +150,19 @@ namespace Mountain.classes.tcp {
         }
 
 
-        public void SaveXml(string filename = null) {
-            return;
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            XmlTextWriter writer = new XmlTextWriter(path + filename, System.Text.Encoding.UTF8);
+        public void SaveXml() {
+            string path = GBL.Settings.PlayersDirectory + @"\";
+            XmlTextWriter writer = new XmlTextWriter(path + Name + "test.xml", System.Text.Encoding.UTF8);
             writer.WriteStartDocument(true);
             writer.Formatting = Formatting.Indented;
             writer.Indentation = 2;
+            writer.WriteStartElement("Player");
             XML.createNode("Login", Name, writer);
-            XML.createNode("Password", Account.Password, writer);
-            XML.createNode("Administrator", Account.Administrator.ToString(), writer);
-            XML.createNode("Email", Account.Email, writer);
+            XML.createNode("Email", Email, writer);
+            XML.createNode("Password", Password, writer);
+            XML.createNode("Administrator", Administrator.ToString(), writer);
             writer = location.SaveXml(writer);
+            writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();
         }
