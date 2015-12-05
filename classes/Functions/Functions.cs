@@ -64,6 +64,28 @@ namespace Mountain.classes.functions {
             }
             return false;
         }
+
+        public static Packet ContainsExit(Array list, Packet packet) {
+            foreach(Exit exit in list) {
+                if (exit.ToString().WordCount() > 1) {
+                    Array words = exit.ToString().Split(' ');
+                    foreach (string word in words) {
+                        if (word.StartsWith(packet.verb, StringComparison.OrdinalIgnoreCase)) {
+                            packet.parameter = exit.ToString();
+                            packet.verb = "go";
+                            return packet;
+                        }
+                    }
+                } else {
+                    if (exit.ToString().StartsWith(packet.verb, StringComparison.OrdinalIgnoreCase)) {
+                        packet.parameter = exit.ToString();
+                        packet.verb = "go";
+                        return packet;
+                    }
+                }
+            }
+            return packet;
+        }
         
         public static void UpdateRoomEdits(Room fromRoom, Room toRoom) {
             toRoom.Name = fromRoom.Name;

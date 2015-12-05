@@ -39,7 +39,7 @@ namespace Mountain.classes.functions {
 
 
             Room theVoidROOM;  // no doorway in for players and at least one exit to world room(s)
-            name = "The Void";
+            name = "Void";
             description = "You find yourself weightlessly floating in some kind of silent, lonely, dark, " +
                 "endless, - and as many other voidy spacy words there might be.. - space.";
 

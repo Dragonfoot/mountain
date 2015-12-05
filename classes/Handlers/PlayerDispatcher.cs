@@ -21,9 +21,6 @@ namespace Mountain.classes.handlers {
             if (!packet.known) {
                 string verb = packet.verb;
                 Commands.DontKnowHow(packet);
-                if (Commands.IsCommand(verb)) {
-                    Client.Send("But, um.. I did a few minutes ago..\"scratch\"".Ansi(Style.yellow).NewLine());
-                }
                 return;
             }
             Commands.InvokeCommand(packet.verb, packet);
@@ -39,6 +36,7 @@ namespace Mountain.classes.handlers {
                 message = message.Remove(0, 1).Insert(0, "say ").StripExtraSpaces();
                 packet.known = true;
             } else {
+                bool error = false;
                 if (message.FirstWordIsSingleChar()) {
                     char ch = message.FirstChar();
                     switch (ch) {
@@ -54,8 +52,14 @@ namespace Mountain.classes.handlers {
                             message = message.Remove(0, 1).Insert(0, "help");
                             packet.known = true;
                             break;
+                        default:
+                            packet.parameter = packet.verb;
+                            packet.verb = ch.ToString();
+                            error = true;
+                            break;
                     }
                 }
+                if (error) return packet;
             }
             packet.verb = message.FirstWord();
             packet.parameter = message.StripFirstWord();
@@ -63,11 +67,11 @@ namespace Mountain.classes.handlers {
                 packet.known = true;
             }
             if (!packet.known) {
-                if(FUNC.HasNameThatStartsWith(player.Room.Exits.ToArray(), packet.verb)) {
-                    packet.parameter = packet.verb;
-                    packet.verb = "go";
+                string verb = packet.verb;
+                packet = FUNC.ContainsExit(player.Room.Exits.ToArray(), packet);
+                if (packet.verb != verb) {
                     packet.known = true;
-                }
+                }                
             }
             return packet;
         }
