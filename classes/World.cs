@@ -31,8 +31,8 @@ namespace Mountain.classes {
 
         private void InitializeSettings() {
             ClassType = classObjectType.world;
-            Glb.Settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
-            Glb.Settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
+            GBL.Settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
+            GBL.Settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
             portListener = new TcpServerListener(this);
             Port = 8090;
             Areas = new List<Area>();
@@ -60,7 +60,7 @@ namespace Mountain.classes {
         }
 
         public void Shutdown() {
-            Glb.Settings.Players.Shutdown();
+            GBL.Settings.Players.Shutdown();
             StopHeart();
             portListener.StopServer();
         }
@@ -117,7 +117,7 @@ namespace Mountain.classes {
             description = "You find yourself weightlessly floating in some kind of silent, lonely, dark, " +
                 "endless, - and as many other voidy spacy words there might be.. - space.";
             Void = Build.NewRoom(name, description, Administration);
-            Glb.Settings.TheVoid = Void;
+            GBL.Settings.TheVoid = Void;
             Void.Tag = "Void";
             Void.roomType = roomType.outdoor;
             Void.roomRestrictons = roomRestrictions.fighting | roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.stealing;
@@ -143,9 +143,9 @@ namespace Mountain.classes {
             writer.Formatting = Formatting.Indented;
             writer.Indentation = 2;
             writer.WriteStartElement("World");
-            Xml.createNode("World", Name, writer);
-            Xml.createNode("Description", Description, writer);
-            Xml.createNode("Port", Port.ToString(), writer);
+            XML.createNode("World", Name, writer);
+            XML.createNode("Description", Description, writer);
+            XML.createNode("Port", Port.ToString(), writer);
             if (Areas.Count > 0) {
                 writer.WriteStartElement("Areas");
                 foreach (Area area in Areas) {

@@ -96,16 +96,16 @@ namespace Mountain.classes {
 
         public string GetName() { return Name; }
         public string GetDesciption() { return Description; }
-        public string GetExits() { return Fnct.GetNames(Exits.ToArray()); }
-        public string GetMobs() { return Fnct.GetNames(Mobs.ToArray()); }
-        public string GetPlayers() { return Fnct.GetNames(Players.ToArray()); }
-        public string GetOtherPlayers(string name) { return Fnct.GetOtherNames(Players.ToArray(), name); }
-        public string GetItems() { return Fnct.GetNames(Items.ToArray()); }
+        public string GetExits() { return FUNC.GetNames(Exits.ToArray()); }
+        public string GetMobs() { return FUNC.GetNames(Mobs.ToArray()); }
+        public string GetPlayers() { return FUNC.GetNames(Players.ToArray()); }
+        public string GetOtherPlayers(string name) { return FUNC.GetOtherNames(Players.ToArray(), name); }
+        public string GetItems() { return FUNC.GetNames(Items.ToArray()); }
 
         private void Messages_OnPlayerEventReceived(object myObject, Packet packet) {
             Packet message = Messages.Pop(); 
             if (message == null) message = packet;
-            Glb.Settings.SystemMessageQueue.Push("Room received: " + message);
+            GBL.Settings.SystemMessageQueue.Push("Room received: " + message);
         }        
         
         public void HeartBeat() {
@@ -150,7 +150,7 @@ namespace Mountain.classes {
             try {
                 serializer.Serialize(writer, this, emptyNamepsaces);
             } catch (Exception e) {
-                Glb.Settings.SystemMessageQueue.Push(e.ToString());
+                GBL.Settings.SystemMessageQueue.Push(e.ToString());
                 return e.ToString();
             }             
             return writer.ToString();
@@ -158,10 +158,10 @@ namespace Mountain.classes {
 
         public XmlTextWriter SaveXml(XmlTextWriter writer) {
             writer.WriteStartElement("Room");
-            Xml.createNode("Name", Name, writer);
-            Xml.createNode("Description", Description, writer);
-            Xml.createNode("ShortDescription", shortDescription, writer);
-            Xml.createNode("Tag", Tag, writer);
+            XML.createNode("Name", Name, writer);
+            XML.createNode("Description", Description, writer);
+            XML.createNode("ShortDescription", shortDescription, writer);
+            XML.createNode("Tag", Tag, writer);
             writer = Location.SaveXml(writer);
             if(Exits.Count > 0) {
                 writer.WriteStartElement("Exits");
@@ -182,17 +182,17 @@ namespace Mountain.classes {
             view.Add(Description);
             view.Add("");
             if (Exits.Any()) { // add color coding's
-                stringBuilder.Append("Exits: " + Fnct.GetNames(Exits.ToArray()));
+                stringBuilder.Append("Exits: " + FUNC.GetNames(Exits.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Mobs.Any()) {
-                stringBuilder.Append("Mobs: " + Fnct.GetNames(Mobs.ToArray()));
+                stringBuilder.Append("Mobs: " + FUNC.GetNames(Mobs.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Players.Any()) {
-                stringBuilder.Append("Players: " + Fnct.GetNames(Players.ToArray()));
+                stringBuilder.Append("Players: " + FUNC.GetNames(Players.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }

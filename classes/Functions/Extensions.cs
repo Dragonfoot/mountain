@@ -96,7 +96,7 @@ namespace Mountain.classes.functions {
             return str + Environment.NewLine;
         }
         public static string Indent(this string str) {
-            for (int i = 0; i <= Glb.indent; i++) {
+            for (int i = 0; i <= GBL.indent; i++) {
                 str = " " + str;
             }
             return str;
@@ -185,7 +185,7 @@ namespace Mountain.classes.functions {
             result = result.Trim();
             return result;
         }
-        public static string WordWrap(this string longString, int width = Glb.pageWidth) {  // takes a long string and formats to width
+        public static string WordWrap(this string longString, int width = GBL.pageWidth) {  // takes a long string and formats to width
             StringBuilder lines = new StringBuilder();
             string[] words = longString.Split(' ');
             StringBuilder buildLine = new StringBuilder("");

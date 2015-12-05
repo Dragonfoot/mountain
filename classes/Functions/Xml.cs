@@ -7,7 +7,7 @@ using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
 
-    public static class Xml {
+    public static class XML {
 
         //saves class to xml file without namespace
         public static void ObjectToXml(object item, string path) {
@@ -25,7 +25,7 @@ namespace Mountain.classes.functions {
                     xmlDocument.Save(path);
                 }
             } catch (Exception e) {
-                Glb.Settings.SystemMessageQueue.Push(e.ToString());
+                GBL.Settings.SystemMessageQueue.Push(e.ToString());
             }
         }
 
@@ -67,40 +67,12 @@ namespace Mountain.classes.functions {
             bucky.Administrator = false;
             users.List.Add(bucky);
 
-            Xml.ObjectToXml(users, path);
+            XML.ObjectToXml(users, path);
         }
         public static void createNode(string Label, string value, XmlTextWriter writer) {
             writer.WriteStartElement(Label);
             writer.WriteString(value);
             writer.WriteEndElement();
-        }
-        private static void createXml(object sender, EventArgs e) {
-            XmlTextWriter writer = new XmlTextWriter("product.xml", System.Text.Encoding.UTF8);
-            writer.WriteStartDocument(true);
-            writer.Formatting = Formatting.Indented;
-            writer.Indentation = 2;
-            writer.WriteStartElement("Table");
-            createNode("1", "Product 1", "1000", writer);
-            createNode("2", "Product 2", "2000", writer);
-            createNode("3", "Product 3", "3000", writer);
-            createNode("4", "Product 4", "4000", writer);
-            writer.WriteEndElement();
-            writer.WriteEndDocument();
-            writer.Close();
-        }
-
-        private static void createNode(string pID, string pName, string pPrice, XmlTextWriter writer) {
-            writer.WriteStartElement("Product");
-            writer.WriteStartElement("Product_id");
-            writer.WriteString(pID);
-            writer.WriteEndElement();
-            writer.WriteStartElement("Product_name");
-            writer.WriteString(pName);
-            writer.WriteEndElement();
-            writer.WriteStartElement("Product_price");
-            writer.WriteString(pPrice);
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-        }
+        }      
     }
 }

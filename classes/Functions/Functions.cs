@@ -5,7 +5,7 @@ using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
 
-    public static class Fnct {
+    public static class FUNC {
 
         public static string FormatStringArray(Array list) {
             string names = string.Empty;

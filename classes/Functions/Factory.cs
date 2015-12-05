@@ -8,9 +8,9 @@ using Mountain.classes.tcp;
 namespace Mountain.classes.functions {
 
     [Serializable]
-    public class Factory {
+    public class FCT {
         public void LoadPlayerFromFile(Connection player, string name, string file) {
-            player.Account.Location = player.Location = new Location(Glb.Settings.TheVoid);
+            player.Account.Location = player.Location = new Location(GBL.Settings.TheVoid);
             return;
             /*   if (!File.Exists(file)) {
                    player.Account.Location = new Location(Glb.Settings.TheVoid);

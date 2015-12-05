@@ -67,9 +67,9 @@ namespace Mountain.classes {
 
         public XmlTextWriter SaveXml(XmlTextWriter writer) {
             writer.WriteStartElement("Exit");
-            Xml.createNode("Name", Name, writer);
-            Xml.createNode("Description", Description, writer);
-            Xml.createNode("DoorLabel", DoorLabel, writer);
+            XML.createNode("Name", Name, writer);
+            XML.createNode("Description", Description, writer);
+            XML.createNode("DoorLabel", DoorLabel, writer);
             writer = Linkage.SaveXml(writer);
             writer.WriteEndElement();
             return writer;

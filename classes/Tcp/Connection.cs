@@ -57,12 +57,12 @@ namespace Mountain.classes.tcp {
 
         protected void StartReceiving() {
             SystemEventPacket packet = new SystemEventPacket(EventType.connection, "New Connection begun from " + this.IPAddress.ToString(), this);
-            Glb.Settings.SystemEventQueue.Push(packet);
+            GBL.Settings.SystemEventQueue.Push(packet);
             try {
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, SocketFlags.None, ReceiveCallback, state);
             }
             catch (Exception e) {
-                Glb.Settings.SystemMessageQueue.Push("Connection closed: " + e.ToString());               
+                GBL.Settings.SystemMessageQueue.Push("Connection closed: " + e.ToString());               
             }
         }
 
@@ -84,13 +84,13 @@ namespace Mountain.classes.tcp {
                 }
             }
             catch (SocketException e) {
-                Glb.Settings.SystemMessageQueue.Push("CC0: " + e.ToString());
+                GBL.Settings.SystemMessageQueue.Push("CC0: " + e.ToString());
             }
             catch (ObjectDisposedException e) {
-                Glb.Settings.SystemMessageQueue.Push("CC1: " + e.ToString());
+                GBL.Settings.SystemMessageQueue.Push("CC1: " + e.ToString());
             }
             catch (Exception e) {
-                Glb.Settings.SystemMessageQueue.Push("CC2: " + e.ToString());
+                GBL.Settings.SystemMessageQueue.Push("CC2: " + e.ToString());
             }
         }
 
@@ -104,13 +104,13 @@ namespace Mountain.classes.tcp {
             LoginDispatcher = null;
             Commands = PlayerDispatcher.OnPlayerMessageReceived;
             SystemEventPacket packet = new SystemEventPacket(EventType.login, this.Account.Name + " has entered the world.", this);
-            Glb.Settings.SystemEventQueue.Push(packet);
+            GBL.Settings.SystemEventQueue.Push(packet);
             Location.Room.AddPlayer(this);
 
         }
 
         private void SetRoom(Room room) {
-            if (room == null) room = Glb.Settings.TheVoid;
+            if (room == null) room = GBL.Settings.TheVoid;
             Account.Location = location = new Location(room);
         }
 
@@ -132,7 +132,7 @@ namespace Mountain.classes.tcp {
                 MessageSentDone.Set(); // tell parent thread we're finished
             }
             catch (Exception e) {
-                Glb.Settings.SystemMessageQueue.Push("CC3: " + e.ToString());
+                GBL.Settings.SystemMessageQueue.Push("CC3: " + e.ToString());
             }
         }
 
@@ -154,10 +154,10 @@ namespace Mountain.classes.tcp {
             writer.WriteStartDocument(true);
             writer.Formatting = Formatting.Indented;
             writer.Indentation = 2;
-            Xml.createNode("Login", Name, writer);
-            Xml.createNode("Password", Account.Password, writer);
-            Xml.createNode("Administrator", Account.Administrator.ToString(), writer);
-            Xml.createNode("Email", Account.Email, writer);
+            XML.createNode("Login", Name, writer);
+            XML.createNode("Password", Account.Password, writer);
+            XML.createNode("Administrator", Account.Administrator.ToString(), writer);
+            XML.createNode("Email", Account.Email, writer);
             writer = location.SaveXml(writer);
             writer.WriteEndDocument();
             writer.Close();

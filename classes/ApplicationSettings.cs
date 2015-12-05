@@ -38,11 +38,11 @@ namespace Mountain.classes {
         [XmlIgnore] public string ItemTemplateDirectory { get { return AppDirectory + Settings.Default.ItemTemplateDirectory; } }
         [XmlIgnore] public MessageQueue SystemMessageQueue;
         [XmlIgnore] public SystemEventQueue SystemEventQueue;
-        protected Factory factory;
+        protected FCT factory;
 
         public ApplicationSettings(MessageQueue messageQueue, SystemEventQueue eventQueue) {
             InitializeSettings();
-            factory = new Factory();
+            factory = new FCT();
             SystemMessageQueue = messageQueue;
             SystemEventQueue = eventQueue;
             Logins = new List<Connection>();
@@ -99,7 +99,7 @@ namespace Mountain.classes {
             if (!Directory.Exists(PlayersDirectory)) { Directory.CreateDirectory(PlayersDirectory); }
             string file = BaseDirectory + "\\" + RegisteredUsersAccounts;
          //   if (!File.Exists(file)) {
-                Xml.ReCreateRegistryAccounts(file);
+                XML.ReCreateRegistryAccounts(file);
           //  }
         }
     }

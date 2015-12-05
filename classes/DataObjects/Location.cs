@@ -12,7 +12,7 @@ namespace Mountain.classes.dataobjects {
         public string RoomName { get { return Room.Name; } }
 
         public Location(Room room)  {
-            if (room == null) room = Glb.Settings.TheVoid;
+            if (room == null) room = GBL.Settings.TheVoid;
             if (room.Location != null) Area = room.Location.Area;
             Room = room;
         }
@@ -26,8 +26,8 @@ namespace Mountain.classes.dataobjects {
 
         public XmlTextWriter SaveXml(XmlTextWriter writer) {
             writer.WriteStartElement("Location");
-            Xml.createNode("AreaName", AreaName, writer);
-            Xml.createNode("RoomName", RoomName, writer);
+            XML.createNode("AreaName", AreaName, writer);
+            XML.createNode("RoomName", RoomName, writer);
             writer.WriteEndElement();
             return writer;
         }

@@ -44,7 +44,7 @@ namespace Mountain.classes.functions {
                 "endless, - and as many other voidy spacy words there might be.. - space.";
 
             theVoidROOM = NewRoom(name, description, area);
-            Glb.Settings.TheVoid = theVoidROOM;
+            GBL.Settings.TheVoid = theVoidROOM;
             theVoidROOM.Tag = "Void";
             theVoidROOM.roomType = roomType.outdoor;
             theVoidROOM.roomRestrictons = roomRestrictions.fighting | roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.stealing;

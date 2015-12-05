@@ -19,7 +19,7 @@ namespace Mountain.classes.collections {
             try {
                 OnMessageReceived(this, message);
             } catch (Exception e) {
-                Glb.Settings.SystemMessageQueue.Push(Tag + ": " + e.ToString());
+                GBL.Settings.SystemMessageQueue.Push(Tag + ": " + e.ToString());
             }
         }
 

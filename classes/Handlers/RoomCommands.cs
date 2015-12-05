@@ -63,7 +63,7 @@ namespace Mountain.classes.handlers {
                     }
                 }
             } catch (Exception e) {
-                Glb.Settings.SystemMessageQueue.Push(e.ToString());
+                GBL.Settings.SystemMessageQueue.Push(e.ToString());
             }
         }
 
@@ -88,21 +88,21 @@ namespace Mountain.classes.handlers {
 
             names = string.Empty;
             if (packet.Client.Location.Room.Players.Count > 1) {
-                names = Fnct.GetOtherNames(packet.Client.Location.Room.Players.ToArray(), packet.Client.Account.Name);
+                names = FUNC.GetOtherNames(packet.Client.Location.Room.Players.ToArray(), packet.Client.Account.Name);
                 if (names != string.Empty) packet.Client.Send("You see:" + names.Ansi(true, Style.cyan, Style.boldOn).WordWrap().NewLine());
             }
 
-            names = Fnct.GetNames(packet.Client.Location.Room.Mobs.ToArray());
+            names = FUNC.GetNames(packet.Client.Location.Room.Mobs.ToArray());
             if (names != string.Empty) packet.Client.Send("You see:" + names.Ansi(Style.green).NewLine());
             // add items
         }
 
         private void Quit(Packet packet) {
-            Glb.Settings.Players.Remove(packet.Client.Account.Name, "Player has left.");
+            GBL.Settings.Players.Remove(packet.Client.Account.Name, "Player has left.");
             packet.Client.Send("See you again soon!".Ansi(Style.white).NewLine().NewLine());
             packet.Client.Location.Room.Players.Remove(packet.Client.Account.Name);
             SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnected, packet.Client.Account.Name + " has left.", packet.Client);
-            Glb.Settings.SystemEventQueue.Push(eventPacket);
+            GBL.Settings.SystemEventQueue.Push(eventPacket);
             packet.Client.Shutdown();
             packet.Client.Dispose();
         }
@@ -140,7 +140,7 @@ namespace Mountain.classes.handlers {
             // see if more than one exit starts with what was received
 
             // make sure we have a room first, before attempting to actually go there
-            int results = Fnct.GetSameNameCount(packet.Client.Location.Room.Exits.ToArray(), packet.parameter);            
+            int results = FUNC.GetSameNameCount(packet.Client.Location.Room.Exits.ToArray(), packet.parameter);            
             if (results > 1) {
                 packet.Client.Send("Too ambiguous.".Ansi(Style.yellow).NewLine());
                 return;
