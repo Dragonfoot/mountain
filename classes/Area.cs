@@ -23,14 +23,13 @@ namespace Mountain.classes {
             Rooms = new Rooms(this);
         }
 
-        public Area(string name, string description, Guid id) {
+        public Area(string name, string description) {
             Name = name;
             Description = description;
-            ID = id;
         }
 
         public void AddRoom(Room room) {
-            room.Location.Area = this;
+            room.Area = this;
             Rooms.Add(room);
         }
 

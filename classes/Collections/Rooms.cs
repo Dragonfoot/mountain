@@ -16,7 +16,6 @@ namespace Mountain.classes.collections {
         }
 
         public void Add(Room room) {
-            room.Location.Area = Area;
             List.Add(room);
         } 
           

@@ -22,8 +22,8 @@ namespace Mountain.classes {
         [XmlIgnore] public ConcurrentBag<Item> Items { get; set; }
         [XmlIgnore] public Players Players { get; set; }
         [XmlIgnore] public PlayerEventQueue Messages;
-        public Location Location { get; set; }
         public string shortDescription { get; set; }
+        public Area Area;
         public roomType roomType { get; set; }
         public roomRestrictions roomRestrictons { get; set; }
         public roomConditions roomConditions { get; set; }
@@ -34,28 +34,21 @@ namespace Mountain.classes {
             InitializeRoom();
             Name = "New Room";
             Description = "This is a newly created room";
-            Location = new Location();
-            Location.Area = area;
-            Location.Room = this;
+            Area = area;
         }
         public Room(string name, Area area) {
             InitializeRoom();
             Name = name;
             Description = Name + " is a newly created room";
-            Location = new Location();
-            Location.Area = area;
-            Location.Room = this;
+            Area = area;
         }
         public Room(string name, string description, Area area) {
             InitializeRoom();
             Name = name;
             Description = description;
-            Location = new Location();
-            Location.Area = area;
-            Location.Room = this;
+            Area = area;
         }
         public Room() { // for xml-serializer
-            Location = new Location();
         }
 
         public override string ToString() {
@@ -136,7 +129,6 @@ namespace Mountain.classes {
         public void AddPlayer(Connection player) {
             Players.Add(player);
             player.Room = this;
-            player.Location = new Location(Location.Room);
         }
 
         public void RemovePlayer(Connection player, string message) {
@@ -162,7 +154,8 @@ namespace Mountain.classes {
             XML.createNode("Description", Description, writer);
             XML.createNode("ShortDescription", shortDescription, writer);
             XML.createNode("Tag", Tag, writer);
-            writer = Location.SaveXml(writer);
+            XML.createNode("AreaName", Area.Name, writer);
+            XML.createNode("RoomName", Name, writer);
             if(Exits.Count > 0) {
                 writer.WriteStartElement("Exits");
                 foreach(Exit exit in Exits) {
@@ -216,7 +209,6 @@ namespace Mountain.classes {
             Array exitsCopy = Exits.ToArray();
             roomCopy.Exits.Clear();
             if (exitsCopy.Length > 0) foreach(Exit exitCopy in exitsCopy) roomCopy.Exits.Add(exitCopy.ShallowCopy());
-            roomCopy.Location = Location.ShallowCopy();  
             return roomCopy;
         }
     }

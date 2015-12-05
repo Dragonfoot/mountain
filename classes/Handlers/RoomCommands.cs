@@ -151,7 +151,7 @@ namespace Mountain.classes.handlers {
                 DontKnowYet(packet);
                 return;
             }
-            Room nextRoom = exit.Linkage.Room;
+            Room nextRoom = exit.Room;
             packet.Client.Room.RemovePlayer(packet.Client, exit.Name);
             nextRoom.AddPlayer(packet.Client);
         }

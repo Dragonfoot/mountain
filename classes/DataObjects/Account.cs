@@ -11,16 +11,9 @@ namespace Mountain.classes.dataobjects {
         public string Password { get; set; }
         public bool Administrator { get; set; }
         public string Email { get; set; }
-        public Guid ID { get; set; }
-   //     [XmlIgnore] public Connection Client { get; set; }
-        public Location Location; 
 
-        public Account(Guid id) {
-            ID = id;
-        }
-
-        public Account() { // empty constructor for de/serialization
-        }
+        public Account() {
+        }        
 
         public bool CheckPassword(string inputPassword) {
             if (Password.IsNullOrWhiteSpace()) return false;

@@ -90,7 +90,7 @@ namespace Mountain.Dialogs {
                 nameChanged = false;
             }
             Exit exit = new Exit();
-            exit.LinkArea = Room.Location.Area;
+            exit.Area = Room.Area;
             exit.Owner = Room;
             exit.DoorLabel = Room.Name;
             ExitEditor exitEdit = new ExitEditor(exit);

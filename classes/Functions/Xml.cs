@@ -46,21 +46,21 @@ namespace Mountain.classes.functions {
         public static void ReCreateRegistryAccounts(string path) {
             RegisteredUsers users = new RegisteredUsers();
 
-            Account toetag = new Account(Guid.NewGuid());
+            Account toetag = new Account();
             toetag.SetName("Toetag");
             toetag.SetPassword("toetag");
             toetag.Email = "Toetag@thisServer.com";
             toetag.Administrator = true;
             users.List.Add(toetag);
 
-            Account haystack = new Account(Guid.NewGuid());
+            Account haystack = new Account();
             haystack.SetName("Haystack");
             haystack.SetPassword("haystack");
             haystack.Email = "haystack@thisServer.com";
             haystack.Administrator = true;
             users.List.Add(haystack);
 
-            Account bucky = new Account(Guid.NewGuid());
+            Account bucky = new Account();
             bucky.SetName("Bucky");
             bucky.SetPassword("bucky");
             bucky.Email = "bucky@thisServer.com";

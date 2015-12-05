@@ -73,7 +73,6 @@ namespace Mountain.classes {
 
         public void CreateAdminSection() {
             Name = "Mountain";
-            ID = Guid.NewGuid();
             Description = "This world has been created by the Toetag Corporate Funding Group for your life's passionate pleasures. " +
                 "Keep your new world growing with us. \r\n" +
                 "Invest in Toetag Corporation's Life Insurance Policies and help make our gaming addition goals a viable solution. " +
@@ -196,7 +195,7 @@ namespace Mountain.classes {
         public string GetAreaNameByRoomName(string name) {
             Room room = GetRoomByName(name);
             if (room == null) return null;
-            return room.Location.Area.Name;
+            return room.Area.Name;
         }
     }
 }

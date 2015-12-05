@@ -72,11 +72,11 @@ namespace Mountain.classes.functions {
             if (fromRoom.Exits.Any()) {
                 foreach (Exit fromExit in fromRoom.Exits) {
                     Exit toExit = new Exit();
-                    toExit.ID = fromExit.ID;
                     toExit.Name = fromExit.Name;
                     toExit.Description = fromExit.Description;
                     toExit.Owner = fromExit.Owner;
-                    toExit.Linkage = new Location(fromExit.Linkage.Room);
+                    toExit.Room = fromExit.Room;
+                    toExit.Area = fromExit.Area;
                     toRoom.AddExit(toExit);
                 }
             }

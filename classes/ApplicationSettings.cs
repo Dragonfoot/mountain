@@ -55,7 +55,6 @@ namespace Mountain.classes {
             var doc = XDocument.Load(BaseDirectory + "\\" + RegisteredUsersAccounts);
             var users = from item in doc.Descendants("Account")
                         select new {
-                            id = item.Element("ID").Value,
                             name = item.Element("Name").Value,
                             password = item.Element("Password").Value,
                             email = item.Element("Email").Value,
@@ -63,7 +62,6 @@ namespace Mountain.classes {
                         };
             foreach (var user in users) {
                 Account account = new Account();
-                account.ID = Guid.Parse(user.id);
                 account.Name = user.name;
                 account.Password = user.password;
                 account.Email = user.email;
@@ -73,7 +71,7 @@ namespace Mountain.classes {
         }
 
         public void SwapLoginForPlayer(Connection connection) {
-            connection.Location = new Location(TheVoid);
+            connection.Room = TheVoid;
             string file = PlayersDirectory + "\\" + connection.Name + "_test.xml";
             factory.LoadPlayerFromFile(connection, connection.Name, file);
             Players.Add(connection);

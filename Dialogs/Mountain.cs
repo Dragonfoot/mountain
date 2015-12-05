@@ -244,7 +244,7 @@ namespace Mountain.Dialogs {
             }
             foreach (Connection player in RemoveList) {
                 GBL.Settings.Players.Remove(player.Name, "Lost connection.");
-                player.Location.Room.Players.Remove(player.Name);
+                player.Room.Players.Remove(player.Name);
                 SystemEventPacket packet = new SystemEventPacket(EventType.disconnected, player.Name + " lost connection.");
                 GBL.Settings.SystemEventQueue.Push(packet);
                 player.Shutdown();

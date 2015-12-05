@@ -8,18 +8,8 @@ namespace Mountain.classes {
 
     [Serializable] public class Exit : Identity {
         [XmlIgnore] public Room Owner { get; set; }
-        [XmlIgnore] public Room Link { get; set; }
-        [XmlIgnore] public Area LinkArea;
-        public Location linkage; 
-        public Location Linkage {
-            get { return linkage; }
-            set {
-                if (value.Room != null) {
-                    LinkArea = value.Room.Location.Area;
-                    Link = value.Room;
-                }
-            }
-        }
+        [XmlIgnore] public Room Room { get; set; }
+        [XmlIgnore] public Area Area;
         public string DoorLabel { get; set; }
         public bool Open;
         public bool Lockable;
@@ -33,7 +23,6 @@ namespace Mountain.classes {
         public exitRestrictions Restrictions;  //http://geekswithblogs.net/BlackRabbitCoder/archive/2010/07/22/c-fundamentals-combining-enum-values-with-bit-flags.aspx
         
         public Exit() {
-            linkage = new Location();
             ClassType = classObjectType.exit;
             Name = null;
         }
@@ -50,9 +39,8 @@ namespace Mountain.classes {
         public void Update(ExitData data) {
             Name = data.Name;
             Description = data.Description;
-            Link = data.Linkage.Room;
-            LinkArea = data.Linkage.Area;
-            if(data.ID.HasValue) ID = (Guid)data.ID;
+            Room = data.Room;
+            Area = data.Area;
             if(data.DoorType.HasValue) DoorType = (doorType)data.DoorType;
             if(data.LockType.HasValue) LockType = (lockType)data.LockType;
             if(data.Restrictions.HasValue) Restrictions = (exitRestrictions)data.Restrictions;
@@ -70,7 +58,8 @@ namespace Mountain.classes {
             XML.createNode("Name", Name, writer);
             XML.createNode("Description", Description, writer);
             XML.createNode("DoorLabel", DoorLabel, writer);
-            writer = Linkage.SaveXml(writer);
+            XML.createNode("Room", Room.Name, writer);
+            XML.createNode("Area", Area.Name, writer);
             writer.WriteEndElement();
             return writer;
         }

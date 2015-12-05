@@ -30,11 +30,6 @@ namespace Mountain.classes.handlers {
             packet.Client.Send(Client.Stats.HealthPrompt());
         }
 
-        private void SetRoom(Room room) {
-            //Client.Location.Room = room;
-            Client.Location = new Location(room);
-        }
-
         private Packet Parse(string message, Connection player) {
             Packet packet = new Packet(string.Empty, string.Empty, player);
             message = message.TrimStart(' ');

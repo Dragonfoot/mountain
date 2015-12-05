@@ -100,7 +100,6 @@
     <Compile Include="classes\Collections\MessageQueue.cs" />
     <Compile Include="classes\DataObjects\Packet.cs" />
     <Compile Include="classes\Handlers\PlayerDispatcher.cs" />
-    <Compile Include="classes\DataObjects\Location.cs" />
     <Compile Include="classes\DataObjects\Stats.cs" />
     <Compile Include="classes\Functions\Xml.cs" />
     <Compile Include="classes\Collections\Players.cs" />

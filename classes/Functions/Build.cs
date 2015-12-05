@@ -66,8 +66,8 @@ namespace Mountain.classes.functions {
             exit.Name = fromRoom.Name + " Exit";
             exit.Description = exit.Name + " Description";
             exit.DoorLabel = toRoom.Name;
-            exit.Linkage.Area = toRoom.Location.Area;
-            exit.Linkage.Room = toRoom;
+            exit.Area = toRoom.Area;
+            exit.Room = toRoom;
           //  exit.Linkage = new Location(toRoom);
             fromRoom.AddExit(exit);
         }

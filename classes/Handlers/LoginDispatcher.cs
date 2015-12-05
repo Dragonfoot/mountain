@@ -125,7 +125,6 @@ namespace Mountain.classes.handlers {
                     LoginClient.Password = user.Password;
                     LoginClient.Email = user.Email;
                     LoginClient.Administrator = user.Administrator;
-                    LoginClient.ID = user.ID;
                     if (GBL.Settings.Players.Exists(user.Name))
                         return userStatus.loggedIn;  // name is already logged in.. timed out?
                     return userStatus.available; // name is registered user

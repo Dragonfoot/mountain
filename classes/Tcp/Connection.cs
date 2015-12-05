@@ -15,15 +15,14 @@ namespace Mountain.classes.tcp {
 
     [XmlRoot("Player")][Serializable] public class Connection : Identity, IDisposable {
         [XmlIgnore][NonSerialized()] public TcpClient Socket;
-        [XmlIgnore][NonSerialized()] public Stack<string> ResponseStack;
-        [XmlIgnore][NonSerialized()] public CommandHandler Commands;
         [XmlIgnore][NonSerialized()] public ManualResetEvent MessageReceivedDone;
         [XmlIgnore][NonSerialized()] public ManualResetEvent MessageSentDone;
         [XmlIgnore][NonSerialized()] public StateObject state;
+        [XmlIgnore][NonSerialized()] public Stack<string> ResponseStack;
+        [XmlIgnore][NonSerialized()] public CommandHandler Commands;
         [XmlIgnore][NonSerialized()] public IPAddress IPAddress;
         [XmlIgnore][NonSerialized()] public int Port;
         [XmlIgnore][NonSerialized()] public Room Room;
-        [XmlIgnore][NonSerialized()] public Area Area;
         [XmlIgnore][NonSerialized()] public string Password;
         [XmlIgnore][NonSerialized()] public string Email;
         [XmlIgnore][NonSerialized()] public bool Administrator;
@@ -35,10 +34,8 @@ namespace Mountain.classes.tcp {
                 return !(read & status);
             }
         }
-        public Location Location { get { return location; } set { SetRoom(value.Room); } }
         public Stats Stats { get; set; }
         public Equipment Equipment { get; set; }
-        private Location location;
         public delegate void CommandHandler(object myObject, string message);
 
         public Connection(TcpClient socket) {
@@ -108,13 +105,12 @@ namespace Mountain.classes.tcp {
             Commands = PlayerDispatcher.OnPlayerMessageReceived;
             SystemEventPacket packet = new SystemEventPacket(EventType.login, this.Name + " has entered the world.", this);
             GBL.Settings.SystemEventQueue.Push(packet);
-            Location.Room.AddPlayer(this);
+            Room.AddPlayer(this);
 
         }
 
         private void SetRoom(Room room) {
             if (room == null) room = GBL.Settings.TheVoid;
-            location = new Location(room);
         }
 
         public void Send(string data, bool indent = true) {
@@ -157,11 +153,12 @@ namespace Mountain.classes.tcp {
             writer.Formatting = Formatting.Indented;
             writer.Indentation = 2;
             writer.WriteStartElement("Player");
-            XML.createNode("Login", Name, writer);
+            XML.createNode("Name", Name, writer);
             XML.createNode("Email", Email, writer);
             XML.createNode("Password", Password, writer);
             XML.createNode("Administrator", Administrator.ToString(), writer);
-            writer = location.SaveXml(writer);
+            XML.createNode("Room", Room.Name, writer);
+            XML.createNode("Area", Room.Area.Name, writer);
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();

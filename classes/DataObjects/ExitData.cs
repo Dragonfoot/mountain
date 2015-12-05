@@ -3,11 +3,12 @@
 namespace Mountain.classes.dataobjects {
 
     [Serializable] public class ExitData {
+        public Room Room;
+        public Area Area;
         public exitType? ExitType = null;  // door, window, random, teleport, openSpace
         public lockType? LockType = null;
         public doorType? DoorType = null;
         public exitRestrictions? Restrictions = null;
-        public Location Linkage = null;
         public string Name = null;
         public string Description = null;
         public Guid? ID = null;
