@@ -24,13 +24,13 @@ namespace Mountain.Dialogs {
         public Mountain() {
             MessageQueue = new MessageQueue();
             SystemEventQueue = new SystemEventQueue();
-            Global.Settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
+            Glb.Settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
             MessageQueue.Tag = "System";
             InitializeComponent();
             MessageQueue.OnMessageReceived += Messages_OnMessageReceived;
             SystemEventQueue.OnEventReceived += Events_OnEventReceived;
             world = BuildWorldAdminSection();
-            Global.Settings.World = world;
+            Glb.Settings.World = world;
             // todo: load last saved world else load default world, if no default, build basic default area
             world.AcceptConnections(world.Port);
             if (world.portListener.Active()) {
@@ -129,7 +129,7 @@ namespace Mountain.Dialogs {
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 world.Areas.Add(areaForm.area);
-                Global.Settings.TheVoid = areaForm.area.Rooms.FindTag("Void");
+                Glb.Settings.TheVoid = areaForm.area.Rooms.FindTag("Void");
                 areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                 areaListBox.SelectedIndex = 0;
             } else {
@@ -148,7 +148,7 @@ namespace Mountain.Dialogs {
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-            string file = Global.Settings.BaseDirectory + "\\" + world.Name + "test.xml";
+            string file = Glb.Settings.BaseDirectory + "\\" + world.Name + "test.xml";
             TextWriter txtWriter = new StreamWriter(file);
             //XmlHelper.ObjectToXml(world.Areas, file, settings);
             try {
@@ -156,7 +156,7 @@ namespace Mountain.Dialogs {
                 xmlSerializer.Serialize(txtWriter, world);
                 logRichTextBox.AppendText(world.Name + " Saved.");
             } catch (Exception ex) {
-                Global.Settings.SystemMessageQueue.Push(ex.ToString());
+                Glb.Settings.SystemMessageQueue.Push(ex.ToString());
             } finally {
                 txtWriter.Close();
             }
@@ -164,7 +164,7 @@ namespace Mountain.Dialogs {
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
             string name = "mountain";
-            string file = Global.Settings.BaseDirectory + "\\" + name + "test.xml";
+            string file = Glb.Settings.BaseDirectory + "\\" + name + "test.xml";
             TextReader txtReader = new StreamReader(file);
             try {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(World));
@@ -174,7 +174,7 @@ namespace Mountain.Dialogs {
                 world.portListener.StartServer(9080);
                 logRichTextBox.AppendText(world.Name + " Loaded.");
             } catch (Exception ex) {
-                Global.Settings.SystemMessageQueue.Push(ex.ToString());
+                Glb.Settings.SystemMessageQueue.Push(ex.ToString());
             } finally {
                 txtReader.Close();
             }
@@ -238,15 +238,15 @@ namespace Mountain.Dialogs {
 
         private void CheckConnections() {
             List<Connection> RemoveList = new List<Connection>();
-            foreach (Connection player in Global.Settings.Players) {
+            foreach (Connection player in Glb.Settings.Players) {
                 if (player.Connected) continue;
                 RemoveList.Add(player);
             }
             foreach (Connection player in RemoveList) {
-                Global.Settings.Players.Remove(player.Account.Name, "Lost connection.");
+                Glb.Settings.Players.Remove(player.Account.Name, "Lost connection.");
                 player.Location.Room.Players.Remove(player.Account.Name);
                 SystemEventPacket packet = new SystemEventPacket(EventType.disconnected, player.Account.Name + " lost connection.");
-                Global.Settings.SystemEventQueue.Push(packet);
+                Glb.Settings.SystemEventQueue.Push(packet);
                 player.Shutdown();
                 player.Dispose();
             }
@@ -257,7 +257,7 @@ namespace Mountain.Dialogs {
             RoomEditor roomEdit = new RoomEditor(newRoom);
             DialogResult dialogresult = roomEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-                Functions.UpdateRoomEdits(roomEdit.Room, newRoom);
+                Fnct.UpdateRoomEdits(roomEdit.Room, newRoom);
                 SelectedArea.Rooms.Add(newRoom);
                 roomsListBox.Items.Clear();
                 roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());

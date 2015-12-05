@@ -62,6 +62,7 @@ namespace Mountain.classes.functions {
         }
 
         #endregion enums
+
         public static T DeepClone<T>(this T input) where T : ISerializable { // true copy, so no references
             using (var stream = new MemoryStream()) {
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -95,7 +96,7 @@ namespace Mountain.classes.functions {
             return str + Environment.NewLine;
         }
         public static string Indent(this string str) {
-            for (int i = 0; i <= Global.indent; i++) {
+            for (int i = 0; i <= Glb.indent; i++) {
                 str = " " + str;
             }
             return str;
@@ -184,7 +185,7 @@ namespace Mountain.classes.functions {
             result = result.Trim();
             return result;
         }
-        public static string WordWrap(this string longString, int width = Global.pageWidth) {  // takes a long string and formats to width
+        public static string WordWrap(this string longString, int width = Glb.pageWidth) {  // takes a long string and formats to width
             StringBuilder lines = new StringBuilder();
             string[] words = longString.Split(' ');
             StringBuilder buildLine = new StringBuilder("");

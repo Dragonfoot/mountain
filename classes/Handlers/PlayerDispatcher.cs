@@ -68,7 +68,7 @@ namespace Mountain.classes.handlers {
                 packet.known = true;
             }
             if (!packet.known) {
-                if(Functions.HasNameThatStartsWith(player.Location.Room.Exits.ToArray(), packet.verb)) {
+                if(Fnct.HasNameThatStartsWith(player.Location.Room.Exits.ToArray(), packet.verb)) {
                     packet.parameter = packet.verb;
                     packet.verb = "go";
                     packet.known = true;

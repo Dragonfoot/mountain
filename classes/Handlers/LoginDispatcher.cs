@@ -37,7 +37,7 @@ namespace Mountain.classes.handlers {
         }
         public void OnMessageReceived(object myObject, string message) { // do stuff with message
             if (message.IsNullOrWhiteSpace()) {
-                Global.Settings.SystemMessageQueue.Push("Login received message is empty");
+                Glb.Settings.SystemMessageQueue.Push("Login received message is empty");
                 return;
             }
             string response = string.Empty;
@@ -83,7 +83,7 @@ namespace Mountain.classes.handlers {
                         Client.Send("".NewLine().NewLine().Ansi(Style.yellow), false);
                         Client.Send("Welcome back ".Ansi(Style.white, Style.white) + LoginClient.Name + "!".NewLine().NewLine());
                         Client.Account = LoginClient;
-                        Global.Settings.SwapLoginForPlayer(Client); // swap out login for player handler
+                        Glb.Settings.SwapLoginForPlayer(Client); // swap out login for player handler
                         return;
                     }
                     Client.Send(" Remember, passwords are case sensitive".NewLine().Ansi(Style.yellow), false);
@@ -95,7 +95,7 @@ namespace Mountain.classes.handlers {
                 case login.confirmPassword:
                     if (NewUser()) {
                         Client.Account = LoginClient;
-                        Global.Settings.SwapLoginForPlayer(Client); // swap out login for player handler
+                        Glb.Settings.SwapLoginForPlayer(Client); // swap out login for player handler
                         return;
                     }
                     break;
@@ -113,14 +113,14 @@ namespace Mountain.classes.handlers {
         }
 
         private userStatus checkName(string name) {
-            foreach (Account user in Global.Settings.RegisteredUsers) { // find name in list
+            foreach (Account user in Glb.Settings.RegisteredUsers) { // find name in list
                 if (String.Equals(name, user.Name, StringComparison.OrdinalIgnoreCase)) {
                     LoginClient.Name = user.Name;
                     LoginClient.Password = user.Password;
                     LoginClient.Email = user.Email;
                     LoginClient.Administrator = user.Administrator;
                     LoginClient.ID = user.ID;
-                    if (Global.Settings.Players.Exists(user.Name))
+                    if (Glb.Settings.Players.Exists(user.Name))
                         return userStatus.loggedIn;  // name is already logged in.. timed out?
                     return userStatus.available; // name is registered user
                 }

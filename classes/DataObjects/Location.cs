@@ -12,7 +12,7 @@ namespace Mountain.classes.dataobjects {
         public string RoomName { get { return Room.Name; } }
 
         public Location(Room room)  {
-            if (room == null) room = Global.Settings.TheVoid;
+            if (room == null) room = Glb.Settings.TheVoid;
             if (room.Location != null) Area = room.Location.Area;
             Room = room;
         }

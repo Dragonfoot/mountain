@@ -25,7 +25,7 @@ namespace Mountain.classes.functions {
                     xmlDocument.Save(path);
                 }
             } catch (Exception e) {
-                Global.Settings.SystemMessageQueue.Push(e.ToString());
+                Glb.Settings.SystemMessageQueue.Push(e.ToString());
             }
         }
 

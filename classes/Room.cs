@@ -96,16 +96,16 @@ namespace Mountain.classes {
 
         public string GetName() { return Name; }
         public string GetDesciption() { return Description; }
-        public string GetExits() { return Functions.GetNames(Exits.ToArray()); }
-        public string GetMobs() { return Functions.GetNames(Mobs.ToArray()); }
-        public string GetPlayers() { return Functions.GetNames(Players.ToArray()); }
-        public string GetOtherPlayers(string name) { return Functions.GetOtherNames(Players.ToArray(), name); }
-        public string GetItems() { return Functions.GetNames(Items.ToArray()); }
+        public string GetExits() { return Fnct.GetNames(Exits.ToArray()); }
+        public string GetMobs() { return Fnct.GetNames(Mobs.ToArray()); }
+        public string GetPlayers() { return Fnct.GetNames(Players.ToArray()); }
+        public string GetOtherPlayers(string name) { return Fnct.GetOtherNames(Players.ToArray(), name); }
+        public string GetItems() { return Fnct.GetNames(Items.ToArray()); }
 
         private void Messages_OnPlayerEventReceived(object myObject, Packet packet) {
             Packet message = Messages.Pop(); 
             if (message == null) message = packet;
-            Global.Settings.SystemMessageQueue.Push("Room received: " + message);
+            Glb.Settings.SystemMessageQueue.Push("Room received: " + message);
         }        
         
         public void HeartBeat() {
@@ -150,7 +150,7 @@ namespace Mountain.classes {
             try {
                 serializer.Serialize(writer, this, emptyNamepsaces);
             } catch (Exception e) {
-                Global.Settings.SystemMessageQueue.Push(e.ToString());
+                Glb.Settings.SystemMessageQueue.Push(e.ToString());
                 return e.ToString();
             }             
             return writer.ToString();
@@ -182,17 +182,17 @@ namespace Mountain.classes {
             view.Add(Description);
             view.Add("");
             if (Exits.Any()) { // add color coding's
-                stringBuilder.Append("Exits: " + Functions.GetNames(Exits.ToArray()));
+                stringBuilder.Append("Exits: " + Fnct.GetNames(Exits.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Mobs.Any()) {
-                stringBuilder.Append("Mobs: " + Functions.GetNames(Mobs.ToArray()));
+                stringBuilder.Append("Mobs: " + Fnct.GetNames(Mobs.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Players.Any()) {
-                stringBuilder.Append("Players: " + Functions.GetNames(Players.ToArray()));
+                stringBuilder.Append("Players: " + Fnct.GetNames(Players.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }

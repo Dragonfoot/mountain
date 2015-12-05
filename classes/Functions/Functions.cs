@@ -5,7 +5,7 @@ using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
 
-    public static class Functions {
+    public static class Fnct {
 
         public static string FormatStringArray(Array list) {
             string names = string.Empty;
@@ -56,8 +56,11 @@ namespace Mountain.classes.functions {
         }
 
         public static bool HasNameThatStartsWith(Array list, string name) {
-            foreach(Identity item in list) {
-                if (item.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase)) return true;
+            foreach (Identity item in list) {
+                string[] names = item.ToString().Split(' ');
+                foreach (string part in names) {
+                    if (part.StartsWith(name, StringComparison.OrdinalIgnoreCase)) return true;
+                }
             }
             return false;
         }

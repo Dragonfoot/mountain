@@ -74,7 +74,7 @@ namespace Mountain.classes.dataobjects {
         human, dwarf, elf, giant, halfElf, halfDwarf, halfGiant
     }
 
-    public static class Global {
+    public static class Glb {
         public const int indent = 1;
         public const int pageWidth = 65;
         public static ApplicationSettings Settings;

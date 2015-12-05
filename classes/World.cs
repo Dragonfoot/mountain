@@ -31,8 +31,8 @@ namespace Mountain.classes {
 
         private void InitializeSettings() {
             ClassType = classObjectType.world;
-            Global.Settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
-            Global.Settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
+            Glb.Settings.Players.OnPlayerAdded += Players_OnPlayerAdded;
+            Glb.Settings.Players.OnPlayerRemoved += Players_OnPlayerRemoved;
             portListener = new TcpServerListener(this);
             Port = 8090;
             Areas = new List<Area>();
@@ -60,7 +60,7 @@ namespace Mountain.classes {
         }
 
         public void Shutdown() {
-            Global.Settings.Players.Shutdown();
+            Glb.Settings.Players.Shutdown();
             StopHeart();
             portListener.StopServer();
         }
@@ -117,7 +117,7 @@ namespace Mountain.classes {
             description = "You find yourself weightlessly floating in some kind of silent, lonely, dark, " +
                 "endless, - and as many other voidy spacy words there might be.. - space.";
             Void = Build.NewRoom(name, description, Administration);
-            Global.Settings.TheVoid = Void;
+            Glb.Settings.TheVoid = Void;
             Void.Tag = "Void";
             Void.roomType = roomType.outdoor;
             Void.roomRestrictons = roomRestrictions.fighting | roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.stealing;

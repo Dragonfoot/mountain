@@ -44,7 +44,7 @@ namespace Mountain.classes {
         }
 
         public override string ToString() {
-            return Name;
+            return DoorLabel;
         }
 
         public void Update(ExitData data) {
