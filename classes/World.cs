@@ -155,7 +155,15 @@ namespace Mountain.classes {
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();
-        }      
+        }
+
+        public void LoadXml(string filename) {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path + filename);
+            XmlNode root = doc.DocumentElement;
+            // parse through..
+        }
 
         private void StartHeart() {
             cancellationTokenSource = new CancellationTokenSource();

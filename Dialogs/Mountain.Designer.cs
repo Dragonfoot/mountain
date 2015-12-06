@@ -73,6 +73,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.connectionPoller = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
+            this.loadXmlButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -478,11 +479,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // loadXmlButton
+            // 
+            this.loadXmlButton.Location = new System.Drawing.Point(145, 99);
+            this.loadXmlButton.Name = "loadXmlButton";
+            this.loadXmlButton.Size = new System.Drawing.Size(75, 23);
+            this.loadXmlButton.TabIndex = 19;
+            this.loadXmlButton.Text = "Load Xml";
+            this.loadXmlButton.UseVisualStyleBackColor = true;
+            this.loadXmlButton.Click += new System.EventHandler(this.loadXmlButton_Click);
+            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1089, 570);
+            this.Controls.Add(this.loadXmlButton);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button1);
@@ -562,6 +574,7 @@
         private System.Windows.Forms.ListBox connectedListBox;
         private System.Windows.Forms.Timer connectionPoller;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button loadXmlButton;
     }
     }
 

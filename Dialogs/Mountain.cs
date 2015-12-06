@@ -268,6 +268,10 @@ namespace Mountain.Dialogs {
         private void button2_Click(object sender, EventArgs e) {
             world.SaveXml(@"/testWorld.xml");
         }
+
+        private void loadXmlButton_Click(object sender, EventArgs e) {
+            world.LoadXml(@"/testWorld.xml");
+        }
     }
 }
         

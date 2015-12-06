@@ -64,6 +64,10 @@ namespace Mountain.classes {
             return writer;
         }
 
+        public void LoadXml(XmlNode node) {
+
+        }
+
         public void StopHeart() {
             cancellationTokenSource.Cancel(); // stop heartbeat
         }
