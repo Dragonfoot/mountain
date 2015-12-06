@@ -141,7 +141,7 @@ namespace Mountain.classes {
             writer.WriteStartDocument(true);
             writer.Formatting = Formatting.Indented;
             writer.Indentation = 2;
-            writer.WriteStartElement("World");
+            writer.WriteStartElement("Mountain");
             XML.createNode("World", Name, writer);
             XML.createNode("Description", Description, writer);
             XML.createNode("Port", Port.ToString(), writer);
@@ -158,10 +158,15 @@ namespace Mountain.classes {
         }
 
         public void LoadXml(string filename) {
+            if (Areas.Count > 0) Areas.Clear();
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             XmlDocument doc = new XmlDocument();
             doc.Load(path + filename);
             XmlNode root = doc.DocumentElement;
+            XmlNodeList nodes = root.SelectNodes("Areas");
+            foreach (XmlNode node in nodes) {
+
+            }
             // parse through..
         }
 

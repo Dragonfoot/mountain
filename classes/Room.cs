@@ -28,7 +28,7 @@ namespace Mountain.classes {
         public roomRestrictions roomRestrictons { get; set; }
         public roomConditions roomConditions { get; set; }
         public string Tag { get; set; }
-        [XmlArray("Links")] public List<Exit> Exits { get; set; }
+        [XmlArray("Exits")] public List<Exit> Exits { get; set; }
 
         public Room(Area area) {
             InitializeRoom();
