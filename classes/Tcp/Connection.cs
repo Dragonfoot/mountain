@@ -3,7 +3,6 @@ using System.Xml;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
@@ -13,22 +12,23 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.tcp {
 
-    [XmlRoot("Player")][Serializable] public class Connection : Identity, IDisposable {
-        [XmlIgnore][NonSerialized()] public TcpClient Socket;
-        [XmlIgnore][NonSerialized()] public ManualResetEvent MessageReceivedDone;
-        [XmlIgnore][NonSerialized()] public ManualResetEvent MessageSentDone;
-        [XmlIgnore][NonSerialized()] public StateObject state;
-        [XmlIgnore][NonSerialized()] public Stack<string> ResponseStack;
-        [XmlIgnore][NonSerialized()] public CommandHandler Commands;
-        [XmlIgnore][NonSerialized()] public IPAddress IPAddress;
-        [XmlIgnore][NonSerialized()] public int Port;
-        [XmlIgnore][NonSerialized()] public Room Room;
-        [XmlIgnore][NonSerialized()] public string Password;
-        [XmlIgnore][NonSerialized()] public string Email;
-        [XmlIgnore][NonSerialized()] public bool Administrator;
-        [NonSerialized()] private LoginDispatcher LoginDispatcher;   // login functions
-        [NonSerialized()] private PlayerDispatcher PlayerDispatcher; // player functions
-        [XmlIgnore] public bool Connected { get {
+    public class Connection : Identity, IDisposable {
+        public TcpClient Socket;
+        public ManualResetEvent MessageReceivedDone;
+        public ManualResetEvent MessageSentDone;
+        public StateObject state;
+        public Stack<string> ResponseStack;
+        public CommandHandler Commands;
+        public IPAddress IPAddress;
+        public int Port;
+        public Room Room;
+        public string Password;
+        public string Email;
+        public bool Administrator;
+        private LoginDispatcher LoginDispatcher;   // login functions
+        private PlayerDispatcher PlayerDispatcher; // player functions
+        public bool Connected {
+            get {
                 bool read = Socket.Client.Poll(500, SelectMode.SelectRead);
                 bool status = (Socket.Client.Available == 0);
                 return !(read & status);
@@ -51,18 +51,16 @@ namespace Mountain.classes.tcp {
             LoginDispatcher = new LoginDispatcher(this);
             StartReceiving();
         }
-        
-        public Connection() { // empty, for xml serialization
-        }
+
+        public Connection() { }
 
         protected void StartReceiving() {
             SystemEventPacket packet = new SystemEventPacket(EventType.connection, "New Connection begun from " + this.IPAddress.ToString(), this);
             GBL.Settings.SystemEventQueue.Push(packet);
             try {
                 state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, SocketFlags.None, ReceiveCallback, state);
-            }
-            catch (Exception e) {
-                GBL.Settings.SystemMessageQueue.Push("Connection closed: " + e.ToString());               
+            } catch (Exception e) {
+                GBL.Settings.SystemMessageQueue.Push("Connection closed: " + e.ToString());
             }
         }
 
@@ -70,33 +68,30 @@ namespace Mountain.classes.tcp {
             try {
                 if (state.Socket.Client == null)
                     return;
-                int read = state.Socket.Client.EndReceive(ar); 
+                int read = state.Socket.Client.EndReceive(ar);
                 if (read > 0) {
                     string incomingMessage = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
                     Task HandleMessage = new Task(() => Commands(this, incomingMessage)); // setup thread for dispatching incoming
-                    MessageReceivedDone.Set(); 
+                    MessageReceivedDone.Set();
                     HandleMessage.Start(); // start processing message - (in separate thread)
                 }
                 try {
                     state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // wait for next
                 } catch (Exception ex) when (ex is SocketException || ex is NullReferenceException) {
-                    if(ex is NullReferenceException) return;
+                    if (ex is NullReferenceException) return;
                 }
-            }
-            catch (SocketException e) {
+            } catch (SocketException e) {
                 GBL.Settings.SystemMessageQueue.Push("CC0: " + e.ToString());
-            }
-            catch (ObjectDisposedException e) {
+            } catch (ObjectDisposedException e) {
                 GBL.Settings.SystemMessageQueue.Push("CC1: " + e.ToString());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 GBL.Settings.SystemMessageQueue.Push("CC2: " + e.ToString());
             }
         }
 
         public void StartLogin() {
-            Commands = LoginDispatcher.OnMessageReceived; 
-            LoginDispatcher.Start(); 
+            Commands = LoginDispatcher.OnMessageReceived;
+            LoginDispatcher.Start();
         }
 
         public void StartPlayer() {
@@ -114,7 +109,7 @@ namespace Mountain.classes.tcp {
         }
 
         public void Send(string data, bool indent = true) {
-            if (indent) data = data.Indent(); 
+            if (indent) data = data.Indent();
             byte[] byteData = Encoding.ASCII.GetBytes(data);
             try {
                 if (state.Socket.Client == null) return;
@@ -129,8 +124,7 @@ namespace Mountain.classes.tcp {
             try {
                 int bytesSent = state.Socket.Client.EndSend(ar);
                 MessageSentDone.Set(); // tell parent thread we're finished
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 GBL.Settings.SystemMessageQueue.Push("CC3: " + e.ToString());
             }
         }
@@ -142,9 +136,8 @@ namespace Mountain.classes.tcp {
         }
         public void Dispose() {
             Socket.Close();
-            if(Socket.Client != null) Socket.Client.Dispose();
+            if (Socket.Client != null) Socket.Client.Dispose();
         }
-
 
         public void SaveXml() {
             string path = GBL.Settings.PlayersDirectory + @"\";
@@ -163,10 +156,16 @@ namespace Mountain.classes.tcp {
             writer.WriteEndDocument();
             writer.Close();
         }
-    }
 
-
-    
+        public void LoadXml(string filename) {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
+            XmlNode root = doc.DocumentElement;
+            XmlNode room = root.SelectSingleNode("Room");
+            string roomName = room.InnerText;
+            Room = GBL.Settings.World.GetRoomByName(roomName);
+        }
+    }    
 
     
     public class StateObject {  

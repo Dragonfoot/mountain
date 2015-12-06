@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using Mountain.classes.tcp;
 using Mountain.classes.collections;
 using Mountain.classes.dataobjects;
 
@@ -73,6 +74,16 @@ namespace Mountain.classes.functions {
             writer.WriteStartElement(Label);
             writer.WriteString(value);
             writer.WriteEndElement();
-        }      
+        }
+
+
+        public static void LoadPlayerFromFile(Connection player, string file) {
+            if (!File.Exists(file)) {
+                player.Room = GBL.Settings.TheVoid;
+                return;
+            } else {
+                player.LoadXml(file);
+            }
+        }
     }
 }

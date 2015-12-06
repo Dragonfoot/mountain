@@ -37,7 +37,7 @@ namespace Mountain.classes.functions {
         public static int GetSameNameCount(Array list, string name) {
             int i = 0;
             foreach(Identity item in list) {
-                if (item.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase)) { i++; }
+                if (item.ToString().StartsWith(name, StringComparison.OrdinalIgnoreCase)) { i++; }
             }
             return i;
         }

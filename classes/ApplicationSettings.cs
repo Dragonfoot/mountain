@@ -38,11 +38,9 @@ namespace Mountain.classes {
         [XmlIgnore] public string ItemTemplateDirectory { get { return AppDirectory + Settings.Default.ItemTemplateDirectory; } }
         [XmlIgnore] public MessageQueue SystemMessageQueue;
         [XmlIgnore] public SystemEventQueue SystemEventQueue;
-        protected FCT factory;
 
         public ApplicationSettings(MessageQueue messageQueue, SystemEventQueue eventQueue) {
             InitializeSettings();
-            factory = new FCT();
             SystemMessageQueue = messageQueue;
             SystemEventQueue = eventQueue;
             Logins = new List<Connection>();
@@ -72,10 +70,10 @@ namespace Mountain.classes {
 
         public void SwapLoginForPlayer(Connection connection) {
             connection.Room = TheVoid;
-            string file = PlayersDirectory + "\\" + connection.Name + "_test.xml";
-            factory.LoadPlayerFromFile(connection, connection.Name, file);
             Players.Add(connection);
             Logins.Remove(connection);
+            string file = PlayersDirectory + "\\" + connection.Name + "test.xml";
+            XML.LoadPlayerFromFile(connection, file);
             connection.StartPlayer();
         }
 
