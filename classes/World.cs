@@ -165,9 +165,10 @@ namespace Mountain.classes {
             XmlNode root = doc.DocumentElement;
             XmlNodeList nodes = root.SelectNodes("Areas");
             foreach (XmlNode node in nodes) {
-
+                Area area = new Area();
+                area.LoadXml(node);
+                Areas.Add(area);
             }
-            // parse through..
         }
 
         private void StartHeart() {
