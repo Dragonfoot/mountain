@@ -2,16 +2,15 @@
 using System.Xml;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
 using Mountain.classes.collections;
 
 namespace Mountain.classes {
 
-    [Serializable][XmlRoot] public class Area : Identity {
-        [XmlArray("Rooms")] public Rooms Rooms { get; private set; }
-        [XmlIgnore] public bool Active { get; set; } 
+    public class Area : Identity {
+        public Rooms Rooms { get; private set; }
+        public bool Active { get; set; } 
         private CancellationTokenSource cancellationTokenSource;
 
         public Area() {
@@ -38,15 +37,11 @@ namespace Mountain.classes {
         }
 
         public void Load(string filename) {
-            throw new NotImplementedException("Area Load (filename)");
-        }
-
-        public void Load() {
-            throw new NotImplementedException("Area Load ()");
+            throw new NotImplementedException("Area Load (xml filename)");
         }
 
         public void Save(string filename) {
-            throw new NotImplementedException("Area Save(filename)");
+            throw new NotImplementedException("Area Save(xml filename)");
         }
 
         public XmlTextWriter SaveXml(XmlTextWriter writer) {

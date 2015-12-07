@@ -2,7 +2,6 @@
 using System.Xml;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Mountain.classes.tcp;
@@ -11,12 +10,11 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes {
 
-    [Serializable] public class World : Identity {
+    public class World : Identity {
         public int Port;
-        [XmlArray("Areas")] public List<Area> Areas;
-        [XmlIgnore] public TcpServerListener portListener;
-        [XmlIgnore] public int Connections { get; private set; }
-   //     [XmlIgnore] public Area Administration;
+        public List<Area> Areas;
+        public TcpServerListener portListener;
+        public int Connections { get; private set; }
         protected ListBox Console;
         private CancellationTokenSource cancellationTokenSource;
 
@@ -49,15 +47,7 @@ namespace Mountain.classes {
 
         void Players_OnPlayerAdded(object myObject, Connection player, string message = "") {
            // throw new NotImplementedException("Player added");
-        }
-
-        public void Reload() {
-          //  throw new NotImplementedException("World Reload");
-        }
-
-        public void Clear() {
-           // throw new NotImplementedException("World Clear");
-        }
+        }      
 
         public void Shutdown() {
             GBL.Settings.Players.Shutdown();

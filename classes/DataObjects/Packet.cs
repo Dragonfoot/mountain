@@ -1,12 +1,11 @@
-﻿using System;
-using Mountain.classes.tcp;
+﻿using Mountain.classes.tcp;
 
 namespace Mountain.classes.dataobjects {
 
     public enum PacketType { data, command, activity, callback, verb, system };
     public enum EventType { unknown, connection, disconnected, idle, login }
   
-    [Serializable] public class Packet  {
+    public class Packet  {
         public PacketType packetType;
         public string verb;
         public string parameter;

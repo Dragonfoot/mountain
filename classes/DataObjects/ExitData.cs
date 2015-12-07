@@ -2,7 +2,7 @@
 
 namespace Mountain.classes.dataobjects {
 
-    [Serializable] public class ExitData {
+    public class ExitData {
         public Room Room;
         public Area Area;
         public exitType? ExitType = null;  // door, window, random, teleport, openSpace

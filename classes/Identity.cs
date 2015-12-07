@@ -1,24 +1,16 @@
-﻿using System;
-using System.Xml.Serialization;
-using Mountain.classes.dataobjects;
-using Mountain.classes.functions;
+﻿using Mountain.classes.dataobjects;
 
 namespace Mountain.classes {
 
-    [Serializable]
     public class Identity {
         public string Name { get; set; }
         public string Description { get; set; }
-        [XmlIgnore] public itemType ItemType { get; set; }
-        [XmlIgnore] public classObjectType ClassType { get; set; }
+        public itemType ItemType { get; set; }
+        public classObjectType ClassType { get; set; }
 
         public Identity() {
-            this.ClassType = classObjectType.unknown;
-            this.ItemType = itemType.none;
-        }
-        
-        public string ToXml() {
-            return XML.ObjectToBasicXml(this);
-        }
+            ClassType = classObjectType.unknown;
+            ItemType = itemType.none;
+        } 
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
-using Mountain.classes.tcp;
+﻿using Mountain.classes.tcp;
 using Mountain.classes.dataobjects;
 using Mountain.classes.functions;
 
 namespace Mountain.classes.handlers {
-
-    [Serializable] public class PlayerDispatcher {
+    
+    public class PlayerDispatcher {
         Connection Client;
         protected Dispatch Commands { get; set; }
 

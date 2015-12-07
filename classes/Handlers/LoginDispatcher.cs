@@ -8,7 +8,7 @@ namespace Mountain.classes.handlers {
     public enum login { error, name, newUser, password, newpassword, confirmPassword, raceType, stats }
     public enum userStatus { loggedIn, nonExistent, laggedOut, available}
 
-    [Serializable] public class LoginDispatcher {
+    public class LoginDispatcher {
         protected login action;
         public Account LoginClient;
         Connection Client;
@@ -21,6 +21,7 @@ namespace Mountain.classes.handlers {
             Welcome();
             StartLogin();
         }
+
         private void Welcome() {
             string welcome = "Welcome to the Mountain Foundation. ";
             welcome += "The food is good, the drinks better. If you like road kill you'll love Gregor's ";
@@ -35,6 +36,7 @@ namespace Mountain.classes.handlers {
             action = login.name; // start with getting the users player name
             Client.Send("User Name: ".Ansi(true, Style.green));
         }
+
         public void OnMessageReceived(object myObject, string message) { // do stuff with message
             if (message.IsNullOrWhiteSpace()) {
                 GBL.Settings.SystemMessageQueue.Push("Login received message is empty");
@@ -49,7 +51,7 @@ namespace Mountain.classes.handlers {
                         StartLogin();
                         break;
                     }
-                    switch (checkName(message)) { // someone is returning?
+                    switch (checkName(message)) { // someone returning?
                         case userStatus.available: // we know the name and it isn't currently logged on
                             Client.Send(message.Ansi(true, Style.yellow).NewLine(), false);
                             LoginClient.SetName(message);

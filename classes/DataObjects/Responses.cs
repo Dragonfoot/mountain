@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 using Mountain.classes.tcp;
 using Mountain.classes.functions;
@@ -7,7 +6,7 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.dataobjects {
 
-    [Serializable] public class StringResponses {
+    public class StringResponses {
         public List<string> Responses;
 
         public StringResponses() {

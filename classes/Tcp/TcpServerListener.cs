@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Mountain.classes.tcp {
     
-     [Serializable] public class TcpServerListener {
+     public class TcpServerListener {
         protected AutoResetEvent connectionWaitDone;
         public TcpListenerActive tcpListener;
         public int Port;

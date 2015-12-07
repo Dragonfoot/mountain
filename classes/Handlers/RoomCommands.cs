@@ -7,7 +7,7 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.handlers {
 
-    [Serializable] public class RoomCommands {
+    public class RoomCommands {
         private Dictionary<string, Action<Packet>> List;
         private StringResponses Resource;
         public List<string> Keys;
@@ -16,6 +16,7 @@ namespace Mountain.classes.handlers {
             Resource = new StringResponses();
             LoadRoomCommands();
         }
+
         private void LoadRoomCommands() {
             List = new Dictionary<string, Action<Packet>>(){
                 {"say", Say}, {"tell", Tell}, {"yell", Yell}, {"shout", Shout}, {"talk", Talk}, {"whisper", Whisper},
@@ -106,6 +107,7 @@ namespace Mountain.classes.handlers {
             packet.Client.Shutdown();
             packet.Client.Dispose();
         }
+
         private void Shout(Packet packet) {
             DontKnowYet(packet);
         }
@@ -135,17 +137,12 @@ namespace Mountain.classes.handlers {
         }
 
         private void MoveTo(Packet packet) {
-            string names = string.Empty;
-            // check room exit name is direction or specific, set up room message for either. ToDo
-            // see if more than one exit starts with what was received
-
-            // make sure we have a room first, before attempting to actually go there
+            string names = string.Empty;            
             int results = FUNC.GetSameNameCount(packet.Client.Room.Exits.ToArray(), packet.parameter);            
             if (results > 1) {
                 packet.Client.Send("Too ambiguous.".Ansi(Style.yellow).NewLine());
                 return;
             }
-
             Exit exit = packet.Client.Room.Exits.Find(e => (e.DoorLabel.StartsWith(packet.parameter, StringComparison.OrdinalIgnoreCase)));
             if (exit == null) {
                 DontKnowYet(packet);

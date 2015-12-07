@@ -4,7 +4,7 @@ using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.collections {
 
-    [Serializable] public class MessageQueue {
+    public class MessageQueue {
         private ConcurrentQueue<string> queue;
         public string Tag { get; set; }
         public delegate void MessageHandler(object myObject, string msg);

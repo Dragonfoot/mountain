@@ -1,12 +1,9 @@
-﻿using System;
-using System.Xml.Serialization;
-using Mountain.classes.tcp;
-using Mountain.classes.functions;
+﻿using Mountain.classes.functions;
 
 
 namespace Mountain.classes.dataobjects {
 
-    [Serializable] public class Account {
+    public class Account {
         public string Name { get; set; }
         public string Password { get; set; }
         public bool Administrator { get; set; }
@@ -20,9 +17,11 @@ namespace Mountain.classes.dataobjects {
             string decryptedPassword = Password.Decrypt();
             return inputPassword.Equals(decryptedPassword);
         }
+
         public void SetPassword(string newPassword) {
             Password = newPassword.Encrypt();
         }
+
         public void SetName(string name) {
             Name = name.Camelize();
         }

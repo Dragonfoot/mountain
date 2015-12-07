@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Serialization;
 using Mountain.classes.functions;
 
 namespace Mountain.classes.collections {
 
-    [XmlRoot("Area")]
     public class Rooms : IEnumerable<Room> {
-        [XmlArray("Rooms")] public List<Room> List { get; set; }
-        [XmlIgnore] public Area Area { get; set; }
-        [XmlIgnore] public int Count { get { return List.Count; } }
+        public List<Room> List { get; set; }
+        public Area Area { get; set; }
+        public int Count { get { return List.Count; } }
 
         public Rooms(Area area) {
             List = new List<Room>();

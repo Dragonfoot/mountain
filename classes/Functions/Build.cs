@@ -14,49 +14,49 @@ namespace Mountain.classes.functions {
                "Houses the most advanced technological and military equipment available rivaling even Mount Cascade Fortress on " + 
                "Tavastazia's bloodless moon."; 
 
-            Room controlROOM;
+            Room control;
             name = "Control Center";
             description = "You see the nerve center of world operations unfold around you. Computer stations line most of the walks with white clad technicians " +
                 "murmuring with headsets, adjusting controls, issuing quiet command. Sensor arrays, blinking routing screens, schedulers dimly glowing " + 
                 "above them, monitoring every aspect of this worlds events and activities. Off to your left, a long line of office doors, " +
                 "uniformed guards challenging, filtering, and recording the movement of staff and visitors alike.";
 
-            controlROOM = NewRoom(name, description, area);
-            controlROOM.Tag = "Administration";
-            controlROOM.roomType = roomType.admin | roomType.healing;
-            controlROOM.roomRestrictons = roomRestrictions.fighting | roomRestrictions.taunting;
-            controlROOM.roomConditions = roomConditions.magic | roomConditions.lawful;  
+            control = NewRoom(name, description, area);
+            control.Tag = "Administration";
+            control.roomType = roomType.admin | roomType.healing;
+            control.roomRestrictons = roomRestrictions.fighting | roomRestrictions.taunting;
+            control.roomConditions = roomConditions.magic | roomConditions.lawful;  
 
-            Room transitROOM;  // room used as exit hub from admin control room
+            Room transit;
             name = "Transit Hub";
             description = "Administration Transit Hub Main Entrance";
 
-            transitROOM = NewRoom(name, description, area);
-            transitROOM.Tag = "Administration";
-            transitROOM.roomType = roomType.path | roomType.shop | roomType.leveling;
-            transitROOM.roomRestrictons = roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.fighting;
-            transitROOM.roomConditions = roomConditions.magic;
+            transit = NewRoom(name, description, area);
+            transit.Tag = "Administration";
+            transit.roomType = roomType.path | roomType.shop | roomType.leveling;
+            transit.roomRestrictons = roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.fighting;
+            transit.roomConditions = roomConditions.magic;
 
 
-            Room theVoidROOM;  // no doorway in for players and at least one exit to world room(s)
+            Room theVoid; 
             name = "Void";
             description = "You find yourself weightlessly floating in some kind of silent, lonely, dark, " +
                 "endless, - and as many other voidy spacy words there might be.. - space.";
 
-            theVoidROOM = NewRoom(name, description, area);
-            GBL.Settings.TheVoid = theVoidROOM;
-            theVoidROOM.Tag = "Void";
-            theVoidROOM.roomType = roomType.outdoor;
-            theVoidROOM.roomRestrictons = roomRestrictions.fighting | roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.stealing;
+            theVoid = NewRoom(name, description, area);
+            GBL.Settings.TheVoid = theVoid;
+            theVoid.Tag = "Void";
+            theVoid.roomType = roomType.outdoor;
+            theVoid.roomRestrictons = roomRestrictions.fighting | roomRestrictions.magic | roomRestrictions.mindpower | roomRestrictions.stealing;
  
 
-            LinkTwoRooms(theVoidROOM, transitROOM);
-            LinkTwoRooms(transitROOM, controlROOM);
-            LinkTwoRooms(controlROOM, theVoidROOM);
+            LinkTwoRooms(theVoid, transit);
+            LinkTwoRooms(transit, control);
+            LinkTwoRooms(control, theVoid);
 
-            area.Rooms.Add(controlROOM);
-            area.Rooms.Add(transitROOM);
-            area.Rooms.Add(theVoidROOM);
+            area.Rooms.Add(control);
+            area.Rooms.Add(transit);
+            area.Rooms.Add(theVoid);
 
             return area;
         }
@@ -68,7 +68,6 @@ namespace Mountain.classes.functions {
             exit.DoorLabel = toRoom.Name;
             exit.Area = toRoom.Area;
             exit.Room = toRoom;
-          //  exit.Linkage = new Location(toRoom);
             fromRoom.AddExit(exit);
         }
 

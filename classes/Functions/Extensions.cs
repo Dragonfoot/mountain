@@ -26,7 +26,6 @@ namespace Mountain.classes.functions {
 
         #region enums
 
-
         // FruitType myBasket = FruitType.Grapes | FruitType.Oranges;
 
         public static bool Has<T>(this Enum enumType, T flag) { // bool hasGrapes = myBasket.Has(FruitType.Grapes); = true

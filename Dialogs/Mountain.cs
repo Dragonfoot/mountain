@@ -227,9 +227,9 @@ namespace Mountain.Dialogs {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            string xml = SelectedArea.ToXml();
+        //    string xml = SelectedArea.ToXml();
             logRichTextBox.Clear();
-            logRichTextBox.AppendText(xml);
+        //    logRichTextBox.AppendText(xml);
         }
 
         private void connectionPoller_Tick(object sender, EventArgs e) {

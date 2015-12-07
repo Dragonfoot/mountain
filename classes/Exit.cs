@@ -1,15 +1,13 @@
-﻿using System;
-using System.Xml;
-using System.Xml.Serialization;
+﻿using System.Xml;
 using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes {
 
-    [Serializable] public class Exit : Identity {
-        [XmlIgnore] public Room Owner { get; set; }
-        [XmlIgnore] public Room Room { get; set; }
-        [XmlIgnore] public Area Area;
+    public class Exit : Identity {
+        public Room Owner { get; set; }
+        public Room Room { get; set; }
+        public Area Area;
         public string DoorLabel { get; set; }
         public bool Open;
         public bool Lockable;
@@ -62,6 +60,10 @@ namespace Mountain.classes {
             XML.createNode("Area", Area.Name, writer);
             writer.WriteEndElement();
             return writer;
+        }
+
+        public void LoadXml(XmlNode node) {
+
         }
     }
 }

@@ -5,11 +5,11 @@ using Mountain.classes.Items;
 
 namespace Mountain.classes.mobs {
 
-    [Serializable] public class Underling : Identity { // mob precursor
+    public class Underling : Identity { // mob precursor
         public Room Room; 
         public ConcurrentBag<Item> Inventory { get; set; }
-        public delegate void CommandHandler(object myObject, string message); // function caller
-        public CommandHandler Commands;         // functions hook
+        public delegate void CommandHandler(object myObject, string message);
+        public CommandHandler Commands;
         public int Health { get; set; }           
         public int Level { get; set; }
 

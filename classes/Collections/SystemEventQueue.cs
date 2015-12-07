@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.collections {
 
-    [Serializable] public class SystemEventQueue {
+    public class SystemEventQueue {
         public string Tag { get; set; }
         private ConcurrentQueue<SystemEventPacket> queue;
         public delegate void EventHandler(object myObject, SystemEventPacket packet);

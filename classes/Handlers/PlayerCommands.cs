@@ -6,13 +6,14 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes.handlers {
 
-    [Serializable] public class PlayerCommands {
+    public class PlayerCommands {
         private Dictionary<string, Action<Packet>> List;
         public List<string> Keys;
 
         public PlayerCommands() {
             LoadPlayerCommands();
         }
+
         private void LoadPlayerCommands() {
             List = new Dictionary<string, Action<Packet>>(){
                 {"inventory", Inventory},

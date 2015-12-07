@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System;
 using Mountain.classes.tcp;
 
 namespace Mountain.classes.collections {
 
     
-    [Serializable] public class Players : IEnumerable<Connection> {
-        [NonSerialized()] public List<Connection> List;
+    public class Players : IEnumerable<Connection> {
+        public List<Connection> List;
         public delegate void AddHandler(object myObject, Connection player, string message = "");
         public delegate void RemoveHandler(object myObject, Connection player, string message = "");
         public event AddHandler OnPlayerAdded;

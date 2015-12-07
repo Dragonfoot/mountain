@@ -1,12 +1,10 @@
 ﻿using System;
-using System.IO;
 using System.Xml;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
-using System.Xml.Serialization;
 using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
 using Mountain.classes.Items;
@@ -15,20 +13,19 @@ using Mountain.classes.collections;
 using Mountain.classes.tcp;
 
 namespace Mountain.classes {
-
-    [Serializable]
+    
     public class Room : Identity {
-        [XmlIgnore] public ConcurrentBag<Mob> Mobs { get; set; }
-        [XmlIgnore] public ConcurrentBag<Item> Items { get; set; }
-        [XmlIgnore] public Players Players { get; set; }
-        [XmlIgnore] public PlayerEventQueue Messages;
+        public ConcurrentBag<Mob> Mobs { get; set; }
+        public ConcurrentBag<Item> Items { get; set; }
+        public Players Players { get; set; }
+        public PlayerEventQueue Messages;
         public string shortDescription { get; set; }
         public Area Area;
         public roomType roomType { get; set; }
         public roomRestrictions roomRestrictons { get; set; }
         public roomConditions roomConditions { get; set; }
         public string Tag { get; set; }
-        [XmlArray("Exits")] public List<Exit> Exits { get; set; }
+        public List<Exit> Exits { get; set; }
 
         public Room(Area area) {
             InitializeRoom();
@@ -48,7 +45,7 @@ namespace Mountain.classes {
             Description = description;
             Area = area;
         }
-        public Room() { // for xml-serializer
+        public Room() {
         }
 
         public override string ToString() {
@@ -133,19 +130,6 @@ namespace Mountain.classes {
 
         public void RemovePlayer(Connection player, string message) {
             Players.Remove(player.Name, message);
-        }
-
-        public string SerializeXML() { 
-            var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
-            XmlSerializer serializer = new XmlSerializer(typeof(Room));
-            TextWriter writer = new StringWriter();
-            try {
-                serializer.Serialize(writer, this, emptyNamepsaces);
-            } catch (Exception e) {
-                GBL.Settings.SystemMessageQueue.Push(e.ToString());
-                return e.ToString();
-            }             
-            return writer.ToString();
         }
 
         public XmlTextWriter SaveXml(XmlTextWriter writer) {

@@ -25,18 +25,11 @@ namespace Mountain.classes.tcp {
         public string Password;
         public string Email;
         public bool Administrator;
-        private LoginDispatcher LoginDispatcher;   // login functions
-        private PlayerDispatcher PlayerDispatcher; // player functions
-        public bool Connected {
-            get {
-                bool read = Socket.Client.Poll(500, SelectMode.SelectRead);
-                bool status = (Socket.Client.Available == 0);
-                return !(read & status);
-            }
-        }
         public Stats Stats { get; set; }
         public Equipment Equipment { get; set; }
         public delegate void CommandHandler(object myObject, string message);
+        private LoginDispatcher LoginDispatcher;   // login functions
+        private PlayerDispatcher PlayerDispatcher; // player functions
 
         public Connection(TcpClient socket) {
             Socket = socket;
@@ -53,6 +46,14 @@ namespace Mountain.classes.tcp {
         }
 
         public Connection() { }
+
+        public bool Connected {
+            get {
+                bool read = Socket.Client.Poll(500, SelectMode.SelectRead);
+                bool status = (Socket.Client.Available == 0);
+                return !(read & status);
+            }
+        }
 
         protected void StartReceiving() {
             SystemEventPacket packet = new SystemEventPacket(EventType.connection, "New Connection begun from " + this.IPAddress.ToString(), this);

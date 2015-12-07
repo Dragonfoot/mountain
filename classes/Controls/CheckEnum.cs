@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Mountain.classes.controls {
 
-    [Serializable] public partial class CheckEnum : CheckedListBox {
+    public partial class CheckEnum : CheckedListBox {
         private static MessageHook Hook = null;
 
         public CheckEnum() {
