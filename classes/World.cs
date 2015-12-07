@@ -155,9 +155,16 @@ namespace Mountain.classes {
             XmlNode root = doc.DocumentElement;
             XmlNodeList nodes = root.SelectNodes("Areas");
             foreach (XmlNode node in nodes) {
-                Area area = new Area();
-                area.LoadXml(node);
-                Areas.Add(area);
+                Area newArea = new Area();
+                newArea.LoadXml(node);
+                Areas.Add(newArea);
+            }
+            foreach(Area area in Areas) {
+                foreach(Room room in area.Rooms) {
+                    foreach(Exit exit in room.Exits) {
+                        exit.Validate();
+                    }
+                }
             }
         }
 

@@ -19,7 +19,7 @@ namespace Mountain.classes {
         public lockType LockType;
         public doorType DoorType;
         public exitRestrictions Restrictions;  //http://geekswithblogs.net/BlackRabbitCoder/archive/2010/07/22/c-fundamentals-combining-enum-values-with-bit-flags.aspx
-        
+        private string roomName, areaName;
         public Exit() {
             ClassType = classObjectType.exit;
             Name = null;
@@ -62,8 +62,19 @@ namespace Mountain.classes {
             return writer;
         }
 
-        public void LoadXml(XmlNode node) {
+        public void LoadXml(XmlNode node, Room room) {
+            Name = node["Name"].InnerText;
+            Description = node["Description"].InnerText;
+            DoorLabel = node["DoorLabel"].InnerText;
+            roomName = node["Room"].InnerText;
+            areaName = node["Area"].InnerText;
+            Owner = room;
+            Area = room.Area;
+        }
 
+        public void Validate() {
+            Area = GBL.Settings.World.GetAreaByName(areaName);
+            Room = GBL.Settings.World.GetRoomByName(roomName);
         }
     }
 }

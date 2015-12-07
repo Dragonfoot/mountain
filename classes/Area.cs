@@ -65,7 +65,7 @@ namespace Mountain.classes {
             XmlNodeList rooms = node.FirstChild["Rooms"].SelectNodes("Room");
             foreach(XmlNode room in rooms) {
                 Room newRoom = new Room();
-                newRoom.LoadXml(room);
+                newRoom.LoadXml(room, this);
                 Rooms.Add(newRoom);
             }
         }

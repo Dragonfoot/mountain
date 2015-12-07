@@ -46,6 +46,7 @@ namespace Mountain.classes {
             Area = area;
         }
         public Room() {
+            InitializeRoom();
         }
 
         public override string ToString() {
@@ -151,16 +152,16 @@ namespace Mountain.classes {
             return writer;
         }
 
-        public void LoadXml(XmlNode node) {
+        public void LoadXml(XmlNode node, Area area) {
             Name = node["Name"].InnerText;
             Description = node["Description"].InnerText;
             shortDescription = node["ShortDescription"].InnerText;
             Tag = node["Tag"].InnerText;
-            string areaName = node["AreaName"].InnerText;
+            Area = area;
             XmlNodeList exits = node["Exits"].SelectNodes("Exit");
             foreach (XmlNode exit in exits) {
                 Exit newExit = new Exit();
-                newExit.LoadXml(exit);
+                newExit.LoadXml(exit, this);
                 Exits.Add(newExit);
             }
             // read in exits...
