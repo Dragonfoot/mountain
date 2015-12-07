@@ -65,7 +65,14 @@ namespace Mountain.classes {
         }
 
         public void LoadXml(XmlNode node) {
-
+            Name = node.FirstChild["Name"].InnerText;
+            Description = node.FirstChild["Description"].InnerText;
+            XmlNodeList rooms = node.FirstChild["Rooms"].SelectNodes("Room");
+            foreach(XmlNode room in rooms) {
+                Room newRoom = new Room();
+                newRoom.LoadXml(room);
+                Rooms.Add(newRoom);
+            }
         }
 
         public void StopHeart() {

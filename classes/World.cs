@@ -197,6 +197,13 @@ namespace Mountain.classes {
             }
         }
 
+        public Area GetAreaByName(string name) {
+            foreach(Area area in Areas) {
+                if (area.Name == name) return area;
+            }
+            return null;
+        }
+
         public Room GetRoomByName(string name) {
             foreach (Area area in Areas) {
                 foreach (Room room in area.Rooms) {

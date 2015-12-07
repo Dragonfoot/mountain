@@ -167,6 +167,16 @@ namespace Mountain.classes {
             return writer;
         }
 
+        public void LoadXml(XmlNode node) {
+            Name = node.FirstChild.InnerText;
+            Description = node["Description"].InnerText;
+            shortDescription = node["ShortDescription"].InnerText;
+            Tag = node["Tag"].InnerText;
+            string areaName = node["AreaName"].InnerText;
+            Area = GBL.Settings.World.GetAreaByName(areaName);
+            // read in exits...
+        }
+
         public string[] View() {
             StringBuilder stringBuilder = new StringBuilder();
             List<string> view = new List<string>();
