@@ -152,12 +152,17 @@ namespace Mountain.classes {
         }
 
         public void LoadXml(XmlNode node) {
-            Name = node.FirstChild.InnerText;
+            Name = node["Name"].InnerText;
             Description = node["Description"].InnerText;
             shortDescription = node["ShortDescription"].InnerText;
             Tag = node["Tag"].InnerText;
             string areaName = node["AreaName"].InnerText;
-            Area = GBL.Settings.World.GetAreaByName(areaName);
+            XmlNodeList exits = node["Exits"].SelectNodes("Exit");
+            foreach (XmlNode exit in exits) {
+                Exit newExit = new Exit();
+                newExit.LoadXml(exit);
+                Exits.Add(newExit);
+            }
             // read in exits...
         }
 
