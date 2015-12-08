@@ -13,7 +13,7 @@ using Mountain.classes.dataobjects;
 
 namespace Mountain.Dialogs {
 
-    public partial class Mountain : Form {
+    public partial class Mountain : Form, IDisposable {
         protected MessageQueue MessageQueue;
         protected SystemEventQueue SystemEventQueue;
         protected World world;
@@ -270,6 +270,12 @@ namespace Mountain.Dialogs {
 
         private void loadXmlButton_Click(object sender, EventArgs e) {
             world.LoadXml(@"/testWorld.xml");
+        }
+
+        public new void Dispose() {
+            MessageQueue.OnMessageReceived -= Messages_OnMessageReceived;
+            SystemEventQueue.OnEventReceived -= Events_OnEventReceived;
+            base.Dispose();
         }
     }
 }

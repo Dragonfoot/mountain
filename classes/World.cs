@@ -10,7 +10,7 @@ using Mountain.classes.functions;
 
 namespace Mountain.classes {
 
-    public class World : Identity {
+    public class World : Identity, IDisposable {
         private CancellationTokenSource cancellationTokenSource;
         public List<Area> Areas;
         protected ListBox Console;
@@ -163,6 +163,11 @@ namespace Mountain.classes {
             Room room = GetRoomByName(name);
             if (room == null) return null;
             return room.Area.Name;
+        }
+
+        public void Dispose() {
+            Common.Settings.Players.OnPlayerAdded -= Players_OnPlayerAdded;
+            Common.Settings.Players.OnPlayerRemoved -= Players_OnPlayerRemoved;
         }
     }
 }

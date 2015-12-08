@@ -14,7 +14,7 @@ using Mountain.classes.tcp;
 
 namespace Mountain.classes {
     
-    public class Room : Identity {
+    public class Room : Identity, IDisposable {
         public ConcurrentBag<Mob> Mobs { get; set; }
         public ConcurrentBag<Item> Items { get; set; }
         public PlayerEventQueue Messages;
@@ -158,8 +158,8 @@ namespace Mountain.classes {
             shortDescription = node["ShortDescription"].InnerText;
             Tag = node["Tag"].InnerText;
             Area = area;
-            var exitsnode = node.SelectSingleNode("Exits");
-            if (exitsnode != null) {
+            var exitsNode = node.SelectSingleNode("Exits");
+            if (exitsNode != null) {
                 XmlNodeList exits = node["Exits"].SelectNodes("Exit");
                 foreach (XmlNode exit in exits) {
                     Exit newExit = new Exit();
@@ -212,6 +212,12 @@ namespace Mountain.classes {
             roomCopy.Exits.Clear();
             if (exitsCopy.Length > 0) foreach(Exit exitCopy in exitsCopy) roomCopy.Exits.Add(exitCopy.ShallowCopy());
             return roomCopy;
+        }
+
+        public void Dispose() {
+            Messages.OnEventReceived -= Messages_OnPlayerEventReceived;
+            Players.OnPlayerAdded -= Players_OnPlayerAdded;
+            Players.OnPlayerRemoved -= Players_OnPlayerRemoved;
         }
     }
 }
