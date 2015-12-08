@@ -64,7 +64,7 @@ namespace Mountain.classes.handlers {
                     }
                 }
             } catch (Exception e) {
-                GBL.Settings.SystemMessageQueue.Push(e.ToString());
+                Common.Settings.SystemMessageQueue.Push(e.ToString());
             }
         }
 
@@ -89,21 +89,21 @@ namespace Mountain.classes.handlers {
 
             names = string.Empty;
             if (packet.Client.Room.Players.Count > 1) {
-                names = FUNC.GetOtherNames(packet.Client.Room.Players.ToArray(), packet.Client.Name);
+                names = Function.GetOtherNames(packet.Client.Room.Players.ToArray(), packet.Client.Name);
                 if (names != string.Empty) packet.Client.Send("You see:" + names.Ansi(true, Style.cyan, Style.boldOn).WordWrap().NewLine());
             }
 
-            names = FUNC.GetNames(packet.Client.Room.Mobs.ToArray());
+            names = Function.GetNames(packet.Client.Room.Mobs.ToArray());
             if (names != string.Empty) packet.Client.Send("You see:" + names.Ansi(Style.green).NewLine());
             // add items
         }
 
         private void Quit(Packet packet) {
-            GBL.Settings.Players.Remove(packet.Client.Name, "Player has left.");
+            Common.Settings.Players.Remove(packet.Client.Name, "Player has left.");
             packet.Client.Send("See you again soon!".Ansi(Style.white).NewLine().NewLine());
             packet.Client.Room.Players.Remove(packet.Client.Name);
-            SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnected, packet.Client.Name + " has left.", packet.Client);
-            GBL.Settings.SystemEventQueue.Push(eventPacket);
+            SystemEventPacket eventPacket = new SystemEventPacket(EventType.disconnect, packet.Client.Name + " has left.", packet.Client);
+            Common.Settings.SystemEventQueue.Push(eventPacket);
             packet.Client.Shutdown();
             packet.Client.Dispose();
         }
@@ -138,7 +138,7 @@ namespace Mountain.classes.handlers {
 
         private void MoveTo(Packet packet) {
             string names = string.Empty;            
-            int results = FUNC.GetSameNameCount(packet.Client.Room.Exits.ToArray(), packet.parameter);            
+            int results = Function.GetSameNameCount(packet.Client.Room.Exits.ToArray(), packet.parameter);            
             if (results > 1) {
                 packet.Client.Send("Too ambiguous.".Ansi(Style.yellow).NewLine());
                 return;

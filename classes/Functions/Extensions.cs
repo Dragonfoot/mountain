@@ -12,15 +12,14 @@ using Mountain.classes.dataobjects;
 
 namespace Mountain.classes.functions {
 
-    public static class ThreadSafeRandom {  // random function called from multiple threads (used for Shuffling an IList<T>)
+    public static class ThreadedRandom {  // random function called from multiple threads (used for Shuffling an IList<T>)
         [ThreadStatic] private static Random Local;
-        public static Random ThisThreadsRandom {
+        public static Random SafeRandom {
             get { return Local ?? (Local = new Random(unchecked(Environment.TickCount * 31 + Thread.CurrentThread.ManagedThreadId))); }
         }
     }
 
     public static class Extensions {
-
 
         #region generic
 
@@ -74,14 +73,14 @@ namespace Mountain.classes.functions {
             int n = list.Count;
             while (n > 1) {
                 n--;
-                int k = ThreadSafeRandom.ThisThreadsRandom.Next(n + 1);
+                int k = ThreadedRandom.SafeRandom.Next(n + 1);
                 T value = list[k];
                 list[k] = list[n];
                 list[n] = value;
             }
         }
 
-        public static bool IsNumber<T>(this T value) {
+        public static bool IsNumeric<T>(this T value) {
             if (value is sbyte) return true;
             if (value is byte) return true;
             if (value is short) return true;
@@ -110,7 +109,7 @@ namespace Mountain.classes.functions {
             return str + Environment.NewLine;
         }
         public static string Indent(this string str) {
-            for (int i = 0; i <= GBL.indent; i++) {
+            for (int i = 0; i <= Common.indent; i++) {
                 str = " " + str;
             }
             return str;
@@ -199,7 +198,7 @@ namespace Mountain.classes.functions {
             result = result.Trim();
             return result;
         }
-        public static string WordWrap(this string longString, int width = GBL.pageWidth) {  // takes a long string and formats to width
+        public static string WordWrap(this string longString, int width = Common.pageWidth) {  // takes a long string and formats to width
             StringBuilder lines = new StringBuilder();
             string[] words = longString.Split(' ');
             StringBuilder buildLine = new StringBuilder("");
@@ -216,7 +215,7 @@ namespace Mountain.classes.functions {
 
         #region cryption
 
-        // hide & change before shifting to production
+        // obfuscate - change values before shifting to production
         private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("zk37pEji3L0t73Q5");
         private const string passPhrase = "my wee lit^le do_keydunk Duck#y DingdYnglededoo4U";
 

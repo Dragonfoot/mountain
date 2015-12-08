@@ -17,8 +17,8 @@ namespace Mountain.Dialogs {
             currentRoomTextBox.Text = exit.Owner.Name;
             currentDoorLabelTextBox.Text = exit.DoorLabel;
 
-            if (GBL.Settings.World.Areas.Any()) {
-                areaComboBox.Items.AddRange(GBL.Settings.World.Areas.Select(x => x.Name).ToArray());
+            if (Common.Settings.World.Areas.Any()) {
+                areaComboBox.Items.AddRange(Common.Settings.World.Areas.Select(x => x.Name).ToArray());
                 areaComboBox.SelectedIndex = 0;
               /*  if (SelectedArea.Rooms.Any()) {
                     if (roomListBox.Items.Count > 0) roomListBox.SelectedIndex = 0;
@@ -28,7 +28,7 @@ namespace Mountain.Dialogs {
 
         private void areaComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             string name = areaComboBox.SelectedItem.ToString();
-            SelectedArea = GBL.Settings.World.Areas.Find(area => area.Name == (string)areaComboBox.SelectedItem);
+            SelectedArea = Common.Settings.World.Areas.Find(area => area.Name == (string)areaComboBox.SelectedItem);
             roomListBox.Items.Clear();
             roomListBox.Items.AddRange(SelectedArea.Rooms.Where(room => room.Name != Exit.Owner.Name).ToArray());
 

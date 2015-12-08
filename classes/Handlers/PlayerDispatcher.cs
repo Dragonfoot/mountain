@@ -67,7 +67,7 @@ namespace Mountain.classes.handlers {
             }
             if (!packet.known) {
                 string verb = packet.verb;
-                packet = FUNC.ContainsExit(player.Room.Exits.ToArray(), packet);
+                packet = Function.ContainsExit(player.Room.Exits.ToArray(), packet);
                 if (packet.verb != verb) {
                     packet.known = true;
                 }                

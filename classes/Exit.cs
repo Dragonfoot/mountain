@@ -6,8 +6,8 @@ namespace Mountain.classes {
 
     public class Exit : Identity {
         public Room Owner { get; set; }
-        public Room Room { get; set; }
-        public Area Area;
+        public Room Room { get; set; }  // points to
+        public Area Area;               // room it points to is in
         public string DoorLabel { get; set; }
         public bool Open;
         public bool Lockable;
@@ -26,29 +26,12 @@ namespace Mountain.classes {
         }
 
         public Exit ShallowCopy() {
-            Exit other = (Exit)MemberwiseClone();
+            Exit other = (Exit) MemberwiseClone();
             return other;
         }
 
         public override string ToString() {
             return DoorLabel;
-        }
-
-        public void Update(ExitData data) {
-            Name = data.Name;
-            Description = data.Description;
-            Room = data.Room;
-            Area = data.Area;
-            if(data.DoorType.HasValue) DoorType = (doorType)data.DoorType;
-            if(data.LockType.HasValue) LockType = (lockType)data.LockType;
-            if(data.Restrictions.HasValue) Restrictions = (exitRestrictions)data.Restrictions;
-            if(data.ExitType.HasValue) ExitType = (exitType)data.ExitType;
-            if(data.Open.HasValue) Open = (bool)data.Open;
-            if(data.Lockable.HasValue) Lockable = (bool)data.Lockable;
-            if(data.Visible.HasValue) Visible = (bool)data.Visible;
-            if(data.Pickable.HasValue) Pickable = (bool)data.Pickable;
-            if(data.Breakable.HasValue) Breakable = (bool)data.Breakable;
-            if(data.Repairable.HasValue) Repairable = (bool)data.Repairable;
         }
 
         public XmlTextWriter SaveXml(XmlTextWriter writer) {
@@ -63,18 +46,18 @@ namespace Mountain.classes {
         }
 
         public void LoadXml(XmlNode node, Room room) {
+            Owner = room;
+            Area = room.Area;
             Name = node["Name"].InnerText;
             Description = node["Description"].InnerText;
             DoorLabel = node["DoorLabel"].InnerText;
             roomName = node["Room"].InnerText;
             areaName = node["Area"].InnerText;
-            Owner = room;
-            Area = room.Area;
         }
 
         public void Validate() {
-            Area = GBL.Settings.World.GetAreaByName(areaName);
-            Room = GBL.Settings.World.GetRoomByName(roomName);
+            Area = Common.Settings.World.GetAreaByName(areaName);
+            Room = Common.Settings.World.GetRoomByName(roomName);
         }
     }
 }

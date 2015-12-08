@@ -72,7 +72,7 @@ namespace Mountain.classes {
             Players.Add(connection);
             Logins.Remove(connection);
             if (!File.Exists(PlayersDirectory + "\\" + connection.Name + "test.xml")) {
-                connection.Room = GBL.Settings.TheVoid;
+                connection.Room = Common.Settings.TheVoid;
                 return;
             } else {
                 connection.LoadXml(PlayersDirectory + "\\" + connection.Name + "test.xml");

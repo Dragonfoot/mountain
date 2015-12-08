@@ -17,15 +17,15 @@ namespace Mountain.classes {
     public class Room : Identity {
         public ConcurrentBag<Mob> Mobs { get; set; }
         public ConcurrentBag<Item> Items { get; set; }
-        public Players Players { get; set; }
         public PlayerEventQueue Messages;
-        public string shortDescription { get; set; }
-        public Area Area;
+        public List<Exit> Exits { get; set; }
+        public Players Players { get; set; }
+        public Area Area { get; set; }
         public roomType roomType { get; set; }
         public roomRestrictions roomRestrictons { get; set; }
         public roomConditions roomConditions { get; set; }
+        public string shortDescription { get; set; }
         public string Tag { get; set; }
-        public List<Exit> Exits { get; set; }
 
         public Room(Area area) {
             InitializeRoom();
@@ -87,16 +87,16 @@ namespace Mountain.classes {
 
         public string GetName() { return Name; }
         public string GetDesciption() { return Description; }
-        public string GetExits() { return FUNC.GetNames(Exits.ToArray()); }
-        public string GetMobs() { return FUNC.GetNames(Mobs.ToArray()); }
-        public string GetPlayers() { return FUNC.GetNames(Players.ToArray()); }
-        public string GetOtherPlayers(string name) { return FUNC.GetOtherNames(Players.ToArray(), name); }
-        public string GetItems() { return FUNC.GetNames(Items.ToArray()); }
+        public string GetExits() { return Function.GetNames(Exits.ToArray()); }
+        public string GetMobs() { return Function.GetNames(Mobs.ToArray()); }
+        public string GetPlayers() { return Function.GetNames(Players.ToArray()); }
+        public string GetOtherPlayers(string name) { return Function.GetOtherNames(Players.ToArray(), name); }
+        public string GetItems() { return Function.GetNames(Items.ToArray()); }
 
         private void Messages_OnPlayerEventReceived(object myObject, Packet packet) {
             Packet message = Messages.Pop(); 
             if (message == null) message = packet;
-            GBL.Settings.SystemMessageQueue.Push("Room received: " + message);
+            Common.Settings.SystemMessageQueue.Push("Room received: " + message);
         }        
         
         public void HeartBeat() {
@@ -164,7 +164,6 @@ namespace Mountain.classes {
                 newExit.LoadXml(exit, this);
                 Exits.Add(newExit);
             }
-            // read in exits...
         }
 
         public string[] View() {
@@ -175,17 +174,17 @@ namespace Mountain.classes {
             view.Add(Description);
             view.Add("");
             if (Exits.Any()) { // add color coding's
-                stringBuilder.Append("Exits: " + FUNC.GetNames(Exits.ToArray()));
+                stringBuilder.Append("Exits: " + Function.GetNames(Exits.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Mobs.Any()) {
-                stringBuilder.Append("Mobs: " + FUNC.GetNames(Mobs.ToArray()));
+                stringBuilder.Append("Mobs: " + Function.GetNames(Mobs.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }
             if (Players.Any()) {
-                stringBuilder.Append("Players: " + FUNC.GetNames(Players.ToArray()));
+                stringBuilder.Append("Players: " + Function.GetNames(Players.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();
             }

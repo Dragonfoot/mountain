@@ -7,8 +7,8 @@ namespace Mountain.classes.collections {
     public class Players : IEnumerable<Connection> {
         public List<Connection> List;
         public delegate void AddHandler(object myObject, Connection player, string message = "");
-        public delegate void RemoveHandler(object myObject, Connection player, string message = "");
         public event AddHandler OnPlayerAdded;
+        public delegate void RemoveHandler(object myObject, Connection player, string message = "");
         public event RemoveHandler OnPlayerRemoved;
         public int Count { get { return List.Count; } }
 

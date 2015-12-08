@@ -15,14 +15,15 @@ namespace Mountain.classes {
 
         public Area() {
             ClassType = classObjectType.area;
+            Rooms = new Rooms(this);
             Name = "new area";
             Description = "new area";
             Active = true;
             cancellationTokenSource = new CancellationTokenSource();
-            Rooms = new Rooms(this);
         }
 
         public Area(string name, string description) {
+            Rooms = new Rooms(this);
             Name = name;
             Description = description;
         }

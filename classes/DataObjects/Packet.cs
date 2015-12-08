@@ -3,7 +3,7 @@
 namespace Mountain.classes.dataobjects {
 
     public enum PacketType { data, command, activity, callback, verb, system };
-    public enum EventType { unknown, connection, disconnected, idle, login }
+    public enum EventType { unknown, connect, disconnect, idle, login }
   
     public class Packet  {
         public PacketType packetType;

@@ -1,6 +1,5 @@
 ﻿using Mountain.classes.functions;
 
-
 namespace Mountain.classes.dataobjects {
 
     public class Account {

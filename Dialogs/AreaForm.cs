@@ -48,7 +48,7 @@ namespace Mountain.Dialogs {
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-            saveAreaFileDialog.InitialDirectory = GBL.Settings.BaseDirectory;
+            saveAreaFileDialog.InitialDirectory = Common.Settings.BaseDirectory;
             if (saveAreaFileDialog.ShowDialog() == DialogResult.OK) 
                 XML.ObjectToXml(area.Rooms, saveAreaFileDialog.FileName);            
         }

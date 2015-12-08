@@ -17,7 +17,7 @@ namespace Mountain.classes.collections {
 
         public bool UpdatePassword(string name, string value) {
             if (Exists(name)) {
-                List.First(player => player.Name == name).Password = value;
+                List.First(player => player.Name == name).Password = value; 
                 return true;
             }
             return false;
