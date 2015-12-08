@@ -71,6 +71,8 @@
       <DependentUpon>CheckEnum.cs</DependentUpon>
     </Compile>
     <Compile Include="classes\DataObjects\ExitData.cs" />
+    <Compile Include="classes\Handlers\Help.cs" />
+    <Compile Include="classes\Handlers\Socials.cs" />
     <Compile Include="Dialogs\AreaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,7 +83,7 @@
     <Compile Include="classes\Collections\SystemEventQueue.cs" />
     <Compile Include="classes\DataObjects\Responses.cs" />
     <Compile Include="classes\Handlers\Combat.cs" />
-    <Compile Include="classes\Handlers\Emote.cs" />
+    <Compile Include="classes\Handlers\Emotes.cs" />
     <Compile Include="classes\Functions\Functions.cs" />
     <Compile Include="classes\Handlers\PlayerCommands.cs" />
     <Compile Include="classes\Handlers\RoomCommands.cs" />
