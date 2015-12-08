@@ -158,11 +158,14 @@ namespace Mountain.classes {
             shortDescription = node["ShortDescription"].InnerText;
             Tag = node["Tag"].InnerText;
             Area = area;
-            XmlNodeList exits = node["Exits"].SelectNodes("Exit");
-            foreach (XmlNode exit in exits) {
-                Exit newExit = new Exit();
-                newExit.LoadXml(exit, this);
-                Exits.Add(newExit);
+            var exitsnode = node.SelectSingleNode("Exits");
+            if (exitsnode != null) {
+                XmlNodeList exits = node["Exits"].SelectNodes("Exit");
+                foreach (XmlNode exit in exits) {
+                    Exit newExit = new Exit();
+                    newExit.LoadXml(exit, this);
+                    Exits.Add(newExit);
+                }
             }
         }
 

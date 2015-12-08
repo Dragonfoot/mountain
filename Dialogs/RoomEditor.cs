@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using Mountain.classes;
+using System.Linq;
 
 namespace Mountain.Dialogs {
 
@@ -78,12 +79,13 @@ namespace Mountain.Dialogs {
             ExitEditor exitEdit = new ExitEditor(SelectedExit);
             DialogResult dialogresult = exitEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-                //    Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
+                
                 //    exitListBox.Items.Clear();
                 //    exitListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
             }
             exitEdit.Dispose();
         }
+
         private void addToolStripMenuItem_Click(object sender, System.EventArgs e) {
             if (nameChanged) {
                 Room.Name = roomNameTextBox.Text;
@@ -96,9 +98,10 @@ namespace Mountain.Dialogs {
             ExitEditor exitEdit = new ExitEditor(exit);
             DialogResult dialogresult = exitEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
-                //    Functions.UpdateRoomEdits(roomEditForm.roomEdits, SelectedRoom);
-                //    exitListBox.Items.Clear();
-                //    exitListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
+                exit = exitEdit.Exit.ShallowCopy();
+                Room.Exits.Add(exit);
+                exitListBox.Items.Clear();
+                PopulateExitListBox();
             }
             exitEdit.Dispose();
         }
