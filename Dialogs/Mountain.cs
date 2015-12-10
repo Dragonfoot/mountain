@@ -273,6 +273,16 @@ namespace Mountain.Dialogs {
             SystemEventQueue.OnEventReceived -= Events_OnEventReceived;
             base.Dispose();
         }
+
+        private void commandsTextBox_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        private void commandsTextBox_KeyPress(object sender, KeyPressEventArgs e) {
+            if (e.KeyChar == (char)13) {
+
+            }
+        }
     }
 }
         

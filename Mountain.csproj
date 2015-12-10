@@ -71,6 +71,7 @@
       <DependentUpon>CheckEnum.cs</DependentUpon>
     </Compile>
     <Compile Include="classes\DataObjects\ExitData.cs" />
+    <Compile Include="classes\Handlers\CommandDispatcher.cs" />
     <Compile Include="classes\Handlers\Help.cs" />
     <Compile Include="classes\Handlers\Socials.cs" />
     <Compile Include="Dialogs\AreaForm.cs">
