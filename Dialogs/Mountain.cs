@@ -1,9 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using System.Collections.Generic;
 using Mountain.classes;
 using Mountain.classes.tcp;
@@ -37,6 +35,20 @@ namespace Mountain.Dialogs {
                 listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
                 connectionPoller.Enabled = true;
                 Console.Items.Add("System: Server has started.");
+            }
+            SetEditor(Common.Settings.TheVoid);
+        }
+
+        private void SetEditor(Room room) {
+            roomNameButton.Text = room.Name;
+            roomDescriptionButton.Text = room.Description;
+            SyncControls(room);
+        }
+
+        private void SyncControls(Room room) {
+            if (areaComboBox.Items.Contains(room.Area.Name)) {
+                areaComboBox.SelectedIndex = areaComboBox.Items.IndexOf(room.Area.Name);
+                roomsListBox.SelectedIndex = roomsListBox.Items.IndexOf(room.Name);
             }
         }
 
@@ -136,7 +148,7 @@ namespace Mountain.Dialogs {
             areaForm.Dispose();
         }
 
-        private void areaListBox_SelectedIndexChanged(object sender, EventArgs e) {
+        private void areaComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             string name = areaComboBox.SelectedItem.ToString();
             SelectedArea = world.Areas.Find(area => area.Name == (string)areaComboBox.SelectedItem);
             roomsListBox.Items.Clear();
@@ -283,6 +295,7 @@ namespace Mountain.Dialogs {
 
             }
         }
+
     }
 }
         

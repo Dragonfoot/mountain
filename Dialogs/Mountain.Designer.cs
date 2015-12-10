@@ -49,14 +49,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.mobsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
+            this.areaComboBox = new System.Windows.Forms.ComboBox();
             this.commandsTextBox = new System.Windows.Forms.TextBox();
-            this.Console = new System.Windows.Forms.ListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listenerCheckBox = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.startServer = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.roomsListBox = new System.Windows.Forms.ListBox();
             this.RoomContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -73,6 +67,13 @@
             this.MoveToAreaContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
+            this.Console = new System.Windows.Forms.ListBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listenerCheckBox = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.startServer = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.connectedListBox = new System.Windows.Forms.ListBox();
@@ -81,15 +82,14 @@
             this.connectionPoller = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.loadXmlButton = new System.Windows.Forms.Button();
-            this.areaComboBox = new System.Windows.Forms.ComboBox();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.editorLayoutPanel.SuspendLayout();
             this.exitLayoutPanel.SuspendLayout();
             this.permMobLayoutPanel.SuspendLayout();
             this.mobsLayoutPanel.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.RoomContextMenu.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -238,7 +238,7 @@
             this.roomNameButton.Location = new System.Drawing.Point(3, 0);
             this.roomNameButton.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.roomNameButton.Name = "roomNameButton";
-            this.roomNameButton.Size = new System.Drawing.Size(751, 23);
+            this.roomNameButton.Size = new System.Drawing.Size(693, 23);
             this.roomNameButton.TabIndex = 0;
             this.roomNameButton.Text = "Room:Name";
             this.roomNameButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -254,7 +254,7 @@
             this.roomDescriptionButton.Location = new System.Drawing.Point(3, 23);
             this.roomDescriptionButton.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.roomDescriptionButton.Name = "roomDescriptionButton";
-            this.roomDescriptionButton.Size = new System.Drawing.Size(751, 23);
+            this.roomDescriptionButton.Size = new System.Drawing.Size(693, 23);
             this.roomDescriptionButton.TabIndex = 1;
             this.roomDescriptionButton.Text = "Room:Description";
             this.roomDescriptionButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -263,11 +263,10 @@
             // exitLayoutPanel
             // 
             this.exitLayoutPanel.Controls.Add(this.label5);
-            this.exitLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.exitLayoutPanel.Location = new System.Drawing.Point(3, 46);
             this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.exitLayoutPanel.Name = "exitLayoutPanel";
-            this.exitLayoutPanel.Size = new System.Drawing.Size(751, 26);
+            this.exitLayoutPanel.Size = new System.Drawing.Size(693, 26);
             this.exitLayoutPanel.TabIndex = 2;
             // 
             // label5
@@ -284,11 +283,10 @@
             // permMobLayoutPanel
             // 
             this.permMobLayoutPanel.Controls.Add(this.label6);
-            this.permMobLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 72);
             this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.permMobLayoutPanel.Name = "permMobLayoutPanel";
-            this.permMobLayoutPanel.Size = new System.Drawing.Size(751, 26);
+            this.permMobLayoutPanel.Size = new System.Drawing.Size(693, 26);
             this.permMobLayoutPanel.TabIndex = 3;
             // 
             // label6
@@ -307,7 +305,7 @@
             this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 98);
             this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
-            this.mobsLayoutPanel.Size = new System.Drawing.Size(751, 26);
+            this.mobsLayoutPanel.Size = new System.Drawing.Size(693, 26);
             this.mobsLayoutPanel.TabIndex = 4;
             // 
             // label7
@@ -320,6 +318,15 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Generate Mobs:";
             // 
+            // areaComboBox
+            // 
+            this.areaComboBox.FormattingEnabled = true;
+            this.areaComboBox.Location = new System.Drawing.Point(708, 29);
+            this.areaComboBox.Name = "areaComboBox";
+            this.areaComboBox.Size = new System.Drawing.Size(162, 21);
+            this.areaComboBox.TabIndex = 20;
+            this.areaComboBox.SelectedIndexChanged += new System.EventHandler(this.areaComboBox_SelectedIndexChanged);
+            // 
             // commandsTextBox
             // 
             this.commandsTextBox.Location = new System.Drawing.Point(3, 360);
@@ -328,83 +335,6 @@
             this.commandsTextBox.TabIndex = 1;
             this.commandsTextBox.TextChanged += new System.EventHandler(this.commandsTextBox_TextChanged);
             this.commandsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.commandsTextBox_KeyPress);
-            // 
-            // Console
-            // 
-            this.Console.BackColor = System.Drawing.SystemColors.Window;
-            this.Console.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Console.FormattingEnabled = true;
-            this.Console.HorizontalScrollbar = true;
-            this.Console.Location = new System.Drawing.Point(12, 310);
-            this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(175, 121);
-            this.Console.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.listenerCheckBox);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Controls.Add(this.startServer);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox1.Location = new System.Drawing.Point(12, 437);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(99, 133);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Server";
-            // 
-            // listenerCheckBox
-            // 
-            this.listenerCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
-            this.listenerCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.listenerCheckBox.Checked = true;
-            this.listenerCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.listenerCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.listenerCheckBox.Location = new System.Drawing.Point(70, 19);
-            this.listenerCheckBox.Name = "listenerCheckBox";
-            this.listenerCheckBox.Size = new System.Drawing.Size(16, 16);
-            this.listenerCheckBox.TabIndex = 16;
-            this.listenerCheckBox.UseVisualStyleBackColor = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Port";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(11, 40);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(55, 20);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Text = "8090";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(11, 95);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "Stop";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // startServer
-            // 
-            this.startServer.Location = new System.Drawing.Point(11, 66);
-            this.startServer.Name = "startServer";
-            this.startServer.Size = new System.Drawing.Size(75, 23);
-            this.startServer.TabIndex = 0;
-            this.startServer.Text = "Start";
-            this.startServer.UseVisualStyleBackColor = true;
-            this.startServer.Click += new System.EventHandler(this.serverStart);
             // 
             // label1
             // 
@@ -526,6 +456,83 @@
             this.label3.TabIndex = 15;
             this.label3.Text = "Area Rooms";
             // 
+            // Console
+            // 
+            this.Console.BackColor = System.Drawing.SystemColors.Window;
+            this.Console.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.Console.FormattingEnabled = true;
+            this.Console.HorizontalScrollbar = true;
+            this.Console.Location = new System.Drawing.Point(12, 310);
+            this.Console.Name = "Console";
+            this.Console.Size = new System.Drawing.Size(175, 121);
+            this.Console.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.listenerCheckBox);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.startServer);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.groupBox1.Location = new System.Drawing.Point(12, 437);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(99, 133);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Server";
+            // 
+            // listenerCheckBox
+            // 
+            this.listenerCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.listenerCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.listenerCheckBox.Checked = true;
+            this.listenerCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.listenerCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.listenerCheckBox.Location = new System.Drawing.Point(70, 19);
+            this.listenerCheckBox.Name = "listenerCheckBox";
+            this.listenerCheckBox.Size = new System.Drawing.Size(16, 16);
+            this.listenerCheckBox.TabIndex = 16;
+            this.listenerCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Port";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(11, 40);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(55, 20);
+            this.textBox2.TabIndex = 2;
+            this.textBox2.Text = "8090";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(11, 95);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 1;
+            this.button6.Text = "Stop";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // startServer
+            // 
+            this.startServer.Location = new System.Drawing.Point(11, 66);
+            this.startServer.Name = "startServer";
+            this.startServer.Size = new System.Drawing.Size(75, 23);
+            this.startServer.TabIndex = 0;
+            this.startServer.Text = "Start";
+            this.startServer.UseVisualStyleBackColor = true;
+            this.startServer.Click += new System.EventHandler(this.serverStart);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(998, 461);
@@ -599,14 +606,6 @@
             this.loadXmlButton.UseVisualStyleBackColor = true;
             this.loadXmlButton.Click += new System.EventHandler(this.loadXmlButton_Click);
             // 
-            // areaComboBox
-            // 
-            this.areaComboBox.FormattingEnabled = true;
-            this.areaComboBox.Location = new System.Drawing.Point(708, 29);
-            this.areaComboBox.Name = "areaComboBox";
-            this.areaComboBox.Size = new System.Drawing.Size(162, 21);
-            this.areaComboBox.TabIndex = 20;
-            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -635,9 +634,9 @@
             this.permMobLayoutPanel.PerformLayout();
             this.mobsLayoutPanel.ResumeLayout(false);
             this.mobsLayoutPanel.PerformLayout();
+            this.RoomContextMenu.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.RoomContextMenu.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
