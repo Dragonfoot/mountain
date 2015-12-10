@@ -36,19 +36,20 @@ namespace Mountain.Dialogs {
                 connectionPoller.Enabled = true;
                 Console.Items.Add("System: Server has started.");
             }
-            SetEditor(Common.Settings.TheVoid);
+            SetEditor();
+            SyncControls();
         }
 
-        private void SetEditor(Room room) {
-            roomNameButton.Text = room.Name;
-            roomDescriptionButton.Text = room.Description;
-            SyncControls(room);
+        private void SetEditor() {
+            if (SelectedRoom == null) SelectedRoom = Common.Settings.TheVoid;
+            roomNameButton.Text = SelectedRoom.Name;
+            roomDescriptionButton.Text = SelectedRoom.Description;
         }
 
-        private void SyncControls(Room room) {
-            if (areaComboBox.Items.Contains(room.Area.Name)) {
-                areaComboBox.SelectedIndex = areaComboBox.Items.IndexOf(room.Area.Name);
-                roomsListBox.SelectedIndex = roomsListBox.Items.IndexOf(room.Name);
+        private void SyncControls() {
+            if (areaComboBox.Items.Contains(SelectedRoom.Area.Name)) {
+                areaComboBox.SelectedIndex = areaComboBox.Items.IndexOf(SelectedRoom.Area.Name);
+                roomsListBox.SelectedIndex = roomsListBox.Items.IndexOf(SelectedRoom.Name);
             }
         }
 
@@ -153,6 +154,7 @@ namespace Mountain.Dialogs {
             SelectedArea = world.Areas.Find(area => area.Name == (string)areaComboBox.SelectedItem);
             roomsListBox.Items.Clear();
             roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
+            SelectedRoom = SelectedArea.Rooms.List[0];
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -219,6 +221,7 @@ namespace Mountain.Dialogs {
 
         private void roomsListBox_SelectedIndexChanged(object sender, EventArgs e) {
             SelectedRoom = SelectedArea.Rooms.FindName((string)roomsListBox.SelectedItem);
+            SetEditor();
         }
 
         private void roomsListBox_MouseDoubleClick(object sender, MouseEventArgs e) {
