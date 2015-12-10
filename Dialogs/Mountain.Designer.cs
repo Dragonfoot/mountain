@@ -42,14 +42,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.Console = new System.Windows.Forms.ListBox();
-            this.logRichTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listenerCheckBox = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.startServer = new System.Windows.Forms.Button();
-            this.areaListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.roomsListBox = new System.Windows.Forms.ListBox();
             this.RoomContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -74,11 +72,25 @@
             this.connectionPoller = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.loadXmlButton = new System.Windows.Forms.Button();
+            this.areaComboBox = new System.Windows.Forms.ComboBox();
+            this.editorLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.roomNameButton = new System.Windows.Forms.Button();
+            this.roomDescriptionButton = new System.Windows.Forms.Button();
+            this.exitLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.permMobLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.mobsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.RoomContextMenu.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.editorLayoutPanel.SuspendLayout();
+            this.exitLayoutPanel.SuspendLayout();
+            this.permMobLayoutPanel.SuspendLayout();
+            this.mobsLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -88,7 +100,7 @@
             this.commandsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1089, 24);
+            this.menuStrip.Size = new System.Drawing.Size(975, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -189,37 +201,30 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.editorLayoutPanel);
             this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.Console);
-            this.panel2.Location = new System.Drawing.Point(257, 290);
+            this.panel2.Location = new System.Drawing.Point(203, 171);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(446, 268);
+            this.panel2.Size = new System.Drawing.Size(760, 385);
             this.panel2.TabIndex = 2;
-            this.panel2.Visible = false;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 233);
+            this.textBox1.Location = new System.Drawing.Point(3, 362);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(443, 20);
+            this.textBox1.Size = new System.Drawing.Size(754, 20);
             this.textBox1.TabIndex = 1;
             // 
             // Console
             // 
+            this.Console.BackColor = System.Drawing.SystemColors.Window;
+            this.Console.ForeColor = System.Drawing.SystemColors.WindowText;
             this.Console.FormattingEnabled = true;
             this.Console.HorizontalScrollbar = true;
-            this.Console.Location = new System.Drawing.Point(3, 6);
+            this.Console.Location = new System.Drawing.Point(408, 39);
             this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(443, 225);
+            this.Console.Size = new System.Drawing.Size(291, 121);
             this.Console.TabIndex = 0;
-            // 
-            // logRichTextBox
-            // 
-            this.logRichTextBox.Location = new System.Drawing.Point(257, 58);
-            this.logRichTextBox.Name = "logRichTextBox";
-            this.logRichTextBox.Size = new System.Drawing.Size(446, 232);
-            this.logRichTextBox.TabIndex = 10;
-            this.logRichTextBox.Text = "";
             // 
             // groupBox1
             // 
@@ -229,7 +234,7 @@
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.startServer);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox1.Location = new System.Drawing.Point(22, 39);
+            this.groupBox1.Location = new System.Drawing.Point(12, 147);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(99, 133);
             this.groupBox1.TabIndex = 11;
@@ -287,19 +292,10 @@
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.serverStart);
             // 
-            // areaListBox
-            // 
-            this.areaListBox.FormattingEnabled = true;
-            this.areaListBox.Location = new System.Drawing.Point(709, 58);
-            this.areaListBox.Name = "areaListBox";
-            this.areaListBox.Size = new System.Drawing.Size(171, 485);
-            this.areaListBox.TabIndex = 12;
-            this.areaListBox.SelectedIndexChanged += new System.EventHandler(this.areaListBox_SelectedIndexChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(709, 39);
+            this.label1.Location = new System.Drawing.Point(210, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 13;
@@ -309,9 +305,9 @@
             // 
             this.roomsListBox.ContextMenuStrip = this.RoomContextMenu;
             this.roomsListBox.FormattingEnabled = true;
-            this.roomsListBox.Location = new System.Drawing.Point(886, 58);
+            this.roomsListBox.Location = new System.Drawing.Point(206, 78);
             this.roomsListBox.Name = "roomsListBox";
-            this.roomsListBox.Size = new System.Drawing.Size(185, 485);
+            this.roomsListBox.Size = new System.Drawing.Size(196, 82);
             this.roomsListBox.TabIndex = 14;
             this.roomsListBox.SelectedIndexChanged += new System.EventHandler(this.roomsListBox_SelectedIndexChanged);
             this.roomsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.roomsListBox_MouseDoubleClick);
@@ -410,15 +406,15 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(886, 39);
+            this.label3.Location = new System.Drawing.Point(210, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 15;
-            this.label3.Text = "Rooms";
+            this.label3.Text = "Area Rooms";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(146, 39);
+            this.button1.Location = new System.Drawing.Point(13, 33);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 16;
@@ -431,9 +427,9 @@
             this.groupBox2.Controls.Add(this.connectedListBox);
             this.groupBox2.Controls.Add(this.connectedLabel);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(22, 186);
+            this.groupBox2.Location = new System.Drawing.Point(12, 286);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(214, 359);
+            this.groupBox2.Size = new System.Drawing.Size(175, 270);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Connections";
@@ -443,7 +439,7 @@
             this.connectedListBox.FormattingEnabled = true;
             this.connectedListBox.Location = new System.Drawing.Point(11, 40);
             this.connectedListBox.Name = "connectedListBox";
-            this.connectedListBox.Size = new System.Drawing.Size(188, 303);
+            this.connectedListBox.Size = new System.Drawing.Size(152, 212);
             this.connectedListBox.TabIndex = 2;
             // 
             // connectedLabel
@@ -460,9 +456,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(11, 19);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 13);
+            this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Currently Connected";
+            this.label4.Text = "Connected";
             // 
             // connectionPoller
             // 
@@ -471,7 +467,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(145, 69);
+            this.button2.Location = new System.Drawing.Point(12, 63);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 18;
@@ -481,7 +477,7 @@
             // 
             // loadXmlButton
             // 
-            this.loadXmlButton.Location = new System.Drawing.Point(145, 99);
+            this.loadXmlButton.Location = new System.Drawing.Point(12, 93);
             this.loadXmlButton.Name = "loadXmlButton";
             this.loadXmlButton.Size = new System.Drawing.Size(75, 23);
             this.loadXmlButton.TabIndex = 19;
@@ -489,11 +485,128 @@
             this.loadXmlButton.UseVisualStyleBackColor = true;
             this.loadXmlButton.Click += new System.EventHandler(this.loadXmlButton_Click);
             // 
+            // areaComboBox
+            // 
+            this.areaComboBox.FormattingEnabled = true;
+            this.areaComboBox.Location = new System.Drawing.Point(206, 40);
+            this.areaComboBox.Name = "areaComboBox";
+            this.areaComboBox.Size = new System.Drawing.Size(196, 21);
+            this.areaComboBox.TabIndex = 20;
+            // 
+            // editorLayoutPanel
+            // 
+            this.editorLayoutPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.editorLayoutPanel.Controls.Add(this.roomNameButton);
+            this.editorLayoutPanel.Controls.Add(this.roomDescriptionButton);
+            this.editorLayoutPanel.Controls.Add(this.exitLayoutPanel);
+            this.editorLayoutPanel.Controls.Add(this.permMobLayoutPanel);
+            this.editorLayoutPanel.Controls.Add(this.mobsLayoutPanel);
+            this.editorLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.editorLayoutPanel.ForeColor = System.Drawing.SystemColors.Window;
+            this.editorLayoutPanel.Location = new System.Drawing.Point(3, 3);
+            this.editorLayoutPanel.Name = "editorLayoutPanel";
+            this.editorLayoutPanel.Size = new System.Drawing.Size(754, 353);
+            this.editorLayoutPanel.TabIndex = 2;
+            // 
+            // roomNameButton
+            // 
+            this.roomNameButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.roomNameButton.FlatAppearance.BorderSize = 0;
+            this.roomNameButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roomNameButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.roomNameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roomNameButton.Location = new System.Drawing.Point(3, 0);
+            this.roomNameButton.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.roomNameButton.Name = "roomNameButton";
+            this.roomNameButton.Size = new System.Drawing.Size(751, 23);
+            this.roomNameButton.TabIndex = 0;
+            this.roomNameButton.Text = "Room:Name";
+            this.roomNameButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.roomNameButton.UseVisualStyleBackColor = true;
+            // 
+            // roomDescriptionButton
+            // 
+            this.roomDescriptionButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.roomDescriptionButton.FlatAppearance.BorderSize = 0;
+            this.roomDescriptionButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roomDescriptionButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.roomDescriptionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roomDescriptionButton.Location = new System.Drawing.Point(3, 23);
+            this.roomDescriptionButton.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.roomDescriptionButton.Name = "roomDescriptionButton";
+            this.roomDescriptionButton.Size = new System.Drawing.Size(751, 23);
+            this.roomDescriptionButton.TabIndex = 1;
+            this.roomDescriptionButton.Text = "Room:Description";
+            this.roomDescriptionButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.roomDescriptionButton.UseVisualStyleBackColor = true;
+            // 
+            // exitLayoutPanel
+            // 
+            this.exitLayoutPanel.Controls.Add(this.label5);
+            this.exitLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.exitLayoutPanel.Location = new System.Drawing.Point(3, 46);
+            this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.exitLayoutPanel.Name = "exitLayoutPanel";
+            this.exitLayoutPanel.Size = new System.Drawing.Size(751, 26);
+            this.exitLayoutPanel.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 6);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Exits:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // permMobLayoutPanel
+            // 
+            this.permMobLayoutPanel.Controls.Add(this.label6);
+            this.permMobLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 72);
+            this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.permMobLayoutPanel.Name = "permMobLayoutPanel";
+            this.permMobLayoutPanel.Size = new System.Drawing.Size(751, 26);
+            this.permMobLayoutPanel.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 6);
+            this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Permanent Mobs:";
+            // 
+            // mobsLayoutPanel
+            // 
+            this.mobsLayoutPanel.Controls.Add(this.label7);
+            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 98);
+            this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.mobsLayoutPanel.Name = "mobsLayoutPanel";
+            this.mobsLayoutPanel.Size = new System.Drawing.Size(751, 26);
+            this.mobsLayoutPanel.TabIndex = 4;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 6);
+            this.label7.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Generating Mobs";
+            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1089, 570);
+            this.ClientSize = new System.Drawing.Size(975, 570);
+            this.Controls.Add(this.areaComboBox);
+            this.Controls.Add(this.Console);
             this.Controls.Add(this.loadXmlButton);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox2);
@@ -501,9 +614,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.roomsListBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.areaListBox);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.logRichTextBox);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
@@ -519,6 +630,13 @@
             this.RoomContextMenu.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.editorLayoutPanel.ResumeLayout(false);
+            this.exitLayoutPanel.ResumeLayout(false);
+            this.exitLayoutPanel.PerformLayout();
+            this.permMobLayoutPanel.ResumeLayout(false);
+            this.permMobLayoutPanel.PerformLayout();
+            this.mobsLayoutPanel.ResumeLayout(false);
+            this.mobsLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -536,7 +654,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListBox Console;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.RichTextBox logRichTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button startServer;
         private System.Windows.Forms.Label label2;
@@ -549,7 +666,6 @@
         private System.Windows.Forms.ToolStripMenuItem itemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eventToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem questToolStripMenuItem;
-        private System.Windows.Forms.ListBox areaListBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox roomsListBox;
         private System.Windows.Forms.Label label3;
@@ -575,6 +691,16 @@
         private System.Windows.Forms.Timer connectionPoller;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button loadXmlButton;
+        private System.Windows.Forms.ComboBox areaComboBox;
+        private System.Windows.Forms.FlowLayoutPanel editorLayoutPanel;
+        private System.Windows.Forms.Button roomNameButton;
+        private System.Windows.Forms.Button roomDescriptionButton;
+        private System.Windows.Forms.FlowLayoutPanel exitLayoutPanel;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.FlowLayoutPanel permMobLayoutPanel;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.FlowLayoutPanel mobsLayoutPanel;
+        private System.Windows.Forms.Label label7;
     }
     }
 

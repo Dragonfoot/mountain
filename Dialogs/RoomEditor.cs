@@ -34,7 +34,7 @@ namespace Mountain.Dialogs {
         }
 
         private void exitListBox_SelectedIndexChanged(object sender, System.EventArgs e) {
-            SelectedExit = (Exit)exitListBox.SelectedItem;         
+            SelectedExit = (Exit)exitListBox.SelectedItem;
         }
         private void exitListBox_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button != MouseButtons.Right) return;
@@ -72,40 +72,44 @@ namespace Mountain.Dialogs {
         #region Exit Context Menu
 
         private void editToolStripMenuItem_Click(object sender, System.EventArgs e) {
-            if (nameChanged) {
-                Room.Name = roomNameTextBox.Text;
-                nameChanged = false;
-            }
-            ExitEditor exitEdit = new ExitEditor(SelectedExit);
-            DialogResult dialogresult = exitEdit.ShowDialog();
-            if (dialogresult == DialogResult.OK) {
-                
-                //    exitListBox.Items.Clear();
-                //    exitListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
-            }
-            exitEdit.Dispose();
+            EditExit(false);
         }
 
         private void addToolStripMenuItem_Click(object sender, System.EventArgs e) {
+            EditExit(true);
+        }
+
+        private void EditExit(bool add) {
             if (nameChanged) {
                 Room.Name = roomNameTextBox.Text;
                 nameChanged = false;
             }
-            Exit exit = new Exit();
-            exit.Area = Room.Area;
-            exit.Owner = Room;
-            exit.DoorLabel = Room.Name;
+            Exit exit;
+            if (add) {
+                exit = new Exit();
+                exit.Area = Room.Area;
+                exit.Owner = Room;
+                exit.DoorLabel = Room.Name;
+            } else {
+                exit = SelectedExit.ShallowCopy();
+            }
             ExitEditor exitEdit = new ExitEditor(exit);
+            exitEdit.currentRoomTextBox.Text = exitEdit.currentRoomLabel.Text = Room.Name;
             DialogResult dialogresult = exitEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 exit = exitEdit.Exit.ShallowCopy();
-                Room.Exits.Add(exit);
+                if (add) {
+                    Room.Exits.Add(exit);
+                }
+                else {
+                    SelectedExit = exit.ShallowCopy();
+                }
                 exitListBox.Items.Clear();
                 PopulateExitListBox();
             }
             exitEdit.Dispose();
         }
-
+    
         #endregion
 
         #region Room Name

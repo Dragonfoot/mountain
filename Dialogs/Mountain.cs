@@ -35,9 +35,9 @@ namespace Mountain.Dialogs {
             world.StartAcceptingConnections(world.Port);
             if (world.portListener.Active()) {
                 listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
-                logRichTextBox.AppendText("Server has started\r\n");
+                connectionPoller.Enabled = true;
+                Console.Items.Add("System: Server has started.");
             }
-            connectionPoller.Enabled = true;
         }
 
         private void Events_OnEventReceived(object myObject, SystemEventPacket eventPacket) {
@@ -59,13 +59,11 @@ namespace Mountain.Dialogs {
 
                 Invoke((MethodInvoker)delegate {
                     connectedLabel.Text = Connections.ToString();
-                    logRichTextBox.AppendText(">>>" + packet.message + "\r\n");
-                    logRichTextBox.ScrollToCaret();
+                    Console.Items.Add("Event: " + packet.message);
                 });
             } catch (Exception e) {
                 Invoke((MethodInvoker)delegate {
-                    logRichTextBox.AppendText(">>>" + e.ToString() + "\r\n");
-                    logRichTextBox.ScrollToCaret();
+                    Console.Items.Add("Event Error: " + e.ToString());
                 });
             }
         }
@@ -76,13 +74,11 @@ namespace Mountain.Dialogs {
                 if (message == null) message = msg;
 
                 Invoke((MethodInvoker)delegate {
-                    logRichTextBox.AppendText(">>>" + message + "\r\n");
-                    logRichTextBox.ScrollToCaret();
+                    Console.Items.Add("Message: " + message);
                 });
             } catch (Exception e) {
                 Invoke((MethodInvoker)delegate {
-                    logRichTextBox.AppendText(">>>" + e.ToString() + "\r\n");
-                    logRichTextBox.ScrollToCaret();
+                    Console.Items.Add("Message Error: " + e.ToString());
                 });
             }
         }
@@ -96,7 +92,7 @@ namespace Mountain.Dialogs {
         private void serverStart(object sender, EventArgs e) { // start
             if (world.portListener.Active()) {
                 listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
-                Console.Items.Add("Server is already running");
+                Console.Items.Add("System: Server is already running.");
             } else listenerCheckBox.BackColor = System.Drawing.Color.Red;
 
         }
@@ -104,21 +100,22 @@ namespace Mountain.Dialogs {
         private void button6_Click(object sender, EventArgs e) { //stop server
             //    world.Shutdown();
             //   world = null;
-            Console.Items.Add("Shutdown not implemented."); // settings.players each player disconnect/save
+            Console.Items.Add("System: Shutdown not implemented."); // settings.players each player disconnect/save
         }
 
         private World BuildWorldAdminSection() {
             if (world != null) { world = null; }
             try {
                 world = new World();
-                if(world.Areas.Any()) areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
-                areaListBox.SelectedIndex = 0;
-                if (SelectedArea.Rooms.Any()) {
-                    if (roomsListBox.Items.Count > 0) roomsListBox.SelectedIndex = 0;
+                if(world.Areas.Any()) areaComboBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
+                areaComboBox.SelectedIndex = 0;
+                if (SelectedArea != null) {
+                    if (SelectedArea.Rooms.Any()) {
+                        if (roomsListBox.Items.Count > 0) roomsListBox.SelectedIndex = 0;
+                    }
                 }
-
             } catch (Exception e) {
-                logRichTextBox.AppendText(">>> " + e.ToString());
+                Console.Items.Add("Error: " + e.ToString());
             }
             return world;
         }
@@ -129,8 +126,8 @@ namespace Mountain.Dialogs {
             if (dialogresult == DialogResult.OK) {
                 world.Areas.Add(areaForm.area);
                 Common.Settings.TheVoid = areaForm.area.Rooms.FindTag("Void");
-                areaListBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
-                areaListBox.SelectedIndex = 0;
+                areaComboBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
+                areaComboBox.SelectedIndex = 0;
             } else {
                 if (dialogresult == DialogResult.Cancel) {
                     //
@@ -140,16 +137,15 @@ namespace Mountain.Dialogs {
         }
 
         private void areaListBox_SelectedIndexChanged(object sender, EventArgs e) {
-            string name = areaListBox.SelectedItem.ToString();
-            SelectedArea = world.Areas.Find(area => area.Name == (string)areaListBox.SelectedItem);
+            string name = areaComboBox.SelectedItem.ToString();
+            SelectedArea = world.Areas.Find(area => area.Name == (string)areaComboBox.SelectedItem);
             roomsListBox.Items.Clear();
             roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-            string file = Common.Settings.BaseDirectory + "\\" + world.Name + "test.xml";
+          /*  string file = Common.Settings.BaseDirectory + "\\" + world.Name + "test.xml";
             TextWriter txtWriter = new StreamWriter(file);
-            //XmlHelper.ObjectToXml(world.Areas, file, settings);
             try {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(World));
                 xmlSerializer.Serialize(txtWriter, world);
@@ -158,11 +154,11 @@ namespace Mountain.Dialogs {
                 Common.Settings.SystemMessageQueue.Push(ex.ToString());
             } finally {
                 txtWriter.Close();
-            }
+            }*/
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
-            string name = "mountain";
+         /*   string name = "mountain";
             string file = Common.Settings.BaseDirectory + "\\" + name + "test.xml";
             TextReader txtReader = new StreamReader(file);
             try {
@@ -176,7 +172,7 @@ namespace Mountain.Dialogs {
                 Common.Settings.SystemMessageQueue.Push(ex.ToString());
             } finally {
                 txtReader.Close();
-            }
+            }*/
         }
 
         private void roomsListBox_MouseDown(object sender, MouseEventArgs e) {
@@ -227,7 +223,7 @@ namespace Mountain.Dialogs {
 
         private void button1_Click(object sender, EventArgs e) {
         //    string xml = SelectedArea.ToXml();
-            logRichTextBox.Clear();
+            Console.Items.Clear();
         //    logRichTextBox.AppendText(xml);
         }
 

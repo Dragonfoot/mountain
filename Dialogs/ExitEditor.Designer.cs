@@ -35,7 +35,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.currentRoomLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -151,14 +151,14 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // currentRoomLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "label1";
+            this.currentRoomLabel.AutoSize = true;
+            this.currentRoomLabel.Location = new System.Drawing.Point(13, 69);
+            this.currentRoomLabel.Name = "currentRoomLabel";
+            this.currentRoomLabel.Size = new System.Drawing.Size(72, 13);
+            this.currentRoomLabel.TabIndex = 16;
+            this.currentRoomLabel.Text = "Current Room";
             // 
             // ExitEditor
             // 
@@ -168,7 +168,7 @@
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(409, 404);
             this.Controls.Add(this.currentRoomTextBox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.currentRoomLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.panel2);
@@ -184,18 +184,18 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListBox roomListBox;
-        private System.Windows.Forms.ComboBox areaComboBox;
+        public System.Windows.Forms.ListBox roomListBox;
+        public System.Windows.Forms.ComboBox areaComboBox;
         private System.Windows.Forms.CheckBox returnLinkCheckBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox linkDoorLabelTextBox;
-        private System.Windows.Forms.TextBox currentRoomTextBox;
+        public System.Windows.Forms.TextBox currentRoomTextBox;
         private System.Windows.Forms.TextBox linkRoomTextBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label currentRoomLabel;
     }
 }
