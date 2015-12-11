@@ -82,6 +82,8 @@
             this.connectionPoller = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.loadXmlButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.editorConsole = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.editorLayoutPanel.SuspendLayout();
@@ -91,6 +93,7 @@
             this.RoomContextMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -219,6 +222,7 @@
             this.editorLayoutPanel.Controls.Add(this.roomNameButton);
             this.editorLayoutPanel.Controls.Add(this.roomDescriptionButton);
             this.editorLayoutPanel.Controls.Add(this.exitLayoutPanel);
+            this.editorLayoutPanel.Controls.Add(this.panel1);
             this.editorLayoutPanel.Controls.Add(this.permMobLayoutPanel);
             this.editorLayoutPanel.Controls.Add(this.mobsLayoutPanel);
             this.editorLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -283,7 +287,7 @@
             // permMobLayoutPanel
             // 
             this.permMobLayoutPanel.Controls.Add(this.label6);
-            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 72);
+            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 297);
             this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.permMobLayoutPanel.Name = "permMobLayoutPanel";
             this.permMobLayoutPanel.Size = new System.Drawing.Size(693, 26);
@@ -302,7 +306,7 @@
             // mobsLayoutPanel
             // 
             this.mobsLayoutPanel.Controls.Add(this.label7);
-            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 98);
+            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 323);
             this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
             this.mobsLayoutPanel.Size = new System.Drawing.Size(693, 26);
@@ -606,6 +610,26 @@
             this.loadXmlButton.UseVisualStyleBackColor = true;
             this.loadXmlButton.Click += new System.EventHandler(this.loadXmlButton_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.editorConsole);
+            this.panel1.Location = new System.Drawing.Point(3, 75);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(693, 219);
+            this.panel1.TabIndex = 5;
+            // 
+            // editorConsole
+            // 
+            this.editorConsole.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.editorConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.editorConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editorConsole.ForeColor = System.Drawing.SystemColors.Window;
+            this.editorConsole.Location = new System.Drawing.Point(0, 0);
+            this.editorConsole.Name = "editorConsole";
+            this.editorConsole.Size = new System.Drawing.Size(693, 219);
+            this.editorConsole.TabIndex = 0;
+            this.editorConsole.Text = "";
+            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -639,6 +663,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -703,6 +728,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FlowLayoutPanel mobsLayoutPanel;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RichTextBox editorConsole;
     }
     }
 
