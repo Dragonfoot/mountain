@@ -42,13 +42,14 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.editorLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.roomNameButton = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.roomDescriptionRichTextBox = new System.Windows.Forms.RichTextBox();
             this.exitLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.exitsLabel = new System.Windows.Forms.Label();
-            this.editorConsole = new System.Windows.Forms.RichTextBox();
-            this.permMobLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
             this.mobsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
+            this.permMobLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
             this.areaComboBox = new System.Windows.Forms.ComboBox();
             this.commandsTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -67,6 +68,7 @@
             this.MoveToAreaContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
+            this.editorConsole = new System.Windows.Forms.RichTextBox();
             this.Console = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listenerCheckBox = new System.Windows.Forms.CheckBox();
@@ -82,18 +84,18 @@
             this.connectionPoller = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.loadXmlButton = new System.Windows.Forms.Button();
-            this.roomDescriptionRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.editorLayoutPanel.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.exitLayoutPanel.SuspendLayout();
-            this.permMobLayoutPanel.SuspendLayout();
             this.mobsLayoutPanel.SuspendLayout();
+            this.permMobLayoutPanel.SuspendLayout();
             this.RoomContextMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -222,6 +224,7 @@
             this.editorLayoutPanel.Controls.Add(this.roomNameButton);
             this.editorLayoutPanel.Controls.Add(this.flowLayoutPanel1);
             this.editorLayoutPanel.Controls.Add(this.exitLayoutPanel);
+            this.editorLayoutPanel.Controls.Add(this.flowLayoutPanel2);
             this.editorLayoutPanel.Controls.Add(this.mobsLayoutPanel);
             this.editorLayoutPanel.Controls.Add(this.permMobLayoutPanel);
             this.editorLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -247,6 +250,31 @@
             this.roomNameButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.roomNameButton.UseVisualStyleBackColor = true;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this.roomDescriptionRichTextBox);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 26);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(690, 30);
+            this.flowLayoutPanel1.TabIndex = 5;
+            // 
+            // roomDescriptionRichTextBox
+            // 
+            this.roomDescriptionRichTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.roomDescriptionRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.roomDescriptionRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.roomDescriptionRichTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.roomDescriptionRichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.roomDescriptionRichTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.roomDescriptionRichTextBox.Name = "roomDescriptionRichTextBox";
+            this.roomDescriptionRichTextBox.ReadOnly = true;
+            this.roomDescriptionRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(690, 30);
+            this.roomDescriptionRichTextBox.TabIndex = 1;
+            this.roomDescriptionRichTextBox.Text = "";
+            this.roomDescriptionRichTextBox.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.roomDescriptionRichTextBox_ContentsResized);
+            // 
             // exitLayoutPanel
             // 
             this.exitLayoutPanel.Controls.Add(this.exitsLabel);
@@ -267,40 +295,10 @@
             this.exitsLabel.Text = "Exits:";
             this.exitsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // editorConsole
-            // 
-            this.editorConsole.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.editorConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.editorConsole.ForeColor = System.Drawing.SystemColors.Window;
-            this.editorConsole.Location = new System.Drawing.Point(298, 523);
-            this.editorConsole.Name = "editorConsole";
-            this.editorConsole.Size = new System.Drawing.Size(693, 94);
-            this.editorConsole.TabIndex = 0;
-            this.editorConsole.Text = "";
-            // 
-            // permMobLayoutPanel
-            // 
-            this.permMobLayoutPanel.Controls.Add(this.label6);
-            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 111);
-            this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.permMobLayoutPanel.Name = "permMobLayoutPanel";
-            this.permMobLayoutPanel.Size = new System.Drawing.Size(693, 26);
-            this.permMobLayoutPanel.TabIndex = 3;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 6);
-            this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Permanent Mobs:";
-            // 
             // mobsLayoutPanel
             // 
             this.mobsLayoutPanel.Controls.Add(this.label7);
-            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 85);
+            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 278);
             this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
             this.mobsLayoutPanel.Size = new System.Drawing.Size(693, 26);
@@ -315,6 +313,25 @@
             this.label7.Size = new System.Drawing.Size(89, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "Generated Mobs:";
+            // 
+            // permMobLayoutPanel
+            // 
+            this.permMobLayoutPanel.Controls.Add(this.label6);
+            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 304);
+            this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.permMobLayoutPanel.Name = "permMobLayoutPanel";
+            this.permMobLayoutPanel.Size = new System.Drawing.Size(693, 26);
+            this.permMobLayoutPanel.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 6);
+            this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Permanent Mobs:";
             // 
             // areaComboBox
             // 
@@ -453,6 +470,17 @@
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 15;
             this.label3.Text = "Area Rooms";
+            // 
+            // editorConsole
+            // 
+            this.editorConsole.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.editorConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.editorConsole.ForeColor = System.Drawing.SystemColors.Window;
+            this.editorConsole.Location = new System.Drawing.Point(3, 3);
+            this.editorConsole.Name = "editorConsole";
+            this.editorConsole.Size = new System.Drawing.Size(687, 162);
+            this.editorConsole.TabIndex = 0;
+            this.editorConsole.Text = "";
             // 
             // Console
             // 
@@ -604,37 +632,20 @@
             this.loadXmlButton.UseVisualStyleBackColor = true;
             this.loadXmlButton.Click += new System.EventHandler(this.loadXmlButton_Click);
             // 
-            // roomDescriptionRichTextBox
+            // flowLayoutPanel2
             // 
-            this.roomDescriptionRichTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.roomDescriptionRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.roomDescriptionRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.roomDescriptionRichTextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.roomDescriptionRichTextBox.Location = new System.Drawing.Point(0, 0);
-            this.roomDescriptionRichTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.roomDescriptionRichTextBox.Name = "roomDescriptionRichTextBox";
-            this.roomDescriptionRichTextBox.ReadOnly = true;
-            this.roomDescriptionRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(690, 30);
-            this.roomDescriptionRichTextBox.TabIndex = 1;
-            this.roomDescriptionRichTextBox.Text = "";
-            this.roomDescriptionRichTextBox.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.roomDescriptionRichTextBox_ContentsResized);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Controls.Add(this.roomDescriptionRichTextBox);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 26);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(690, 30);
-            this.flowLayoutPanel1.TabIndex = 5;
+            this.flowLayoutPanel2.Controls.Add(this.editorConsole);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 88);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(693, 187);
+            this.flowLayoutPanel2.TabIndex = 20;
             // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 570);
-            this.Controls.Add(this.editorConsole);
             this.Controls.Add(this.Console);
             this.Controls.Add(this.loadXmlButton);
             this.Controls.Add(this.button2);
@@ -653,18 +664,19 @@
             this.panel2.PerformLayout();
             this.editorLayoutPanel.ResumeLayout(false);
             this.editorLayoutPanel.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.exitLayoutPanel.ResumeLayout(false);
             this.exitLayoutPanel.PerformLayout();
-            this.permMobLayoutPanel.ResumeLayout(false);
-            this.permMobLayoutPanel.PerformLayout();
             this.mobsLayoutPanel.ResumeLayout(false);
             this.mobsLayoutPanel.PerformLayout();
+            this.permMobLayoutPanel.ResumeLayout(false);
+            this.permMobLayoutPanel.PerformLayout();
             this.RoomContextMenu.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -731,6 +743,7 @@
         private System.Windows.Forms.RichTextBox editorConsole;
         private System.Windows.Forms.RichTextBox roomDescriptionRichTextBox;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
     }
     }
 

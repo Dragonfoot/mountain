@@ -14,16 +14,14 @@ namespace Mountain.classes.tcp {
 
     public class Connection : Identity, IDisposable {
         public TcpClient Socket;
-        public ManualResetEvent MessageReceivedDone;
-        public ManualResetEvent MessageSentDone;
+        public ManualResetEvent MessageReceivedDone, MessageSentDone;
         public StateObject state;
         public Stack<string> ResponseStack;
         public CommandHandler Commands;
         public IPAddress IPAddress;
         public int Port;
         public Room Room;
-        public string Password;
-        public string Email;
+        public string Password, Email;
         public bool Administrator;
         public Stats Stats { get; set; }
         public Equipment Equipment { get; set; }
@@ -45,8 +43,6 @@ namespace Mountain.classes.tcp {
             StartReceiving();
         }
 
-        public Connection() { }
-
         public bool Connected {
             get {
                 bool read = Socket.Client.Poll(500, SelectMode.SelectRead);
@@ -67,8 +63,7 @@ namespace Mountain.classes.tcp {
 
         public void ReceiveCallback(IAsyncResult ar) {
             try {
-                if (state.Socket.Client == null)
-                    return;
+                if (state.Socket.Client == null) return;
                 int read = state.Socket.Client.EndReceive(ar);
                 if (read > 0) {
                     string incomingMessage = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
@@ -79,14 +74,14 @@ namespace Mountain.classes.tcp {
                 try {
                     state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // wait for next
                 } catch (Exception ex) when (ex is SocketException || ex is NullReferenceException) {
-                    if (ex is NullReferenceException) return;
+                    if (ex is NullReferenceException) return; // eat exceptions as connection has terminated in other thread
                 }
             } catch (SocketException e) {
-                Common.Settings.SystemMessageQueue.Push("CC0: " + e.ToString());
+                Common.Settings.SystemMessageQueue.Push("Socket Exception: " + e.ToString());
             } catch (ObjectDisposedException e) {
-                Common.Settings.SystemMessageQueue.Push("CC1: " + e.ToString());
+                Common.Settings.SystemMessageQueue.Push("Object Disposed Exception: " + e.ToString());
             } catch (Exception e) {
-                Common.Settings.SystemMessageQueue.Push("CC2: " + e.ToString());
+                Common.Settings.SystemMessageQueue.Push("Connection Exception: " + e.ToString());
             }
         }
 
@@ -135,6 +130,7 @@ namespace Mountain.classes.tcp {
             Socket.Close();
             SaveXml();
         }
+
         public void Dispose() {
             Socket.Close();
             if (Socket.Client != null) Socket.Client.Dispose();
@@ -161,10 +157,7 @@ namespace Mountain.classes.tcp {
         public void LoadXml(string filename) {
             XmlDocument doc = new XmlDocument();
             doc.Load(filename);
-            XmlNode root = doc.DocumentElement;
-            XmlNode room = root.SelectSingleNode("Room");
-            string roomName = room.InnerText;
-            Room = Common.Settings.World.GetRoomByName(roomName);
+            Room = Common.Settings.World.GetRoomByName(doc.DocumentElement.SelectSingleNode("Room").InnerText);
         }
     }    
 
