@@ -176,7 +176,7 @@ namespace Mountain.classes {
             view.Add("");
             view.Add(Description);
             view.Add("");
-            if (Exits.Any()) { // add color coding's
+            if (Exits.Any()) {
                 stringBuilder.Append("Exits: " + Function.GetNames(Exits.ToArray()));
                 view.Add(stringBuilder.ToString());
                 stringBuilder.Clear();

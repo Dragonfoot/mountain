@@ -42,9 +42,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.editorLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.roomNameButton = new System.Windows.Forms.Button();
-            this.roomDescriptionButton = new System.Windows.Forms.Button();
             this.exitLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.exitsLabel = new System.Windows.Forms.Label();
+            this.editorConsole = new System.Windows.Forms.RichTextBox();
             this.permMobLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.mobsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -82,8 +82,8 @@
             this.connectionPoller = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.loadXmlButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.editorConsole = new System.Windows.Forms.RichTextBox();
+            this.roomDescriptionRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.editorLayoutPanel.SuspendLayout();
@@ -93,7 +93,7 @@
             this.RoomContextMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -220,11 +220,10 @@
             // 
             this.editorLayoutPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.editorLayoutPanel.Controls.Add(this.roomNameButton);
-            this.editorLayoutPanel.Controls.Add(this.roomDescriptionButton);
+            this.editorLayoutPanel.Controls.Add(this.flowLayoutPanel1);
             this.editorLayoutPanel.Controls.Add(this.exitLayoutPanel);
-            this.editorLayoutPanel.Controls.Add(this.panel1);
-            this.editorLayoutPanel.Controls.Add(this.permMobLayoutPanel);
             this.editorLayoutPanel.Controls.Add(this.mobsLayoutPanel);
+            this.editorLayoutPanel.Controls.Add(this.permMobLayoutPanel);
             this.editorLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.editorLayoutPanel.ForeColor = System.Drawing.SystemColors.Window;
             this.editorLayoutPanel.Location = new System.Drawing.Point(3, 3);
@@ -248,46 +247,41 @@
             this.roomNameButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.roomNameButton.UseVisualStyleBackColor = true;
             // 
-            // roomDescriptionButton
-            // 
-            this.roomDescriptionButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.roomDescriptionButton.FlatAppearance.BorderSize = 0;
-            this.roomDescriptionButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.roomDescriptionButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.roomDescriptionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roomDescriptionButton.Location = new System.Drawing.Point(3, 23);
-            this.roomDescriptionButton.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.roomDescriptionButton.Name = "roomDescriptionButton";
-            this.roomDescriptionButton.Size = new System.Drawing.Size(693, 23);
-            this.roomDescriptionButton.TabIndex = 1;
-            this.roomDescriptionButton.Text = "Room:Description";
-            this.roomDescriptionButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.roomDescriptionButton.UseVisualStyleBackColor = true;
-            // 
             // exitLayoutPanel
             // 
-            this.exitLayoutPanel.Controls.Add(this.label5);
-            this.exitLayoutPanel.Location = new System.Drawing.Point(3, 46);
+            this.exitLayoutPanel.Controls.Add(this.exitsLabel);
+            this.exitLayoutPanel.Location = new System.Drawing.Point(3, 59);
             this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.exitLayoutPanel.Name = "exitLayoutPanel";
             this.exitLayoutPanel.Size = new System.Drawing.Size(693, 26);
             this.exitLayoutPanel.TabIndex = 2;
             // 
-            // label5
+            // exitsLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 6);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(32, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Exits:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.exitsLabel.AutoSize = true;
+            this.exitsLabel.Location = new System.Drawing.Point(3, 6);
+            this.exitsLabel.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.exitsLabel.Name = "exitsLabel";
+            this.exitsLabel.Size = new System.Drawing.Size(32, 13);
+            this.exitsLabel.TabIndex = 0;
+            this.exitsLabel.Text = "Exits:";
+            this.exitsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // editorConsole
+            // 
+            this.editorConsole.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.editorConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.editorConsole.ForeColor = System.Drawing.SystemColors.Window;
+            this.editorConsole.Location = new System.Drawing.Point(298, 523);
+            this.editorConsole.Name = "editorConsole";
+            this.editorConsole.Size = new System.Drawing.Size(693, 94);
+            this.editorConsole.TabIndex = 0;
+            this.editorConsole.Text = "";
             // 
             // permMobLayoutPanel
             // 
             this.permMobLayoutPanel.Controls.Add(this.label6);
-            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 297);
+            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 111);
             this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.permMobLayoutPanel.Name = "permMobLayoutPanel";
             this.permMobLayoutPanel.Size = new System.Drawing.Size(693, 26);
@@ -306,7 +300,7 @@
             // mobsLayoutPanel
             // 
             this.mobsLayoutPanel.Controls.Add(this.label7);
-            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 323);
+            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 85);
             this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
             this.mobsLayoutPanel.Size = new System.Drawing.Size(693, 26);
@@ -318,9 +312,9 @@
             this.label7.Location = new System.Drawing.Point(3, 6);
             this.label7.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 13);
+            this.label7.Size = new System.Drawing.Size(89, 13);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Generate Mobs:";
+            this.label7.Text = "Generated Mobs:";
             // 
             // areaComboBox
             // 
@@ -466,7 +460,7 @@
             this.Console.ForeColor = System.Drawing.SystemColors.WindowText;
             this.Console.FormattingEnabled = true;
             this.Console.HorizontalScrollbar = true;
-            this.Console.Location = new System.Drawing.Point(12, 310);
+            this.Console.Location = new System.Drawing.Point(12, 296);
             this.Console.Name = "Console";
             this.Console.Size = new System.Drawing.Size(175, 121);
             this.Console.TabIndex = 0;
@@ -479,7 +473,7 @@
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.startServer);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox1.Location = new System.Drawing.Point(12, 437);
+            this.groupBox1.Location = new System.Drawing.Point(12, 423);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(99, 133);
             this.groupBox1.TabIndex = 11;
@@ -554,7 +548,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(12, 34);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(175, 270);
+            this.groupBox2.Size = new System.Drawing.Size(175, 253);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Connections";
@@ -564,7 +558,7 @@
             this.connectedListBox.FormattingEnabled = true;
             this.connectedListBox.Location = new System.Drawing.Point(11, 40);
             this.connectedListBox.Name = "connectedListBox";
-            this.connectedListBox.Size = new System.Drawing.Size(152, 212);
+            this.connectedListBox.Size = new System.Drawing.Size(152, 199);
             this.connectedListBox.TabIndex = 2;
             // 
             // connectedLabel
@@ -610,31 +604,37 @@
             this.loadXmlButton.UseVisualStyleBackColor = true;
             this.loadXmlButton.Click += new System.EventHandler(this.loadXmlButton_Click);
             // 
-            // panel1
+            // roomDescriptionRichTextBox
             // 
-            this.panel1.Controls.Add(this.editorConsole);
-            this.panel1.Location = new System.Drawing.Point(3, 75);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(693, 219);
-            this.panel1.TabIndex = 5;
+            this.roomDescriptionRichTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.roomDescriptionRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.roomDescriptionRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.roomDescriptionRichTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.roomDescriptionRichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.roomDescriptionRichTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.roomDescriptionRichTextBox.Name = "roomDescriptionRichTextBox";
+            this.roomDescriptionRichTextBox.ReadOnly = true;
+            this.roomDescriptionRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(690, 30);
+            this.roomDescriptionRichTextBox.TabIndex = 1;
+            this.roomDescriptionRichTextBox.Text = "";
+            this.roomDescriptionRichTextBox.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.roomDescriptionRichTextBox_ContentsResized);
             // 
-            // editorConsole
+            // flowLayoutPanel1
             // 
-            this.editorConsole.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.editorConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.editorConsole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editorConsole.ForeColor = System.Drawing.SystemColors.Window;
-            this.editorConsole.Location = new System.Drawing.Point(0, 0);
-            this.editorConsole.Name = "editorConsole";
-            this.editorConsole.Size = new System.Drawing.Size(693, 219);
-            this.editorConsole.TabIndex = 0;
-            this.editorConsole.Text = "";
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this.roomDescriptionRichTextBox);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 26);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(690, 30);
+            this.flowLayoutPanel1.TabIndex = 5;
             // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 570);
+            this.Controls.Add(this.editorConsole);
             this.Controls.Add(this.Console);
             this.Controls.Add(this.loadXmlButton);
             this.Controls.Add(this.button2);
@@ -652,6 +652,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.editorLayoutPanel.ResumeLayout(false);
+            this.editorLayoutPanel.PerformLayout();
             this.exitLayoutPanel.ResumeLayout(false);
             this.exitLayoutPanel.PerformLayout();
             this.permMobLayoutPanel.ResumeLayout(false);
@@ -663,7 +664,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -721,15 +722,15 @@
         private System.Windows.Forms.ComboBox areaComboBox;
         private System.Windows.Forms.FlowLayoutPanel editorLayoutPanel;
         private System.Windows.Forms.Button roomNameButton;
-        private System.Windows.Forms.Button roomDescriptionButton;
         private System.Windows.Forms.FlowLayoutPanel exitLayoutPanel;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label exitsLabel;
         private System.Windows.Forms.FlowLayoutPanel permMobLayoutPanel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FlowLayoutPanel mobsLayoutPanel;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox editorConsole;
+        private System.Windows.Forms.RichTextBox roomDescriptionRichTextBox;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
     }
 

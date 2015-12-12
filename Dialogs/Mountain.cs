@@ -43,7 +43,15 @@ namespace Mountain.Dialogs {
         private void SetEditor() {
             if (SelectedRoom == null) SelectedRoom = Common.Settings.TheVoid;
             roomNameButton.Text = SelectedRoom.Name;
-            roomDescriptionButton.Text = SelectedRoom.Description;
+            roomDescriptionRichTextBox.Clear();
+            roomDescriptionRichTextBox.AppendText(SelectedRoom.Description);
+            exitsLabel.Text = "Exits:  ";
+            int i = 0, count = SelectedRoom.Exits.Count;
+            foreach (Exit exit in SelectedRoom.Exits) {
+                exitsLabel.Text += exit.ToString();
+                if (i != count) { exitsLabel.Text += ", "; }
+                if (i == count) { exitsLabel.Text += "."; }
+            }
         }
 
         private void SyncControls() {
@@ -299,6 +307,9 @@ namespace Mountain.Dialogs {
             }
         }
 
+        private void roomDescriptionRichTextBox_ContentsResized(object sender, ContentsResizedEventArgs e) {
+            roomDescriptionRichTextBox.Height = e.NewRectangle.Height + 5;
+        }
     }
 }
         

@@ -14,9 +14,9 @@ namespace Mountain.classes.functions {
 
             Room control;
             string name = "Control Center";
-            string description = "You see the nerve center of world operations unfold around you. Computer stations line most of the walks with white clad technicians " +
-                "murmuring with headsets, adjusting controls, issuing quiet command. Sensor arrays, blinking routing screens, schedulers dimly glowing " +
-                "above them, monitoring every aspect of this worlds events and activities. Off to your left, a long line of office doors, " +
+            string description = "You see the nerve center of world operations unfold around you. Computer stations line most of the walls, white clad technicians " +
+                "murmuring their quiet instructions into headsets. Computer screens, sensor arrays, active routing screens and scheduling tickers dimly glowing " +
+                "on smoke darkened walls above, all monitoring aspects of world events and activities. Off to your left, a long line of office doors, " +
                 "uniformed guards challenging, filtering, and recording the movement of staff and visitors alike.";
 
             control = Build.NewRoom(name, description, Administration);

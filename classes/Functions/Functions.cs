@@ -14,6 +14,7 @@ namespace Mountain.classes.functions {
                 names += item;
                 if (i != list.Length) { names += ", "; }
                 if (i == list.Length) { names += "."; }
+                i++;
             }
             return names;
         }
