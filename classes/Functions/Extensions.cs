@@ -69,7 +69,7 @@ namespace Mountain.classes.functions {
                 return (T)formatter.Deserialize(stream);
             }
         }
-        public static void Shuffle<T>(this IList<T> list) { // randomize an interface list of <T>
+        public static void Shuffle<T>(this IList<T> list) { // randomize list of <T>
             int n = list.Count;
             while (n > 1) {
                 n--;
@@ -102,7 +102,7 @@ namespace Mountain.classes.functions {
         public static string StripNewLine(this string str) {
             return Regex.Replace(str, @"\n|\r", "");
         }
-        public static bool IsYes(this string str) { // we will just check the first char to see if the intent was Yes
+        public static bool IsYes(this string str) { // just check the first char to see if the intent was Yes
             return (String.Equals(str.Substring(0, 1), "Y", StringComparison.OrdinalIgnoreCase));
         }
         public static string NewLine(this string str) {
@@ -120,13 +120,13 @@ namespace Mountain.classes.functions {
         }
         public static bool IsNumeric(this string str) {
             float result; // ignore output
-            return float.TryParse(str, out result); // a parse error here returns false
+            return float.TryParse(str, out result); // parse error will return false
         }
         public static bool IsValidEmailAddress(this string str) {
             Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
             return regex.IsMatch(str);
         }
-        public static bool IsNumberOnly(this string str, bool floatPoint) { // is it a string representation of a number
+        public static bool IsNumberOnly(this string str, bool floatPoint) { // string representation of number
             str = str.Trim();
             if (str.Length == 0) return false;
             foreach (char chr in str) {
@@ -137,7 +137,7 @@ namespace Mountain.classes.functions {
             }
             return true;
         }
-        public static bool IsNullOrWhiteSpace(this string str) { // better string.empty test
+        public static bool IsNullOrWhiteSpace(this string str) { // somewhat better string.empty test
             return string.IsNullOrWhiteSpace(str);
         }
         public static bool HasValue(this string str) {
@@ -198,18 +198,18 @@ namespace Mountain.classes.functions {
             result = result.Trim();
             return result;
         }
-        public static string WordWrap(this string longString, int width = Common.pageWidth) {  // takes a long string and formats to width
+        public static string WordWrap(this string longString, int width = Common.pageWidth) { 
             StringBuilder lines = new StringBuilder();
             string[] words = longString.Split(' ');
             StringBuilder buildLine = new StringBuilder("");
             foreach (var word in words) {
-                if (word.Length + buildLine.Length + 1 > width) {    // check if have we exceeded line width
+                if (word.Length + buildLine.Length + 1 > width) {    // check if exceeded line width
                     lines.Append(buildLine.ToString().Indent().NewLine());
                     buildLine.Clear();
                 }
                 buildLine.Append((buildLine.Length == 0 ? "" : " ") + word);  // remove space at start of new line
             }
-            if (buildLine.Length > 0) lines.Append(buildLine.ToString().Indent().NewLine());   // finish up, final words to append            
+            if (buildLine.Length > 0) lines.Append(buildLine.ToString().Indent().NewLine());   // finish trailing words            
             return lines.ToString();
         }
 
