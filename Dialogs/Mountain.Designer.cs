@@ -309,15 +309,17 @@
             this.editorConsole.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.editorConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.editorConsole.ForeColor = System.Drawing.SystemColors.Window;
-            this.editorConsole.Location = new System.Drawing.Point(3, 3);
+            this.editorConsole.Location = new System.Drawing.Point(0, 0);
+            this.editorConsole.Margin = new System.Windows.Forms.Padding(0);
             this.editorConsole.Name = "editorConsole";
-            this.editorConsole.Size = new System.Drawing.Size(687, 162);
+            this.editorConsole.Size = new System.Drawing.Size(693, 162);
             this.editorConsole.TabIndex = 0;
             this.editorConsole.Text = "";
             // 
             // mobsLayoutPanel
             // 
             this.mobsLayoutPanel.Controls.Add(this.label7);
+            this.mobsLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 248);
             this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
@@ -337,6 +339,7 @@
             // permMobLayoutPanel
             // 
             this.permMobLayoutPanel.Controls.Add(this.label6);
+            this.permMobLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 274);
             this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.permMobLayoutPanel.Name = "permMobLayoutPanel";
@@ -510,7 +513,7 @@
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.startServer);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox1.Location = new System.Drawing.Point(55, 410);
+            this.groupBox1.Location = new System.Drawing.Point(53, 408);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(99, 133);
             this.groupBox1.TabIndex = 11;

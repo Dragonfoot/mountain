@@ -310,6 +310,10 @@ namespace Mountain.Dialogs {
         private void roomDescriptionRichTextBox_ContentsResized(object sender, ContentsResizedEventArgs e) {
             roomDescriptionRichTextBox.Height = e.NewRectangle.Height + 5;
         }
+
+        private void zcheckEnum_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
     }
 }
         

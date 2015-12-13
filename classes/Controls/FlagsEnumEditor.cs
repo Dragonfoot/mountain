@@ -33,7 +33,7 @@ namespace Mountain.classes.controls {
     /// editor for an enumerated data type that represents a set of flags.
     /// This makes it easy to select multiple values with the drop-down.
     /// </summary>
-    public class FlagsEnumEditor : System.Drawing.Design.UITypeEditor {
+    public class FlagsEnumEditor : UITypeEditor {
         /// <summary>
         /// This is overridden to edit the value using a checked list box
         /// control as the drop-down editor.
@@ -43,8 +43,7 @@ namespace Mountain.classes.controls {
         /// <param name="value">The enumerated type object to edit</param>
         /// <returns>The edited enumerated type object</returns>
         [RefreshProperties(RefreshProperties.All)]
-        public override object EditValue(System.ComponentModel.ITypeDescriptorContext context,
-          IServiceProvider provider, object value) {
+        public override object EditValue(System.ComponentModel.ITypeDescriptorContext context, IServiceProvider provider, object value) {
             IWindowsFormsEditorService editorService;
             Type enumType;
             Array enumValues;
