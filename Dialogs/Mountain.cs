@@ -52,16 +52,18 @@ namespace Mountain.Dialogs {
             strip.BackColor = System.Drawing.Color.Black;
             strip.Height = 20;
             strip.Margin = new Padding(0);
-            strip.GripMargin = new System.Windows.Forms.Padding(0);
             strip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             strip.CanOverflow = false;
             exitLayoutPanel.Controls.Clear();
-            exitsLabel.Text = "Exits:  ";
+            exitsLabel.Text = "Exits:";
+            exitsLabel.Margin = new Padding(0, 6, 0, 0);
             exitLayoutPanel.Controls.Add(exitsLabel);
             foreach (Exit exit in SelectedRoom.Exits) {
                 ToolStripSplitButton button = new ToolStripSplitButton(exit.ToString());
-                button.Height = 20;
+                button.AutoToolTip = false;
+                button.Height = 16;
                 button.Margin = new Padding(0);
+                button.DropDownItems.Add("Remove");
                 strip.Items.Add(button);
                 exitLayoutPanel.Controls.Add(strip);
             }

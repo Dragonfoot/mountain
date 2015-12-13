@@ -277,17 +277,18 @@
             // 
             // exitLayoutPanel
             // 
+            this.exitLayoutPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.exitLayoutPanel.Location = new System.Drawing.Point(3, 59);
             this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.exitLayoutPanel.Name = "exitLayoutPanel";
-            this.exitLayoutPanel.Size = new System.Drawing.Size(689, 26);
+            this.exitLayoutPanel.Size = new System.Drawing.Size(689, 20);
             this.exitLayoutPanel.TabIndex = 2;
             // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.editorConsole);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 88);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 82);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(695, 157);
             this.flowLayoutPanel2.TabIndex = 20;
@@ -307,7 +308,7 @@
             // mobsLayoutPanel
             // 
             this.mobsLayoutPanel.Controls.Add(this.label7);
-            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 248);
+            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 242);
             this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
             this.mobsLayoutPanel.Size = new System.Drawing.Size(689, 26);
@@ -326,7 +327,7 @@
             // permMobLayoutPanel
             // 
             this.permMobLayoutPanel.Controls.Add(this.label6);
-            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 274);
+            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 268);
             this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.permMobLayoutPanel.Name = "permMobLayoutPanel";
             this.permMobLayoutPanel.Size = new System.Drawing.Size(689, 26);
