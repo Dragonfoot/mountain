@@ -207,6 +207,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.GrayText;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.editorLayoutPanel);
             this.panel2.Controls.Add(this.areaComboBox);
             this.panel2.Controls.Add(this.commandsTextBox);
@@ -221,6 +222,7 @@
             // editorLayoutPanel
             // 
             this.editorLayoutPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.editorLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.editorLayoutPanel.Controls.Add(this.roomNameButton);
             this.editorLayoutPanel.Controls.Add(this.flowLayoutPanel1);
             this.editorLayoutPanel.Controls.Add(this.exitLayoutPanel);
@@ -244,7 +246,7 @@
             this.roomNameButton.Location = new System.Drawing.Point(3, 0);
             this.roomNameButton.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.roomNameButton.Name = "roomNameButton";
-            this.roomNameButton.Size = new System.Drawing.Size(693, 23);
+            this.roomNameButton.Size = new System.Drawing.Size(689, 23);
             this.roomNameButton.TabIndex = 0;
             this.roomNameButton.Text = "Room:Name";
             this.roomNameButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -256,7 +258,7 @@
             this.flowLayoutPanel1.Controls.Add(this.roomDescriptionRichTextBox);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 26);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(690, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(695, 30);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // roomDescriptionRichTextBox
@@ -265,12 +267,12 @@
             this.roomDescriptionRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.roomDescriptionRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.roomDescriptionRichTextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.roomDescriptionRichTextBox.Location = new System.Drawing.Point(0, 0);
-            this.roomDescriptionRichTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.roomDescriptionRichTextBox.Location = new System.Drawing.Point(6, 0);
+            this.roomDescriptionRichTextBox.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.roomDescriptionRichTextBox.Name = "roomDescriptionRichTextBox";
             this.roomDescriptionRichTextBox.ReadOnly = true;
             this.roomDescriptionRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(690, 30);
+            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(683, 30);
             this.roomDescriptionRichTextBox.TabIndex = 1;
             this.roomDescriptionRichTextBox.Text = "";
             this.roomDescriptionRichTextBox.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.roomDescriptionRichTextBox_ContentsResized);
@@ -281,7 +283,7 @@
             this.exitLayoutPanel.Location = new System.Drawing.Point(3, 59);
             this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.exitLayoutPanel.Name = "exitLayoutPanel";
-            this.exitLayoutPanel.Size = new System.Drawing.Size(693, 26);
+            this.exitLayoutPanel.Size = new System.Drawing.Size(689, 26);
             this.exitLayoutPanel.TabIndex = 2;
             // 
             // exitsLabel
@@ -301,7 +303,7 @@
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 88);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(693, 157);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(695, 157);
             this.flowLayoutPanel2.TabIndex = 20;
             // 
             // editorConsole
@@ -312,18 +314,17 @@
             this.editorConsole.Location = new System.Drawing.Point(0, 0);
             this.editorConsole.Margin = new System.Windows.Forms.Padding(0);
             this.editorConsole.Name = "editorConsole";
-            this.editorConsole.Size = new System.Drawing.Size(693, 162);
+            this.editorConsole.Size = new System.Drawing.Size(689, 162);
             this.editorConsole.TabIndex = 0;
             this.editorConsole.Text = "";
             // 
             // mobsLayoutPanel
             // 
             this.mobsLayoutPanel.Controls.Add(this.label7);
-            this.mobsLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 248);
             this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
-            this.mobsLayoutPanel.Size = new System.Drawing.Size(693, 26);
+            this.mobsLayoutPanel.Size = new System.Drawing.Size(689, 26);
             this.mobsLayoutPanel.TabIndex = 4;
             // 
             // label7
@@ -339,11 +340,10 @@
             // permMobLayoutPanel
             // 
             this.permMobLayoutPanel.Controls.Add(this.label6);
-            this.permMobLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 274);
             this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.permMobLayoutPanel.Name = "permMobLayoutPanel";
-            this.permMobLayoutPanel.Size = new System.Drawing.Size(693, 26);
+            this.permMobLayoutPanel.Size = new System.Drawing.Size(689, 26);
             this.permMobLayoutPanel.TabIndex = 3;
             // 
             // label6
@@ -648,6 +648,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(1096, 570);
             this.Controls.Add(this.Console);
             this.Controls.Add(this.loadXmlButton);
@@ -657,8 +658,12 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
+            this.MaximizeBox = false;
             this.Name = "Mountain";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mountain";
             this.menuStrip.ResumeLayout(false);
