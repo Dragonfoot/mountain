@@ -45,7 +45,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.roomDescriptionRichTextBox = new System.Windows.Forms.RichTextBox();
             this.exitLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.exitsLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.editorConsole = new System.Windows.Forms.RichTextBox();
             this.mobsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -89,7 +88,6 @@
             this.panel2.SuspendLayout();
             this.editorLayoutPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.exitLayoutPanel.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.mobsLayoutPanel.SuspendLayout();
             this.permMobLayoutPanel.SuspendLayout();
@@ -279,23 +277,11 @@
             // 
             // exitLayoutPanel
             // 
-            this.exitLayoutPanel.Controls.Add(this.exitsLabel);
             this.exitLayoutPanel.Location = new System.Drawing.Point(3, 59);
             this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.exitLayoutPanel.Name = "exitLayoutPanel";
             this.exitLayoutPanel.Size = new System.Drawing.Size(689, 26);
             this.exitLayoutPanel.TabIndex = 2;
-            // 
-            // exitsLabel
-            // 
-            this.exitsLabel.AutoSize = true;
-            this.exitsLabel.Location = new System.Drawing.Point(3, 6);
-            this.exitsLabel.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.exitsLabel.Name = "exitsLabel";
-            this.exitsLabel.Size = new System.Drawing.Size(32, 13);
-            this.exitsLabel.TabIndex = 0;
-            this.exitsLabel.Text = "Exits:";
-            this.exitsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // flowLayoutPanel2
             // 
@@ -673,8 +659,6 @@
             this.editorLayoutPanel.ResumeLayout(false);
             this.editorLayoutPanel.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.exitLayoutPanel.ResumeLayout(false);
-            this.exitLayoutPanel.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.mobsLayoutPanel.ResumeLayout(false);
             this.mobsLayoutPanel.PerformLayout();
@@ -743,7 +727,6 @@
         private System.Windows.Forms.FlowLayoutPanel editorLayoutPanel;
         private System.Windows.Forms.Button roomNameButton;
         private System.Windows.Forms.FlowLayoutPanel exitLayoutPanel;
-        private System.Windows.Forms.Label exitsLabel;
         private System.Windows.Forms.FlowLayoutPanel permMobLayoutPanel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FlowLayoutPanel mobsLayoutPanel;

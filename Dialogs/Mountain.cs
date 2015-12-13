@@ -45,12 +45,25 @@ namespace Mountain.Dialogs {
             roomNameButton.Text = SelectedRoom.Name;
             roomDescriptionRichTextBox.Clear();
             roomDescriptionRichTextBox.AppendText(SelectedRoom.Description);
+            Label exitsLabel = new Label();
+            ToolStrip strip = new ToolStrip();
+            strip.Renderer = new ToolStripOverride();
+            strip.GripStyle = ToolStripGripStyle.Hidden;
+            strip.BackColor = System.Drawing.Color.Black;
+            strip.Height = 20;
+            strip.Margin = new Padding(0);
+            strip.GripMargin = new System.Windows.Forms.Padding(0);
+            strip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            strip.CanOverflow = false;
+            exitLayoutPanel.Controls.Clear();
             exitsLabel.Text = "Exits:  ";
-            int i = 0, count = SelectedRoom.Exits.Count;
+            exitLayoutPanel.Controls.Add(exitsLabel);
             foreach (Exit exit in SelectedRoom.Exits) {
-                exitsLabel.Text += exit.ToString();
-                if (i != count) { exitsLabel.Text += ", "; }
-                if (i == count) { exitsLabel.Text += "."; }
+                ToolStripSplitButton button = new ToolStripSplitButton(exit.ToString());
+                button.Height = 20;
+                button.Margin = new Padding(0);
+                strip.Items.Add(button);
+                exitLayoutPanel.Controls.Add(strip);
             }
         }
 
@@ -310,10 +323,12 @@ namespace Mountain.Dialogs {
         private void roomDescriptionRichTextBox_ContentsResized(object sender, ContentsResizedEventArgs e) {
             roomDescriptionRichTextBox.Height = e.NewRectangle.Height + 5;
         }
+        
+    }
+    public class ToolStripOverride : ToolStripProfessionalRenderer {
+        public ToolStripOverride() { }
 
-        private void zcheckEnum_SelectedIndexChanged(object sender, EventArgs e) {
-
-        }
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
     }
 }
         
