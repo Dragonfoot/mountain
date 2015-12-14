@@ -104,7 +104,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1278, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1246, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -213,7 +213,7 @@
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.roomsListBox);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(237, 44);
+            this.panel2.Location = new System.Drawing.Point(204, 44);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1027, 444);
@@ -234,7 +234,7 @@
             this.editorLayoutPanel.Location = new System.Drawing.Point(4, 4);
             this.editorLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.editorLayoutPanel.Name = "editorLayoutPanel";
-            this.editorLayoutPanel.Size = new System.Drawing.Size(812, 407);
+            this.editorLayoutPanel.Size = new System.Drawing.Size(812, 410);
             this.editorLayoutPanel.TabIndex = 2;
             // 
             // roomNameButton
@@ -500,10 +500,10 @@
             this.Console.FormattingEnabled = true;
             this.Console.HorizontalScrollbar = true;
             this.Console.ItemHeight = 15;
-            this.Console.Location = new System.Drawing.Point(237, 504);
+            this.Console.Location = new System.Drawing.Point(204, 500);
             this.Console.Margin = new System.Windows.Forms.Padding(4);
             this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(815, 139);
+            this.Console.Size = new System.Drawing.Size(818, 139);
             this.Console.TabIndex = 0;
             // 
             // groupBox1
@@ -514,7 +514,7 @@
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.startServer);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox1.Location = new System.Drawing.Point(62, 471);
+            this.groupBox1.Location = new System.Drawing.Point(44, 466);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
@@ -581,7 +581,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1130, 519);
+            this.button1.Location = new System.Drawing.Point(1094, 521);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 26);
@@ -599,7 +599,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(204, 401);
+            this.groupBox2.Size = new System.Drawing.Size(178, 401);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Connections";
@@ -611,7 +611,7 @@
             this.connectedListBox.Location = new System.Drawing.Point(13, 46);
             this.connectedListBox.Margin = new System.Windows.Forms.Padding(4);
             this.connectedListBox.Name = "connectedListBox";
-            this.connectedListBox.Size = new System.Drawing.Size(176, 334);
+            this.connectedListBox.Size = new System.Drawing.Size(150, 334);
             this.connectedListBox.TabIndex = 2;
             // 
             // connectedLabel
@@ -641,7 +641,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1130, 554);
+            this.button2.Location = new System.Drawing.Point(1094, 556);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(88, 26);
@@ -652,7 +652,7 @@
             // 
             // loadXmlButton
             // 
-            this.loadXmlButton.Location = new System.Drawing.Point(1130, 589);
+            this.loadXmlButton.Location = new System.Drawing.Point(1094, 591);
             this.loadXmlButton.Margin = new System.Windows.Forms.Padding(4);
             this.loadXmlButton.Name = "loadXmlButton";
             this.loadXmlButton.Size = new System.Drawing.Size(88, 26);
@@ -666,7 +666,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1278, 658);
+            this.ClientSize = new System.Drawing.Size(1246, 652);
             this.Controls.Add(this.Console);
             this.Controls.Add(this.loadXmlButton);
             this.Controls.Add(this.groupBox2);
