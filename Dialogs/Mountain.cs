@@ -92,6 +92,9 @@ namespace Mountain.Dialogs {
                 case "GoTo": // world.findroombyname(sender.text), show room
                     break;
                 case "Remove": // currentroom.exits.removebyname(clickedItem.text)
+                    int index = SelectedRoom.Exits.FindIndex(item => item.DoorLabel == ((ToolStripSplitButton)sender).Text);
+                    SelectedRoom.Exits.RemoveAt(index);
+                    SetEditor();
                     break;
                 case "Rename": // popup string editor with clickedItem.text, edit and save
                     break;
