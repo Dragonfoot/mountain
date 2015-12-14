@@ -45,7 +45,12 @@ namespace Mountain.Dialogs {
             roomNameButton.Text = SelectedRoom.Name;
             roomDescriptionRichTextBox.Clear();
             roomDescriptionRichTextBox.AppendText(SelectedRoom.Description);
-            Label exitsLabel = new Label();
+            ToolStripSplitButton exitsLabel = new ToolStripSplitButton("Exits:");
+            exitsLabel.AutoToolTip = false;
+            exitsLabel.Height = 16;
+            exitsLabel.Margin = new Padding(0);
+            exitsLabel.DropDownItems.Add("Add");
+
             ToolStrip strip = new ToolStrip();
             strip.Renderer = new ToolStripOverride();
             strip.GripStyle = ToolStripGripStyle.Hidden;
@@ -55,9 +60,7 @@ namespace Mountain.Dialogs {
             strip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             strip.CanOverflow = false;
             exitLayoutPanel.Controls.Clear();
-            exitsLabel.Text = "Exits:";
-            exitsLabel.Margin = new Padding(0, 6, 0, 0);
-            exitLayoutPanel.Controls.Add(exitsLabel);
+            strip.Items.Add(exitsLabel);
             foreach (Exit exit in SelectedRoom.Exits) {
                 ToolStripSplitButton button = new ToolStripSplitButton(exit.ToString());
                 button.AutoToolTip = false;
@@ -65,8 +68,8 @@ namespace Mountain.Dialogs {
                 button.Margin = new Padding(0);
                 button.DropDownItems.Add("Remove");
                 strip.Items.Add(button);
-                exitLayoutPanel.Controls.Add(strip);
             }
+            exitLayoutPanel.Controls.Add(strip);
         }
 
         private void SyncControls() {

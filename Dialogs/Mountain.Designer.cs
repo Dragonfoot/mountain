@@ -103,7 +103,8 @@
             this.commandsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1096, 24);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(1278, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -212,9 +213,10 @@
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.roomsListBox);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(203, 38);
+            this.panel2.Location = new System.Drawing.Point(237, 44);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(881, 385);
+            this.panel2.Size = new System.Drawing.Size(1027, 444);
             this.panel2.TabIndex = 2;
             // 
             // editorLayoutPanel
@@ -229,9 +231,10 @@
             this.editorLayoutPanel.Controls.Add(this.permMobLayoutPanel);
             this.editorLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.editorLayoutPanel.ForeColor = System.Drawing.SystemColors.Window;
-            this.editorLayoutPanel.Location = new System.Drawing.Point(3, 3);
+            this.editorLayoutPanel.Location = new System.Drawing.Point(4, 4);
+            this.editorLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.editorLayoutPanel.Name = "editorLayoutPanel";
-            this.editorLayoutPanel.Size = new System.Drawing.Size(696, 353);
+            this.editorLayoutPanel.Size = new System.Drawing.Size(812, 407);
             this.editorLayoutPanel.TabIndex = 2;
             // 
             // roomNameButton
@@ -241,10 +244,12 @@
             this.roomNameButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.roomNameButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.roomNameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roomNameButton.Location = new System.Drawing.Point(3, 0);
-            this.roomNameButton.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.roomNameButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roomNameButton.ForeColor = System.Drawing.Color.Teal;
+            this.roomNameButton.Location = new System.Drawing.Point(4, 0);
+            this.roomNameButton.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.roomNameButton.Name = "roomNameButton";
-            this.roomNameButton.Size = new System.Drawing.Size(689, 23);
+            this.roomNameButton.Size = new System.Drawing.Size(804, 26);
             this.roomNameButton.TabIndex = 0;
             this.roomNameButton.Text = "Room:Name";
             this.roomNameButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -254,9 +259,10 @@
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.roomDescriptionRichTextBox);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 26);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 30);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(695, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(811, 35);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // roomDescriptionRichTextBox
@@ -264,13 +270,13 @@
             this.roomDescriptionRichTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.roomDescriptionRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.roomDescriptionRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.roomDescriptionRichTextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.roomDescriptionRichTextBox.Location = new System.Drawing.Point(6, 0);
-            this.roomDescriptionRichTextBox.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.roomDescriptionRichTextBox.ForeColor = System.Drawing.Color.Gold;
+            this.roomDescriptionRichTextBox.Location = new System.Drawing.Point(7, 0);
+            this.roomDescriptionRichTextBox.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.roomDescriptionRichTextBox.Name = "roomDescriptionRichTextBox";
             this.roomDescriptionRichTextBox.ReadOnly = true;
             this.roomDescriptionRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(683, 30);
+            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(797, 35);
             this.roomDescriptionRichTextBox.TabIndex = 1;
             this.roomDescriptionRichTextBox.Text = "";
             this.roomDescriptionRichTextBox.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.roomDescriptionRichTextBox_ContentsResized);
@@ -278,19 +284,20 @@
             // exitLayoutPanel
             // 
             this.exitLayoutPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.exitLayoutPanel.Location = new System.Drawing.Point(3, 59);
-            this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.exitLayoutPanel.Location = new System.Drawing.Point(4, 69);
+            this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.exitLayoutPanel.Name = "exitLayoutPanel";
-            this.exitLayoutPanel.Size = new System.Drawing.Size(689, 20);
+            this.exitLayoutPanel.Size = new System.Drawing.Size(804, 23);
             this.exitLayoutPanel.TabIndex = 2;
             // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.editorConsole);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 82);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(4, 96);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(695, 157);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(811, 181);
             this.flowLayoutPanel2.TabIndex = 20;
             // 
             // editorConsole
@@ -301,62 +308,64 @@
             this.editorConsole.Location = new System.Drawing.Point(0, 0);
             this.editorConsole.Margin = new System.Windows.Forms.Padding(0);
             this.editorConsole.Name = "editorConsole";
-            this.editorConsole.Size = new System.Drawing.Size(689, 162);
+            this.editorConsole.Size = new System.Drawing.Size(804, 187);
             this.editorConsole.TabIndex = 0;
             this.editorConsole.Text = "";
             // 
             // mobsLayoutPanel
             // 
             this.mobsLayoutPanel.Controls.Add(this.label7);
-            this.mobsLayoutPanel.Location = new System.Drawing.Point(3, 242);
-            this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.mobsLayoutPanel.Location = new System.Drawing.Point(4, 281);
+            this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
-            this.mobsLayoutPanel.Size = new System.Drawing.Size(689, 26);
+            this.mobsLayoutPanel.Size = new System.Drawing.Size(804, 30);
             this.mobsLayoutPanel.TabIndex = 4;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 6);
-            this.label7.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label7.Location = new System.Drawing.Point(4, 7);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 7, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 13);
+            this.label7.Size = new System.Drawing.Size(102, 15);
             this.label7.TabIndex = 0;
             this.label7.Text = "Generated Mobs:";
             // 
             // permMobLayoutPanel
             // 
             this.permMobLayoutPanel.Controls.Add(this.label6);
-            this.permMobLayoutPanel.Location = new System.Drawing.Point(3, 268);
-            this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.permMobLayoutPanel.Location = new System.Drawing.Point(4, 311);
+            this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.permMobLayoutPanel.Name = "permMobLayoutPanel";
-            this.permMobLayoutPanel.Size = new System.Drawing.Size(689, 26);
+            this.permMobLayoutPanel.Size = new System.Drawing.Size(804, 30);
             this.permMobLayoutPanel.TabIndex = 3;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 6);
-            this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label6.Location = new System.Drawing.Point(4, 7);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 7, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 13);
+            this.label6.Size = new System.Drawing.Size(105, 15);
             this.label6.TabIndex = 0;
             this.label6.Text = "Permanent Mobs:";
             // 
             // areaComboBox
             // 
             this.areaComboBox.FormattingEnabled = true;
-            this.areaComboBox.Location = new System.Drawing.Point(708, 29);
+            this.areaComboBox.Location = new System.Drawing.Point(826, 34);
+            this.areaComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.areaComboBox.Name = "areaComboBox";
-            this.areaComboBox.Size = new System.Drawing.Size(162, 21);
+            this.areaComboBox.Size = new System.Drawing.Size(189, 23);
             this.areaComboBox.TabIndex = 20;
             this.areaComboBox.SelectedIndexChanged += new System.EventHandler(this.areaComboBox_SelectedIndexChanged);
             // 
             // commandsTextBox
             // 
-            this.commandsTextBox.Location = new System.Drawing.Point(3, 360);
+            this.commandsTextBox.Location = new System.Drawing.Point(4, 415);
+            this.commandsTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.commandsTextBox.Name = "commandsTextBox";
-            this.commandsTextBox.Size = new System.Drawing.Size(696, 20);
+            this.commandsTextBox.Size = new System.Drawing.Size(812, 21);
             this.commandsTextBox.TabIndex = 1;
             this.commandsTextBox.TextChanged += new System.EventHandler(this.commandsTextBox_TextChanged);
             this.commandsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.commandsTextBox_KeyPress);
@@ -364,9 +373,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(712, 14);
+            this.label1.Location = new System.Drawing.Point(830, 16);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 13;
             this.label1.Text = "Areas";
             // 
@@ -374,9 +384,11 @@
             // 
             this.roomsListBox.ContextMenuStrip = this.RoomContextMenu;
             this.roomsListBox.FormattingEnabled = true;
-            this.roomsListBox.Location = new System.Drawing.Point(708, 67);
+            this.roomsListBox.ItemHeight = 15;
+            this.roomsListBox.Location = new System.Drawing.Point(826, 77);
+            this.roomsListBox.Margin = new System.Windows.Forms.Padding(4);
             this.roomsListBox.Name = "roomsListBox";
-            this.roomsListBox.Size = new System.Drawing.Size(162, 82);
+            this.roomsListBox.Size = new System.Drawing.Size(189, 94);
             this.roomsListBox.TabIndex = 14;
             this.roomsListBox.SelectedIndexChanged += new System.EventHandler(this.roomsListBox_SelectedIndexChanged);
             this.roomsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.roomsListBox_MouseDoubleClick);
@@ -475,9 +487,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(712, 53);
+            this.label3.Location = new System.Drawing.Point(830, 61);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.Size = new System.Drawing.Size(75, 15);
             this.label3.TabIndex = 15;
             this.label3.Text = "Area Rooms";
             // 
@@ -487,9 +500,11 @@
             this.Console.ForeColor = System.Drawing.SystemColors.WindowText;
             this.Console.FormattingEnabled = true;
             this.Console.HorizontalScrollbar = true;
-            this.Console.Location = new System.Drawing.Point(203, 437);
+            this.Console.ItemHeight = 15;
+            this.Console.Location = new System.Drawing.Point(237, 504);
+            this.Console.Margin = new System.Windows.Forms.Padding(4);
             this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(699, 121);
+            this.Console.Size = new System.Drawing.Size(815, 139);
             this.Console.TabIndex = 0;
             // 
             // groupBox1
@@ -500,9 +515,11 @@
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.startServer);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox1.Location = new System.Drawing.Point(53, 408);
+            this.groupBox1.Location = new System.Drawing.Point(62, 471);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(99, 133);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(116, 154);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Server";
@@ -514,35 +531,39 @@
             this.listenerCheckBox.Checked = true;
             this.listenerCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.listenerCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.listenerCheckBox.Location = new System.Drawing.Point(70, 19);
+            this.listenerCheckBox.Location = new System.Drawing.Point(81, 22);
+            this.listenerCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.listenerCheckBox.Name = "listenerCheckBox";
-            this.listenerCheckBox.Size = new System.Drawing.Size(16, 16);
+            this.listenerCheckBox.Size = new System.Drawing.Size(18, 19);
             this.listenerCheckBox.TabIndex = 16;
             this.listenerCheckBox.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 24);
+            this.label2.Location = new System.Drawing.Point(10, 28);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.Size = new System.Drawing.Size(29, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "Port";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(11, 40);
+            this.textBox2.Location = new System.Drawing.Point(13, 46);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(55, 20);
+            this.textBox2.Size = new System.Drawing.Size(64, 21);
             this.textBox2.TabIndex = 2;
             this.textBox2.Text = "8090";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(11, 95);
+            this.button6.Location = new System.Drawing.Point(13, 110);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(88, 26);
             this.button6.TabIndex = 1;
             this.button6.Text = "Stop";
             this.button6.UseVisualStyleBackColor = true;
@@ -550,9 +571,10 @@
             // 
             // startServer
             // 
-            this.startServer.Location = new System.Drawing.Point(11, 66);
+            this.startServer.Location = new System.Drawing.Point(13, 76);
+            this.startServer.Margin = new System.Windows.Forms.Padding(4);
             this.startServer.Name = "startServer";
-            this.startServer.Size = new System.Drawing.Size(75, 23);
+            this.startServer.Size = new System.Drawing.Size(88, 26);
             this.startServer.TabIndex = 0;
             this.startServer.Text = "Start";
             this.startServer.UseVisualStyleBackColor = true;
@@ -560,9 +582,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(969, 450);
+            this.button1.Location = new System.Drawing.Point(1130, 519);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(88, 26);
             this.button1.TabIndex = 16;
             this.button1.Text = "AreaToXml";
             this.button1.UseVisualStyleBackColor = true;
@@ -573,9 +596,11 @@
             this.groupBox2.Controls.Add(this.connectedListBox);
             this.groupBox2.Controls.Add(this.connectedLabel);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(13, 33);
+            this.groupBox2.Location = new System.Drawing.Point(15, 38);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(175, 348);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(204, 401);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Connections";
@@ -583,26 +608,30 @@
             // connectedListBox
             // 
             this.connectedListBox.FormattingEnabled = true;
-            this.connectedListBox.Location = new System.Drawing.Point(11, 40);
+            this.connectedListBox.ItemHeight = 15;
+            this.connectedListBox.Location = new System.Drawing.Point(13, 46);
+            this.connectedListBox.Margin = new System.Windows.Forms.Padding(4);
             this.connectedListBox.Name = "connectedListBox";
-            this.connectedListBox.Size = new System.Drawing.Size(152, 290);
+            this.connectedListBox.Size = new System.Drawing.Size(176, 334);
             this.connectedListBox.TabIndex = 2;
             // 
             // connectedLabel
             // 
             this.connectedLabel.AutoSize = true;
-            this.connectedLabel.Location = new System.Drawing.Point(120, 19);
+            this.connectedLabel.Location = new System.Drawing.Point(140, 22);
+            this.connectedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.connectedLabel.Name = "connectedLabel";
-            this.connectedLabel.Size = new System.Drawing.Size(13, 13);
+            this.connectedLabel.Size = new System.Drawing.Size(14, 15);
             this.connectedLabel.TabIndex = 1;
             this.connectedLabel.Text = "0";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 19);
+            this.label4.Location = new System.Drawing.Point(13, 22);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.Size = new System.Drawing.Size(66, 15);
             this.label4.TabIndex = 0;
             this.label4.Text = "Connected";
             // 
@@ -613,9 +642,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(969, 480);
+            this.button2.Location = new System.Drawing.Point(1130, 554);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(88, 26);
             this.button2.TabIndex = 18;
             this.button2.Text = "Xml Save";
             this.button2.UseVisualStyleBackColor = true;
@@ -623,9 +653,10 @@
             // 
             // loadXmlButton
             // 
-            this.loadXmlButton.Location = new System.Drawing.Point(969, 510);
+            this.loadXmlButton.Location = new System.Drawing.Point(1130, 589);
+            this.loadXmlButton.Margin = new System.Windows.Forms.Padding(4);
             this.loadXmlButton.Name = "loadXmlButton";
-            this.loadXmlButton.Size = new System.Drawing.Size(75, 23);
+            this.loadXmlButton.Size = new System.Drawing.Size(88, 26);
             this.loadXmlButton.TabIndex = 19;
             this.loadXmlButton.Text = "Load Xml";
             this.loadXmlButton.UseVisualStyleBackColor = true;
@@ -633,10 +664,10 @@
             // 
             // Mountain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1096, 570);
+            this.ClientSize = new System.Drawing.Size(1278, 658);
             this.Controls.Add(this.Console);
             this.Controls.Add(this.loadXmlButton);
             this.Controls.Add(this.groupBox2);
@@ -645,9 +676,11 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.button1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Mountain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
