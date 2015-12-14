@@ -20,6 +20,7 @@ namespace Mountain.classes {
         public doorType DoorType;
         public exitRestrictions Restrictions;  //http://geekswithblogs.net/BlackRabbitCoder/archive/2010/07/22/c-fundamentals-combining-enum-values-with-bit-flags.aspx
         private string roomName, areaName;
+
         public Exit() {
             ClassType = classObjectType.exit;
             Name = null;

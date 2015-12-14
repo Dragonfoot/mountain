@@ -34,6 +34,11 @@ namespace Mountain.classes.dataobjects {
         intermittant = 32, hypnotized = 64, spaced = 128, drugged = 256, paralized = 512, dead = 1024
     }
 
+    [Flags]
+    public enum lockType {
+        none = 0, key = 1, pin = 2, owner = 4, spell = 8, skill = 16, item = 32, password = 64, pickable = 128, broken = 256
+    }
+
     public enum roomItem {
         roomType, roomLimits, roomTraits
     }
@@ -63,10 +68,6 @@ namespace Mountain.classes.dataobjects {
 
     public enum exitType {
         door, window, random, teleport, openSpace
-    }
-
-    public enum lockType {
-        broken, key, pin, owner, spell, skill, item, password
     }
 
     public enum direction {

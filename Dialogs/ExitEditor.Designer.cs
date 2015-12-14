@@ -84,6 +84,7 @@
             this.linkDoorLabelTextBox.Name = "linkDoorLabelTextBox";
             this.linkDoorLabelTextBox.Size = new System.Drawing.Size(121, 20);
             this.linkDoorLabelTextBox.TabIndex = 8;
+            this.linkDoorLabelTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.linkDoorLabelTextBox_KeyPress);
             // 
             // currentRoomTextBox
             // 
@@ -146,7 +147,6 @@
             // 
             // ExitEditor
             // 
-            this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
@@ -155,7 +155,10 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.panel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ExitEditor";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Exit Editor";
             this.panel1.ResumeLayout(false);
