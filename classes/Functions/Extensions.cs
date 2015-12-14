@@ -137,6 +137,28 @@ namespace Mountain.classes.functions {
             }
             return true;
         }
+        public static string TruncateWithEllipses(this string str, int size) {
+            if (size < 3) size = 3;
+            if (string.IsNullOrWhiteSpace(str)) return str;
+            if (size > str.Length) return str;
+            return str.Substring(0, size) + "...";
+        }
+        public static bool IsGuid(this string str) {
+            if (str == null) return false;
+            Regex format = new Regex(
+                "^[A-Fa-f0-9]{32}$|" +
+                "^({|\\()?[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}(}|\\))?$|" +
+                "^({)?[0xA-Fa-f0-9]{3,10}(, {0,1}[0xA-Fa-f0-9]{3,6}){2}, {0,1}({)([0xA-Fa-f0-9]{3,4}, {0,1}){7}[0xA-Fa-f0-9]{3,4}(}})$");
+            Match match = format.Match(str);
+            return match.Success;
+        }
+        public static bool IsValidUrl(this string url) {
+            return Uri.IsWellFormedUriString(url.Trim(), UriKind.Absolute);
+        }
+        public static bool IsAlphanumeric(this string str) {
+            Regex pattern = new Regex("[^0-9a-zA-Z]");
+            return !pattern.IsMatch(str);
+        }
         public static bool IsNullOrWhiteSpace(this string str) { // somewhat better string.empty test
             return string.IsNullOrWhiteSpace(str);
         }
