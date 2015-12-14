@@ -52,7 +52,7 @@ namespace Mountain.Dialogs {
             exitsLabel.Height = 16;
             exitsLabel.Margin = new Padding(6,0,0,0);
             exitsLabel.DropDownItems.Add("Add");
-            exitsLabel.DropDownItemClicked += ExitsLabel_DropDownItemClicked;
+            exitsLabel.DropDownItemClicked += Button_DropDownItemClicked;
 
             ToolStrip strip = new ToolStrip();
             strip.Renderer = new ToolStripOverride();
@@ -87,27 +87,20 @@ namespace Mountain.Dialogs {
 
         private void Button_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
             switch (e.ClickedItem.Text) {
+                case "Add": // call exit.add dialog with selected room
+                    break;
                 case "Attributes":  // exit = room.getexitbyname(clickeditem.text); popup exit.attributes dialog
                     break;
-                case "GoTo": // world.findroombyname(sender.text), show room
+                case "GoTo": // world.findroombyname(sender.text), set selectedroom to room found, seteditor()
                     break;
-                case "Remove": // currentroom.exits.removebyname(clickedItem.text)
-                    int index = SelectedRoom.Exits.FindIndex(item => item.DoorLabel == ((ToolStripSplitButton)sender).Text);
-                    SelectedRoom.Exits.RemoveAt(index);
+                case "Remove":
+                    SelectedRoom.Exits.RemoveAt(SelectedRoom.Exits.FindIndex(item => item.DoorLabel == ((ToolStripSplitButton)sender).Text));
                     SetEditor();
                     break;
                 case "Rename": // popup string editor with clickedItem.text, edit and save
                     break;
             }
-        }
-
-        private void ExitsLabel_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
-            if(e.ClickedItem.Text == "Add") {
-                // new exit, get room to link to name, doorlable, call build.linkto if oneway or double linkto if twoway
-                // check for duplicates in both room exit lists
-                // add exits to both rooms if two way, or this room if oneway
-            }
-        }
+        }        
 
         private void SyncControls() {
             if (areaComboBox.Items.Contains(SelectedRoom.Area.Name)) {
