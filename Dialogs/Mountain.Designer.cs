@@ -352,7 +352,7 @@
             // areaComboBox
             // 
             this.areaComboBox.FormattingEnabled = true;
-            this.areaComboBox.Location = new System.Drawing.Point(826, 34);
+            this.areaComboBox.Location = new System.Drawing.Point(824, 28);
             this.areaComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.areaComboBox.Name = "areaComboBox";
             this.areaComboBox.Size = new System.Drawing.Size(189, 23);
@@ -372,7 +372,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(830, 16);
+            this.label1.Location = new System.Drawing.Point(828, 10);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 15);
@@ -384,7 +384,7 @@
             this.roomsListBox.ContextMenuStrip = this.RoomContextMenu;
             this.roomsListBox.FormattingEnabled = true;
             this.roomsListBox.ItemHeight = 15;
-            this.roomsListBox.Location = new System.Drawing.Point(826, 77);
+            this.roomsListBox.Location = new System.Drawing.Point(824, 71);
             this.roomsListBox.Margin = new System.Windows.Forms.Padding(4);
             this.roomsListBox.Name = "roomsListBox";
             this.roomsListBox.Size = new System.Drawing.Size(189, 94);
@@ -486,7 +486,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(830, 61);
+            this.label3.Location = new System.Drawing.Point(828, 55);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 15);
