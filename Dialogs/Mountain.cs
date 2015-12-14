@@ -82,20 +82,27 @@ namespace Mountain.Dialogs {
 
         private void Button_Click(object sender, EventArgs e) {
             if (((ToolStripSplitButton)sender).Text == "Exits:") return;
+            // world.findroombyname (sender.text), show room
         }
 
         private void Button_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
             switch (e.ClickedItem.Text) {
-                case "Attributes": break;
-                case "GoTo": break;
-                case "Remove": break;
-                case "Rename": break;
+                case "Attributes":  // exit = room.getexitbyname(clickeditem.text); popup exit.attributes dialog
+                    break;
+                case "GoTo": // world.findroombyname(sender.text), show room
+                    break;
+                case "Remove": // currentroom.exits.removebyname(clickedItem.text)
+                    break;
+                case "Rename": // popup string editor with clickedItem.text, edit and save
+                    break;
             }
         }
 
         private void ExitsLabel_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
             if(e.ClickedItem.Text == "Add") {
-                
+                // new exit, get room to link to name, doorlable, call build.linkto if oneway or double linkto if twoway
+                // check for duplicates in both room exit lists
+                // add exits to both rooms if two way, or this room if oneway
             }
         }
 
