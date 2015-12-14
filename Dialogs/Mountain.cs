@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Mountain.classes;
@@ -45,11 +46,10 @@ namespace Mountain.Dialogs {
             roomNameButton.Text = SelectedRoom.Name;
             roomDescriptionRichTextBox.Clear();
             roomDescriptionRichTextBox.AppendText(SelectedRoom.Description);
-            ToolStripSplitButton exitsLabel = new ToolStripSplitButton("Exits:");
+            ToolStripButton exitsLabel = new ToolStripButton("Exits:");
             exitsLabel.AutoToolTip = false;
             exitsLabel.Height = 16;
-            exitsLabel.Margin = new Padding(0);
-            exitsLabel.DropDownItems.Add("Add");
+            exitsLabel.Margin = new Padding(6,0,0,0);
 
             ToolStrip strip = new ToolStrip();
             strip.Renderer = new ToolStripOverride();
@@ -66,6 +66,8 @@ namespace Mountain.Dialogs {
                 button.AutoToolTip = false;
                 button.Height = 16;
                 button.Margin = new Padding(0);
+                button.DropDownItems.Add("GoTo");
+                button.DropDownItems.Add("Rename");
                 button.DropDownItems.Add("Remove");
                 strip.Items.Add(button);
             }
@@ -334,6 +336,15 @@ namespace Mountain.Dialogs {
         public ToolStripOverride() { }
 
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
+        protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e) {
+            if (!e.Item.Selected) {
+                base.OnRenderButtonBackground(e);
+            } else {
+                Rectangle rectangle = new Rectangle(0, 0, e.Item.Size.Width - 1, e.Item.Size.Height - 1);
+                e.Graphics.FillRectangle(Brushes.DarkCyan, rectangle);
+                e.Graphics.DrawRectangle(Pens.DarkCyan, rectangle);
+            }
+        }
     }
 }
         

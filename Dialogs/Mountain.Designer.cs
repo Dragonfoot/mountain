@@ -259,24 +259,23 @@
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.roomDescriptionRichTextBox);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 30);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 26);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(811, 35);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(813, 35);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // roomDescriptionRichTextBox
             // 
             this.roomDescriptionRichTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.roomDescriptionRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.roomDescriptionRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.roomDescriptionRichTextBox.ForeColor = System.Drawing.Color.Gold;
             this.roomDescriptionRichTextBox.Location = new System.Drawing.Point(7, 0);
             this.roomDescriptionRichTextBox.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.roomDescriptionRichTextBox.Name = "roomDescriptionRichTextBox";
             this.roomDescriptionRichTextBox.ReadOnly = true;
             this.roomDescriptionRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(797, 35);
+            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(799, 35);
             this.roomDescriptionRichTextBox.TabIndex = 1;
             this.roomDescriptionRichTextBox.Text = "";
             this.roomDescriptionRichTextBox.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.roomDescriptionRichTextBox_ContentsResized);
@@ -284,8 +283,8 @@
             // exitLayoutPanel
             // 
             this.exitLayoutPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.exitLayoutPanel.Location = new System.Drawing.Point(4, 69);
-            this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.exitLayoutPanel.Location = new System.Drawing.Point(0, 61);
+            this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exitLayoutPanel.Name = "exitLayoutPanel";
             this.exitLayoutPanel.Size = new System.Drawing.Size(804, 23);
             this.exitLayoutPanel.TabIndex = 2;
@@ -294,10 +293,10 @@
             // 
             this.flowLayoutPanel2.Controls.Add(this.editorConsole);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(4, 96);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(4, 88);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(811, 181);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(805, 181);
             this.flowLayoutPanel2.TabIndex = 20;
             // 
             // editorConsole
@@ -315,7 +314,7 @@
             // mobsLayoutPanel
             // 
             this.mobsLayoutPanel.Controls.Add(this.label7);
-            this.mobsLayoutPanel.Location = new System.Drawing.Point(4, 281);
+            this.mobsLayoutPanel.Location = new System.Drawing.Point(4, 273);
             this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
             this.mobsLayoutPanel.Size = new System.Drawing.Size(804, 30);
@@ -334,7 +333,7 @@
             // permMobLayoutPanel
             // 
             this.permMobLayoutPanel.Controls.Add(this.label6);
-            this.permMobLayoutPanel.Location = new System.Drawing.Point(4, 311);
+            this.permMobLayoutPanel.Location = new System.Drawing.Point(4, 303);
             this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.permMobLayoutPanel.Name = "permMobLayoutPanel";
             this.permMobLayoutPanel.Size = new System.Drawing.Size(804, 30);
