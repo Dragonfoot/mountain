@@ -46,10 +46,13 @@ namespace Mountain.Dialogs {
             roomNameButton.Text = SelectedRoom.Name;
             roomDescriptionRichTextBox.Clear();
             roomDescriptionRichTextBox.AppendText(SelectedRoom.Description);
-            ToolStripButton exitsLabel = new ToolStripButton("Exits:");
+
+            ToolStripSplitButton exitsLabel = new ToolStripSplitButton("Exits:");
             exitsLabel.AutoToolTip = false;
             exitsLabel.Height = 16;
             exitsLabel.Margin = new Padding(6,0,0,0);
+            exitsLabel.DropDownItems.Add("Add");
+            exitsLabel.DropDownItemClicked += ExitsLabel_DropDownItemClicked;
 
             ToolStrip strip = new ToolStrip();
             strip.Renderer = new ToolStripOverride();
@@ -67,11 +70,33 @@ namespace Mountain.Dialogs {
                 button.Height = 16;
                 button.Margin = new Padding(0);
                 button.DropDownItems.Add("GoTo");
+                button.DropDownItems.Add("Attributes");
                 button.DropDownItems.Add("Rename");
                 button.DropDownItems.Add("Remove");
+                button.DropDownItemClicked += Button_DropDownItemClicked;
+                button.Click += Button_Click;
                 strip.Items.Add(button);
             }
             exitLayoutPanel.Controls.Add(strip);
+        }
+
+        private void Button_Click(object sender, EventArgs e) {
+            if (((ToolStripSplitButton)sender).Text == "Exits:") return;
+        }
+
+        private void Button_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
+            switch (e.ClickedItem.Text) {
+                case "Attributes": break;
+                case "GoTo": break;
+                case "Remove": break;
+                case "Rename": break;
+            }
+        }
+
+        private void ExitsLabel_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
+            if(e.ClickedItem.Text == "Add") {
+                
+            }
         }
 
         private void SyncControls() {
