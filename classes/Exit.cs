@@ -12,7 +12,6 @@ namespace Mountain.classes {
         public bool Open;
         public bool Lockable;
         public bool Visible;
-        public bool Pickable;
         public bool Breakable;
         public bool Repairable;
         public exitType ExitType; 

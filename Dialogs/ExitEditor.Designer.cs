@@ -1,4 +1,6 @@
-﻿namespace Mountain.Dialogs {
+﻿using Mountain.classes.controls;
+
+namespace Mountain.Dialogs {
     partial class ExitEditor {
         /// <summary>
         /// Required designer variable.
@@ -34,6 +36,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.exitTypeCheckEnum = new CheckEnum();
+            this.lockTypeCheckEnum = new CheckEnum();
+            this.doorTypeCheckEnum = new CheckEnum();
+            this.booleanTypeCheckEnum = new CheckEnum();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +70,7 @@
             this.returnLinkCheckBox.Name = "returnLinkCheckBox";
             this.returnLinkCheckBox.Size = new System.Drawing.Size(103, 23);
             this.returnLinkCheckBox.TabIndex = 3;
-            this.returnLinkCheckBox.Text = "Two Way Link";
+            this.returnLinkCheckBox.Text = "One Way Link";
             this.returnLinkCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.returnLinkCheckBox.UseVisualStyleBackColor = true;
             this.returnLinkCheckBox.CheckedChanged += new System.EventHandler(this.returnLinkCheckBox_CheckedChanged);
@@ -89,7 +95,7 @@
             // currentRoomTextBox
             // 
             this.currentRoomTextBox.Enabled = false;
-            this.currentRoomTextBox.Location = new System.Drawing.Point(34, 12);
+            this.currentRoomTextBox.Location = new System.Drawing.Point(34, 9);
             this.currentRoomTextBox.Name = "currentRoomTextBox";
             this.currentRoomTextBox.Size = new System.Drawing.Size(121, 20);
             this.currentRoomTextBox.TabIndex = 10;
@@ -145,12 +151,48 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
+            // exitTypeCheckEnum
+            // 
+            this.exitTypeCheckEnum.FormattingEnabled = true;
+            this.exitTypeCheckEnum.Location = new System.Drawing.Point(196, 42);
+            this.exitTypeCheckEnum.Name = "exitTypeCheckEnum";
+            this.exitTypeCheckEnum.Size = new System.Drawing.Size(120, 94);
+            this.exitTypeCheckEnum.TabIndex = 16;
+            // 
+            // lockTypeCheckEnum
+            // 
+            this.lockTypeCheckEnum.FormattingEnabled = true;
+            this.lockTypeCheckEnum.Location = new System.Drawing.Point(323, 42);
+            this.lockTypeCheckEnum.Name = "lockTypeCheckEnum";
+            this.lockTypeCheckEnum.Size = new System.Drawing.Size(120, 94);
+            this.lockTypeCheckEnum.TabIndex = 17;
+            // 
+            // doorTypeCheckEnum
+            // 
+            this.doorTypeCheckEnum.FormattingEnabled = true;
+            this.doorTypeCheckEnum.Location = new System.Drawing.Point(196, 143);
+            this.doorTypeCheckEnum.Name = "doorTypeCheckEnum";
+            this.doorTypeCheckEnum.Size = new System.Drawing.Size(120, 94);
+            this.doorTypeCheckEnum.TabIndex = 18;
+            // 
+            // booleanTypeCheckEnum
+            // 
+            this.booleanTypeCheckEnum.FormattingEnabled = true;
+            this.booleanTypeCheckEnum.Location = new System.Drawing.Point(323, 143);
+            this.booleanTypeCheckEnum.Name = "booleanTypeCheckEnum";
+            this.booleanTypeCheckEnum.Size = new System.Drawing.Size(120, 94);
+            this.booleanTypeCheckEnum.TabIndex = 19;
+            // 
             // ExitEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(191, 382);
+            this.ClientSize = new System.Drawing.Size(535, 382);
+            this.Controls.Add(this.booleanTypeCheckEnum);
+            this.Controls.Add(this.doorTypeCheckEnum);
+            this.Controls.Add(this.lockTypeCheckEnum);
+            this.Controls.Add(this.exitTypeCheckEnum);
             this.Controls.Add(this.currentRoomTextBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
@@ -181,5 +223,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
+        private CheckEnum exitTypeCheckEnum;
+        private CheckEnum lockTypeCheckEnum;
+        private CheckEnum doorTypeCheckEnum;
+        private CheckEnum booleanTypeCheckEnum;
     }
 }

@@ -46,7 +46,7 @@ namespace Mountain.Dialogs {
         }
 
         private void returnLinkCheckBox_CheckedChanged(object sender, EventArgs e) {
-            if (!returnLinkCheckBox.Checked) returnLinkCheckBox.Text = "Two Way Link"; else returnLinkCheckBox.Text = "One Way Link";
+            if (returnLinkCheckBox.Checked) returnLinkCheckBox.Text = "Two Way Link"; else returnLinkCheckBox.Text = "One Way Link";
         }
 
         private void linkDoorLabelTextBox_KeyPress(object sender, KeyPressEventArgs e) {
