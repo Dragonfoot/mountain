@@ -94,7 +94,7 @@ namespace Mountain.Dialogs {
                 exit = SelectedExit.ShallowCopy();
             }
             ExitEditor exitEdit = new ExitEditor(exit);
-            exitEdit.currentRoomTextBox.Text = exitEdit.currentRoomLabel.Text = Room.Name;
+            exitEdit.currentRoomTextBox.Text = Room.Name;
             DialogResult dialogresult = exitEdit.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 exit = exitEdit.Exit.ShallowCopy();

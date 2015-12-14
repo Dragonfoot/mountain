@@ -88,6 +88,20 @@ namespace Mountain.Dialogs {
         private void Button_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
             switch (e.ClickedItem.Text) {
                 case "Add": // call exit.add dialog with selected room
+                    Exit exit;
+                    exit = new Exit();
+                    exit.Area = SelectedRoom.Area;
+                    exit.Owner = SelectedRoom;
+                 //   exit.DoorLabel = Room.Name;
+                    ExitEditor exitEdit = new ExitEditor(exit);
+                    exitEdit.currentRoomTextBox.Text = SelectedRoom.Name;
+                    DialogResult dialogresult = exitEdit.ShowDialog();
+                    if (dialogresult == DialogResult.OK) {
+                        exit = exitEdit.Exit.ShallowCopy();
+                        SelectedRoom.Exits.Add(exit);
+                    }
+                    exitEdit.Dispose();
+                    SetEditor();
                     break;
                 case "Attributes":  // exit = room.getexitbyname(clickeditem.text); popup exit.attributes dialog
                     break;
