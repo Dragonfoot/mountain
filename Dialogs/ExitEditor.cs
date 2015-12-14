@@ -14,14 +14,15 @@ namespace Mountain.Dialogs {
         public ExitEditor(Exit exit) {
             InitializeComponent();
             Exit = exit.ShallowCopy();
+            SelectedArea = Exit.Area;
             currentRoomTextBox.Text = exit.Owner.Name;
 
             if (Common.Settings.World.Areas.Any()) {
                 areaComboBox.Items.AddRange(Common.Settings.World.Areas.Select(x => x.Name).ToArray());
                 areaComboBox.SelectedIndex = 0;
-              /*  if (SelectedArea.Rooms.Any()) {
+                if (SelectedArea.Rooms.Any()) {
                     if (roomListBox.Items.Count > 0) roomListBox.SelectedIndex = 0;
-                }*/
+                }
             }
         }
 
@@ -39,6 +40,8 @@ namespace Mountain.Dialogs {
             if (name != "None") {
                 Room room = Common.Settings.World.GetRoomByName(name);
                 linkDoorLabelTextBox.Text = room.Name;
+                Exit.DoorLabel = room.Name;
+                Exit.Room = room;
             }
         }
 

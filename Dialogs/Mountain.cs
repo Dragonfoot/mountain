@@ -92,7 +92,6 @@ namespace Mountain.Dialogs {
                     exit = new Exit();
                     exit.Area = SelectedRoom.Area;
                     exit.Owner = SelectedRoom;
-                 //   exit.DoorLabel = Room.Name;
                     ExitEditor exitEdit = new ExitEditor(exit);
                     exitEdit.currentRoomTextBox.Text = SelectedRoom.Name;
                     DialogResult dialogresult = exitEdit.ShowDialog();
