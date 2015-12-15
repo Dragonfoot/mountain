@@ -53,6 +53,7 @@ namespace Mountain.Dialogs {
             exitsLabel.Margin = new Padding(6,0,0,0);
             exitsLabel.DropDownItems.Add("Add");
             exitsLabel.DropDownItemClicked += Button_DropDownItemClicked;
+            exitsLabel.DropDownItems.Add("Clear All");
 
             ToolStrip strip = new ToolStrip();
             strip.Renderer = new ToolStripOverride();
@@ -69,9 +70,7 @@ namespace Mountain.Dialogs {
                 button.AutoToolTip = false;
                 button.Height = 16;
                 button.Margin = new Padding(0);
-                button.DropDownItems.Add("GoTo");
-                button.DropDownItems.Add("Attributes");
-                button.DropDownItems.Add("Rename");
+                button.DropDownItems.Add("Edit");
                 button.DropDownItems.Add("Remove");
                 button.DropDownItemClicked += Button_DropDownItemClicked;
                 button.Click += Button_Click;
