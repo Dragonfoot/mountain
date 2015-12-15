@@ -36,10 +36,7 @@ namespace Mountain.Dialogs {
             this.panel2 = new System.Windows.Forms.Panel();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.exitTypeCheckEnum = new CheckEnum();
-            this.lockTypeCheckEnum = new CheckEnum();
-            this.doorTypeCheckEnum = new CheckEnum();
-            this.booleanTypeCheckEnum = new CheckEnum();
+            this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -151,37 +148,16 @@ namespace Mountain.Dialogs {
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // exitTypeCheckEnum
+            // propertyGrid
             // 
-            this.exitTypeCheckEnum.FormattingEnabled = true;
-            this.exitTypeCheckEnum.Location = new System.Drawing.Point(196, 42);
-            this.exitTypeCheckEnum.Name = "exitTypeCheckEnum";
-            this.exitTypeCheckEnum.Size = new System.Drawing.Size(120, 94);
-            this.exitTypeCheckEnum.TabIndex = 16;
-            // 
-            // lockTypeCheckEnum
-            // 
-            this.lockTypeCheckEnum.FormattingEnabled = true;
-            this.lockTypeCheckEnum.Location = new System.Drawing.Point(323, 42);
-            this.lockTypeCheckEnum.Name = "lockTypeCheckEnum";
-            this.lockTypeCheckEnum.Size = new System.Drawing.Size(120, 94);
-            this.lockTypeCheckEnum.TabIndex = 17;
-            // 
-            // doorTypeCheckEnum
-            // 
-            this.doorTypeCheckEnum.FormattingEnabled = true;
-            this.doorTypeCheckEnum.Location = new System.Drawing.Point(196, 143);
-            this.doorTypeCheckEnum.Name = "doorTypeCheckEnum";
-            this.doorTypeCheckEnum.Size = new System.Drawing.Size(120, 94);
-            this.doorTypeCheckEnum.TabIndex = 18;
-            // 
-            // booleanTypeCheckEnum
-            // 
-            this.booleanTypeCheckEnum.FormattingEnabled = true;
-            this.booleanTypeCheckEnum.Location = new System.Drawing.Point(323, 143);
-            this.booleanTypeCheckEnum.Name = "booleanTypeCheckEnum";
-            this.booleanTypeCheckEnum.Size = new System.Drawing.Size(120, 94);
-            this.booleanTypeCheckEnum.TabIndex = 19;
+            this.propertyGrid.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.propertyGrid.CategoryForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.propertyGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.propertyGrid.HelpVisible = false;
+            this.propertyGrid.Location = new System.Drawing.Point(218, 38);
+            this.propertyGrid.Name = "propertyGrid";
+            this.propertyGrid.Size = new System.Drawing.Size(283, 309);
+            this.propertyGrid.TabIndex = 16;
             // 
             // ExitEditor
             // 
@@ -189,10 +165,7 @@ namespace Mountain.Dialogs {
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(535, 382);
-            this.Controls.Add(this.booleanTypeCheckEnum);
-            this.Controls.Add(this.doorTypeCheckEnum);
-            this.Controls.Add(this.lockTypeCheckEnum);
-            this.Controls.Add(this.exitTypeCheckEnum);
+            this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.currentRoomTextBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
@@ -223,9 +196,6 @@ namespace Mountain.Dialogs {
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
-        private CheckEnum exitTypeCheckEnum;
-        private CheckEnum lockTypeCheckEnum;
-        private CheckEnum doorTypeCheckEnum;
-        private CheckEnum booleanTypeCheckEnum;
+        private System.Windows.Forms.PropertyGrid propertyGrid;
     }
 }

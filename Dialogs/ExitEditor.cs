@@ -14,6 +14,7 @@ namespace Mountain.Dialogs {
         public ExitEditor(Exit exit) {
             InitializeComponent();
             Exit = exit.ShallowCopy();
+            propertyGrid.SelectedObject = Exit;
             SelectedArea = Exit.Area;
             currentRoomTextBox.Text = exit.Owner.Name;
 
