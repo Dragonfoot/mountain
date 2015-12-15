@@ -92,7 +92,7 @@ namespace Mountain.Dialogs {
             // currentRoomTextBox
             // 
             this.currentRoomTextBox.Enabled = false;
-            this.currentRoomTextBox.Location = new System.Drawing.Point(34, 9);
+            this.currentRoomTextBox.Location = new System.Drawing.Point(172, 9);
             this.currentRoomTextBox.Name = "currentRoomTextBox";
             this.currentRoomTextBox.Size = new System.Drawing.Size(121, 20);
             this.currentRoomTextBox.TabIndex = 10;
@@ -131,7 +131,7 @@ namespace Mountain.Dialogs {
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(18, 353);
+            this.okButton.Location = new System.Drawing.Point(306, 354);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 14;
@@ -141,7 +141,7 @@ namespace Mountain.Dialogs {
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(96, 353);
+            this.cancelButton.Location = new System.Drawing.Point(384, 354);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 15;
@@ -153,19 +153,20 @@ namespace Mountain.Dialogs {
             this.propertyGrid.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.propertyGrid.CategoryForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.propertyGrid.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.propertyGrid.Location = new System.Drawing.Point(218, 38);
+            this.propertyGrid.Location = new System.Drawing.Point(194, 38);
             this.propertyGrid.Name = "propertyGrid";
             this.propertyGrid.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.propertyGrid.SelectedObject = this.propertyGrid;
             this.propertyGrid.Size = new System.Drawing.Size(283, 309);
             this.propertyGrid.TabIndex = 16;
+            this.propertyGrid.SelectedGridItemChanged += new System.Windows.Forms.SelectedGridItemChangedEventHandler(this.propertyGrid_SelectedGridItemChanged);
+            this.propertyGrid.SelectedObjectsChanged += new System.EventHandler(this.propertyGrid_SelectedObjectsChanged);
             // 
             // ExitEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(535, 382);
+            this.ClientSize = new System.Drawing.Size(493, 382);
             this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.currentRoomTextBox);
             this.Controls.Add(this.cancelButton);

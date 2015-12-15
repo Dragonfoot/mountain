@@ -54,5 +54,13 @@ namespace Mountain.Dialogs {
         private void linkDoorLabelTextBox_KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar == (char)Keys.Return) Exit.DoorLabel = linkDoorLabelTextBox.Text;
         }
+
+        private void propertyGrid_SelectedGridItemChanged(object sender, SelectedGridItemChangedEventArgs e) {
+           //
+        }
+
+        private void propertyGrid_SelectedObjectsChanged(object sender, EventArgs e) {
+            //
+        }
     }
 }
