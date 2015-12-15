@@ -22,7 +22,7 @@ namespace Mountain.classes.dataobjects {
     }
 
     [Flags] public enum doorType {
-        none = 0, open = 1, visible = 2, hasLock = 4, 
+        none = 0, closed = 1, locking = 2, trapped = 4, triggered = 8, questing = 16, offMap = 32 
     }
 
     [Flags] public enum exitRestrictions {
@@ -67,7 +67,7 @@ namespace Mountain.classes.dataobjects {
     }
 
     public enum exitType {
-        door, window, random, teleport, openSpace
+        unknown, door, window, teleporter, openSpace
     }
 
     public enum direction {
