@@ -15,7 +15,6 @@ namespace Mountain.Dialogs {
             InitializeComponent();
             Exit = exit.ShallowCopy();
             propertyGrid.SelectedObject = Exit;
-            propertyGrid.Refresh();
             SelectedArea = Exit.Area;
             currentRoomTextBox.Text = exit.Owner.Name;
 
@@ -35,6 +34,7 @@ namespace Mountain.Dialogs {
             roomListBox.Items.Add("None");
             roomListBox.Items.AddRange(SelectedArea.Rooms.Where(room => room.Name != Exit.Owner.Name).ToArray());
             if (roomListBox.Items.Count > 0) roomListBox.SelectedIndex = 0;
+            propertyGrid.Refresh();
         }
 
         private void roomListBox_SelectedIndexChanged(object sender, EventArgs e) {
@@ -45,6 +45,7 @@ namespace Mountain.Dialogs {
                 Exit.DoorLabel = room.Name;
                 Exit.Room = room;
             }
+            propertyGrid.Refresh();
         }
 
         private void returnLinkCheckBox_CheckedChanged(object sender, EventArgs e) {
@@ -53,14 +54,23 @@ namespace Mountain.Dialogs {
 
         private void linkDoorLabelTextBox_KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar == (char)Keys.Return) Exit.DoorLabel = linkDoorLabelTextBox.Text;
+            propertyGrid.Refresh();
         }
 
-        private void propertyGrid_SelectedGridItemChanged(object sender, SelectedGridItemChangedEventArgs e) {
-           //
-        }
-
-        private void propertyGrid_SelectedObjectsChanged(object sender, EventArgs e) {
-            //
+        private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e) {
+            var item = e.ChangedItem;
+            var old = e.OldValue;
+            switch (e.ChangedItem.Label) {
+                case "DoorLabel":
+                    this.linkDoorLabelTextBox.Text = e.ChangedItem.Value.ToString();
+                    break;
+                case "Visible": break;
+                case "Breakable": break;
+                case "LockType": break;
+                case "DoorType": break;
+                case "ExitType": break;
+                case "Restrictions": break;
+            }
         }
     }
 }

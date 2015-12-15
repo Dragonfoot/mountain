@@ -91,10 +91,12 @@ namespace Mountain.Dialogs {
             // 
             // currentRoomTextBox
             // 
+            this.currentRoomTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.currentRoomTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.currentRoomTextBox.Enabled = false;
-            this.currentRoomTextBox.Location = new System.Drawing.Point(172, 9);
+            this.currentRoomTextBox.Location = new System.Drawing.Point(177, 9);
             this.currentRoomTextBox.Name = "currentRoomTextBox";
-            this.currentRoomTextBox.Size = new System.Drawing.Size(121, 20);
+            this.currentRoomTextBox.Size = new System.Drawing.Size(121, 13);
             this.currentRoomTextBox.TabIndex = 10;
             this.currentRoomTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -158,8 +160,7 @@ namespace Mountain.Dialogs {
             this.propertyGrid.PropertySort = System.Windows.Forms.PropertySort.Categorized;
             this.propertyGrid.Size = new System.Drawing.Size(283, 309);
             this.propertyGrid.TabIndex = 16;
-            this.propertyGrid.SelectedGridItemChanged += new System.Windows.Forms.SelectedGridItemChangedEventHandler(this.propertyGrid_SelectedGridItemChanged);
-            this.propertyGrid.SelectedObjectsChanged += new System.EventHandler(this.propertyGrid_SelectedObjectsChanged);
+            this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
             // 
             // ExitEditor
             // 

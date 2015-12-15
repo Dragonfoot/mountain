@@ -16,10 +16,6 @@ namespace Mountain.classes {
         public Area Area;               // room it points to is in
         [CategoryAttribute("\t Exit Settings"), Description("Name the player will see as the exit to leave from.")]
         public string DoorLabel { get; set; }
-        [Category("\t Exit Settings"), Description("If the door is initially open or closed.")]
-        public bool Open { get; set; }
-        [Category("\t Exit Settings"), Description("If the door has a locking device or not.")]
-        public bool Lockable { get; set; }
         [Category("\t Exit Settings"), Description("Can the player normally see the exit.")]
         public bool Visible { get; set; }
         [Category("\t Exit Settings"), Description("Is the door something that can be broken down.")]
@@ -41,7 +37,6 @@ namespace Mountain.classes {
             ClassType = classObjectType.exit;
             Name = null;
             Visible = true;
-            Open = true;
             ExitType = exitType.door;
             LockType = lockType.key | lockType.pickable;
             DoorType = doorType.locking;

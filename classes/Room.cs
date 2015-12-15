@@ -114,7 +114,6 @@ namespace Mountain.classes {
             exit.Name = this.Name + " Exit";
             exit.Description = Name + " exit is not yet linked to another room";
             exit.DoorLabel = Name + " Exit (unassigned)";
-            exit.Open = false;
             exit.DoorType = doorType.none;
             AddExit(exit);
         }
