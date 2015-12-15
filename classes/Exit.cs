@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Mountain.classes.functions;
 using Mountain.classes.dataobjects;
+using Mountain.classes.controls;
 
 namespace Mountain.classes {
 
@@ -12,16 +13,26 @@ namespace Mountain.classes {
         public Room Room { get; set; }  // points to
         [Browsable(false)]
         public Area Area;               // room it points to is in
+        [CategoryAttribute("Exit Settings"), Description("Name the player will see as the exit to leave from.")]
         public string DoorLabel { get; set; }
+        [Category("Exit Settings"), Description("If the door is initially open or closed.")]
         public bool Open { get; set; }
+        [Category("Exit Settings"), Description("If the door has a locking device or not.")]
         public bool Lockable { get; set; }
+        [Category("Exit Settings"), Description("Can the player normally see the exit.")]
         public bool Visible { get; set; }
+        [Category("Exit Settings"), Description("Is the door something that can be broken down.")]
         public bool Breakable { get; set; }
-        public bool Repairable { get; set; }
-        [Browsable(true)]
+        [Category("Exit Settings")]
         public exitType ExitType { get; set; }
+        [Category("Exit Attributes")]
+        [Editor(typeof(FlagsEnumEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public lockType LockType { get; set; }
+        [Category("Exit Attributes")]
+        [Editor(typeof(FlagsEnumEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public doorType DoorType { get; set; }
+        [Category("Exit Attributes")]
+        [Editor(typeof(FlagsEnumEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public exitRestrictions Restrictions { get; set; }  //http://geekswithblogs.net/BlackRabbitCoder/archive/2010/07/22/c-fundamentals-combining-enum-values-with-bit-flags.aspx
         private string roomName, areaName;
 

@@ -1,8 +1,10 @@
 ﻿using Mountain.classes.dataobjects;
+using System.ComponentModel;
 
 namespace Mountain.classes {
 
     public class Identity {
+
         public string Name { get; set; }
         public string Description { get; set; }
         public itemType ItemType { get; set; }

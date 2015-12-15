@@ -8,13 +8,14 @@ using Mountain.classes.dataobjects;
 namespace Mountain.Dialogs {
 
     public partial class ExitEditor : Form {
-        public Exit Exit;
+        public Exit Exit { get; set; }
         Area SelectedArea;
 
         public ExitEditor(Exit exit) {
             InitializeComponent();
             Exit = exit.ShallowCopy();
             propertyGrid.SelectedObject = Exit;
+            propertyGrid.Refresh();
             SelectedArea = Exit.Area;
             currentRoomTextBox.Text = exit.Owner.Name;
 
