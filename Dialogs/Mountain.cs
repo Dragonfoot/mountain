@@ -97,19 +97,17 @@ namespace Mountain.Dialogs {
                     if (dialogresult == DialogResult.OK) {
                         exit = exitEdit.Exit.ShallowCopy();
                         SelectedRoom.Exits.Add(exit);
+                        SetEditor();
                     }
                     exitEdit.Dispose();
-                    SetEditor();
                     break;
-                case "Attributes":  // exit = room.getexitbyname(clickeditem.text); popup exit.attributes dialog
-                    break;
-                case "GoTo": // world.findroombyname(sender.text), set selectedroom to room found, seteditor()
+                case "Clear All":  // exits.clear() 
                     break;
                 case "Remove":
                     SelectedRoom.Exits.RemoveAt(SelectedRoom.Exits.FindIndex(item => item.DoorLabel == ((ToolStripSplitButton)sender).Text));
                     SetEditor();
                     break;
-                case "Rename": // popup string editor with clickedItem.text, edit and save
+                case "Edit": // popup string editor with clickedItem.text, edit and save
                     break;
             }
         }        
