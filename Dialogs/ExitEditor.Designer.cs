@@ -155,6 +155,7 @@ namespace Mountain.Dialogs {
             this.propertyGrid.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.propertyGrid.Location = new System.Drawing.Point(218, 38);
             this.propertyGrid.Name = "propertyGrid";
+            this.propertyGrid.PropertySort = System.Windows.Forms.PropertySort.Categorized;
             this.propertyGrid.SelectedObject = this.propertyGrid;
             this.propertyGrid.Size = new System.Drawing.Size(283, 309);
             this.propertyGrid.TabIndex = 16;
