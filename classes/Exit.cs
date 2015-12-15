@@ -63,7 +63,7 @@ namespace Mountain.classes {
             XML.createNode("Visible", Convert.ToString(Visible), writer);
             XML.createNode("Breakable", Convert.ToString(Breakable), writer);
             XML.createNode("ExitType", Enum.GetName(typeof(exitType), ExitType), writer);
-            List<string> locks = getLockTypeEnum(LockType);
+            List<string> locks = getLockTypeFlags(LockType);
             if (locks.Count > 0) {
                 writer.WriteStartElement("Lock");
                 foreach (string name in locks) {
@@ -88,10 +88,10 @@ namespace Mountain.classes {
             ExitType = (exitType)Enum.Parse(typeof(exitType), node["ExitType"].InnerText);
             var lockNode = node.SelectSingleNode("Lock");
             if (lockNode != null) {
+                LockType = new lockType();
                 XmlNodeList locks = node["Lock"].SelectNodes("LockType");
-                foreach (XmlNode lt in locks) {
-                    LockType = new lockType();
-                    LockType |= (lockType)Enum.Parse(typeof(lockType), lt.InnerText);
+                foreach (XmlNode locktype in locks) {
+                    LockType |= (lockType)Enum.Parse(typeof(lockType), locktype.InnerText);
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace Mountain.classes {
             Room = Common.Settings.World.GetRoomByName(roomName);
         }
 
-        private List<string> getLockTypeEnum(lockType value) {
+        private List<string> getLockTypeFlags(lockType value) {
             List<string> list = new List<string>();
             foreach(Enum locktype in Enum.GetValues(typeof(lockType))) {
                 if (value.HasFlag(locktype)) {
