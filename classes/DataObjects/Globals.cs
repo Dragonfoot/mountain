@@ -36,7 +36,7 @@ namespace Mountain.classes.dataobjects {
 
     [Flags]
     public enum lockType {
-        none = 0, key = 1, pin = 2, owner = 4, spell = 8, skill = 16, item = 32, password = 64, pickable = 128, broken = 256
+        none = 0, key = 1, pin = 2, owner = 4, spell = 8, skill = 16, item = 32, password = 64, pickable = 128, broken = 256, trap = 512
     }
 
     public enum roomItem {

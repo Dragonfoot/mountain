@@ -28,12 +28,15 @@ using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
 namespace Mountain.classes.controls {
+
     /// <summary>
     /// This is a type editor that displays a checked list box as the drop-down
     /// editor for an enumerated data type that represents a set of flags.
     /// This makes it easy to select multiple values with the drop-down.
     /// </summary>
+    
     public class FlagsEnumEditor : UITypeEditor {
+
         /// <summary>
         /// This is overridden to edit the value using a checked list box
         /// control as the drop-down editor.
@@ -42,26 +45,23 @@ namespace Mountain.classes.controls {
         /// <param name="provider">The provider</param>
         /// <param name="value">The enumerated type object to edit</param>
         /// <returns>The edited enumerated type object</returns>
+        
         [RefreshProperties(RefreshProperties.All)]
         public override object EditValue(System.ComponentModel.ITypeDescriptorContext context, IServiceProvider provider, object value) {
             IWindowsFormsEditorService editorService;
             Type enumType;
             Array enumValues;
-            CheckedListBox ckbListBox;
+            CheckedListBox checkbListBox;
 
-            int bitIdx, bitCount;
+            int bitIndex, bitCount;
             long flagsValue, itemValue, bit, newValue = 0;
 
             // Only use the editor if we have a valid context
-            if (context == null || provider == null || context.Instance == null ||
-              value == null)
-                return base.EditValue(context, provider, value);
+            if (context == null || provider == null || context.Instance == null || value == null) return base.EditValue(context, provider, value);
 
-            editorService = (IWindowsFormsEditorService)provider.GetService(
-                typeof(IWindowsFormsEditorService));
+            editorService = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
 
-            if (editorService == null)
-                return base.EditValue(context, provider, value);
+            if (editorService == null) return base.EditValue(context, provider, value);
 
             enumType = context.PropertyDescriptor.PropertyType;
 
@@ -69,60 +69,55 @@ namespace Mountain.classes.controls {
             // It doesn't make sense to apply this to a non-flags enum so
             // in debug builds, validate it and throw an exception if it
             // doesn't meet the necessary criteria.
-            object[] attributes = enumType.GetCustomAttributes(
-                typeof(FlagsAttribute), true);
+            object[] attributes = enumType.GetCustomAttributes(typeof(FlagsAttribute), true);
 
             if (attributes.Length == 0)
                 throw new InvalidOperationException("FlagsEnumEditor must " +
                     "be applied to an enum that has the Flags attribute.");
 #endif
+
             // Enums are generally 32-bit values but can be 8 or 64-bit
             // if a base type modifier is used.  We'll assume long to cover
             // all cases.
+
             flagsValue = Convert.ToInt64(value, CultureInfo.InvariantCulture);
             enumValues = Enum.GetValues(enumType);
 
-            using (ckbListBox = new CheckedListBox()) {
-                ckbListBox.BorderStyle = BorderStyle.None;
-                ckbListBox.CheckOnClick = true;
+            using (checkbListBox = new CheckedListBox()) {
+                checkbListBox.BorderStyle = BorderStyle.None;
+                checkbListBox.CheckOnClick = true;
 
                 // Tahoma 8pt prevents it from clipping the bottom of each item
-                ckbListBox.Font = new Font("Tahoma", 8.0f);
+                checkbListBox.Font = new Font("Tahoma", 8.0f);
 
                 // Load the values into the checked list box
-                for (int idx = 0; idx < enumValues.Length; idx++) {
-                    itemValue = Convert.ToInt64(enumValues.GetValue(idx),
-                        CultureInfo.InvariantCulture);
+                for (int index = 0; index < enumValues.Length; index++) {
+                    itemValue = Convert.ToInt64(enumValues.GetValue(index), CultureInfo.InvariantCulture);
 
-                    for (bitCount = bitIdx = 0, bit = 1; bitIdx < 64;
-                      bitIdx++, bit <<= 1)
+                    for (bitCount = bitIndex = 0, bit = 1; bitIndex < 64;
+                      bitIndex++, bit <<= 1)
                         if ((itemValue & bit) != 0)
                             bitCount++;
 
                     // Ignore zero values (i.e. None) and values that are
                     // combinations of the flag values.
-                    if (bitCount == 1)
-                        ckbListBox.Items.Add(enumValues.GetValue(idx),
-                            (flagsValue & itemValue) == itemValue);
+                    if (bitCount == 1) checkbListBox.Items.Add(enumValues.GetValue(index), (flagsValue & itemValue) == itemValue);
                 }
 
                 // Adjust the height of the list box to show all items or
                 // at most twelve of them.
-                if (ckbListBox.Items.Count < 12)
-                    ckbListBox.Height = ckbListBox.Items.Count *
-                        ckbListBox.ItemHeight;
+                if (checkbListBox.Items.Count < 12)
+                    checkbListBox.Height = checkbListBox.Items.Count *
+                        checkbListBox.ItemHeight;
                 else
-                    ckbListBox.Height = ckbListBox.Items.Count * 12;
+                    checkbListBox.Height = checkbListBox.Items.Count * 12;
 
                 // Display it and let the user edit the value
-                editorService.DropDownControl(ckbListBox);
+                editorService.DropDownControl(checkbListBox);
 
                 // Get the selected values and return the modified enum value
-                for (int idx = 0; idx < ckbListBox.CheckedItems.Count; idx++) {
-                    itemValue = Convert.ToInt64(Enum.ToObject(enumType,
-                        ckbListBox.CheckedItems[idx]),
-                        CultureInfo.InvariantCulture);
-
+                for (int index = 0; index < checkbListBox.CheckedItems.Count; index++) {
+                    itemValue = Convert.ToInt64(Enum.ToObject(enumType, checkbListBox.CheckedItems[index]), CultureInfo.InvariantCulture);
                     newValue = newValue | itemValue;
                 }
             }
@@ -136,10 +131,9 @@ namespace Mountain.classes.controls {
         /// <param name="context">The descriptor context</param>
         /// <returns>Always returns <b>DropDown</b> as long as there is a context and an instance.  Otherwise, it
         /// returns <c>None</c>.</returns>
+        
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
-            if (context != null && context.Instance != null)
-                return UITypeEditorEditStyle.DropDown;
-
+            if (context != null && context.Instance != null) return UITypeEditorEditStyle.DropDown;
             return UITypeEditorEditStyle.None;
         }
     }
