@@ -91,8 +91,6 @@
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(193, 149);
             this.descriptionTextBox.TabIndex = 15;
-            this.descriptionTextBox.TextChanged += new System.EventHandler(this.descriptionTextBox_TextChanged);
-            this.descriptionTextBox.Leave += new System.EventHandler(this.descriptionTextBox_Leave);
             // 
             // label7
             // 
@@ -109,10 +107,6 @@
             this.roomNameTextBox.Name = "roomNameTextBox";
             this.roomNameTextBox.Size = new System.Drawing.Size(193, 20);
             this.roomNameTextBox.TabIndex = 1;
-            this.roomNameTextBox.TextChanged += new System.EventHandler(this.roomNameTextBox_TextChanged);
-            this.roomNameTextBox.Enter += new System.EventHandler(this.roomNameTextBox_Enter);
-            this.roomNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.roomNameTextBox_KeyPress);
-            this.roomNameTextBox.Leave += new System.EventHandler(this.roomNameTextBox_Leave);
             // 
             // label3
             // 
@@ -138,14 +132,11 @@
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.addToolStripMenuItem.Text = "Add";
-            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
-            // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // removeToolStripMenuItem
             // 

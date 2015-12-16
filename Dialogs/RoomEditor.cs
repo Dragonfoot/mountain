@@ -17,14 +17,14 @@ namespace Mountain.Dialogs {
             name = roomNameTextBox.Text = Room.Name;
             description = descriptionTextBox.Text = Room.Description;
             shortTextBox.Text = Room.shortDescription;
-            PopulateExitListBox();
+         //   PopulateExitListBox();
         }
         #endregion
 
         #region roomExitListbox
         // ************************************************************************************
         // begin: room exits listbox
-
+/*
         private void PopulateExitListBox() {
             exitListBox.Items.Clear();
             exitListBox.DisplayMember = "DoorLabel";
@@ -159,7 +159,7 @@ namespace Mountain.Dialogs {
                 descriptionChanged = false;
             }
         }
-
+        */
 
         #endregion
     }

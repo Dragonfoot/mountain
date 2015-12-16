@@ -25,13 +25,13 @@ namespace Mountain.classes {
         public bool Breakable { get; set; }
         [Category("\t Exit Settings"), Description("What type of physical exit is this.")]
         public exitType ExitType { get; set; }
-        [Category("Exit Attributes"), Description("What lock type, if any, does it use.")]
+        [Category("Exit Attributes"), Description("What lock attributes, if any, does it use.")]
         [Editor(typeof(FlagsEnumEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public lockType LockType { get; set; }
-        [Category("Exit Attributes"), Description("What type of door, if any, this is.")]
+        [Category("Exit Attributes"), Description("What type of door attributes, if any, has it.")]
         [Editor(typeof(FlagsEnumEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public doorType DoorType { get; set; }
-        [Category("Exit Attributes"), Description("Player restrictions to access this exit.")]
+        [Category("Exit Attributes"), Description("Restrictions to stop or limit access through this exit.")]
         [Editor(typeof(FlagsEnumEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public exitRestrictions Restrictions { get; set; }  //http://geekswithblogs.net/BlackRabbitCoder/archive/2010/07/22/c-fundamentals-combining-enum-values-with-bit-flags.aspx
         private string roomName, areaName;
@@ -55,6 +55,7 @@ namespace Mountain.classes {
 
         public XmlTextWriter SaveXml(XmlTextWriter writer) {
             writer.WriteStartElement("Exit");
+
             XML.createNode("Name", Name, writer);
             XML.createNode("Description", Description, writer);
             XML.createNode("DoorLabel", DoorLabel, writer);
@@ -81,6 +82,16 @@ namespace Mountain.classes {
                 }
                 writer.WriteEndElement();
             }
+
+            List<string> restrictions = getRestrictionTypeFlags(Restrictions);
+            if (restrictions.Count > 0) {
+                writer.WriteStartElement("Restrictions");
+                foreach (string name in restrictions) {
+                    XML.createNode("Restriction", name, writer);
+                }
+                writer.WriteEndElement();
+            }
+
             writer.WriteEndElement();
             return writer;
         }
@@ -88,6 +99,7 @@ namespace Mountain.classes {
         public void LoadXml(XmlNode node, Room room) {
             Owner = room;
             Area = room.Area;
+
             Name = node["Name"].InnerText;
             Description = node["Description"].InnerText;
             DoorLabel = node["DoorLabel"].InnerText;
@@ -114,6 +126,15 @@ namespace Mountain.classes {
                     DoorType |= (doorType)Enum.Parse(typeof(doorType), doortype.InnerText);
                 }
             }
+
+            var restrictionNode = node.SelectSingleNode("Restrictions");
+            if (restrictionNode != null) {
+                Restrictions = new exitRestrictions();
+                XmlNodeList restrictions = node["Restrictions"].SelectNodes("Restriction");
+                foreach (XmlNode restriction in restrictions) {
+                    Restrictions |= (exitRestrictions)Enum.Parse(typeof(exitRestrictions), restriction.InnerText);
+                }
+            }
         }
 
         public void Validate() {
@@ -136,6 +157,16 @@ namespace Mountain.classes {
             foreach (Enum doortype in Enum.GetValues(typeof(doorType))) {
                 if (value.HasFlag(doortype)) {
                     list.Add(Enum.GetName(typeof(doorType), doortype));
+                }
+            }
+            return list;
+        }
+
+        private List<string> getRestrictionTypeFlags(exitRestrictions value) {
+            List<string> list = new List<string>();
+            foreach (Enum restriction in Enum.GetValues(typeof(exitRestrictions))) {
+                if (value.HasFlag(restriction)) {
+                    list.Add(Enum.GetName(typeof(exitRestrictions), restriction));
                 }
             }
             return list;
