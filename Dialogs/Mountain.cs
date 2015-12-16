@@ -101,7 +101,8 @@ namespace Mountain.Dialogs {
                     }
                     exitEdit.Dispose();
                     break;
-                case "Clear All":  // exits.clear() 
+                case "Clear All":
+                    SelectedRoom.Exits.Clear();
                     break;
                 case "Remove":
                     SelectedRoom.Exits.RemoveAt(SelectedRoom.Exits.FindIndex(item => item.DoorLabel == ((ToolStripSplitButton)sender).Text));
@@ -330,15 +331,20 @@ namespace Mountain.Dialogs {
 
         private void NewContextMenuItem_Click(object sender, EventArgs e) {
             Room newRoom = new Room("New Room", "This is the new room description", SelectedArea);
-            RoomEditor roomEdit = new RoomEditor(newRoom);
-            DialogResult dialogresult = roomEdit.ShowDialog();
-            if (dialogresult == DialogResult.OK) {
-                Function.UpdateRoomEdits(roomEdit.Room, newRoom);
-                SelectedArea.Rooms.Add(newRoom);
-                roomsListBox.Items.Clear();
-                roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
-            }
-            roomEdit.Dispose();
+            SelectedArea.Rooms.Add(newRoom);
+            SelectedRoom = newRoom;
+            roomsListBox.Items.Clear();
+            roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
+            SetEditor();
+        }
+
+        private void RemoveContextMenuItem_Click(object sender, EventArgs e) {
+            // do popup query.. are you sure you want to delete + selectedRoom.Name ? yes, no
+            // selectedArea.Rooms.RemoveAt(get index of selectedRoom)
+            // roomslistbox.items.clear
+            // listbox.addrange
+            // set new selectedRoom
+            // setEditor
         }
 
         private void button2_Click(object sender, EventArgs e) {
@@ -368,12 +374,13 @@ namespace Mountain.Dialogs {
         private void roomDescriptionRichTextBox_ContentsResized(object sender, ContentsResizedEventArgs e) {
             roomDescriptionRichTextBox.Height = e.NewRectangle.Height + 5;
         }
-        
+
     }
+
+
     public class ToolStripOverride : ToolStripProfessionalRenderer {
         public ToolStripOverride() { }
-
-        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { } // swallow event
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e) {
             if (!e.Item.Selected) {
                 base.OnRenderButtonBackground(e);

@@ -65,8 +65,6 @@
             this.LoadContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsTemplateContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.MoveToAreaContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.Console = new System.Windows.Forms.ListBox();
@@ -400,16 +398,14 @@
             this.EditContextMenuItem,
             this.CopyContextMenuItem,
             this.PasteContextMenuItem,
+            this.RemoveContextMenuItem,
             this.ClearContextMenuItem,
             this.toolStripSeparator2,
             this.LoadContextMenuItem,
             this.SaveAsContextMenuItem,
-            this.SaveAsTemplateContextMenuItem,
-            this.toolStripSeparator3,
-            this.MoveToAreaContextMenuItem,
-            this.RemoveContextMenuItem});
+            this.SaveAsTemplateContextMenuItem});
             this.RoomContextMenu.Name = "NewRoom";
-            this.RoomContextMenu.Size = new System.Drawing.Size(155, 236);
+            this.RoomContextMenu.Size = new System.Drawing.Size(155, 230);
             // 
             // NewContextMenuItem
             // 
@@ -466,22 +462,12 @@
             this.SaveAsTemplateContextMenuItem.Size = new System.Drawing.Size(154, 22);
             this.SaveAsTemplateContextMenuItem.Text = "SaveToTemplate";
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(151, 6);
-            // 
-            // MoveToAreaContextMenuItem
-            // 
-            this.MoveToAreaContextMenuItem.Name = "MoveToAreaContextMenuItem";
-            this.MoveToAreaContextMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.MoveToAreaContextMenuItem.Text = "MoveTo";
-            // 
             // RemoveContextMenuItem
             // 
             this.RemoveContextMenuItem.Name = "RemoveContextMenuItem";
             this.RemoveContextMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.RemoveContextMenuItem.Text = "Remove";
+            this.RemoveContextMenuItem.Text = "Delete";
+            this.RemoveContextMenuItem.Click += new System.EventHandler(this.RemoveContextMenuItem_Click);
             // 
             // label3
             // 
@@ -741,13 +727,11 @@
         private System.Windows.Forms.ToolStripMenuItem SaveAsContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveAsTemplateContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LoadContextMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MoveToAreaContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RemoveContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PasteContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClearContextMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label connectedLabel;
