@@ -63,11 +63,21 @@ namespace Mountain.classes {
             XML.createNode("Visible", Convert.ToString(Visible), writer);
             XML.createNode("Breakable", Convert.ToString(Breakable), writer);
             XML.createNode("ExitType", Enum.GetName(typeof(exitType), ExitType), writer);
+
             List<string> locks = getLockTypeFlags(LockType);
             if (locks.Count > 0) {
                 writer.WriteStartElement("Lock");
                 foreach (string name in locks) {
                     XML.createNode("LockType", name, writer);
+                }
+                writer.WriteEndElement();
+            }
+
+            List<string> doors = getDoorTypeFlags(DoorType);
+            if (doors.Count > 0) {
+                writer.WriteStartElement("Door");
+                foreach (string name in doors) {
+                    XML.createNode("DoorType", name, writer);
                 }
                 writer.WriteEndElement();
             }
@@ -86,12 +96,22 @@ namespace Mountain.classes {
             Visible = Convert.ToBoolean(node["Visible"].InnerText);
             Breakable = Convert.ToBoolean(node["Breakable"].InnerText);
             ExitType = (exitType)Enum.Parse(typeof(exitType), node["ExitType"].InnerText);
+
             var lockNode = node.SelectSingleNode("Lock");
             if (lockNode != null) {
                 LockType = new lockType();
                 XmlNodeList locks = node["Lock"].SelectNodes("LockType");
                 foreach (XmlNode locktype in locks) {
                     LockType |= (lockType)Enum.Parse(typeof(lockType), locktype.InnerText);
+                }
+            }
+
+            var doorNode = node.SelectSingleNode("Door");
+            if (doorNode != null) {
+                DoorType = new doorType();
+                XmlNodeList doors = node["Door"].SelectNodes("DoorType");
+                foreach (XmlNode doortype in doors) {
+                    DoorType |= (doorType)Enum.Parse(typeof(doorType), doortype.InnerText);
                 }
             }
         }
@@ -106,6 +126,16 @@ namespace Mountain.classes {
             foreach(Enum locktype in Enum.GetValues(typeof(lockType))) {
                 if (value.HasFlag(locktype)) {
                     list.Add(Enum.GetName(typeof(lockType), locktype));
+                }
+            }
+            return list;
+        }
+
+        private List<string> getDoorTypeFlags(doorType value) {
+            List<string> list = new List<string>();
+            foreach (Enum doortype in Enum.GetValues(typeof(doorType))) {
+                if (value.HasFlag(doortype)) {
+                    list.Add(Enum.GetName(typeof(doorType), doortype));
                 }
             }
             return list;
