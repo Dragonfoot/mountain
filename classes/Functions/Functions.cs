@@ -7,7 +7,7 @@ namespace Mountain.classes.functions {
 
     public static class Function {
 
-        public static string FormatStringArray(Array list) {
+        public static string HumanReadableStringArray(Array list) {
             string names = string.Empty;
             int i = 0;
             foreach (string item in list) {
@@ -59,8 +59,8 @@ namespace Mountain.classes.functions {
         public static bool HasNameThatStartsWith(Array list, string name) {
             foreach (Identity item in list) {
                 string[] names = item.ToString().Split(' ');
-                foreach (string part in names) {
-                    if (part.StartsWith(name, StringComparison.OrdinalIgnoreCase)) return true;
+                foreach (string word in names) {
+                    if (word.StartsWith(name, StringComparison.OrdinalIgnoreCase)) return true;
                 }
             }
             return false;

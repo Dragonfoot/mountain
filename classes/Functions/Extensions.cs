@@ -69,14 +69,15 @@ namespace Mountain.classes.functions {
                 return (T)formatter.Deserialize(stream);
             }
         }
+
         public static void Shuffle<T>(this IList<T> list) { // randomize list of <T>
-            int n = list.Count;
-            while (n > 1) {
-                n--;
-                int k = ThreadedRandom.SafeRandom.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
+            int count = list.Count;
+            while (count > 1) {
+                count--;
+                int random = ThreadedRandom.SafeRandom.Next(count + 1);
+                T value = list[random];
+                list[random] = list[count];
+                list[count] = value;
             }
         }
 
