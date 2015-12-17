@@ -110,11 +110,12 @@ namespace Mountain.classes {
         }
 
         public void CreateExit() {
-            Exit exit = new Exit();
-            exit.Name = this.Name + " Exit";
-            exit.Description = Name + " exit is not yet linked to another room";
-            exit.DoorLabel = Name + " Exit (unassigned)";
-            exit.DoorType = doorType.none;
+            Exit exit = new Exit() {
+                Name = this.Name + " Exit",
+                Description = Name + " exit is not yet linked to another room",
+                DoorLabel = Name + " Exit (unassigned)",
+                DoorType = doorType.none
+            };
             AddExit(exit);
         }
 

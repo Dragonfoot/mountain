@@ -58,14 +58,12 @@
             this.RoomContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.NewContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PasteContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.LoadContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsTemplateContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RemoveContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.Console = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -396,8 +394,6 @@
             this.RoomContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewContextMenuItem,
             this.EditContextMenuItem,
-            this.CopyContextMenuItem,
-            this.PasteContextMenuItem,
             this.RemoveContextMenuItem,
             this.ClearContextMenuItem,
             this.toolStripSeparator2,
@@ -405,7 +401,7 @@
             this.SaveAsContextMenuItem,
             this.SaveAsTemplateContextMenuItem});
             this.RoomContextMenu.Name = "NewRoom";
-            this.RoomContextMenu.Size = new System.Drawing.Size(155, 230);
+            this.RoomContextMenu.Size = new System.Drawing.Size(155, 164);
             // 
             // NewContextMenuItem
             // 
@@ -421,17 +417,12 @@
             this.EditContextMenuItem.Text = "Edit";
             this.EditContextMenuItem.Click += new System.EventHandler(this.EditRoomContextMenuItem_Click);
             // 
-            // CopyContextMenuItem
+            // RemoveContextMenuItem
             // 
-            this.CopyContextMenuItem.Name = "CopyContextMenuItem";
-            this.CopyContextMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.CopyContextMenuItem.Text = "Copy";
-            // 
-            // PasteContextMenuItem
-            // 
-            this.PasteContextMenuItem.Name = "PasteContextMenuItem";
-            this.PasteContextMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.PasteContextMenuItem.Text = "Paste";
+            this.RemoveContextMenuItem.Name = "RemoveContextMenuItem";
+            this.RemoveContextMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.RemoveContextMenuItem.Text = "Delete";
+            this.RemoveContextMenuItem.Click += new System.EventHandler(this.RemoveContextMenuItem_Click);
             // 
             // ClearContextMenuItem
             // 
@@ -461,13 +452,6 @@
             this.SaveAsTemplateContextMenuItem.Name = "SaveAsTemplateContextMenuItem";
             this.SaveAsTemplateContextMenuItem.Size = new System.Drawing.Size(154, 22);
             this.SaveAsTemplateContextMenuItem.Text = "SaveToTemplate";
-            // 
-            // RemoveContextMenuItem
-            // 
-            this.RemoveContextMenuItem.Name = "RemoveContextMenuItem";
-            this.RemoveContextMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.RemoveContextMenuItem.Text = "Delete";
-            this.RemoveContextMenuItem.Click += new System.EventHandler(this.RemoveContextMenuItem_Click);
             // 
             // label3
             // 
@@ -728,8 +712,6 @@
         private System.Windows.Forms.ToolStripMenuItem SaveAsTemplateContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LoadContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RemoveContextMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CopyContextMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem PasteContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClearContextMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Button button1;

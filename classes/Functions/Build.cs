@@ -6,11 +6,12 @@ namespace Mountain.classes.functions {
     public static class Build {
 
         public static Area CreateAdminSection() {
-            Area Administration = new Area();
-            Administration.Name = "Administration Complex";
-            Administration.Description = "One of this worlds most extraordinary wonders. Top minds from all the major centers reside here. " +
+            Area Administration = new Area() {
+                Name = "Administration Complex",
+                Description = "One of this worlds most extraordinary wonders. Top minds from all the major centers reside here. " +
                "Houses the most advanced technological and military equipment available rivaling even Mount Cascade Fortress on " +
-               "Tavastazia's bloodless moon.";
+               "Tavastazia's bloodless moon."
+            };
 
             Room control;
             string name = "Control Center";
@@ -58,11 +59,12 @@ namespace Mountain.classes.functions {
         public static Area AdminArea() {
             string name, description;
 
-            Area area = new Area();
-            area.Name = "Administration Complex";
-            area.Description = "One of this worlds most extraordinary wonders. Top minds from all the major centers reside here. " +
-               "Houses the most advanced technological and military equipment available rivaling even Mount Cascade Fortress on " + 
-               "Tavastazia's bloodless moon."; 
+            Area area = new Area() {
+                Name = "Administration Complex",
+                Description = "One of this worlds most extraordinary wonders. Top minds from all the major centers reside here. " +
+               "Houses the most advanced technological and military equipment available rivaling even Mount Cascade Fortress on " +
+               "Tavastazia's bloodless moon."
+            }; 
 
             Room control;
             name = "Control Center";
@@ -112,12 +114,13 @@ namespace Mountain.classes.functions {
         }
 
         public static void LinkRoomTo(Room fromRoom, Room toRoom) {
-            Exit exit = new Exit();
-            exit.Name = fromRoom.Name + " Exit";
-            exit.Description = exit.Name + " Description";
-            exit.DoorLabel = toRoom.Name;
-            exit.Area = toRoom.Area;
-            exit.Room = toRoom;
+            Exit exit = new Exit() {
+                Name = fromRoom.Name + " Exit",
+                Description = fromRoom.Name + " Description",
+                DoorLabel = toRoom.Name,
+                Area = toRoom.Area,
+                Room = toRoom
+            };
             fromRoom.AddExit(exit);
         }
 

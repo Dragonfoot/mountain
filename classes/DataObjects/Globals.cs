@@ -16,6 +16,11 @@ namespace Mountain.classes.dataobjects {
         none = 0, fighting = 1, stealing = 2, magic = 4, mindpower = 8, taunting = 16, vocalizing = 32
     }
 
+    [Flags]
+    public enum areaRestrictions {
+        none = 0, level = 1, race = 2, classOf = 4, questItem = 8, skillLevel = 16, affiliation = 32
+    }
+
     [Flags] public enum charType {
         none = 0, fighter = 1, ranger = 2, mage = 4, monk = 8, druid = 16, assassin = 32, thief = 64, psychic = 128,
         paladin = 256, bard = 512, alcamist = 1024, cleric = 2048, diplomat = 4096, barbarian = 8192

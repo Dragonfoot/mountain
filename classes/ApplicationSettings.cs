@@ -58,11 +58,12 @@ namespace Mountain.classes {
                             administrator = item.Element("Administrator").Value
                         };
             foreach (var user in users) {
-                Account account = new Account();
-                account.Name = user.name;
-                account.Password = user.password;
-                account.Email = user.email;
-                account.Administrator = Convert.ToBoolean(user.administrator);
+                Account account = new Account() {
+                    Name = user.name,
+                    Password = user.password,
+                    Email = user.email,
+                    Administrator = Convert.ToBoolean(user.administrator)
+                };
                 RegisteredUsers.Add(account);
             }
         }

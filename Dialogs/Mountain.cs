@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using Mountain.classes;
 using Mountain.classes.tcp;
-using Mountain.classes.functions;
 using Mountain.classes.collections;
 using Mountain.classes.dataobjects;
 
@@ -37,11 +36,11 @@ namespace Mountain.Dialogs {
                 connectionPoller.Enabled = true;
                 Console.Items.Add("System: Server has started.");
             }
-            SetEditor();
+            RefreshEditor();
             SyncControls();
         }
 
-        private void SetEditor() {
+        private void RefreshEditor() {
             if (SelectedRoom == null) SelectedRoom = Common.Settings.TheVoid;
             roomNameButton.Text = SelectedRoom.Name;
             roomDescriptionRichTextBox.Clear();
@@ -88,25 +87,26 @@ namespace Mountain.Dialogs {
             switch (e.ClickedItem.Text) {
                 case "Add": // call exit.add dialog with selected room
                     Exit exit;
-                    exit = new Exit();
-                    exit.Area = SelectedRoom.Area;
-                    exit.Owner = SelectedRoom;
-                    ExitEditor exitEdit = new ExitEditor(exit);
-                    exitEdit.currentRoomTextBox.Text = SelectedRoom.Name;
-                    DialogResult dialogresult = exitEdit.ShowDialog();
+                    exit = new Exit() {
+                        Area = SelectedRoom.Area,
+                        Owner = SelectedRoom
+                    };
+                    ExitEditor exitEditor = new ExitEditor(exit);
+                    exitEditor.currentRoomTextBox.Text = SelectedRoom.Name;
+                    DialogResult dialogresult = exitEditor.ShowDialog();
                     if (dialogresult == DialogResult.OK) {
-                        exit = exitEdit.Exit.ShallowCopy();
+                        exit = exitEditor.Exit.ShallowCopy();
                         SelectedRoom.Exits.Add(exit);
-                        SetEditor();
+                        RefreshEditor();
                     }
-                    exitEdit.Dispose();
+                    exitEditor.Dispose();
                     break;
                 case "Clear All":
                     SelectedRoom.Exits.Clear();
                     break;
                 case "Remove":
                     SelectedRoom.Exits.RemoveAt(SelectedRoom.Exits.FindIndex(item => item.DoorLabel == ((ToolStripSplitButton)sender).Text));
-                    SetEditor();
+                    RefreshEditor();
                     break;
                 case "Edit": // popup string editor with clickedItem.text, edit and save
                     break;
@@ -288,7 +288,7 @@ namespace Mountain.Dialogs {
 
         private void roomsListBox_SelectedIndexChanged(object sender, EventArgs e) {
             SelectedRoom = SelectedArea.Rooms.FindName((string)roomsListBox.SelectedItem);
-            SetEditor();
+            RefreshEditor();
         }
 
         private void roomsListBox_MouseDoubleClick(object sender, MouseEventArgs e) {
@@ -335,7 +335,7 @@ namespace Mountain.Dialogs {
             SelectedRoom = newRoom;
             roomsListBox.Items.Clear();
             roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
-            SetEditor();
+            RefreshEditor();
         }
 
         private void RemoveContextMenuItem_Click(object sender, EventArgs e) {
@@ -353,6 +353,7 @@ namespace Mountain.Dialogs {
 
         private void loadXmlButton_Click(object sender, EventArgs e) {
             world.LoadXml(@"/testWorld.xml");
+            RefreshEditor();
         }
 
         public new void Dispose() {

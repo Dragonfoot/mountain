@@ -14,9 +14,10 @@ namespace Mountain.classes.functions {
             try {
                 var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
                 var serializer = new XmlSerializer(item.GetType());
-                var flags = new XmlWriterSettings();
-                flags.Indent = true;
-                flags.OmitXmlDeclaration = true;
+                var flags = new XmlWriterSettings() {
+                    Indent = true,
+                    OmitXmlDeclaration = true
+                };
                 using (var stream = new StringWriter())
                 using (var writer = XmlWriter.Create(stream, flags)) {
                     serializer.Serialize(writer, item, emptyNamepsaces);
@@ -28,13 +29,14 @@ namespace Mountain.classes.functions {
                 Common.Settings.SystemMessageQueue.Push(e.ToString());
             }
         }
-        
+
         public static string ObjectToBasicXml(object item) {
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
             var serializer = new XmlSerializer(item.GetType());
-            var settings = new XmlWriterSettings();
-            settings.Indent = true;
-            settings.OmitXmlDeclaration = true;
+            var settings = new XmlWriterSettings() {
+                Indent = true,
+                OmitXmlDeclaration = true
+            };
             using (var stream = new StringWriter())
             using (var writer = XmlWriter.Create(stream, settings)) {
                 serializer.Serialize(writer, item, emptyNamepsaces);
@@ -45,25 +47,28 @@ namespace Mountain.classes.functions {
         public static void ReCreateRegistryAccounts(string path) {
             RegisteredUsers Registry = new RegisteredUsers();
 
-            Account toetag = new Account();
+            Account toetag = new Account() {
+                Email = "Toetag@thisServer.com",
+                Administrator = true
+            };
             toetag.SetName("Toetag");
             toetag.SetPassword("toetag");
-            toetag.Email = "Toetag@thisServer.com";
-            toetag.Administrator = true;
             Registry.List.Add(toetag);
 
-            Account haystack = new Account();
+            Account haystack = new Account() {
+                Email = "haystack@thisServer.com",
+                Administrator = true
+            };
             haystack.SetName("Haystack");
             haystack.SetPassword("haystack");
-            haystack.Email = "haystack@thisServer.com";
-            haystack.Administrator = true;
             Registry.List.Add(haystack);
 
-            Account bucky = new Account();
+            Account bucky = new Account() {
+                Email = "bucky@thisServer.com",
+                Administrator = false
+            };
             bucky.SetName("Bucky");
             bucky.SetPassword("bucky");
-            bucky.Email = "bucky@thisServer.com";
-            bucky.Administrator = false;
             Registry.List.Add(bucky);
 
             XML.ObjectToXml(Registry, path);

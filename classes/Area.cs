@@ -10,7 +10,7 @@ namespace Mountain.classes {
 
     public class Area : Identity {
         public Rooms Rooms { get; private set; }
-        public bool Active { get; set; } 
+        public AreaSettings Settings;
         private CancellationTokenSource cancellationTokenSource;
 
         public Area() {
@@ -18,7 +18,7 @@ namespace Mountain.classes {
             Rooms = new Rooms(this);
             Name = "new area";
             Description = "new area";
-            Active = true;
+            Settings = new AreaSettings();
             cancellationTokenSource = new CancellationTokenSource();
         }
 
@@ -91,5 +91,28 @@ namespace Mountain.classes {
             }, cancellationToken);
         }
     }
+
+    public class AreaSettings {
+        public areaRestrictions Restrictions { get; set; }
+        public bool Active { get; set; }
+
+        public AreaSettings() {
+            Restrictions = new areaRestrictions();
+            Restrictions = areaRestrictions.skillLevel | areaRestrictions.classOf;
+            Restrictions.Add(areaRestrictions.skillLevel);
+            Active = false;
+        }
+        public XmlTextWriter SaveXml(XmlTextWriter writer) {
+            writer.WriteStartElement("Settings");
+            XML.createNode("Active", Active.ToString(), writer);
+
+            writer.WriteStartElement("Restrictions");
+            writer.WriteEndElement();
+            
+            writer.WriteEndElement();
+            return writer;
+        }
+    }
+
 
 }
