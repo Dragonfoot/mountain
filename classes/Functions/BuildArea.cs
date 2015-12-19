@@ -4,21 +4,30 @@ using Mountain.classes.functions;
 namespace Mountain.classes.Functions {
 
     public class BuildArea {
-        Area area { get; }
-        areaType Type;
+        public Area area { get; private set; }
         Room IncomingLink;
 
         public BuildArea(areaType type, Room fromHere = null) {
-            area = new Area("Undefined Area", "A default undefined area.");
-            Type = type;
             IncomingLink = fromHere;
+            BuildAreaType(type);
+        }
+
+        private void BuildAreaType(areaType type) {
+            switch (type) {
+                case areaType.home:
+                    area = BuildHomeArea();  // setup restrictions, weather, unique stats ...
+                    break;
+                default:
+                    area = new Area("Undefined Area", "A default undefined area.");
+                    break;
+            }
         }
 
         private Room BuildRoomType(roomType type) {
             Room room = new Room(area);
             switch (type) {
                 case roomType.road:
-                    room.roomType = roomType.road;
+                    room.roomType = roomType.road; // set up possible speed limits, healing rates, leveling restrictions...
                     break;
                 case roomType.path:
                     room.roomType = roomType.path;
@@ -46,6 +55,8 @@ namespace Mountain.classes.Functions {
                     break;
                 case roomType.vault:
                     room.roomType = roomType.vault;
+                    break;
+                default: room.roomType = roomType.none;
                     break;
             }
             return room;
