@@ -1,4 +1,5 @@
 ﻿using Mountain.classes.dataobjects;
+using Mountain.classes.functions;
 
 namespace Mountain.classes.Functions {
 
@@ -8,7 +9,7 @@ namespace Mountain.classes.Functions {
         Room LinkTo;
 
         public BuildArea(areaType type, Room linkTo = null) {
-            area = new Area("Test Area", "A test area for command testing.");
+            area = new Area("Undefined Area", "A default undefined area.");
             Type = type;
             LinkTo = linkTo;
         }
@@ -52,6 +53,28 @@ namespace Mountain.classes.Functions {
         }
         private Area BuildHomeArea() {
             Area area = new Area("Home", "Default Home Area.");
+            Room livingRoom = BuildRoomType(roomType.home);
+            Build.LinkTwoRooms(LinkTo, livingRoom);
+            livingRoom.Name = "Living Room";
+            livingRoom.Description = "A warm and quiet room, fireplace alight with golden glow, slow patient crackling and " +
+                "sweet tendrils of smoke emanate gently from within. A couch and two comfortably cushioned chairs cuddle closely " + 
+                "towards the hearths gentleness. An archway brings the comforting smells of cooking in. A worn stairway " +
+                "leads up on your left.";
+            area.Rooms.Add(livingRoom);
+
+            Room hallway = BuildRoomType(roomType.home);
+            Build.LinkTwoRooms(livingRoom, hallway);
+            hallway.Name = "Hallway";
+            hallway.Description = "A dark narrow hallway joins the living room and the kitchen. Two doors, one on either, side break the length of the hall.";
+            area.Rooms.Add(hallway);
+
+            Room bathroom = BuildRoomType(roomType.home);
+            Build.LinkTwoRooms(hallway, bathroom);
+            bathroom.Name = "Little John";
+            bathroom.Description = "The purpose if this room is evident by its plumbing and fixtures. Clean and organized, it still " +
+                "gives off a gentle aroma of lavender, urine, and damp mildew.";
+            area.Rooms.Add(bathroom);
+             
             return area;
         }
     }
