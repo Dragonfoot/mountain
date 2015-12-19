@@ -10,6 +10,7 @@ namespace Mountain.classes {
 
     public class Area : Identity {
         public Rooms Rooms { get; private set; }
+        public areaType Type { get; set; }
         public AreaSettings Settings;
         private CancellationTokenSource cancellationTokenSource;
 

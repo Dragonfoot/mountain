@@ -57,6 +57,10 @@ namespace Mountain.classes.dataobjects {
         white, blackBk, redBk, greenBK, yellowBk, blueBk, magentaBk, cyanBk, whiteBk, clearScreen
     }
 
+    public enum areaType {
+        undefined, random, admin, property, home, shop, bank, cavern, town, tavern, hotel, hovel, clearing
+    }
+
     public enum itemType {
         unknown, weapon, armour, money, consumable, clothing, valuables,
         text, container, ingredients, equipment, none
@@ -81,7 +85,7 @@ namespace Mountain.classes.dataobjects {
 
     public enum equipmentLocation {
         unknown, head, eyes, face, neck, torso, shoulders, arms, wrists, hands, waist, thighs,
-        shins, feet, back, chest, weapon1, weapon2, shield, holding, undergarment
+        shins, feet, back, chest, weapon1, weapon2, shield, holding, undersuite
     }
 
     public enum seasonType {
