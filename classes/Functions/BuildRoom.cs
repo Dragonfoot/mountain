@@ -1,7 +1,7 @@
 ﻿using Mountain.classes.dataobjects;
 using Mountain.classes.functions;
 
-namespace Mountain.classes.Functions {
+namespace Mountain.classes.functions {
 
     public static class BuildRoom {
 

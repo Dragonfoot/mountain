@@ -8,6 +8,7 @@ using Mountain.classes;
 using Mountain.classes.tcp;
 using Mountain.classes.collections;
 using Mountain.classes.dataobjects;
+using Mountain.classes.functions;
 
 namespace Mountain.Dialogs {
 
@@ -20,15 +21,16 @@ namespace Mountain.Dialogs {
         protected int Connections;
 
         public Mountain() {
+            InitializeComponent();
             MessageQueue = new MessageQueue();
             SystemEventQueue = new SystemEventQueue();
             Common.Settings = new ApplicationSettings(MessageQueue, SystemEventQueue);
             MessageQueue.Tag = "System";
-            InitializeComponent();
             MessageQueue.OnMessageReceived += Messages_OnMessageReceived;
             SystemEventQueue.OnEventReceived += Events_OnEventReceived;
             world = BuildWorldAdminSection();
             Common.Settings.World = world;
+            world.Areas.Add(BuildAreas.AreaType(areaType.home, Common.Settings.TheVoid));
             // todo: load last saved world else load default world, if no default, build basic default area
             world.StartAcceptingConnections(world.Port);
             if (world.portListener.Active()) {
@@ -187,7 +189,8 @@ namespace Mountain.Dialogs {
             if (world != null) { world = null; }
             try {
                 world = new World();
-                if(world.Areas.Any()) areaComboBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
+                world.Areas.Add(BuildAreas.AreaType(areaType.home, Common.Settings.TheVoid));
+                if (world.Areas.Any()) areaComboBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                 areaComboBox.SelectedIndex = 0;
                 if (SelectedArea != null) {
                     if (SelectedArea.Rooms.Any()) {

@@ -72,7 +72,7 @@
     </Compile>
     <Compile Include="classes\Controls\FlagsEnumEditor.cs" />
     <Compile Include="classes\DataObjects\ExitData.cs" />
-    <Compile Include="classes\Functions\BuildArea.cs" />
+    <Compile Include="classes\Functions\BuildAreas.cs" />
     <Compile Include="classes\Functions\BuildRoom.cs" />
     <Compile Include="classes\Handlers\CommandDispatcher.cs" />
     <Compile Include="classes\Handlers\Help.cs" />

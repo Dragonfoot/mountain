@@ -1,28 +1,28 @@
 ﻿using Mountain.classes.dataobjects;
 using Mountain.classes.functions;
 
-namespace Mountain.classes.Functions {
+namespace Mountain.classes.functions {
 
-    public class BuildArea {
-        public Area area { get; private set; }
-        Room IncomingLink;
+    public static class BuildAreas {
 
-        public BuildArea(areaType type, Room fromHere = null) {
-            IncomingLink = fromHere;
-            BuildAreaType(type);
+        public static Area AreaType(areaType type, Room fromHere = null) {
+            return BuildAreaType(type, fromHere);
         }
 
-        private void BuildAreaType(areaType type) {
+        private static Area BuildAreaType(areaType type, Room fromHere) {
+            Area area = null;
             switch (type) {
                 case areaType.home:
-                    area = BuildHomeArea();  // setup restrictions, weather, unique stats ...
+                    area = BuildHomeArea(fromHere);  // setup restrictions, weather, unique stats ...
                     break;
                 default:
                     area = new Area("Undefined Area", "A default undefined area.");
                     break;
             }
+            return area;
         }
-        private Area BuildHomeArea() {
+
+        private static Area BuildHomeArea(Room IncomingLink) {
             Area area = new Area("Home", "Default Home Area.");
             Room livingRoom = BuildRoom.Type(roomType.home, area);
             livingRoom.Name = "Living Room";
@@ -68,12 +68,14 @@ namespace Mountain.classes.Functions {
             basement.Name = "Basement";
             basement.Description = "Basement Description";
             Build.LinkTwoRooms(kitchen, basement);
+            kitchen.Exits[1].DoorLabel = "Door";
             area.Rooms.Add(basement);
 
             Room upstairsHall = BuildRoom.Type(roomType.home, area);
             upstairsHall.Name = "Upstairs Hallway";
             upstairsHall.Description = "Upstairs hallway description";
             Build.LinkTwoRooms(livingRoom, upstairsHall);
+            upstairsHall.Exits[0].DoorLabel = "Down Stairs";
             area.Rooms.Add(upstairsHall);
              
             return area;
