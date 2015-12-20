@@ -48,22 +48,25 @@ namespace Mountain.Dialogs {
             roomDescriptionRichTextBox.Clear();
             roomDescriptionRichTextBox.AppendText(SelectedRoom.Description);
 
-            ToolStripSplitButton exitsLabel = new ToolStripSplitButton("Exits:");
-            exitsLabel.AutoToolTip = false;
-            exitsLabel.Height = 16;
-            exitsLabel.Margin = new Padding(6,0,0,0);
+            ToolStripSplitButton exitsLabel = new ToolStripSplitButton("Exits:") {
+                AutoToolTip = false,
+                Height = 16,
+                Margin = new Padding(6, 0, 0, 0)
+            };
             exitsLabel.DropDownItems.Add("Add");
             exitsLabel.DropDownItemClicked += Button_DropDownItemClicked;
             exitsLabel.DropDownItems.Add("Clear All");
 
-            ToolStrip strip = new ToolStrip();
-            strip.Renderer = new ToolStripOverride();
-            strip.GripStyle = ToolStripGripStyle.Hidden;
-            strip.BackColor = System.Drawing.Color.Black;
-            strip.Height = 20;
-            strip.Margin = new Padding(0);
-            strip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            strip.CanOverflow = false;
+            ToolStrip strip = new ToolStrip() {
+                Renderer = new ToolStripOverride(),
+                GripStyle = ToolStripGripStyle.Hidden,
+                BackColor = Color.Black,
+                Height = 20,
+                Margin = new Padding(0),
+                LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow,
+                CanOverflow = false
+            };
+
             exitLayoutPanel.Controls.Clear();
             strip.Items.Add(exitsLabel);
             foreach (Exit exit in SelectedRoom.Exits) {
@@ -71,6 +74,7 @@ namespace Mountain.Dialogs {
                 button.AutoToolTip = false;
                 button.Height = 16;
                 button.Margin = new Padding(0);
+                button.DropDownItems.Add("Rename");
                 button.DropDownItems.Add("Edit");
                 button.DropDownItems.Add("Remove");
                 button.DropDownItemClicked += Button_DropDownItemClicked;
@@ -112,6 +116,8 @@ namespace Mountain.Dialogs {
                     break;
                 case "Edit": // popup string editor with clickedItem.text, edit and save
                     break;
+                case "Rename": break;
+
             }
         }        
 
@@ -173,15 +179,16 @@ namespace Mountain.Dialogs {
 
         private void serverStart(object sender, EventArgs e) { // start
             if (world.portListener.Active()) {
-                listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
+                listenerCheckBox.BackColor = Color.GreenYellow;
                 Console.Items.Add("System: Server is already running.");
-            } else listenerCheckBox.BackColor = System.Drawing.Color.Red;
+            } else listenerCheckBox.BackColor = Color.Red;
 
         }
 
         private void button6_Click(object sender, EventArgs e) { //stop server
             //    world.Shutdown();
             //   world = null;
+            // or world.dispose()
             Console.Items.Add("System: Shutdown not implemented."); // settings.players each player disconnect/save
         }
 
@@ -379,6 +386,9 @@ namespace Mountain.Dialogs {
             roomDescriptionRichTextBox.Height = e.NewRectangle.Height + 5;
         }
 
+        private void roomNameButton_Click(object sender, EventArgs e) {
+            //
+        }
     }
 
 

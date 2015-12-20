@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Mountain.classes {
         public World World;
         public Players Players { get; set; }
         public Room TheVoid { get; set; }
+        public Dictionary<int, KnownColor> MapColors;
         public string AppDirectory { get; private set; }
         public string PlayersDirectory { get { return AppDirectory + Settings.Default.PlayersDirectory; } }
         public string BaseDirectory { get { return AppDirectory + Settings.Default.WorldsDirectory; } }
@@ -39,13 +41,29 @@ namespace Mountain.classes {
         public SystemEventQueue SystemEventQueue;
 
         public ApplicationSettings(MessageQueue messageQueue, SystemEventQueue eventQueue) {
-            InitializeSettings();
+            InitializeDirectories();
             SystemMessageQueue = messageQueue;
             SystemEventQueue = eventQueue;
+            MapColors = new Dictionary<int, KnownColor>();
+            LoadColors();
             Logins = new List<Connection>();
             RegisteredUsers = new RegisteredUsers();
             Players = new Players();
             LoadRegistryAccounts();
+        }
+
+        public void LoadColors() {
+            int i = 0, j = 0;
+            foreach (KnownColor c in Enum.GetValues(typeof(KnownColor))) {
+                if (j <= 26) {
+                    j++;
+                    continue;
+                }
+                if (!c.ToString().StartsWith("Control")) {
+                    MapColors.Add(i, c);
+                    i++;
+                }
+            } 
         }
 
         private void LoadRegistryAccounts() {
@@ -81,7 +99,7 @@ namespace Mountain.classes {
             connection.StartPlayer();
         }
 
-        public void InitializeSettings() {
+        public void InitializeDirectories() {
             AppDirectory = AppDomain.CurrentDomain.BaseDirectory;
             if (!Directory.Exists(BaseDirectory)) { Directory.CreateDirectory(BaseDirectory); }
             if (!Directory.Exists(BuildDirectory)) { Directory.CreateDirectory(BuildDirectory); }

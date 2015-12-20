@@ -11,12 +11,18 @@ namespace Mountain.classes {
     public class Area : Identity {
         public Rooms Rooms { get; private set; }
         public areaType Type { get; set; }
+        public MapSettings MapSettings { get; set; }
         public AreaSettings Settings;
         private CancellationTokenSource cancellationTokenSource;
 
         public Area() {
             ClassType = classObjectType.area;
             Rooms = new Rooms(this);
+            if (Common.Settings.World != null) {
+                MapSettings = new MapSettings(Common.Settings.World.Areas.Count);
+            }else {
+                MapSettings = new MapSettings(0);
+            }
             Name = "new area";
             Description = "new area";
             Settings = new AreaSettings();
@@ -25,6 +31,7 @@ namespace Mountain.classes {
 
         public Area(string name, string description) {
             Rooms = new Rooms(this);
+            MapSettings = new MapSettings(Common.Settings.World.Areas.Count);
             Name = name;
             Description = description;
         }

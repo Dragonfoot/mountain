@@ -82,11 +82,11 @@
             this.loadXmlButton = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.worldPage = new System.Windows.Forms.TabPage();
-            this.consolePage = new System.Windows.Forms.TabPage();
             this.worldTileBoard = new System.Windows.Forms.TableLayoutPanel();
             this.areaPage = new System.Windows.Forms.TabPage();
             this.areaTileBoard = new System.Windows.Forms.TableLayoutPanel();
             this.roomPage = new System.Windows.Forms.TabPage();
+            this.consolePage = new System.Windows.Forms.TabPage();
             this.menuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.editorLayoutPanel.SuspendLayout();
@@ -99,8 +99,8 @@
             this.groupBox2.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.worldPage.SuspendLayout();
-            this.consolePage.SuspendLayout();
             this.areaPage.SuspendLayout();
+            this.consolePage.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -256,11 +256,12 @@
             this.roomNameButton.Location = new System.Drawing.Point(4, 0);
             this.roomNameButton.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.roomNameButton.Name = "roomNameButton";
-            this.roomNameButton.Size = new System.Drawing.Size(804, 26);
+            this.roomNameButton.Size = new System.Drawing.Size(733, 26);
             this.roomNameButton.TabIndex = 0;
             this.roomNameButton.Text = "Room:Name";
             this.roomNameButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.roomNameButton.UseVisualStyleBackColor = true;
+            this.roomNameButton.Click += new System.EventHandler(this.roomNameButton_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -269,7 +270,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 26);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(813, 35);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(744, 35);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // roomDescriptionRichTextBox
@@ -282,7 +283,7 @@
             this.roomDescriptionRichTextBox.Name = "roomDescriptionRichTextBox";
             this.roomDescriptionRichTextBox.ReadOnly = true;
             this.roomDescriptionRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(799, 35);
+            this.roomDescriptionRichTextBox.Size = new System.Drawing.Size(730, 35);
             this.roomDescriptionRichTextBox.TabIndex = 1;
             this.roomDescriptionRichTextBox.Text = "";
             this.roomDescriptionRichTextBox.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.roomDescriptionRichTextBox_ContentsResized);
@@ -293,7 +294,7 @@
             this.exitLayoutPanel.Location = new System.Drawing.Point(0, 61);
             this.exitLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exitLayoutPanel.Name = "exitLayoutPanel";
-            this.exitLayoutPanel.Size = new System.Drawing.Size(804, 23);
+            this.exitLayoutPanel.Size = new System.Drawing.Size(737, 23);
             this.exitLayoutPanel.TabIndex = 2;
             // 
             // flowLayoutPanel2
@@ -303,7 +304,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(4, 88);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(805, 181);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(736, 181);
             this.flowLayoutPanel2.TabIndex = 20;
             // 
             // editorConsole
@@ -314,7 +315,7 @@
             this.editorConsole.Location = new System.Drawing.Point(0, 0);
             this.editorConsole.Margin = new System.Windows.Forms.Padding(0);
             this.editorConsole.Name = "editorConsole";
-            this.editorConsole.Size = new System.Drawing.Size(804, 187);
+            this.editorConsole.Size = new System.Drawing.Size(733, 187);
             this.editorConsole.TabIndex = 0;
             this.editorConsole.Text = "";
             // 
@@ -324,7 +325,7 @@
             this.mobsLayoutPanel.Location = new System.Drawing.Point(4, 273);
             this.mobsLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mobsLayoutPanel.Name = "mobsLayoutPanel";
-            this.mobsLayoutPanel.Size = new System.Drawing.Size(804, 30);
+            this.mobsLayoutPanel.Size = new System.Drawing.Size(733, 30);
             this.mobsLayoutPanel.TabIndex = 4;
             // 
             // label7
@@ -343,7 +344,7 @@
             this.permMobLayoutPanel.Location = new System.Drawing.Point(4, 303);
             this.permMobLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.permMobLayoutPanel.Name = "permMobLayoutPanel";
-            this.permMobLayoutPanel.Size = new System.Drawing.Size(804, 30);
+            this.permMobLayoutPanel.Size = new System.Drawing.Size(733, 30);
             this.permMobLayoutPanel.TabIndex = 3;
             // 
             // label6
@@ -666,17 +667,6 @@
             this.worldPage.Text = "World";
             this.worldPage.UseVisualStyleBackColor = true;
             // 
-            // consolePage
-            // 
-            this.consolePage.Controls.Add(this.panel2);
-            this.consolePage.Location = new System.Drawing.Point(4, 24);
-            this.consolePage.Name = "consolePage";
-            this.consolePage.Padding = new System.Windows.Forms.Padding(3);
-            this.consolePage.Size = new System.Drawing.Size(974, 451);
-            this.consolePage.TabIndex = 1;
-            this.consolePage.Text = "Console";
-            this.consolePage.UseVisualStyleBackColor = true;
-            // 
             // worldTileBoard
             // 
             this.worldTileBoard.AllowDrop = true;
@@ -718,7 +708,7 @@
             this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.worldTileBoard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.worldTileBoard.Location = new System.Drawing.Point(3, 3);
             this.worldTileBoard.Name = "worldTileBoard";
@@ -815,7 +805,7 @@
             this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.areaTileBoard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.areaTileBoard.Location = new System.Drawing.Point(3, 3);
             this.areaTileBoard.Name = "areaTileBoard";
@@ -869,6 +859,17 @@
             this.roomPage.Text = "Room";
             this.roomPage.UseVisualStyleBackColor = true;
             // 
+            // consolePage
+            // 
+            this.consolePage.Controls.Add(this.panel2);
+            this.consolePage.Location = new System.Drawing.Point(4, 24);
+            this.consolePage.Name = "consolePage";
+            this.consolePage.Padding = new System.Windows.Forms.Padding(3);
+            this.consolePage.Size = new System.Drawing.Size(974, 451);
+            this.consolePage.TabIndex = 1;
+            this.consolePage.Text = "Console";
+            this.consolePage.UseVisualStyleBackColor = true;
+            // 
             // Mountain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -912,8 +913,8 @@
             this.groupBox2.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.worldPage.ResumeLayout(false);
-            this.consolePage.ResumeLayout(false);
             this.areaPage.ResumeLayout(false);
+            this.consolePage.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
