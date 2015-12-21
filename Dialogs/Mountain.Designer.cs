@@ -40,7 +40,7 @@
             this.eventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.questToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.areaColorButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -219,7 +219,7 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.GrayText;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.areaColorButton);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label5);
@@ -237,14 +237,14 @@
             this.panel2.Size = new System.Drawing.Size(824, 385);
             this.panel2.TabIndex = 2;
             // 
-            // button3
+            // areaColorButton
             // 
-            this.button3.Location = new System.Drawing.Point(696, 99);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(64, 20);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "Area Color";
-            this.button3.UseVisualStyleBackColor = true;
+            this.areaColorButton.Location = new System.Drawing.Point(696, 99);
+            this.areaColorButton.Name = "areaColorButton";
+            this.areaColorButton.Size = new System.Drawing.Size(64, 20);
+            this.areaColorButton.TabIndex = 27;
+            this.areaColorButton.Text = "Area Color";
+            this.areaColorButton.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -761,7 +761,7 @@
             this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.areaTileBoard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.areaTileBoard.Location = new System.Drawing.Point(3, 3);
             this.areaTileBoard.Name = "areaTileBoard";
@@ -858,7 +858,7 @@
             this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.worldTileBoard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.worldTileBoard.Location = new System.Drawing.Point(3, 3);
             this.worldTileBoard.Name = "worldTileBoard";
@@ -1020,7 +1020,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button areaColorButton;
     }
     }
 
