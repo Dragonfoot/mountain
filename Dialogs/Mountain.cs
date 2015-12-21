@@ -30,7 +30,6 @@ namespace Mountain.Dialogs {
             SystemEventQueue.OnEventReceived += Events_OnEventReceived;
             world = BuildWorldAdminSection();
             Common.Settings.World = world;
-            world.Areas.Add(BuildAreas.AreaType(areaType.home, Common.Settings.TheVoid));
             // todo: load last saved world else load default world, if no default, build basic default area
             world.StartAcceptingConnections(world.Port);
             if (world.portListener.Active()) {

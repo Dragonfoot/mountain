@@ -18,11 +18,7 @@ namespace Mountain.classes {
         public Area() {
             ClassType = classObjectType.area;
             Rooms = new Rooms(this);
-            if (Common.Settings.World != null) {
-                MapSettings = new MapSettings(Common.Settings.World.Areas.Count);
-            }else {
-                MapSettings = new MapSettings(0);
-            }
+            SetColor();
             Name = "new area";
             Description = "new area";
             Settings = new AreaSettings();
@@ -31,11 +27,18 @@ namespace Mountain.classes {
 
         public Area(string name, string description) {
             Rooms = new Rooms(this);
-            MapSettings = new MapSettings(Common.Settings.World.Areas.Count);
+            SetColor();
             Name = name;
             Description = description;
         }
 
+        private void SetColor() {
+            if (Common.Settings.World != null) {
+                MapSettings = new MapSettings(Common.Settings.World.Areas.Count);
+            }else {
+                MapSettings = new MapSettings(0);
+            }
+        }
         public void AddRoom(Room room) {
             room.Area = this;
             Rooms.Add(room);
