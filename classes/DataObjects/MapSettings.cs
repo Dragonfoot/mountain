@@ -2,12 +2,11 @@
 namespace Mountain.classes.dataobjects {
 
     public class MapSettings {
-        public int ColorIndex { get; set; }
-
+        public Color Color { get; set; }
         public Location WorldGrid, AreaGrid;
 
         public MapSettings(int index) {
-            ColorIndex = index;
+            Color = Color.FromKnownColor((KnownColor)index);
             WorldGrid = new Location();
             AreaGrid = new Location();
         }
