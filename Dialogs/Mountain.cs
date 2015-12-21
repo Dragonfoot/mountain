@@ -43,7 +43,7 @@ namespace Mountain.Dialogs {
 
         private void RefreshEditor() {
             if (SelectedRoom == null) SelectedRoom = Common.Settings.TheVoid;
-            roomNameButton.Text = SelectedRoom.Name;
+            roomNameLabel.Text = SelectedRoom.Name;
             roomDescriptionRichTextBox.Clear();
             roomDescriptionRichTextBox.AppendText(SelectedRoom.Description);
 
@@ -394,6 +394,7 @@ namespace Mountain.Dialogs {
         private void roomNameButton_Click(object sender, EventArgs e) {
             //
         }
+        
     }
 
 
