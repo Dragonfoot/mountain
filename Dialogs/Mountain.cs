@@ -19,6 +19,8 @@ namespace Mountain.Dialogs {
         protected Area SelectedArea;
         protected Room SelectedRoom;
         protected int Connections;
+        protected bool nameChanged;
+        protected string name;
 
         public Mountain() {
             InitializeComponent();
@@ -391,10 +393,36 @@ namespace Mountain.Dialogs {
             roomDescriptionRichTextBox.Height = e.NewRectangle.Height + 5;
         }
 
-        private void roomNameButton_Click(object sender, EventArgs e) {
-            //
+
+        private void roomTextBox_TextChanged(object sender, EventArgs e) {
+            if (roomTextBox.Text != name && nameChanged != true)
+                nameChanged = true;
         }
-        
+
+        private void roomTextBox_KeyPress(object sender, KeyPressEventArgs e) {
+
+            switch (e.KeyChar) {
+                case (char)Keys.Return:
+                    nameChanged = true;
+                    break;
+                case (char)Keys.Escape:
+                    nameChanged = false;
+                    roomTextBox.Text = SelectedRoom.Name;
+                    roomTextBox.SelectAll();
+                    break;
+                default:
+                    nameChanged = true;
+                    break;
+            }
+        }
+
+        private void roomTextBox_Leave(object sender, EventArgs e) {
+            if (nameChanged) {
+                SelectedRoom.Name = roomTextBox.Text;
+                nameChanged = false;
+                RefreshEditor();
+            }
+        }
     }
 
 
