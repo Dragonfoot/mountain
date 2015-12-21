@@ -228,9 +228,15 @@ namespace Mountain.Dialogs {
         private void areaComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             string name = areaComboBox.SelectedItem.ToString();
             SelectedArea = world.Areas.Find(area => area.Name == (string)areaComboBox.SelectedItem);
+            areaTextBox.Text = SelectedArea.Name;
             roomsListBox.Items.Clear();
             roomsListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
             SelectedRoom = SelectedArea.Rooms.List[0];
+            if (roomsListBox.Items.Count > 0) {
+                roomsListBox.SelectedIndex = 0;
+                roomTextBox.Text = SelectedRoom.Name;
+            }
+
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
