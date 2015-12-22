@@ -79,7 +79,7 @@ namespace Mountain.Dialogs {
                 button.DropDownItems.Add("Edit");
                 button.DropDownItems.Add("Remove");
                 button.DropDownItemClicked += Button_DropDownItemClicked;
-                button.Click += Button_Click;
+                button.ButtonClick += Button_Click;
                 strip.Items.Add(button);
             }
             exitLayoutPanel.Controls.Add(strip);
@@ -87,7 +87,9 @@ namespace Mountain.Dialogs {
 
         private void Button_Click(object sender, EventArgs e) {
             if (((ToolStripSplitButton)sender).Text == "Exits:") return;
-            // world.findroombyname (sender.text), show room
+            SelectedRoom = Common.Settings.World.GetRoomByName(((ToolStripSplitButton)sender).Text);
+            SelectedArea = SelectedRoom.Area;
+            RefreshEditor();
         }
 
         private void Button_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
@@ -117,7 +119,9 @@ namespace Mountain.Dialogs {
                     break;
                 case "Edit": // popup string editor with clickedItem.text, edit and save
                     break;
-                case "Rename": break;
+                case "Rename":
+                    // popup editor over control
+                    break;
 
             }
         }        
@@ -400,9 +404,9 @@ namespace Mountain.Dialogs {
         }
 
         private void roomTextBox_KeyPress(object sender, KeyPressEventArgs e) {
-
             switch (e.KeyChar) {
                 case (char)Keys.Return:
+                    SelectedRoom.Name = roomNameLabel.Text = roomTextBox.Text;
                     nameChanged = true;
                     break;
                 case (char)Keys.Escape:
@@ -411,6 +415,7 @@ namespace Mountain.Dialogs {
                     roomTextBox.SelectAll();
                     break;
                 default:
+                    roomNameLabel.Text = roomTextBox.Text;
                     nameChanged = true;
                     break;
             }
@@ -418,9 +423,16 @@ namespace Mountain.Dialogs {
 
         private void roomTextBox_Leave(object sender, EventArgs e) {
             if (nameChanged) {
-                SelectedRoom.Name = roomTextBox.Text;
+                SelectedRoom.Name = roomNameLabel.Text = roomTextBox.Text;
                 nameChanged = false;
                 RefreshEditor();
+            }
+        }
+
+        private void roomTextBox_KeyUp(object sender, KeyEventArgs e) {
+            if (nameChanged) {
+                SelectedRoom.Name = roomNameLabel.Text = roomTextBox.Text;
+                nameChanged = false;
             }
         }
     }

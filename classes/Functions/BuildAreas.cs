@@ -30,7 +30,7 @@ namespace Mountain.classes.functions {
                 "sweet tendrils of smoke emanate gently from within. A couch and two comfortably cushioned chairs cuddle closely " + 
                 "towards the hearths gentleness. An archway brings the comforting smells of cooking in. A worn stairway " +
                 "leads up on your left.";
-            if (IncomingLink != null) { Build.LinkTwoRooms(IncomingLink, livingRoom); }
+            if (IncomingLink != null) { Build.LinkRoomTo(IncomingLink, livingRoom); }
             area.Rooms.Add(livingRoom);
 
             Room hallway = BuildRoom.Type(roomType.home, area);

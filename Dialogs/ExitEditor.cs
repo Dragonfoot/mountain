@@ -20,9 +20,11 @@ namespace Mountain.Dialogs {
 
             if (Common.Settings.World.Areas.Any()) {
                 areaComboBox.Items.AddRange(Common.Settings.World.Areas.Select(x => x.Name).ToArray());
-                areaComboBox.SelectedIndex = 0;
+                areaComboBox.SelectedIndex = areaComboBox.Items.IndexOf(SelectedArea.Name);
                 if (SelectedArea.Rooms.Any()) {
-                    if (roomListBox.Items.Count > 0) roomListBox.SelectedIndex = 0;
+                    if (roomListBox.Items.Count > 0) {
+                        roomListBox.SelectedIndex = roomListBox.Items.IndexOf(exit.Owner.Name);
+                    }
                 }
             }
         }
