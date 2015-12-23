@@ -72,6 +72,7 @@ namespace Mountain.Dialogs {
             strip.Items.Add(exitsLabel);
             foreach (Exit exit in SelectedRoom.Exits) {
                 ToolStripSplitButton button = new ToolStripSplitButton(exit.ToString());
+                button.Tag = exit;
                 button.AutoToolTip = false;
                 button.Height = 16;
                 button.Margin = new Padding(0);
@@ -87,7 +88,7 @@ namespace Mountain.Dialogs {
 
         private void Button_Click(object sender, EventArgs e) {
             if (((ToolStripSplitButton)sender).Text == "Exits:") return;
-            SelectedRoom = Common.Settings.World.GetRoomByName(((ToolStripSplitButton)sender).Text);
+            SelectedRoom = ((Exit)((ToolStripSplitButton)sender).Tag).Room;
             SelectedArea = SelectedRoom.Area;
             RefreshEditor();
         }

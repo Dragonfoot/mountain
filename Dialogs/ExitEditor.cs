@@ -40,6 +40,7 @@ namespace Mountain.Dialogs {
         }
 
         private void roomListBox_SelectedIndexChanged(object sender, EventArgs e) {
+            if (roomListBox.SelectedIndex == -1) return;
             string name = linkRoomTextBox.Text = roomListBox.Items[roomListBox.SelectedIndex].ToString();
             if (name != "None") {
                 Room room = Common.Settings.World.GetRoomByName(name);
@@ -55,7 +56,13 @@ namespace Mountain.Dialogs {
         }
 
         private void linkDoorLabelTextBox_KeyPress(object sender, KeyPressEventArgs e) {
-            if (e.KeyChar == (char)Keys.Return) Exit.DoorLabel = linkDoorLabelTextBox.Text;
+            switch (e.KeyChar) {
+                case (char)Keys.Return:
+                    Exit.DoorLabel = linkDoorLabelTextBox.Text;
+                    break;
+                default: Exit.DoorLabel = linkDoorLabelTextBox.Text;
+                    break;
+            }
             propertyGrid.Refresh();
         }
 
