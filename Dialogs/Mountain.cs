@@ -94,6 +94,8 @@ namespace Mountain.Dialogs {
         }
 
         private void Button_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
+            ExitEditor exitEditor;
+            DialogResult dialogResult;
             switch (e.ClickedItem.Text) {
                 case "Add": // call exit.add dialog with selected room
                     Exit exit;
@@ -101,10 +103,10 @@ namespace Mountain.Dialogs {
                         Area = SelectedRoom.Area,
                         Owner = SelectedRoom
                     };
-                    ExitEditor exitEditor = new ExitEditor(exit);
+                    exitEditor = new ExitEditor(exit);
                     exitEditor.currentRoomTextBox.Text = SelectedRoom.Name;
-                    DialogResult dialogresult = exitEditor.ShowDialog();
-                    if (dialogresult == DialogResult.OK) {
+                    dialogResult = exitEditor.ShowDialog();
+                    if (dialogResult == DialogResult.OK) {
                         exit = exitEditor.Exit.ShallowCopy();
                         SelectedRoom.Exits.Add(exit);
                         RefreshEditor();
@@ -118,7 +120,16 @@ namespace Mountain.Dialogs {
                     SelectedRoom.Exits.RemoveAt(SelectedRoom.Exits.FindIndex(item => item.DoorLabel == ((ToolStripSplitButton)sender).Text));
                     RefreshEditor();
                     break;
-                case "Edit": // popup string editor with clickedItem.text, edit and save
+                case "Edit":
+                    Exit currentExit = (Exit)e.ClickedItem.OwnerItem.Tag;
+                    exitEditor = new ExitEditor(currentExit);
+                    exitEditor.currentRoomTextBox.Text = SelectedRoom.Name;
+                    dialogResult = exitEditor.ShowDialog();
+                    if (dialogResult == DialogResult.OK) {
+                        currentExit = exitEditor.Exit.ShallowCopy();
+                        RefreshEditor();
+                    }
+                    exitEditor.Dispose();
                     break;
                 case "Rename":
                     // popup editor over control
