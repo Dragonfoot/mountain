@@ -35,7 +35,7 @@ namespace Mountain.Dialogs {
             roomListBox.Items.Clear();
             roomListBox.Items.Add("None");
             roomListBox.Items.AddRange(SelectedArea.Rooms.Where(room => room.Name != Exit.Owner.Name).ToArray());
-            if (roomListBox.Items.Count > 0) roomListBox.SelectedIndex = 0;
+            if (roomListBox.Items.Count > 0) roomListBox.SelectedIndex = roomListBox.Items.IndexOf(Exit.Owner.Name);
             propertyGrid.Refresh();
         }
 
