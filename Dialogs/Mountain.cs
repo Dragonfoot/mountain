@@ -56,7 +56,7 @@ namespace Mountain.Dialogs {
             };
             exitsLabel.DropDownItems.Add("Add");
             exitsLabel.DropDownItemClicked += Button_DropDownItemClicked;
-            exitsLabel.DropDownItems.Add("Clear All");
+            exitsLabel.DropDownItems.Add("Remove All");
 
             ToolStrip strip = new ToolStrip() {
                 Renderer = new ToolStripOverride(),
@@ -76,7 +76,6 @@ namespace Mountain.Dialogs {
                 button.AutoToolTip = false;
                 button.Height = 16;
                 button.Margin = new Padding(0);
-                button.DropDownItems.Add("Rename");
                 button.DropDownItems.Add("Edit");
                 button.DropDownItems.Add("Remove");
                 button.DropDownItemClicked += Button_DropDownItemClicked;
@@ -104,7 +103,6 @@ namespace Mountain.Dialogs {
                         Owner = SelectedRoom
                     };
                     exitEditor = new ExitEditor(exit);
-                    exitEditor.currentRoomTextBox.Text = SelectedRoom.Name;
                     dialogResult = exitEditor.ShowDialog();
                     if (dialogResult == DialogResult.OK) {
                         exit = exitEditor.Exit.ShallowCopy();
@@ -113,7 +111,7 @@ namespace Mountain.Dialogs {
                     }
                     exitEditor.Dispose();
                     break;
-                case "Clear All":
+                case "Remove All":
                     SelectedRoom.Exits.Clear();
                     break;
                 case "Remove":
@@ -123,7 +121,6 @@ namespace Mountain.Dialogs {
                 case "Edit":
                     Exit currentExit = (Exit)e.ClickedItem.OwnerItem.Tag;
                     exitEditor = new ExitEditor(currentExit);
-                    exitEditor.currentRoomTextBox.Text = SelectedRoom.Name;
                     dialogResult = exitEditor.ShowDialog();
                     if (dialogResult == DialogResult.OK) {
                         currentExit = exitEditor.Exit.ShallowCopy();
@@ -131,10 +128,6 @@ namespace Mountain.Dialogs {
                     }
                     exitEditor.Dispose();
                     break;
-                case "Rename":
-                    // popup editor over control
-                    break;
-
             }
         }        
 

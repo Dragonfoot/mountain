@@ -16,7 +16,6 @@ namespace Mountain.Dialogs {
             Exit = exit.ShallowCopy();
             propertyGrid.SelectedObject = Exit;
             SelectedArea = Exit.Area;
-            currentRoomTextBox.Text = exit.Owner.Name;
 
             if (Common.Settings.World.Areas.Any()) {
                 areaComboBox.Items.AddRange(Common.Settings.World.Areas.Select(x => x.Name).ToArray());
@@ -41,7 +40,7 @@ namespace Mountain.Dialogs {
 
         private void roomListBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (roomListBox.SelectedIndex == -1) return;
-            string name = linkRoomTextBox.Text = roomListBox.Items[roomListBox.SelectedIndex].ToString();
+            string name = roomListBox.Items[roomListBox.SelectedIndex].ToString();
             if (name != "None") {
                 Room room = Common.Settings.World.GetRoomByName(name);
                 linkDoorLabelTextBox.Text = room.Name;
@@ -49,11 +48,7 @@ namespace Mountain.Dialogs {
                 Exit.Room = room;
             }
             propertyGrid.Refresh();
-        }
-
-        private void returnLinkCheckBox_CheckedChanged(object sender, EventArgs e) {
-            if (returnLinkCheckBox.Checked) returnLinkCheckBox.Text = "Two Way Link"; else returnLinkCheckBox.Text = "One Way Link";
-        }
+        }      
 
         private void linkDoorLabelTextBox_KeyPress(object sender, KeyPressEventArgs e) {
             switch (e.KeyChar) {
