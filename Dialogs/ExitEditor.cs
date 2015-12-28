@@ -20,11 +20,6 @@ namespace Mountain.Dialogs {
             if (Common.Settings.World.Areas.Any()) {
                 areaComboBox.Items.AddRange(Common.Settings.World.Areas.Select(x => x.Name).ToArray());
                 areaComboBox.SelectedIndex = areaComboBox.Items.IndexOf(SelectedArea.Name);
-                if (SelectedArea.Rooms.Any()) {
-                    if (roomListBox.Items.Count > 0) {
-                        roomListBox.SelectedIndex = roomListBox.Items.IndexOf(exit.Owner.Name);
-                    }
-                }
             }
         }
 
@@ -33,7 +28,7 @@ namespace Mountain.Dialogs {
             SelectedArea = Common.Settings.World.Areas.Find(area => area.Name == (string)areaComboBox.SelectedItem);
             roomListBox.Items.Clear();
             roomListBox.Items.Add("None");
-            roomListBox.Items.AddRange(SelectedArea.Rooms.Where(room => room.Name != Exit.Owner.Name).ToArray());
+            roomListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
             if (roomListBox.Items.Count > 0) roomListBox.SelectedIndex = roomListBox.Items.IndexOf(Exit.Owner.Name);
             propertyGrid.Refresh();
         }
