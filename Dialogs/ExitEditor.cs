@@ -16,7 +16,6 @@ namespace Mountain.Dialogs {
             Exit = exit.ShallowCopy();
             propertyGrid.SelectedObject = Exit;
             SelectedArea = Exit.Area;
-
             if (Common.Settings.World.Areas.Any()) {
                 areaComboBox.Items.AddRange(Common.Settings.World.Areas.Select(x => x.Name).ToArray());
                 areaComboBox.SelectedIndex = areaComboBox.Items.IndexOf(SelectedArea.Name);
@@ -27,7 +26,6 @@ namespace Mountain.Dialogs {
             string name = areaComboBox.SelectedItem.ToString();
             SelectedArea = Common.Settings.World.Areas.Find(area => area.Name == (string)areaComboBox.SelectedItem);
             roomListBox.Items.Clear();
-            roomListBox.Items.Add("None");
             roomListBox.Items.AddRange(SelectedArea.Rooms.Select(room => room.Name).ToArray());
             if (roomListBox.Items.Count > 0) roomListBox.SelectedIndex = roomListBox.Items.IndexOf(Exit.Owner.Name);
             propertyGrid.Refresh();
