@@ -9,6 +9,8 @@ using Mountain.classes.tcp;
 using Mountain.classes.collections;
 using Mountain.classes.dataobjects;
 using Mountain.classes.functions;
+using Mountain.classes.mobs;
+using Mountain.classes.mobs.animals;
 
 namespace Mountain.Dialogs {
 
@@ -35,7 +37,7 @@ namespace Mountain.Dialogs {
             // todo: load last saved world else load default world, if no default, build basic default area
             world.StartAcceptingConnections(world.Port);
             if (world.portListener.Active()) {
-                listenerCheckBox.BackColor = System.Drawing.Color.GreenYellow;
+                listenerCheckBox.BackColor = Color.GreenYellow;
                 connectionPoller.Enabled = true;
                 Console.Items.Add("System: Server has started.");
             }
@@ -90,6 +92,7 @@ namespace Mountain.Dialogs {
             SelectedRoom = ((Exit)((ToolStripSplitButton)sender).Tag).Room;
             SelectedArea = SelectedRoom.Area;
             RefreshEditor();
+            SyncControls();
         }
 
         private void Button_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e) {
@@ -108,23 +111,27 @@ namespace Mountain.Dialogs {
                         exit = exitEditor.Exit.ShallowCopy();
                         SelectedRoom.Exits.Add(exit);
                         RefreshEditor();
+                        SyncControls();
                     }
                     exitEditor.Dispose();
                     break;
                 case "Remove All":
                     SelectedRoom.Exits.Clear();
+                    RefreshEditor();
+                    SyncControls();
                     break;
                 case "Remove":
                     SelectedRoom.Exits.RemoveAt(SelectedRoom.Exits.FindIndex(item => item.DoorLabel == ((ToolStripSplitButton)sender).Text));
                     RefreshEditor();
+                    SyncControls();
                     break;
                 case "Edit":
-                    Exit currentExit = (Exit)e.ClickedItem.OwnerItem.Tag;
-                    exitEditor = new ExitEditor(currentExit);
+                    exitEditor = new ExitEditor((Exit)e.ClickedItem.OwnerItem.Tag);
                     dialogResult = exitEditor.ShowDialog();
                     if (dialogResult == DialogResult.OK) {
-                        currentExit = exitEditor.Exit.ShallowCopy();
+                        e.ClickedItem.OwnerItem.Tag = exitEditor.Exit.ShallowCopy();
                         RefreshEditor();
+                        SyncControls();
                     }
                     exitEditor.Dispose();
                     break;
@@ -329,10 +336,9 @@ namespace Mountain.Dialogs {
             }
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-        //    string xml = SelectedArea.ToXml();
-            Console.Items.Clear();
-        //    logRichTextBox.AppendText(xml);
+        private void mobButton_Click(object sender, EventArgs e) {
+            Mob dog = new Dog();
+            if (SelectedRoom != null) SelectedRoom.AddMob(dog);
         }
 
         private void connectionPoller_Tick(object sender, EventArgs e) {

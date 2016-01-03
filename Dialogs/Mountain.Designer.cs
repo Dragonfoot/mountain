@@ -78,7 +78,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.startServer = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.mobButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.connectedListBox = new System.Windows.Forms.ListBox();
             this.connectedLabel = new System.Windows.Forms.Label();
@@ -599,15 +599,15 @@
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.serverStart);
             // 
-            // button1
+            // mobButton
             // 
-            this.button1.Location = new System.Drawing.Point(886, 451);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "AreaToXml";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.mobButton.Location = new System.Drawing.Point(886, 451);
+            this.mobButton.Name = "mobButton";
+            this.mobButton.Size = new System.Drawing.Size(75, 23);
+            this.mobButton.TabIndex = 16;
+            this.mobButton.Text = "Load Mob";
+            this.mobButton.UseVisualStyleBackColor = true;
+            this.mobButton.Click += new System.EventHandler(this.mobButton_Click);
             // 
             // groupBox2
             // 
@@ -748,7 +748,7 @@
             this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.areaTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.areaTileBoard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.areaTileBoard.Location = new System.Drawing.Point(3, 3);
             this.areaTileBoard.Name = "areaTileBoard";
@@ -891,7 +891,7 @@
             this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.worldTileBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.worldTileBoard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.worldTileBoard.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.worldTileBoard.Location = new System.Drawing.Point(3, 3);
@@ -993,7 +993,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.menuStrip);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.mobButton);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1068,7 +1068,7 @@
         private System.Windows.Forms.ToolStripMenuItem RemoveContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClearContextMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button mobButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label connectedLabel;
         private System.Windows.Forms.Label label4;

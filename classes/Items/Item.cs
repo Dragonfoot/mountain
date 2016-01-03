@@ -8,12 +8,13 @@ namespace Mountain.classes.Items {
         public bool holdable { get; set; }
         public bool breakable { get; set; }
         public bool consumable { get; set; }
+        public int protection { get; set; }
         public int value { get; set; }
 
         public Item() {
             ClassType = classObjectType.item;
             Name = "new item";
-            Description = "new generic unknown item";
+            Description = "new generic item.";
         }       
     }
 
@@ -24,25 +25,24 @@ namespace Mountain.classes.Items {
             base.ItemType = itemType.container;
             this.items = new ConcurrentBag<Item>(); 
         }
-        protected string Save(string txt) {
-            return txt;
-        }
-        protected string Load(string txt) {
-            return txt;
-        }
 
     }
-    class ItemWeapon : Item {
+    public class Weapon : Item {
     }
-    class ItemMoney : Item {
+    public class Money : Item {
     }
-    class ItemText : Item {
+    public class Note : Item {
     }
-    class ItemConsumable : Item {
+    public class Consumable : Item {
     }
-    class ItemClothing : Item {
+
+    public class Clothing : Item {
+        public Clothing() {
+            base.ItemType = itemType.clothing;
+        }
     }
-    class ItemValuables : Item {
+
+    public class Valuable : Item {
     }
 
 }
