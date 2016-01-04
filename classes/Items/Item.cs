@@ -8,7 +8,7 @@ namespace Mountain.classes.Items {
         public bool holdable { get; set; }
         public bool breakable { get; set; }
         public bool consumable { get; set; }
-        public int protection { get; set; }
+        public float protection { get; set; }
         public int value { get; set; }
 
         public Item() {

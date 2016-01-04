@@ -1,13 +1,13 @@
 ﻿using Mountain.classes.dataobjects;
 using Mountain.classes.Items;
 
-namespace Mountain.classes.mobs.animals {
+namespace Mountain.classes.mobs.mammal {
 
-    public class Dog : Mob {
+    public class Canine : Mob {
 
-        public Dog() {
-            Name = "Dog";
-            Description = "A quick energetic mutt.";
+        public Canine(string name = null, string description = null) {
+            Name = (name == null) ? "Canine" : name;
+            Description = (description == null ) ? "A quick energetic mutt." : description;
             Inventory.Add(new Collar());
         }
     }
@@ -17,7 +17,7 @@ namespace Mountain.classes.mobs.animals {
         public Collar() {
             locationHook = equipmentLocation.neck;
             value = 5;
-            protection = 1;
+            protection = 0.5f;
             Name = "Collar";
             Description = "Simple leather collar";
         }

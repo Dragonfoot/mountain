@@ -6,10 +6,11 @@ namespace Mountain.classes.mobs {
 
     public class Underling : Identity { // mob precursor
         public Room Room; 
-        public int Health { get; set; }
-        public int Strength { get; set; }
-        public int Intellegence { get; set; }          
-        public int Level { get; set; }
+        public int Health { get; set; }  // dies at 0
+        public int Strength { get; set; }  // carry, stamina, conditioning
+        public int Intellegence { get; set; } // skills, spells, awareness         
+        public int Level { get; set; }  // dexterity, experience, competence
+        public int Attack { get; set; } // fighting ability, hit strength
 
         public ConcurrentBag<Item> Inventory { get; set; }
         public delegate void CommandHandler(object myObject, string message);
@@ -17,13 +18,12 @@ namespace Mountain.classes.mobs {
 
         public Underling() {
             ClassType = classObjectType.mob;
-            Name = "Underling";
-            Description = "This is a new Underling.";
             Inventory = new ConcurrentBag<Item>();
-            Health = 10;
-            Strength = 5;
-            Intellegence = 5;
+            Health = 6;
+            Strength = 3;
+            Intellegence = 3;
             Level = 1;
+            Attack = 0;
         }
     }
 }
