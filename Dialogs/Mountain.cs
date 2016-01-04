@@ -10,7 +10,7 @@ using Mountain.classes.collections;
 using Mountain.classes.dataobjects;
 using Mountain.classes.functions;
 using Mountain.classes.mobs;
-using Mountain.classes.mobs.mammal;
+using Mountain.classes.mobs.mammals;
 
 namespace Mountain.Dialogs {
 
@@ -337,8 +337,9 @@ namespace Mountain.Dialogs {
         }
 
         private void mobButton_Click(object sender, EventArgs e) {
-            Mob dog = new Canine();
-            if (SelectedRoom != null) SelectedRoom.AddMob(dog);
+            Mob guardDog = new Canine("Guard Dog", "A nasty looking mutt.");
+            guardDog.Inventory.Add(new Collar());
+            if (SelectedRoom != null) SelectedRoom.AddMob(guardDog);
         }
 
         private void connectionPoller_Tick(object sender, EventArgs e) {

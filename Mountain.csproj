@@ -78,7 +78,7 @@
     <Compile Include="classes\Handlers\CommandDispatcher.cs" />
     <Compile Include="classes\Handlers\Help.cs" />
     <Compile Include="classes\Handlers\Socials.cs" />
-    <Compile Include="classes\Mobs\Mammal\Canine.cs" />
+    <Compile Include="classes\Mobs\Mammals\Canine.cs" />
     <Compile Include="Dialogs\AreaForm.cs">
       <SubType>Form</SubType>
     </Compile>
