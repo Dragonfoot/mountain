@@ -17,8 +17,8 @@ namespace Mountain.classes.mobs.mammals {
             locationHook = equipmentLocation.neck;
             value = 5;
             protection = 0.5f;
-            Name = "Collar";
-            Description = "Simple leather collar";
+            Name = "Spiked Collar";
+            Description = "Thick leather collar with embedded spikes encircling it.";
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Mountain.classes.Handlers {
+namespace Mountain.classes.handlers {
 
     public class Help {
         private Dictionary<string, string> List;

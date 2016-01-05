@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using Mountain.classes.dataobjects;
 using Mountain.classes.Items;
+using Mountain.classes.handlers;
 
 namespace Mountain.classes.mobs {
 
@@ -14,11 +15,13 @@ namespace Mountain.classes.mobs {
 
         public ConcurrentBag<Item> Inventory { get; set; }
         public delegate void CommandHandler(object myObject, string message);
-        public CommandHandler Commands;
+        public CommandHandler Handler;
+        public MobCommands Commands;
 
         public Underling() {
             ClassType = classObjectType.mob;
             Inventory = new ConcurrentBag<Item>();
+            Commands = new MobCommands();
             Health = 6;
             Strength = 3;
             Intellegence = 3;

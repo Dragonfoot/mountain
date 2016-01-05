@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Mountain.classes.handlers {
 
-    public class CommandDispatcher {
+    public class MobCommands {
 
-        public CommandDispatcher() {
+        public MobCommands() {
         }
     }
 }

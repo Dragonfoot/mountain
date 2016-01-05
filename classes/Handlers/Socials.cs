@@ -1,6 +1,6 @@
 ﻿using Mountain.classes.tcp;
 
-namespace Mountain.classes.Handlers {
+namespace Mountain.classes.handlers {
 
     public class Socials {
         string WhatYouSee, WhatTheySee, WhatHeSees;
