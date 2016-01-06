@@ -15,17 +15,17 @@ using Mountain.classes.tcp;
 namespace Mountain.classes {
     
     public class Room : Identity, IDisposable {
+        public Area Area { get; set; }
+        public List<Exit> Exits { get; set; }
+        public PlayerEventQueue Messages;
         public ConcurrentBag<Mob> Mobs { get; set; }
         public ConcurrentBag<Item> Items { get; set; }
-        public PlayerEventQueue Messages;
-        public List<Exit> Exits { get; set; }
         public Players Players { get; set; }
-        public Area Area { get; set; }
         public roomType roomType { get; set; }
         public roomRestrictions roomRestrictons { get; set; }
         public roomConditions roomConditions { get; set; }
         public string shortDescription { get; set; }
-        public string Tag { get; set; }
+        public object Tag { get; set; }
 
         public Room(Area area) {
             InitializeRoom();
@@ -138,7 +138,7 @@ namespace Mountain.classes {
             XML.createNode("Name", Name, writer);
             XML.createNode("Description", Description, writer);
             XML.createNode("ShortDescription", shortDescription, writer);
-            XML.createNode("Tag", Tag, writer);
+            XML.createNode("Tag", Tag.ToString(), writer);
             XML.createNode("AreaName", Area.Name, writer);
             XML.createNode("RoomName", Name, writer);
             if(Exits.Count > 0) {

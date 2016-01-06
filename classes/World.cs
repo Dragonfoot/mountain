@@ -11,12 +11,12 @@ using Mountain.classes.functions;
 namespace Mountain.classes {
 
     public class World : Identity, IDisposable {
-        private CancellationTokenSource cancellationTokenSource;
         public List<Area> Areas;
-        protected ListBox Console;
         public int Connections { get; private set; }
         public TcpServerListener portListener;
         public int Port;
+        private CancellationTokenSource cancellationTokenSource;
+        protected ListBox Console;
 
         public World() {
             InitializeSettings();
@@ -143,14 +143,14 @@ namespace Mountain.classes {
             }
         }
 
-        public Area GetAreaByName(string name) {
+        public Area AreaByName(string name) {
             foreach(Area area in Areas) {
                 if (area.Name == name) return area;
             }
             return null;
         }
 
-        public Room GetRoomByName(string name) {
+        public Room RoomByName(string name) {
             foreach (Area area in Areas) {
                 foreach (Room room in area.Rooms) {
                     if (room.Name == name) return room;                    
@@ -159,8 +159,8 @@ namespace Mountain.classes {
             return null;
         }
 
-        public string GetAreaNameByRoomName(string name) {
-            Room room = GetRoomByName(name);
+        public string AreaNameByRoomName(string name) {
+            Room room = RoomByName(name);
             if (room == null) return null;
             return room.Area.Name;
         }

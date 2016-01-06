@@ -22,11 +22,11 @@ namespace Mountain.classes.handlers {
         }
 
         public void InvokeCommand(string verb, Packet packet) {
-            if (RoomCommands.Keys.Any(key => key.StartsWith(verb))) {
+            if (RoomCommands.Keys.Any(key => key.StartsWith(verb, System.StringComparison.CurrentCulture))) {
                 RoomCommands.InvokeCommand(verb, packet);
                 return;
             }
-            if (PlayerCommands.Keys.Any(key => key.StartsWith(verb))) {
+            if (PlayerCommands.Keys.Any(key => key.StartsWith(verb, System.StringComparison.CurrentCulture))) {
                 PlayerCommands.InvokeCommand(verb, packet);
                 return;
             }
@@ -36,8 +36,8 @@ namespace Mountain.classes.handlers {
         }
 
         public bool IsCommand(string verb) {
-            if (RoomCommands.Keys.Any(key => key.StartsWith(verb))) return true;            
-            if (PlayerCommands.Keys.Any(key => key.StartsWith(verb))) return true;            
+            if (RoomCommands.Keys.Any(key => key.StartsWith(verb, System.StringComparison.CurrentCulture))) return true;          
+            if (PlayerCommands.Keys.Any(key => key.StartsWith(verb, System.StringComparison.CurrentCulture))) return true;            
             return false;
         }
     } 

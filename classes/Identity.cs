@@ -15,8 +15,6 @@ namespace Mountain.classes {
         public classObjectType ClassType { get; set; }
 
         public Identity() {
-            ClassType = classObjectType.unknown;
-            ItemType = itemType.none;
         } 
     }
 }

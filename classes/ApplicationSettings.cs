@@ -59,7 +59,7 @@ namespace Mountain.classes {
                     j++;
                     continue;
                 }
-                if (!c.ToString().StartsWith("Control")) {
+                if (!c.ToString().StartsWith("Control", System.StringComparison.CurrentCulture)) {
                     MapColors.Add(i, c);
                     i++;
                 }

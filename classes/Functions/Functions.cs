@@ -7,9 +7,8 @@ namespace Mountain.classes.functions {
 
     public static class Function {
 
-        public static string HumanReadableStringArray(Array list) {
-            string names = string.Empty;
-            int i = 0;
+        public static string ReadableString(Array list) {
+            string names = string.Empty; int i = 0;
             foreach (string item in list) {
                 names += item;
                 if (i != list.Length) { names += ", "; }
@@ -20,8 +19,7 @@ namespace Mountain.classes.functions {
         }
 
         public static string GetNames(Array list) {
-            string names = string.Empty;
-            int i = 1;
+            string names = string.Empty; int i = 1;
             foreach (Identity item in list) {
                 names = names + item.Name;
                 if (i != list.Length) { names = names + ", "; }
@@ -31,7 +29,7 @@ namespace Mountain.classes.functions {
             return names;
         }
 
-        public static IEnumerable<T> GetValues<T>() { // loop through enums: var values = GetValues<Foos>();
+        public static IEnumerable<T> GetValues<T>() {
             return (T[])Enum.GetValues(typeof(T));
         }
 
@@ -44,8 +42,7 @@ namespace Mountain.classes.functions {
         }
 
         public static string GetOtherNames(Array list, string name) {
-            string names = string.Empty;
-            int i = 1;
+            string names = string.Empty; int i = 1;
             foreach (Identity item in list) {
                 if(item.Name == name) { i++; continue; }
                 names = names + item.Name;

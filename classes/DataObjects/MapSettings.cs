@@ -13,6 +13,6 @@ namespace Mountain.classes.dataobjects {
     }
 
     public struct Location {
-        public int row, col;
+        public int row, column;
     }
 }

@@ -232,7 +232,7 @@ namespace Mountain.Dialogs {
             DialogResult dialogresult = areaForm.ShowDialog();
             if (dialogresult == DialogResult.OK) {
                 world.Areas.Add(areaForm.area);
-                Common.Settings.TheVoid = areaForm.area.Rooms.FindTag("Void");
+                Common.Settings.TheVoid = areaForm.area.Rooms.FindByTag("Void");
                 areaComboBox.Items.AddRange(world.Areas.Select(x => x.Name).ToArray());
                 areaComboBox.SelectedIndex = 0;
             } else {
@@ -294,7 +294,7 @@ namespace Mountain.Dialogs {
             var index = roomsListBox.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches) {
                 roomsListBox.SelectedIndex = index;
-                SelectedRoom = SelectedArea.Rooms.FindName((string)roomsListBox.SelectedItem);
+                SelectedRoom = SelectedArea.Rooms.FindByName((string)roomsListBox.SelectedItem);
                 for (int i = 0; i <= RoomContextMenu.Items.Count - 1; i++) {
                     RoomContextMenu.Items[i].Enabled = true;
                 }
@@ -320,7 +320,7 @@ namespace Mountain.Dialogs {
         }
 
         private void roomsListBox_SelectedIndexChanged(object sender, EventArgs e) {
-            SelectedRoom = SelectedArea.Rooms.FindName((string)roomsListBox.SelectedItem);
+            SelectedRoom = SelectedArea.Rooms.FindByName((string)roomsListBox.SelectedItem);
             RefreshEditor();
         }
 
@@ -328,7 +328,7 @@ namespace Mountain.Dialogs {
             var index = roomsListBox.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches) {
                 roomsListBox.SelectedIndex = index;
-                SelectedRoom = SelectedArea.Rooms.FindName((string)roomsListBox.SelectedItem);
+                SelectedRoom = SelectedArea.Rooms.FindByName((string)roomsListBox.SelectedItem);
                 EditRoomContextMenuItem_Click(sender, e);
             } else {
                 roomsListBox.SelectedIndex = -1;

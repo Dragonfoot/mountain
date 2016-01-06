@@ -26,7 +26,7 @@ namespace Mountain.classes.handlers {
         }
 
         public bool IsVerb(string verb) {
-            return Keys.Any(key => key.StartsWith(verb));
+            return Keys.Any(key => key.StartsWith(verb, System.StringComparison.CurrentCulture));
         }
 
         public string ShowCommands(int size) {

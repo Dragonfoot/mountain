@@ -16,7 +16,7 @@ namespace Mountain.classes {
         [Browsable(false)]
         public Room Room { get; set; }  // points to
         [Browsable(false)]
-        public Area Area;               // room it points to is in
+        public Area Area;               // the area the room it links to is in
         [CategoryAttribute("\t Exit Settings"), Description("Name the player will see as the exit to leave from.")]
         public string DoorLabel { get; set; }
         [Category("\t Exit Settings"), Description("Can the player normally see the exit.")]
@@ -58,7 +58,7 @@ namespace Mountain.classes {
 
             XML.createNode("Name", Name, writer);
             XML.createNode("Description", Description, writer);
-            XML.createNode("DoorLabel", DoorLabel, writer);
+            XML.createNode("DoorDescription", DoorLabel, writer);
             XML.createNode("Room", Room.Name, writer);
             XML.createNode("Area", Area.Name, writer);
             XML.createNode("Visible", Convert.ToString(Visible), writer);
@@ -102,7 +102,7 @@ namespace Mountain.classes {
 
             Name = node["Name"].InnerText;
             Description = node["Description"].InnerText;
-            DoorLabel = node["DoorLabel"].InnerText;
+            DoorLabel = node["DoorDescription"].InnerText;
             roomName = node["Room"].InnerText;
             areaName = node["Area"].InnerText;
             Visible = Convert.ToBoolean(node["Visible"].InnerText);
@@ -138,8 +138,8 @@ namespace Mountain.classes {
         }
 
         public void Validate() {
-            Area = Common.Settings.World.GetAreaByName(areaName);
-            Room = Common.Settings.World.GetRoomByName(roomName);
+            Area = Common.Settings.World.AreaByName(areaName);
+            Room = Common.Settings.World.RoomByName(roomName);
         }
 
         private List<string> getLockTypeFlags(lockType value) {

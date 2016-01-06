@@ -19,11 +19,11 @@ namespace Mountain.classes.Items {
     }
 
     public class ItemContainer : Item {
-        protected ConcurrentBag<Item> items;
+        public ConcurrentBag<Item> List;
 
         public ItemContainer(string name, string description) {
-            base.ItemType = itemType.container;
-            this.items = new ConcurrentBag<Item>(); 
+            ItemType = itemType.container;
+            List = new ConcurrentBag<Item>(); 
         }
 
     }
@@ -38,7 +38,7 @@ namespace Mountain.classes.Items {
 
     public class Clothing : Item {
         public Clothing() {
-            base.ItemType = itemType.clothing;
+            ItemType = itemType.clothing;
         }
     }
 

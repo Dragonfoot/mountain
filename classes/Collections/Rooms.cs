@@ -17,13 +17,13 @@ namespace Mountain.classes.collections {
             List.Add(room);
         } 
           
-        public Room FindTag(string tagName) {
-            return List.Find(room => room.Tag == tagName);
+        public Room FindByTag(string tagName) {
+            return List.Find(room => room.Tag.ToString() == tagName);
         }
 
-        public Room FindName(string name) {
+        public Room FindByName(string name) {
             if (name.IsNullOrWhiteSpace()) return null;
-            return List.Find(room => room.Name.StartsWith(name));
+            return List.Find(room => room.Name.StartsWith(name, System.StringComparison.CurrentCulture));
         }
 
         public IEnumerator<Room> GetEnumerator() {

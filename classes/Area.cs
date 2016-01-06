@@ -12,7 +12,7 @@ namespace Mountain.classes {
         public Rooms Rooms { get; private set; }
         public areaType Type { get; set; }
         public MapSettings MapSettings { get; set; }
-        public AreaSettings Settings;
+        public AreaSettings AreaSettings;
         private CancellationTokenSource cancellationTokenSource;
 
         public Area() {
@@ -21,7 +21,7 @@ namespace Mountain.classes {
             SetColor();
             Name = "new area";
             Description = "new area";
-            Settings = new AreaSettings();
+            AreaSettings = new AreaSettings();
             cancellationTokenSource = new CancellationTokenSource();
         }
 
@@ -113,13 +113,12 @@ namespace Mountain.classes {
             Restrictions.Add(areaRestrictions.skillLevel);
             Active = false;
         }
+
         public XmlTextWriter SaveXml(XmlTextWriter writer) {
             writer.WriteStartElement("Settings");
             XML.createNode("Active", Active.ToString(), writer);
-
             writer.WriteStartElement("Restrictions");
-            writer.WriteEndElement();
-            
+            writer.WriteEndElement();            
             writer.WriteEndElement();
             return writer;
         }

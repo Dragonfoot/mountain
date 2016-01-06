@@ -35,7 +35,7 @@ namespace Mountain.Dialogs {
             if (roomListBox.SelectedIndex == -1) return;
             string name = roomListBox.Items[roomListBox.SelectedIndex].ToString();
             if (name != "None") {
-                Room room = Common.Settings.World.GetRoomByName(name);
+                Room room = Common.Settings.World.RoomByName(name);
                 linkDoorLabelTextBox.Text = room.Name;
                 Exit.DoorLabel = room.Name;
                 Exit.Room = room;

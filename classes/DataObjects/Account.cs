@@ -5,16 +5,15 @@ namespace Mountain.classes.dataobjects {
     public class Account {
         public string Name { get; set; }
         public string Password { get; set; }
-        public bool Administrator { get; set; }
         public string Email { get; set; }
+        public bool Administrator { get; set; }
 
         public Account() {
         }        
 
         public bool CheckPassword(string inputPassword) {
             if (Password.IsNullOrWhiteSpace()) return false;
-            string decryptedPassword = Password.Decrypt();
-            return inputPassword.Equals(decryptedPassword);
+            return inputPassword.Equals(Password.Decrypt());
         }
 
         public void SetPassword(string newPassword) {

@@ -61,7 +61,7 @@ namespace Mountain.classes.functions {
 
         #endregion enums
 
-        public static T DeepClone<T>(this T input) where T : ISerializable { // true copy, so no references
+        public static T DeepClone<T>(this T input) where T : ISerializable { 
             using (var stream = new MemoryStream()) {
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(stream, input);
@@ -70,7 +70,7 @@ namespace Mountain.classes.functions {
             }
         }
 
-        public static void Shuffle<T>(this IList<T> list) { // randomize list of <T>
+        public static void Shuffle<T>(this IList<T> list) { 
             int count = list.Count;
             while (count > 1) {
                 count--;
@@ -186,7 +186,7 @@ namespace Mountain.classes.functions {
         public static string StripFirstChar(this string str) {
             return str.Substring(1);
         }
-        // revise this to check for a specific set of punctuations ?
+        // revise this to add checks for a specific set of punctuations ?
         public static bool HasLastCharPunctuation(this string str) { // returns true if it ends with 'any' punctuation char, including comma..
             if (str.IsNullOrWhiteSpace()) return true; // have caller ignore empty string
             if (str.Length == 1) return Char.IsPunctuation(str[0]);

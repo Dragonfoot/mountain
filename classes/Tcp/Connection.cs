@@ -14,18 +14,20 @@ namespace Mountain.classes.tcp {
 
     public class Connection : Identity, IDisposable {
         public TcpClient Socket;
+        public StateObject State;
         public ManualResetEvent MessageReceivedDone, MessageSentDone;
-        public StateObject state;
-        public Stack<string> ResponseStack;
-        public CommandHandler Commands;
         public IPAddress IPAddress;
         public int Port;
+
         public Room Room;
         public string Password, Email;
         public bool Administrator;
         public Stats Stats { get; set; }
         public Equipment Equipment { get; set; }
+
         public delegate void CommandHandler(object myObject, string message);
+        public CommandHandler Commands;
+        public Stack<string> ResponseStack;
         private LoginDispatcher LoginDispatcher;   // login functions
         private PlayerDispatcher PlayerDispatcher; // player functions
 
@@ -38,7 +40,7 @@ namespace Mountain.classes.tcp {
             ResponseStack = new Stack<string>();
             MessageReceivedDone = new ManualResetEvent(false);
             MessageSentDone = new ManualResetEvent(false);
-            state = new StateObject((socket));
+            State = new StateObject((socket));
             LoginDispatcher = new LoginDispatcher(this);
             StartReceiving();
         }
@@ -55,7 +57,7 @@ namespace Mountain.classes.tcp {
             SystemEventPacket packet = new SystemEventPacket(EventType.connect, "New Connection begun from " + this.IPAddress.ToString(), this);
             Common.Settings.SystemEventQueue.Push(packet);
             try {
-                state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, SocketFlags.None, ReceiveCallback, state);
+                State.Socket.Client.BeginReceive(State.Buffer, 0, State.Buffer.Length, SocketFlags.None, ReceiveCallback, State);
             } catch (Exception e) {
                 Common.Settings.SystemMessageQueue.Push("Connection closed: " + e.ToString());
             }
@@ -63,16 +65,16 @@ namespace Mountain.classes.tcp {
 
         public void ReceiveCallback(IAsyncResult ar) {
             try {
-                if (state.Socket.Client == null) return;
-                int read = state.Socket.Client.EndReceive(ar);
+                if (State.Socket.Client == null) return;
+                int read = State.Socket.Client.EndReceive(ar);
                 if (read > 0) {
-                    string incomingMessage = Encoding.ASCII.GetString(state.Buffer, 0, read).StripNewLine();
+                    string incomingMessage = Encoding.ASCII.GetString(State.Buffer, 0, read).StripNewLine();
                     Task HandleMessage = new Task(() => Commands(this, incomingMessage)); // setup thread for dispatching incoming
                     MessageReceivedDone.Set();
                     HandleMessage.Start(); // start processing message - (in separate thread)
                 }
                 try {
-                    state.Socket.Client.BeginReceive(state.Buffer, 0, state.Buffer.Length, 0, ReceiveCallback, state); // wait for next
+                    State.Socket.Client.BeginReceive(State.Buffer, 0, State.Buffer.Length, 0, ReceiveCallback, State); // wait for next
                 } catch (Exception ex) when (ex is SocketException || ex is NullReferenceException) {
                     if (ex is NullReferenceException) return; // eat exceptions as connection has terminated in other thread
                 }
@@ -91,13 +93,13 @@ namespace Mountain.classes.tcp {
         }
 
         public void StartPlayer() {
-            PlayerDispatcher = new PlayerDispatcher(this);
             LoginDispatcher = null;
+            PlayerDispatcher = new PlayerDispatcher(this);
             Commands = PlayerDispatcher.OnPlayerMessageReceived;
             SystemEventPacket packet = new SystemEventPacket(EventType.login, this.Name + " has entered the world.", this);
             Common.Settings.SystemEventQueue.Push(packet);
+            if (Room == null) SetRoom(null);
             Room.AddPlayer(this);
-
         }
 
         private void SetRoom(Room room) {
@@ -108,17 +110,17 @@ namespace Mountain.classes.tcp {
             if (indent) data = data.Indent();
             byte[] byteData = Encoding.ASCII.GetBytes(data);
             try {
-                if (state.Socket.Client == null) return;
-                state.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, state);
+                if (State.Socket.Client == null) return;
+                State.Socket.Client.BeginSend(byteData, 0, byteData.Length, SocketFlags.None, SendCallback, State);
             } catch (SocketException) {
                 return;
             }
         }
 
         private void SendCallback(IAsyncResult ar) {
-            if (state.Socket.Client == null) return;
+            if (State.Socket.Client == null) return;
             try {
-                int bytesSent = state.Socket.Client.EndSend(ar);
+                int bytesSent = State.Socket.Client.EndSend(ar);
                 MessageSentDone.Set(); // tell parent thread we're finished
             } catch (Exception e) {
                 Common.Settings.SystemMessageQueue.Push("CC3: " + e.ToString());
@@ -157,14 +159,14 @@ namespace Mountain.classes.tcp {
         public void LoadXml(string filename) {
             XmlDocument doc = new XmlDocument();
             doc.Load(filename);
-            Room = Common.Settings.World.GetRoomByName(doc.DocumentElement.SelectSingleNode("Room").InnerText);
+            Room = Common.Settings.World.RoomByName(doc.DocumentElement.SelectSingleNode("Room").InnerText);
         }
     }    
 
     
     public class StateObject {  
-        private const int BUFFER_SIZE = 1024;
-        public byte[] Buffer = new byte[BUFFER_SIZE];
+        private const int Buffer_Size = 1024;
+        public byte[] Buffer = new byte[Buffer_Size];
         public TcpClient Socket { get; set; }
         public StateObject(TcpClient workSocket) {
             Socket = workSocket;

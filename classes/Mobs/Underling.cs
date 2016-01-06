@@ -22,7 +22,7 @@ namespace Mountain.classes.mobs {
             ClassType = classObjectType.mob;
             Inventory = new ConcurrentBag<Item>();
             Commands = new MobCommands();
-            Health = 6;
+            Health = 5;
             Strength = 3;
             Intellegence = 3;
             Level = 1;
