@@ -7,7 +7,13 @@ namespace Mountain.classes.controls {
 
     public partial class Tile : Control {
         protected Area Area { get { return this.Room.Area; } }
-        protected Room Room { get; private set; }
+        protected Room Room {
+            get { return Room; }
+            set {
+                Room = value;
+                SetColor();
+            }
+        }
 
         public Tile Root { get; set; }
         public List<Tile> Children { get; private set; }
