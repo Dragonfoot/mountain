@@ -6,8 +6,8 @@ using Mountain.classes.dataobjects;
 namespace Mountain.classes.controls {
 
     public partial class Tile : Control {
-        protected Area Area { get { return Room.Area; } }
         protected Room Room { get { return Room; } set { Room = value; SetColor(); } }
+        protected Area Area { get { return Room.Area; } }
 
         public Tile Root { get; set; }
         public List<Tile> Children { get; private set; }
