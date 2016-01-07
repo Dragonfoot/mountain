@@ -55,6 +55,7 @@ namespace Mountain.classes.controls {
                 case roomType.vault: Pen = new Pen(Color.DarkTurquoise); break;
                 default: Pen = new Pen(Color.Silver); break;
             }
+            Refresh();
         }
     }
 }
