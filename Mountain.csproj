@@ -71,6 +71,12 @@
       <DependentUpon>CheckEnum.cs</DependentUpon>
     </Compile>
     <Compile Include="classes\Controls\FlagsEnumEditor.cs" />
+    <Compile Include="classes\Controls\Tile.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="classes\Controls\Tile.Designer.cs">
+      <DependentUpon>Tile.cs</DependentUpon>
+    </Compile>
     <Compile Include="classes\DataObjects\MapSettings.cs" />
     <Compile Include="classes\Functions\BuildAreas.cs" />
     <Compile Include="classes\Functions\BuildRoom.cs" />
@@ -151,6 +157,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="classes\Controls\Tile.resx">
+      <DependentUpon>Tile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AreaForm.resx">
       <DependentUpon>AreaForm.cs</DependentUpon>
     </EmbeddedResource>
