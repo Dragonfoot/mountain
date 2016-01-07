@@ -9,14 +9,15 @@ namespace Mountain.classes.controls {
         protected Room Room { get { return Room; } set { Room = value; SetColor(); } }
         protected Area Area { get { return Room.Area; } }
 
-        public Tile Root { get; set; }
+        public Tile Root { get; private set; }
         public List<Tile> Children { get; private set; }
         public int Row { get; set; }
         public int Column { get; set; }
 
         public string Identity { get; private set; }
         public roomType RoomType { get { return Room.roomType; } }
-        public Pen Pen;
+
+        protected Pen Pen;   // background color
 
         public Tile(int row, int column, Room room, Tile parent = null) {
             Room = room;
