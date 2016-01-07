@@ -6,7 +6,7 @@ using Mountain.classes.dataobjects;
 namespace Mountain.classes.controls {
 
     public partial class Tile : Control {
-        protected Area Area { get { return this.Room.Area; } }
+        protected Area Area { get { return Room.Area; } }
         protected Room Room { get { return Room; } set { Room = value; SetColor(); } }
 
         public Tile Root { get; set; }
@@ -22,9 +22,9 @@ namespace Mountain.classes.controls {
             Room = room;
             Identity = room.Area.Name + ":" + room.Name;
             Root = parent;
-            SetColor();
 
             InitializeComponent();
+            SetColor();
         }
 
         public void Add(Tile tile) {
