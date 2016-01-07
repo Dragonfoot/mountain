@@ -22,8 +22,8 @@ namespace Mountain.classes.controls {
             Room = room;
             Area = room.Area;
             Identity = room.Name + ":" + room.Area.Name;
-
             Root = parent;
+            SetColor();
 
             InitializeComponent();
         }
@@ -42,41 +42,19 @@ namespace Mountain.classes.controls {
             base.OnPaint(pe);
         }
 
-        protected void SetType() {
+        protected void SetColor() {
             switch (RoomType) {
-                case roomType.road:
-                    Pen = new Pen(Color.SaddleBrown);
-                    break;
-                case roomType.path:
-                    Pen = new Pen(Color.SandyBrown);
-                    break;
-                case roomType.street:
-                    Pen = new Pen(Color.Beige);
-                    break;
-                case roomType.healing:
-                    Pen = new Pen(Color.Green);
-                    break;
-                case roomType.home:
-                    Pen = new Pen(Color.RosyBrown);
-                    break;
-                case roomType.leveling:
-                    Pen = new Pen(Color.Salmon);
-                    break;
-                case roomType.pawn:
-                    Pen = new Pen(Color.Gold);
-                    break;
-                case roomType.shop:
-                    Pen = new Pen(Color.Fuchsia);
-                    break;
-                case roomType.sewer:
-                    Pen = new Pen(Color.DarkSlateBlue);
-                    break;
-                case roomType.vault:
-                    Pen = new Pen(Color.DarkTurquoise);
-                    break;
-                default:
-                    Pen = new Pen(Color.Silver);
-                    break;
+                case roomType.road: Pen = new Pen(Color.SaddleBrown); break;
+                case roomType.path: Pen = new Pen(Color.SandyBrown); break;
+                case roomType.street: Pen = new Pen(Color.Beige); break;
+                case roomType.healing: Pen = new Pen(Color.Green); break;
+                case roomType.home: Pen = new Pen(Color.RosyBrown); break;
+                case roomType.leveling: Pen = new Pen(Color.Salmon); break;
+                case roomType.pawn: Pen = new Pen(Color.Gold); break;
+                case roomType.shop: Pen = new Pen(Color.Fuchsia); break;
+                case roomType.sewer: Pen = new Pen(Color.DarkSlateBlue); break;
+                case roomType.vault: Pen = new Pen(Color.DarkTurquoise); break;
+                default: Pen = new Pen(Color.Silver); break;
             }
         }
     }
